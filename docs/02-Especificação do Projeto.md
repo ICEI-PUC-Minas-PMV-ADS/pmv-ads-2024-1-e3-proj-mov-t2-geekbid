@@ -23,8 +23,15 @@ Com base na análise das personas forma identificadas as seguintes histórias de
 
 |EU COMO... `PERSONA`| QUERO/PRECISO ... `FUNCIONALIDADE` |PARA ... `MOTIVO/VALOR`                 |
 |--------------------|------------------------------------|----------------------------------------|
-|Usuário do sistema  | Registrar minhas tarefas           | Não esquecer de fazê-las               |
-|Administrador       | Alterar permissões                 | Permitir que possam administrar contas |
+|Lucas | Comprar artigos de jogos online. | Ganhar vantagem e economizar tempo.
+|Lucas | Comprar jogos de tabuleiro. | Receber amigos e socializar. |
+|Lucas | Encontrar de maneira objetiva seus artigos colecionáveis. | Colecionar artigos geek |
+|Marta | Obter action figures de seus animes preferidos | Decorar sua estante de colecionáveis |
+Marta | Achar peças de vestuário e acessórios para seus cosplays | Conseguir fazer os cosplays desejados|
+|Antônio | Encontrar RPG's raros e antigos | Colecionar os RPG's de sua juventude |
+Antônio| Comprar action figures e jogos de tabuleiro raros | Obter e relembrar objetos e jogos nostálgicos |
+
+
 
 Apresente aqui as histórias de usuário que são relevantes para o projeto de sua solução. As Histórias de Usuário consistem em uma ferramenta poderosa para a compreensão e elicitação dos requisitos funcionais e não funcionais da sua aplicação. Se possível, agrupe as histórias de usuário por contexto, para facilitar consultas recorrentes à essa parte do documento.
 
