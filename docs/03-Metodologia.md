@@ -60,8 +60,17 @@ Exemplificação: A equipe utiliza metodologias ágeis, tendo escolhido o Scrum 
 
 ### Processo
 
-Coloque  informações sobre detalhes da implementação do Scrum seguido pelo grupo. O grupo deverá fazer uso do recurso de gerenciamento de projeto oferecido pelo GitHub, que permite acompanhar o andamento do projeto, a execução das tarefas e o status de desenvolvimento da solução.
- 
+O desenvolvimento do projeto Geek Bid está sendo conduzido utilizando o framework Scrum, com os detalhes de implementação e acompanhamento sendo gerenciados através do recurso de gerenciamento de projeto oferecido pelo GitHub. No repositório do projeto, denominado Geek Bid, foram estabelecidas as seções de status: backlog do projeto, backlog da sprint, em progresso e concluído. Além disso, foram criadas e planejadas as sprints de 1 a 5 para organizar o trabalho e monitorar o progresso da equipe.
+
+<div align="center">
+
+Figura 1 - Canva
+
+![Canva](https://github.com/ICEI-PUC-Minas-PMV-ADS/pmv-ads-2024-1-e3-proj-mov-t2-geekbid/blob/main/docs/img/canva.PNG)
+
+</div>
+
+
 > **Links Úteis**:
 > - [Planejamento e Gestáo Ágil de Projetos](https://pucminas.instructure.com/courses/87878/pages/unidade-2-tema-2-utilizacao-de-ferramentas-para-controle-de-versoes-de-software)
 > - [Sobre quadros de projeto](https://docs.github.com/pt/issues/organizing-your-work-with-project-boards/managing-project-boards/about-project-boards)
