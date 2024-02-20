@@ -10,9 +10,9 @@ Apresente uma visão geral do que será abordado nesta parte do documento, enume
 
 |**Persona**| **Idade e Ocupação** | **Aplicativos** | **Motivações** | **Frustrações** | **Hobbies/História** |
 ------------|----------------------|------------------|----------------|------------------------|----------------------------|
-|Lucas Monteiro  | 35 anos. Designer de Jogos| Instagram, Steam, Mercado Livre, AliExpress| Ter acesso à colecionáveis raros sem precisar pesquisar muito. | Não saber onde procurar seus artigos de interesse raros.| Jogos eletrônicos, board games.
+|Lucas Monteiro  | 35 anos. Designer de Jogos| Instagram, Steam, Mercado Livre, AliExpress| Ter acesso à colecionáveis raros sem precisar pesquisar muito. | Não saber onde procurar seus artigos de interesse raros.| Jogos eletrônicos, board games |
 |Marta Freitas      | 21 anos. Estudante Universitária | Instagram, Pinterest | Comprar action figures de anime, artigos para cosplay | Dificuldade em achar Action Figures e materiais para seus cosplays em lojas de sua região e online.| Cosplay |
-|Antônio Demétrio | 56 anos. Empresário . | Facebook. Whatsapp. | Entusiasta em RPG e jogos raros nostálgicos. | Dificuldade em achar RPGs, board games raros e action figures de sua juventude. | RPG, board games e ar .
+|Antônio Demétrio | 56 anos. Empresário . | Facebook. Whatsapp. | Entusiasta em RPG e jogos raros nostálgicos. | Dificuldade em achar RPGs, board games raros e action figures de sua juventude. | RPG, board games e artigos colecionáis |
 
 ## Histórias de Usuários
 Lembre-se que você deve ser enumerar e descrever precisamente e personalizada todos os clientes ideais que sua solução almeja.
