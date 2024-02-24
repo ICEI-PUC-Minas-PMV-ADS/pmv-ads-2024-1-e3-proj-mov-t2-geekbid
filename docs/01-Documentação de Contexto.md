@@ -6,21 +6,15 @@ Vestuário e acessórios personalizado e itens colecionáveis são alguns dos ex
 
 Um dos melhores exemplos dessa tendência é o CCXP - a _Comic Con_ brasileira -, evento que reúne diversas tribos de geeks que participam de painéis, anúncios inéditos, campeonatos de eSports, shows ao vivo, dentre outras atividades. Na sua edição de 10 anos, em 2023, o evento reuniu um total de 287 mil pessoas em seus seis dias de duração, 105 marcas e movimentou valores superiores a R$500 milhões, direta e indiretamente[^3].
 
-Esses valores já têm atraído a atenção de grandes varejistas, e são uma boa oportunidade para pequenos empreendedores, segundo especialistas[^3].
-
 ## Problema
 
-Nesse momento você deve apresentar o problema que a sua aplicação deve resolver. No entanto, não é a hora de comentar sobre a aplicação.
+Esses valores têm atraído a atenção de grandes varejistas, com lançamento de linhas de produtos focando esse segmento de mercado. Contudo, segundo especialistas, o setor também apresenta boas oportunidades para pequenos empreendedores[^3]. E uma dessas oportunidades é o mercado secundário de produtos desse segmento.
 
-Descreva também o contexto em que essa aplicação será usada, se houver: empresa, tecnologias, etc. Novamente, descreva apenas o que de fato existir, pois ainda não é a hora de apresentar requisitos detalhados ou projetos.
+No Brasil já existem aplicativos de comércio eletrônico especializadas no segmento geek/nerd, como a [Nerdstore](https://nerdstore.com.br/), a [Loja Nerd](https://lojanerd.com.br/) e a [ComicStore](https://www.comicstore.com.br/), porém seu foco é o B2C (_business to consumer_).
 
-Nesse momento, o grupo pode optar por fazer uso de ferramentas como Design Thinking, que permite um olhar de ponta a ponta para o problema.
+Também existem aplicativos de comércio eletrônico com foco no B2C (_business to consumer_), como [Mercado Livre](https://www.mercadolivre.com.br/) e [Olx](https://www.olx.com.br/), onde se pode negociar de parafusos a aeronaves. Contudo, estas plataformas não oferecem mais a opção de leilão de produtos, embora fosse seu negócio primário, no início de suas atividades.
 
-> **Links Úteis**:
->
-> - [Objetivos, Problema de pesquisa e Justificativa](https://medium.com/@versioparole/objetivos-problema-de-pesquisa-e-justificativa-c98c8233b9c3)
-> - [Matriz Certezas, Suposições e Dúvidas](https://medium.com/educa%C3%A7%C3%A3o-fora-da-caixa/matriz-certezas-suposi%C3%A7%C3%B5es-e-d%C3%BAvidas-fa2263633655)
-> - [Brainstorming](https://www.euax.com.br/2018/09/brainstorming/)
+O problema que se apresenta é que não existe opção no Brasil para a negociação direta de produtos do segmento geek/nerd que permitam ao vendedor a possibilidade de maximizar seu retorno financeiro, e ao comprador de adquirir o item desejado com a possibilidade de um desconto substancial.
 
 ## Objetivos
 
