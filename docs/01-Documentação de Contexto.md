@@ -12,19 +12,15 @@ Esses valores têm atraído a atenção de grandes varejistas, com lançamento d
 
 No Brasil já existem aplicativos de comércio eletrônico especializadas no segmento geek/nerd, como a [Nerdstore](https://nerdstore.com.br/), a [Loja Nerd](https://lojanerd.com.br/) e a [ComicStore](https://www.comicstore.com.br/), porém seu foco é o B2C (_business to consumer_).
 
-Também existem aplicativos de comércio eletrônico com foco no B2C (_business to consumer_), como [Mercado Livre](https://www.mercadolivre.com.br/) e [Olx](https://www.olx.com.br/), onde se pode negociar de parafusos a aeronaves. Contudo, estas plataformas não oferecem mais a opção de leilão de produtos, embora fosse seu negócio primário, no início de suas atividades.
+Também existem aplicativos de comércio eletrônico que, além do B2C, possibilitam o C2C (_consumer to consumer_), como [Mercado Livre](https://www.mercadolivre.com.br/) e [Olx](https://www.olx.com.br/), onde se pode negociar de parafusos a aeronaves. Contudo, estas plataformas não oferecem mais a opção de leilão de produtos, embora fosse seu negócio primário, no início de suas atividades. Ainda, são plataformas que abrangem o mercado de forma geral, sem qualquer especialização/segmentação.
 
-O problema que se apresenta é que não existe opção no Brasil para a negociação direta de produtos do segmento geek/nerd que permitam ao vendedor a possibilidade de maximizar seu retorno financeiro, e ao comprador de adquirir o item desejado com a possibilidade de um desconto substancial.
+O problema que se apresenta é que não existe opção no Brasil para a negociação direta de produtos novos ou usados, do segmento geek/nerd, que permitam ao vendedor a possibilidade de maximizar seu retorno financeiro, e ao comprador de adquirir o item desejado com a possibilidade de um desconto substancial.
 
 ## Objetivos
 
-Aqui você deve descrever os objetivos do trabalho indicando que o objetivo geral é desenvolver um software para solucionar o problema apresentado acima.
+O objetivo do projeto é desenvolver um aplicativo de comércio eletrônico, que possibilite o leilão de produtos, de forma direta entre vendedores e compradores, e que seja especializado no segmento geek/nerd.
 
-Apresente também alguns (pelo menos 2) objetivos específicos dependendo de onde você vai querer concentrar a sua prática investigativa, ou como você vai aprofundar no seu trabalho.
-
-> **Links Úteis**:
->
-> - [Objetivo geral e objetivo específico: como fazer e quais verbos utilizar](https://blog.mettzer.com/diferenca-entre-objetivo-geral-e-objetivo-especifico/)
+Os objetivos específicos são a possibilidade de venda direta a preço fixo, bem como a da possibilidade de contratação de especialista credenciado para avaliação de produto, em casos de itens raros e/ou de elevado valor, por meio de um programa de parceira.
 
 ## Justificativa
 
@@ -37,6 +33,12 @@ O grupo de trabalho pode fazer uso de questionários, entrevistas e dados estat�
 > - [Como montar a justificativa](https://guiadamonografia.com.br/como-montar-justificativa-do-tcc/)
 
 ## Público-Alvo
+
+https://fastcompanybrasil.com/co-design/a-forca-esta-com-eles-geeks-dominam-o-mercado-de-cultura-pop/
+
+https://pagar.me/blog/mercado-geek/#:~:text=Mercado%20geek%20movimenta%20mais%20de,diante%20do%20cen%C3%A1rio%20de%20pandemia.
+
+https://www.segs.com.br/info-ti/172569-rakuten-digital-commerce-divulga-pesquisa-sobre-o-perfil-geek-no-e-commerce-brasileiro
 
 Descreva quem serão as pessoas que usarão a sua aplicação indicando os diferentes perfis. O objetivo aqui não é definir quem serão os clientes ou quais serão os papéis dos usuários na aplicação. A ideia é, dentro do possível, conhecer um pouco mais sobre o perfil dos usuários: conhecimentos prévios, relação com a tecnologia, relações
 hierárquicas, etc.
