@@ -29,24 +29,35 @@ Os objetivos específicos são:
 
 O mercado nerd no Brasil tem crescido significativamente ao longo dos anos, com uma base de fãs dedicados e apaixonados. No entanto, a falta de uma plataforma especializada em leilões online para esse público específico representa uma lacuna no mercado. Este projeto visa preencher essa lacuna, oferecendo uma solução que não apenas atende às necessidades dos entusiastas nerd, mas também cria um espaço seguro e confiável para transações comerciais. Ao conectar compradores e vendedores de produtos nerd em um ambiente dedicado, esperamos impulsionar ainda mais o crescimento e a diversificação desse mercado, proporcionando uma experiência única e gratificante para todos os envolvidos.
 
-## Público-Alvo
+## Público-Alvo[^4] [^5]
 
-https://fastcompanybrasil.com/co-design/a-forca-esta-com-eles-geeks-dominam-o-mercado-de-cultura-pop/
+**Demografia:**
 
-https://pagar.me/blog/mercado-geek/#:~:text=Mercado%20geek%20movimenta%20mais%20de,diante%20do%20cen%C3%A1rio%20de%20pandemia.
+Gênero: 52% dos usuários são homens, enquanto as mulheres representam 48% do público.
+Faixa Etária: A maior parte dos consumidores (66%) tem entre 22 e 39 anos, indicando uma forte presença da geração Y e dos millennials.
+Estado Civil e Filhos: 65,8% são solteiros e 81% não têm filhos, refletindo um público jovem e sem as responsabilidades familiares típicas.
 
-https://www.segs.com.br/info-ti/172569-rakuten-digital-commerce-divulga-pesquisa-sobre-o-perfil-geek-no-e-commerce-brasileiro
+**Educação e Renda:**
 
-Descreva quem serão as pessoas que usarão a sua aplicação indicando os diferentes perfis. O objetivo aqui não é definir quem serão os clientes ou quais serão os papéis dos usuários na aplicação. A ideia é, dentro do possível, conhecer um pouco mais sobre o perfil dos usuários: conhecimentos prévios, relação com a tecnologia, relações
-hierárquicas, etc.
+Nível Educacional: 38% possuem ensino superior completo, indicando um público com um grau razoável de educação formal.
+Ticket Médio de Compras Online: O ticket médio das compras online do universo geek é de R$ 548,00, superando significativamente a média nacional de R$ 329,00, sugerindo um poder aquisitivo relativamente alto entre os usuários.
 
-Adicione informações sobre o público-alvo por meio de uma descrição textual, diagramas de personas e mapa de stakeholders.
+**Hábitos e Interesses:**
+
+Investimentos Financeiros: 47,5% dos usuários investem seu dinheiro, indicando uma preocupação com a gestão financeira e o planejamento futuro.
+Atividades Físicas: 52% praticam atividades físicas, mostrando um interesse em manter um estilo de vida ativo e saudável.
+Consumo de Entretenimento: 45% consomem filmes e séries em serviços de streaming diariamente, destacando um interesse compartilhado por cultura pop e entretenimento.
+
+Justificativa:
+Esses dados demográficos e comportamentais fornecem uma compreensão abrangente do público-alvo do aplicativo de leilão online para produtos do segmento nerd no Brasil. Com uma base majoritariamente jovem, educada e financeiramente ativa, há uma clara oportunidade de atender a essa demanda crescente por uma plataforma especializada que ofereça uma experiência de leilão online exclusiva e emocionante para os entusiastas nerd.
 
 ## Referências
 
-[^1]: LICENSE GLOBAL. **The 2024 License Global Toy Forecast**. Dez 2023. Disponível em: (https://www.licenseglobal.com/toys-games/2024-license-global-toy-forecast). Acesso em: 22 fev. 2024.
-[^2]: ABRAL. **Paixão pelo universo geek e ativações de marcas movimentam milhares durante a CCXP 2023**. Dez 2023. Disponível em: (https://abral.org.br/paixao-pelo-universo-geek-e-ativacoes-de-marcas-movimentam-milhares-durante-a-ccxp-2023/). Acesso em 22 fev. 2024.
-[^3]: REVISTA PEGN. **Mercado geek**: especialistas apontam tendências e oportunidades para empreender no segmento. Dez 2023. Disponível em: (https://revistapegn.globo.com/empreendedorismo/noticia/2023/11/mercado-geek-especialistas-apontam-tendencias-e-oportunidades-para-empreender-no-segmento.ghtml). Acesso em 22 fev. 2024.
+[^1]: LICENSE GLOBAL. **The 2024 License Global Toy Forecast**. Dez 2023. Disponível em: https://www.licenseglobal.com/toys-games/2024-license-global-toy-forecast. Acesso em: 22 fev. 2024.
+[^2]: ABRAL. **Paixão pelo universo geek e ativações de marcas movimentam milhares durante a CCXP 2023**. Dez 2023. Disponível em: https://abral.org.br/paixao-pelo-universo-geek-e-ativacoes-de-marcas-movimentam-milhares-durante-a-ccxp-2023/. Acesso em 22 fev. 2024.
+[^3]: REVISTA PEGN. **Mercado geek**: especialistas apontam tendências e oportunidades para empreender no segmento. Dez 2023. Disponível em: https://revistapegn.globo.com/empreendedorismo/noticia/2023/11/mercado-geek-especialistas-apontam-tendencias-e-oportunidades-para-empreender-no-segmento.ghtml. Acesso em 22 fev. 2024.
+[^4]: FAST COMPANY. **A força está com eles!** Geeks dominam o mercado de cultura pop. Dez 2023. Disponível em: https://fastcompanybrasil.com/co-design/a-forca-esta-com-eles-geeks-dominam-o-mercado-de-cultura-pop/. Acesso em 22 fev. 2024.
+[^5]: PAGAR.ME. **Mercado geek**: 5 dados e insights sobre o nicho nerd. Mai 2023. Disponível em: https://pagar.me/blog/mercado-geek/#:~:text=Mercado%20geek%20movimenta%20mais%20de,diante%20do%20cen%C3%A1rio%20de%20pandemia. Acesso em 22 fev.2024.
 
 > **Links Úteis**:
 >
