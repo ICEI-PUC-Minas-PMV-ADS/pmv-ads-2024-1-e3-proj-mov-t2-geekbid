@@ -29,24 +29,36 @@ Os objetivos específicos são:
 
 O mercado nerd no Brasil tem crescido significativamente ao longo dos anos, com uma base de fãs dedicados e apaixonados. No entanto, a falta de uma plataforma especializada em leilões online para esse público específico representa uma lacuna no mercado. Este projeto visa preencher essa lacuna, oferecendo uma solução que não apenas atende às necessidades dos entusiastas nerd, mas também cria um espaço seguro e confiável para transações comerciais. Ao conectar compradores e vendedores de produtos nerd em um ambiente dedicado, esperamos impulsionar ainda mais o crescimento e a diversificação desse mercado, proporcionando uma experiência única e gratificante para todos os envolvidos.
 
-## Público-Alvo[^4] [^5]
+## Público-Alvo
+
+A 10ª edição da pesquisa Geek Power[^4] [^5], do Omelete Company, revela as seguintes características do público desse segmento:
 
 **Demografia:**
 
 Gênero: 52% dos usuários são homens, enquanto as mulheres representam 48% do público.
+
 Faixa Etária: A maior parte dos consumidores (66%) tem entre 22 e 39 anos, indicando uma forte presença da geração Y e dos millennials.
+
 Família: 65,8% são solteiros e 81% não têm filhos, refletindo um público jovem e sem as responsabilidades familiares típicas.
 
 **Educação e Renda:**
 
 Nível Educacional: 38% possuem ensino superior completo, indicando um público com um grau razoável de educação formal.
+
 Ticket Médio de Compras Online: O ticket médio das compras online do universo geek é de R$ 548,00, superando significativamente a média nacional de R$ 329,00, sugerindo um poder aquisitivo relativamente alto entre os usuários.
 
 **Hábitos e Interesses:**
 
 Investimentos Financeiros: 47,5% dos usuários investem seu dinheiro, indicando uma preocupação com a gestão financeira e o planejamento futuro.
+
 Atividades Físicas: 52% praticam atividades físicas, mostrando um interesse em manter um estilo de vida ativo e saudável.
-Consumo de Entretenimento: 45% consomem filmes e séries em serviços de streaming diariamente, destacando um interesse compartilhado por cultura pop e entretenimento.
+
+Consumo de Entretenimento:
+
+- 45% consomem filmes e séries em serviços de streaming diariamente, destacando um interesse compartilhado por cultura pop e entretenimento;
+- fãs de quadrinhos geralmente tem mais de 40 anos e sete em cada 10 colecionam objetos ligados ao tema de interesse;
+- 69,4% dos gamers seguem criadores de conteúdo e acompanham streams de gameplay;
+- quase 40% dos leitores de animes e mangás, os "otakus", fazem cosplay;
 
 **Justificativa:**
 
