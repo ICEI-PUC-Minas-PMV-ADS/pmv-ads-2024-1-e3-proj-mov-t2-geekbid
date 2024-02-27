@@ -14,23 +14,20 @@ No Brasil já existem aplicativos de comércio eletrônico especializadas no seg
 
 Também existem aplicativos de comércio eletrônico que, além do B2C, possibilitam o C2C (_consumer to consumer_), como [Mercado Livre](https://www.mercadolivre.com.br/) e [Olx](https://www.olx.com.br/), onde se pode negociar de parafusos a aeronaves. Contudo, estas plataformas não oferecem mais a opção de leilão de produtos, embora fosse seu negócio primário, no início de suas atividades. Ainda, são plataformas que abrangem o mercado de forma geral, sem qualquer especialização/segmentação.
 
-O problema que se apresenta é que não existe opção no Brasil para a negociação direta de produtos novos ou usados, do segmento geek/nerd, que permitam ao vendedor a possibilidade de maximizar seu retorno financeiro, e ao comprador de adquirir o item desejado com a possibilidade de um desconto substancial.
+Apesar da crescente demanda por produtos nerds no mercado brasileiro, atualmente não há uma plataforma especializada em leilões online que atenda adequadamente às necessidades e interesses desse segmento específico. Muitos entusiastas enfrentam dificuldades para encontrar e adquirir itens raros, colecionáveis e exclusivos que fazem parte de suas paixões nerd. Além disso, a falta de um ambiente dedicado pode levar a transações inseguras e experiências de compra insatisfatórias.
 
 ## Objetivos
 
-O objetivo do projeto é desenvolver um aplicativo de comércio eletrônico, que possibilite o leilão de produtos, de forma direta entre vendedores e compradores, e que seja especializado no segmento geek/nerd.
+O objetivo principal deste projeto é criar uma plataforma de leilões online exclusiva para produtos do segmento nerd no Brasil, proporcionando aos usuários uma experiência segura, emocionante e conveniente para adquirir itens raros, colecionáveis e exclusivos de suas franquias favoritas.
 
-Os objetivos específicos são a possibilidade de venda direta a preço fixo, bem como a da possibilidade de contratação de especialista credenciado para avaliação de produto, em casos de itens raros e/ou de elevado valor, por meio de um programa de parceira.
+Os objetivos específicos são:
+
+- Facilitar a interação entre compradores e vendedores, criando uma comunidade vibrante e engajada de entusiastas nerd.
+- Garantir a autenticidade e qualidade dos produtos oferecidos, estabelecendo medidas rigorosas de verificação e controle de qualidade.
 
 ## Justificativa
 
-Descreva a importância ou a motivação para trabalhar com esta aplicação que você escolheu. Indique as razões pelas quais você escolheu seus objetivos específicos ou as razões para aprofundar em certos aspectos do software.
-
-O grupo de trabalho pode fazer uso de questionários, entrevistas e dados estatísticos, que podem ser apresentados, com o objetivo de esclarecer detalhes do problema que será abordado pelo grupo.
-
-> **Links Úteis**:
->
-> - [Como montar a justificativa](https://guiadamonografia.com.br/como-montar-justificativa-do-tcc/)
+O mercado nerd no Brasil tem crescido significativamente ao longo dos anos, com uma base de fãs dedicados e apaixonados. No entanto, a falta de uma plataforma especializada em leilões online para esse público específico representa uma lacuna no mercado. Este projeto visa preencher essa lacuna, oferecendo uma solução que não apenas atende às necessidades dos entusiastas nerd, mas também cria um espaço seguro e confiável para transações comerciais. Ao conectar compradores e vendedores de produtos nerd em um ambiente dedicado, esperamos impulsionar ainda mais o crescimento e a diversificação desse mercado, proporcionando uma experiência única e gratificante para todos os envolvidos.
 
 ## Público-Alvo
 
