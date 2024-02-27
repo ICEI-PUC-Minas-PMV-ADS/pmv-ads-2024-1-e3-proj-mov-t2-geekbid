@@ -35,7 +35,7 @@ O mercado nerd no Brasil tem crescido significativamente ao longo dos anos, com 
 
 Gênero: 52% dos usuários são homens, enquanto as mulheres representam 48% do público.
 Faixa Etária: A maior parte dos consumidores (66%) tem entre 22 e 39 anos, indicando uma forte presença da geração Y e dos millennials.
-Estado Civil e Filhos: 65,8% são solteiros e 81% não têm filhos, refletindo um público jovem e sem as responsabilidades familiares típicas.
+Família: 65,8% são solteiros e 81% não têm filhos, refletindo um público jovem e sem as responsabilidades familiares típicas.
 
 **Educação e Renda:**
 
@@ -48,7 +48,8 @@ Investimentos Financeiros: 47,5% dos usuários investem seu dinheiro, indicando 
 Atividades Físicas: 52% praticam atividades físicas, mostrando um interesse em manter um estilo de vida ativo e saudável.
 Consumo de Entretenimento: 45% consomem filmes e séries em serviços de streaming diariamente, destacando um interesse compartilhado por cultura pop e entretenimento.
 
-Justificativa:
+**Justificativa:**
+
 Esses dados demográficos e comportamentais fornecem uma compreensão abrangente do público-alvo do aplicativo de leilão online para produtos do segmento nerd no Brasil. Com uma base majoritariamente jovem, educada e financeiramente ativa, há uma clara oportunidade de atender a essa demanda crescente por uma plataforma especializada que ofereça uma experiência de leilão online exclusiva e emocionante para os entusiastas nerd.
 
 ## Referências
@@ -58,10 +59,3 @@ Esses dados demográficos e comportamentais fornecem uma compreensão abrangente
 [^3]: REVISTA PEGN. **Mercado geek**: especialistas apontam tendências e oportunidades para empreender no segmento. Dez 2023. Disponível em: https://revistapegn.globo.com/empreendedorismo/noticia/2023/11/mercado-geek-especialistas-apontam-tendencias-e-oportunidades-para-empreender-no-segmento.ghtml. Acesso em 22 fev. 2024.
 [^4]: FAST COMPANY. **A força está com eles!** Geeks dominam o mercado de cultura pop. Dez 2023. Disponível em: https://fastcompanybrasil.com/co-design/a-forca-esta-com-eles-geeks-dominam-o-mercado-de-cultura-pop/. Acesso em 22 fev. 2024.
 [^5]: PAGAR.ME. **Mercado geek**: 5 dados e insights sobre o nicho nerd. Mai 2023. Disponível em: https://pagar.me/blog/mercado-geek/#:~:text=Mercado%20geek%20movimenta%20mais%20de,diante%20do%20cen%C3%A1rio%20de%20pandemia. Acesso em 22 fev.2024.
-
-> **Links Úteis**:
->
-> - [Público-alvo](https://blog.hotmart.com/pt-br/publico-alvo/)
-> - [Como definir o público alvo](https://exame.com/pme/5-dicas-essenciais-para-definir-o-publico-alvo-do-seu-negocio/)
-> - [Público-alvo: o que é, tipos, como definir seu público e exemplos](https://klickpages.com.br/blog/publico-alvo-o-que-e/)
-> - [Qual a diferença entre público-alvo e persona?](https://rockcontent.com/blog/diferenca-publico-alvo-e-persona/)
