@@ -1,4 +1,4 @@
-# Geek Bid
+# 🔨 Geek Bid
 
 `ANÁLISE E DESENVOLVIMENTO DE SISTEMAS`
 
@@ -8,7 +8,7 @@
 
 Descrever resumidamente, em um ou dois parágrafos, o projeto que está sendo desenvolvido.
 
-## Integrantes
+## 👥 Integrantes
 
 * Bianca Moreira
 * Gabriel Russo
@@ -20,11 +20,11 @@ Descrever resumidamente, em um ou dois parágrafos, o projeto que está sendo de
 
 * Udo Fritzke
 
-## Instruções de utilização
+## 📝 Instruções de utilização
 
 Assim que a primeira versão do sistema estiver disponível, deverá complementar com as instruções de utilização. Descreva como instalar eventuais dependências e como executar a aplicação.
 
-# Documentação
+# 📚 Documentação
 
 <ol>
 <li><a href="docs/01-Documentação de Contexto.md"> Documentação de Contexto</a></li>
@@ -42,7 +42,7 @@ Assim que a primeira versão do sistema estiver disponível, deverá complementa
 <li><a href="docs/13-Referências.md"> Referências</a></li>
 </ol>
 
-# Código
+# 💻 Código
 
 <li><a href="src/README.md"> Código Fonte</a></li>
 
