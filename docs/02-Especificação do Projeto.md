@@ -2,51 +2,51 @@
 
 <span style="color:red">Pré-requisitos: <a href="1-Documentação de Contexto.md"> Documentação de Contexto</a></span>
 
-Definição do problema e ideia de solução a partir da perspectiva do usuário. É composta pela definição do  diagrama de personas, histórias de usuários, requisitos funcionais e não funcionais além das restrições do projeto.
-
-Apresente uma visão geral do que será abordado nesta parte do documento, enumerando as técnicas e/ou ferramentas utilizadas para realizar a especificações do projeto
+A definição exata do problema e os pontos mais relevantes a serem tratados neste projeto foi consolidada com a participação de possíveis usuários em um trabalho de consulta feito pelos membros da equipe. Os detalhes levantados nesse processo foram consolidados na forma de personas e histórias de usuários.
 
 ## Personas
 
-|**Persona**| **Idade e Ocupação** | **Aplicativos** | **Motivações** | **Frustrações** | **Hobbies/História** |
-------------|----------------------|------------------|----------------|------------------------|----------------------------|
-|Lucas Monteiro  | 35 anos. Designer de Jogos| Instagram, Steam, Mercado Livre, AliExpress| Ter acesso à colecionáveis raros sem precisar pesquisar muito. | Não saber onde procurar seus artigos de interesse raros.| Jogos eletrônicos, board games |
-|Marta Freitas      | 21 anos. Estudante Universitária | Instagram, Pinterest | Comprar action figures de anime, artigos para cosplay | Dificuldade em achar Action Figures e materiais para seus cosplays em lojas de sua região e online.| Cosplay |
-|Antônio Demétrio | 56 anos. Empresário . | Facebook. Whatsapp. | Entusiasta em RPG e jogos raros nostálgicos. | Dificuldade em achar RPGs, board games raros e action figures de sua juventude. | RPG, board games e artigos colecionáveis |
+| **Persona**      | **Idade e Ocupação**             | **Aplicativos**                              | **Motivações**                                                 | **Frustrações**                                                                                     | **Hobbies/História**                              |
+| ---------------- | -------------------------------- | -------------------------------------------- | -------------------------------------------------------------- | --------------------------------------------------------------------------------------------------- | ------------------------------------------------- |
+| Lucas Monteiro   | 35 anos. Designer de Jogos       | Instagram, Steam, Mercado Livre, AliExpress  | Ter acesso à colecionáveis raros sem precisar pesquisar muito. | Não saber onde procurar seus artigos de interesse raros.                                            | Jogos eletrônicos, board games                    |
+| Marta Freitas    | 21 anos. Estudante Universitária | Instagram, Pinterest                         | Comprar action figures de anime, artigos para cosplay          | Dificuldade em achar Action Figures e materiais para seus cosplays em lojas de sua região e online. | Cosplay                                           |
+| Antônio Demétrio | 56 anos. Empresário              | Facebook. Whatsapp.                          | Entusiasta em RPG e jogos raros nostálgicos.                   | Dificuldade em achar RPGs, board games raros e action figures de sua juventude.                     | RPG, board games e artigos colecionáveis          |
+| Stanley Oliveira | 42 anos. Empresário              | Facebook. Whatsapp. Mercado Livre. Instagram | Lojista e negociador de colecionáveis                          | Dificuldade em achar compradores para artigos raros e/ou caros no mercado físico                    | RPG, board games e artigos colecionáveis em geral |
 
 ## Histórias de Usuários
+
 Lembre-se que você deve ser enumerar e descrever precisamente e personalizada todos os clientes ideais que sua solução almeja.
 
 ## Histórias de Usuários
 
 Com base na análise das personas forma identificadas as seguintes histórias de usuários:
 
-|EU COMO... `PERSONA`| QUERO/PRECISO ... `FUNCIONALIDADE` |PARA ... `MOTIVO/VALOR`                 |
-|--------------------|------------------------------------|----------------------------------------|
-|Lucas | Comprar artigos de jogos online. | Ganhar vantagem e economizar tempo.
-|Lucas | Comprar jogos de tabuleiro. | Receber amigos e socializar. |
-|Lucas | Encontrar de maneira objetiva seus artigos colecionáveis. | Colecionar artigos geek |
-|Marta | Obter action figures de seus animes preferidos | Decorar sua estante de colecionáveis |
-Marta | Achar peças de vestuário e acessórios para seus cosplays | Conseguir fazer os cosplays desejados|
-|Antônio | Encontrar RPG's raros e antigos | Colecionar os RPG's de sua juventude |
-Antônio| Comprar action figures e jogos de tabuleiro raros | Obter e relembrar objetos e jogos nostálgicos |
-
-
+| EU COMO... `PERSONA` | QUERO/PRECISO ... `FUNCIONALIDADE`                            | PARA ... `MOTIVO/VALOR`                        |
+| -------------------- | ------------------------------------------------------------- | ---------------------------------------------- |
+| Lucas                | Comprar artigos de jogos online.                              | Ganhar vantagem e economizar tempo.            |
+| Lucas                | Comprar jogos de tabuleiro.                                   | Receber amigos e socializar.                   |
+| Lucas                | Encontrar de maneira objetiva seus artigos colecionáveis.     | Colecionar artigos geek                        |
+| Marta                | Obter action figures de seus animes preferidos                | Decorar sua estante de colecionáveis           |
+| Marta                | Achar peças de vestuário e acessórios para seus cosplays      | Conseguir fazer os cosplays desejados          |
+| Antônio              | Encontrar RPG's raros e antigos                               | Colecionar os RPG's de sua juventude           |
+| Antônio              | Comprar action figures e jogos de tabuleiro raros             | Obter e relembrar objetos e jogos nostálgicos  |
+| Stanley              | Vender artigos colecionaveis, board games, rpgs raros/antigos | Ter um mercado maior para vender seus produtos |
 
 Apresente aqui as histórias de usuário que são relevantes para o projeto de sua solução. As Histórias de Usuário consistem em uma ferramenta poderosa para a compreensão e elicitação dos requisitos funcionais e não funcionais da sua aplicação. Se possível, agrupe as histórias de usuário por contexto, para facilitar consultas recorrentes à essa parte do documento.
 
 > **Links Úteis**:
+>
 > - [Histórias de usuários com exemplos e template](https://www.atlassian.com/br/agile/project-management/user-stories)
 > - [Como escrever boas histórias de usuário (User Stories)](https://medium.com/vertice/como-escrever-boas-users-stories-hist%C3%B3rias-de-usu%C3%A1rios-b29c75043fac)
 > - [User Stories: requisitos que humanos entendem](https://www.luiztools.com.br/post/user-stories-descricao-de-requisitos-que-humanos-entendem/)
 > - [Histórias de Usuários: mais exemplos](https://www.reqview.com/doc/user-stories-example.html)
 > - [9 Common User Story Mistakes](https://airfocus.com/blog/user-story-mistakes/)
 
-## Modelagem do Processo de Negócio 
+## Modelagem do Processo de Negócio
 
 ### Análise da Situação Atual
 
-Apresente aqui os problemas existentes que viabilizam sua proposta. Apresente o modelo do sistema como ele funciona hoje. Caso sua proposta seja inovadora e não existam processos claramente definidos, apresente como as tarefas que o seu sistema pretende implementar são executadas atualmente, mesmo que não se utilize tecnologia computacional. 
+Apresente aqui os problemas existentes que viabilizam sua proposta. Apresente o modelo do sistema como ele funciona hoje. Caso sua proposta seja inovadora e não existam processos claramente definidos, apresente como as tarefas que o seu sistema pretende implementar são executadas atualmente, mesmo que não se utilize tecnologia computacional.
 
 ### Descrição Geral da Proposta
 
@@ -54,7 +54,7 @@ Apresente aqui uma descrição da sua proposta abordando seus limites e suas lig
 
 ### Processo 1 – NOME DO PROCESSO
 
-Apresente aqui o nome e as oportunidades de melhorias para o processo 1. Em seguida, apresente o modelo do processo 1, descrito no padrão BPMN. 
+Apresente aqui o nome e as oportunidades de melhorias para o processo 1. Em seguida, apresente o modelo do processo 1, descrito no padrão BPMN.
 
 ![Processo 1](img/02-bpmn-proc1.png)
 
@@ -66,12 +66,12 @@ Apresente aqui o nome e as oportunidades de melhorias para o processo 2. Em segu
 
 ## Indicadores de Desempenho
 
-Apresente aqui os principais indicadores de desempenho e algumas metas para o processo. Atenção: as informações necessárias para gerar os indicadores devem estar contempladas no diagrama de classe. Colocar no mínimo 5 indicadores. 
+Apresente aqui os principais indicadores de desempenho e algumas metas para o processo. Atenção: as informações necessárias para gerar os indicadores devem estar contempladas no diagrama de classe. Colocar no mínimo 5 indicadores.
 
-Usar o seguinte modelo: 
+Usar o seguinte modelo:
 
 ![Indicadores de Desempenho](img/02-indic-desemp.png)
-Obs.: todas as informações para gerar os indicadores devem estar no diagrama de classe a ser apresentado a posteriori. 
+Obs.: todas as informações para gerar os indicadores devem estar no diagrama de classe a ser apresentado a posteriori.
 
 ## Requisitos
 
@@ -79,55 +79,57 @@ As tabelas que se seguem apresentam os requisitos funcionais e não funcionais q
 
 ### Requisitos Funcionais
 
-|ID    | Descrição do Requisito  | Prioridade |
-|------|-----------------------------------------|----|
-|RF-001| Permitir que o usuário cadastre tarefas | ALTA | 
-|RF-002| Emitir um relatório de tarefas no mês   | MÉDIA |
+| ID     | Descrição do Requisito                  | Prioridade |
+| ------ | --------------------------------------- | ---------- |
+| RF-001 | Permitir que o usuário cadastre tarefas | ALTA       |
+| RF-002 | Emitir um relatório de tarefas no mês   | MÉDIA      |
 
 ### Requisitos não Funcionais
 
-|ID     | Descrição do Requisito  |Prioridade |
-|-------|-------------------------|----|
-|RNF-001| O sistema deve ser responsivo para rodar em um dispositivos móvel | MÉDIA | 
-|RNF-002| Deve processar requisições do usuário em no máximo 3s |  BAIXA | 
+| ID      | Descrição do Requisito                                            | Prioridade |
+| ------- | ----------------------------------------------------------------- | ---------- |
+| RNF-001 | O sistema deve ser responsivo para rodar em um dispositivos móvel | MÉDIA      |
+| RNF-002 | Deve processar requisições do usuário em no máximo 3s             | BAIXA      |
 
 Com base nas Histórias de Usuário, enumere os requisitos da sua solução. Classifique esses requisitos em dois grupos:
 
 - [Requisitos Funcionais
- (RF)](https://pt.wikipedia.org/wiki/Requisito_funcional):
- correspondem a uma funcionalidade que deve estar presente na
+  (RF)](https://pt.wikipedia.org/wiki/Requisito_funcional):
+  correspondem a uma funcionalidade que deve estar presente na
   plataforma (ex: cadastro de usuário).
 - [Requisitos Não Funcionais
   (RNF)](https://pt.wikipedia.org/wiki/Requisito_n%C3%A3o_funcional):
   correspondem a uma característica técnica, seja de usabilidade,
   desempenho, confiabilidade, segurança ou outro (ex: suporte a
   dispositivos iOS e Android).
-Lembre-se que cada requisito deve corresponder à uma e somente uma
-característica alvo da sua solução. Além disso, certifique-se de que
-todos os aspectos capturados nas Histórias de Usuário foram cobertos.
+  Lembre-se que cada requisito deve corresponder à uma e somente uma
+  característica alvo da sua solução. Além disso, certifique-se de que
+  todos os aspectos capturados nas Histórias de Usuário foram cobertos.
 
 ## Restrições
 
 O projeto está restrito pelos itens apresentados na tabela a seguir.
 
-|ID| Restrição                                             |
-|--|-------------------------------------------------------|
-|01| O projeto deverá ser entregue até o final do semestre |
-|02| Não pode ser desenvolvido um módulo de backend        |
+| ID  | Restrição                                             |
+| --- | ----------------------------------------------------- |
+| 01  | O projeto deverá ser entregue até o final do semestre |
+| 02  | Não pode ser desenvolvido um módulo de backend        |
 
 Enumere as restrições à sua solução. Lembre-se de que as restrições geralmente limitam a solução candidata.
 
 > **Links Úteis**:
+>
 > - [O que são Requisitos Funcionais e Requisitos Não Funcionais?](https://codificar.com.br/requisitos-funcionais-nao-funcionais/)
 > - [O que são requisitos funcionais e requisitos não funcionais?](https://analisederequisitos.com.br/requisitos-funcionais-e-requisitos-nao-funcionais-o-que-sao/)
 
 ## Diagrama de Casos de Uso
 
-O diagrama de casos de uso é o próximo passo após a elicitação de requisitos, que utiliza um modelo gráfico e uma tabela com as descrições sucintas dos casos de uso e dos atores. Ele contempla a fronteira do sistema e o detalhamento dos requisitos funcionais com a indicação dos atores, casos de uso e seus relacionamentos. 
+O diagrama de casos de uso é o próximo passo após a elicitação de requisitos, que utiliza um modelo gráfico e uma tabela com as descrições sucintas dos casos de uso e dos atores. Ele contempla a fronteira do sistema e o detalhamento dos requisitos funcionais com a indicação dos atores, casos de uso e seus relacionamentos.
 
 As referências abaixo irão auxiliá-lo na geração do artefato “Diagrama de Casos de Uso”.
 
 > **Links Úteis**:
+>
 > - [Criando Casos de Uso](https://www.ibm.com/docs/pt-br/elm/6.0?topic=requirements-creating-use-cases)
 > - [Como Criar Diagrama de Caso de Uso: Tutorial Passo a Passo](https://gitmind.com/pt/fazer-diagrama-de-caso-uso.html/)
 > - [Lucidchart](https://www.lucidchart.com/)
@@ -136,17 +138,17 @@ As referências abaixo irão auxiliá-lo na geração do artefato “Diagrama de
 
 # Matriz de Rastreabilidade
 
-A matriz de rastreabilidade é uma ferramenta usada para facilitar a visualização dos relacionamento entre requisitos e outros artefatos ou objetos, permitindo a rastreabilidade entre os requisitos e os objetivos de negócio. 
+A matriz de rastreabilidade é uma ferramenta usada para facilitar a visualização dos relacionamento entre requisitos e outros artefatos ou objetos, permitindo a rastreabilidade entre os requisitos e os objetivos de negócio.
 
 A matriz deve contemplar todos os elementos relevantes que fazem parte do sistema, conforme a figura meramente ilustrativa apresentada a seguir.
 
 ![Exemplo de matriz de rastreabilidade](img/02-matriz-rastreabilidade.png)
 
 > **Links Úteis**:
+>
 > - [Artigo Engenharia de Software 13 - Rastreabilidade](https://www.devmedia.com.br/artigo-engenharia-de-software-13-rastreabilidade/12822/)
 > - [Verificação da rastreabilidade de requisitos usando a integração do IBM Rational RequisitePro e do IBM ClearQuest Test Manager](https://developer.ibm.com/br/tutorials/requirementstraceabilityverificationusingrrpandcctm/)
 > - [IBM Engineering Lifecycle Optimization – Publishing](https://www.ibm.com/br-pt/products/engineering-lifecycle-optimization/publishing/)
-
 
 # Gerenciamento de Projeto
 
@@ -164,7 +166,7 @@ O gráfico de Gantt ou diagrama de Gantt também é uma ferramenta visual utiliz
 
 ## Gerenciamento de Equipe
 
-O gerenciamento adequado de tarefas contribuirá para que o projeto alcance altos níveis de produtividade. Por isso, é fundamental que ocorra a gestão de tarefas e de pessoas, de modo que os times envolvidos no projeto possam ser facilmente gerenciados. 
+O gerenciamento adequado de tarefas contribuirá para que o projeto alcance altos níveis de produtividade. Por isso, é fundamental que ocorra a gestão de tarefas e de pessoas, de modo que os times envolvidos no projeto possam ser facilmente gerenciados.
 
 ![Simple Project Timeline](img/02-project-timeline.png)
 
