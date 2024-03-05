@@ -64,9 +64,9 @@ O desenvolvimento do projeto Geek Bid está sendo conduzido utilizando o framewo
 
 <div align="center">
 
-Figura 1 - Canva
+Figura 1 - kanban
 
-![Canva](https://github.com/ICEI-PUC-Minas-PMV-ADS/pmv-ads-2024-1-e3-proj-mov-t2-geekbid/blob/main/docs/img/canva.PNG)
+![kanban](https://github.com/ICEI-PUC-Minas-PMV-ADS/pmv-ads-2024-1-e3-proj-mov-t2-geekbid/blob/main/docs/img/kanban1.PNG)
 
 </div>
 
