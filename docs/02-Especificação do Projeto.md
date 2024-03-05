@@ -15,10 +15,6 @@ A definição exata do problema e os pontos mais relevantes a serem tratados nes
 
 ## Histórias de Usuários
 
-Lembre-se que você deve ser enumerar e descrever precisamente e personalizada todos os clientes ideais que sua solução almeja.
-
-## Histórias de Usuários
-
 Com base na análise das personas forma identificadas as seguintes histórias de usuários:
 
 | EU COMO... `PERSONA` | QUERO/PRECISO ... `FUNCIONALIDADE`                            | PARA ... `MOTIVO/VALOR`                        |
@@ -31,16 +27,6 @@ Com base na análise das personas forma identificadas as seguintes histórias de
 | Antônio              | Encontrar RPG's raros e antigos                               | Colecionar os RPG's de sua juventude           |
 | Antônio              | Comprar action figures e jogos de tabuleiro raros             | Obter e relembrar objetos e jogos nostálgicos  |
 | Stanley              | Vender artigos colecionaveis, board games, rpgs raros/antigos | Ter um mercado maior para vender seus produtos |
-
-Apresente aqui as histórias de usuário que são relevantes para o projeto de sua solução. As Histórias de Usuário consistem em uma ferramenta poderosa para a compreensão e elicitação dos requisitos funcionais e não funcionais da sua aplicação. Se possível, agrupe as histórias de usuário por contexto, para facilitar consultas recorrentes à essa parte do documento.
-
-> **Links Úteis**:
->
-> - [Histórias de usuários com exemplos e template](https://www.atlassian.com/br/agile/project-management/user-stories)
-> - [Como escrever boas histórias de usuário (User Stories)](https://medium.com/vertice/como-escrever-boas-users-stories-hist%C3%B3rias-de-usu%C3%A1rios-b29c75043fac)
-> - [User Stories: requisitos que humanos entendem](https://www.luiztools.com.br/post/user-stories-descricao-de-requisitos-que-humanos-entendem/)
-> - [Histórias de Usuários: mais exemplos](https://www.reqview.com/doc/user-stories-example.html)
-> - [9 Common User Story Mistakes](https://airfocus.com/blog/user-story-mistakes/)
 
 ## Modelagem do Processo de Negócio
 
@@ -79,48 +65,56 @@ As tabelas que se seguem apresentam os requisitos funcionais e não funcionais q
 
 ### Requisitos Funcionais
 
-| ID     | Descrição do Requisito                  | Prioridade |
-| ------ | --------------------------------------- | ---------- |
-| RF-001 | Permitir que o usuário cadastre tarefas | ALTA       |
-| RF-002 | Emitir um relatório de tarefas no mês   | MÉDIA      |
+| Id        | Identificação                    | Descrição                                                                                                                                                                                                                    | Classificação | Prioridade |
+| --------- | -------------------------------- | ---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- | ------------- | ---------- |
+| RF-001.01 | Cadastro de Usuário              | Permitir que os usuários se cadastrem na plataforma, fornecendo informações básicas como nome completo, e-mail e senha.                                                                                                      | Essencial     | Alta       |
+| RF-001.02 | Cadastro de Usuário              | Validar o cadastro do usuário, por meio do envio de e-mail ou código eletrônico pelo celular.                                                                                                                                | Importante    | Média      |
+| RF-002.01 | Login de Usuário                 | Permitir que os usuários façam login na plataforma usando suas credenciais cadastradas.                                                                                                                                      | Essencial     | Alta       |
+| RF-002.02 | Login de Usuário                 | Permitir que os usuários façam login na plataforma usando suas credenciais cadastradas.                                                                                                                                      | Essencial     | Alta       |
+| RF-003    | Gerenciamento de Perfil          | Permitir que os usuários editem e atualizem suas informações de perfil, incluindo número do CPF, número do celular, imagem do usuário, endereço, data de nascimento, informações de pagamento e preferências de notificação. | Essencial     | Alta       |
+| RF-004.01 | Navegação e Busca                | Exibir uma lista de produtos disponíveis para leilão, incluindo detalhes como nome do produto, descrição, imagens e preço inicial                                                                                            | Importante    | Alta       |
+| RF-004.02 | Navegação e Busca                | Permitir que os usuários filtrem e pesquisem produtos por categoria, tipo, etc.                                                                                                                                              | Importante    | Alta       |
+| RF-005.01 | Leilões                          | Permitir a criação de novos leilões por parte dos vendedores, incluindo a definição de preço inicial, tempo de duração do leilão, descrição e imagens do produto.                                                            | Essencial     | Alta       |
+| RF-005.02 | Leilões                          | Permitir que os usuários façam lances em leilões ativos e acompanhem seu progresso.                                                                                                                                          | Essencial     | Alta       |
+| RF-005.03 | Leilões                          | Notificar os usuários sobre o status dos leilões em que estão participando, incluindo avisos de novos lances e encerramento de leilões.                                                                                      | Importante    | Média      |
+| RF-006.01 | Pagamentos e Transações          | Integrar sistemas de pagamento seguros para facilitar transações entre compradores e vendedores.                                                                                                                             | Desejável     | Baixa      |
+| RF-006.02 | Pagamentos e Transações          | Garantir a segurança e a proteção dos dados financeiros dos usuários durante as transações.                                                                                                                                  | Desejável     | Baixa      |
+| RF-007.01 | Gerenciamento de Pedidos         | Permitir que os usuários visualizem e gerenciem seus pedidos de produtos ganhos em leilões.                                                                                                                                  | Importante    | Média      |
+| RF-007.02 | Gerenciamento de Pedidos         | Rastrear o status dos pedidos, desde o pagamento até a entrega, fornecendo atualizações regulares aos usuários.                                                                                                              | Desejável     | Baixa      |
+| RF-008.01 | Sistema de Avaliações e Feedback | Permitir que os usuários deixem avaliações e feedback sobre os produtos adquiridos e a experiência geral de compra.                                                                                                          | Desejável     | Baixa      |
+| RF-008.02 | Sistema de Avaliações e Feedback | Exibir avaliações e feedback publicamente para ajudar outros usuários a tomar decisões informadas.                                                                                                                           | Desejável     | Baixa      |
+| RF-009.01 | Administração do Sistema         | Fornecer uma interface de administração para monitorar e gerenciar atividades de usuários, leilões, pagamentos e outras operações relacionadas ao sistema.                                                                   | Desejável     | Baixa      |
+| RF-009.02 | Administração do Sistema         | Permitir a moderação de conteúdo e ações para garantir a integridade e segurança da plataforma.                                                                                                                              | Desejável     | Baixa      |
 
 ### Requisitos não Funcionais
 
-| ID      | Descrição do Requisito                                            | Prioridade |
-| ------- | ----------------------------------------------------------------- | ---------- |
-| RNF-001 | O sistema deve ser responsivo para rodar em um dispositivos móvel | MÉDIA      |
-| RNF-002 | Deve processar requisições do usuário em no máximo 3s             | BAIXA      |
-
-Com base nas Histórias de Usuário, enumere os requisitos da sua solução. Classifique esses requisitos em dois grupos:
-
-- [Requisitos Funcionais
-  (RF)](https://pt.wikipedia.org/wiki/Requisito_funcional):
-  correspondem a uma funcionalidade que deve estar presente na
-  plataforma (ex: cadastro de usuário).
-- [Requisitos Não Funcionais
-  (RNF)](https://pt.wikipedia.org/wiki/Requisito_n%C3%A3o_funcional):
-  correspondem a uma característica técnica, seja de usabilidade,
-  desempenho, confiabilidade, segurança ou outro (ex: suporte a
-  dispositivos iOS e Android).
-  Lembre-se que cada requisito deve corresponder à uma e somente uma
-  característica alvo da sua solução. Além disso, certifique-se de que
-  todos os aspectos capturados nas Histórias de Usuário foram cobertos.
+| Id     | Identificação   | Descrição                                                                                                                                 | Classificação | Prioridade |
+| ------ | --------------- | ----------------------------------------------------------------------------------------------------------------------------------------- | ------------- | ---------- |
+| RNF-01 | Segurança       | Garantir que todas as transações e dados dos usuários sejam protegidos por medidas de segurança                                           | Essencial     | Alta       |
+| RNF-02 | Desempenho      | Assegurar que o aplicativo seja responsivo e de alto desempenho, mesmo durante períodos de tráfego intenso simultâneo                     | Importante    | Alta       |
+| RNF-03 | Escalabilidade  | Projetar o aplicativo de forma que possa lidar com um aumento significativo no número de usuários e produtos sem comprometer o desempenho | Desejável     | Alta       |
+| RNF-04 | Usabilidade     | Desenvolver uma interface intuitiva e amigável para o usuário, facilitando a navegação e a participação nos leilões                       | Importante    | Média      |
+| RNF-05 | Compatibilidade | Garantir que o aplicativo seja compatível com uma variedade de dispositivos                                                               | Desejável     | Alta       |
+| RNF-06 | Disponibilidade | Assegurar uma alta disponibilidade do sistema, minimizando o tempo de inatividade e garantindo que os leilões ocorram conforme programado | Importante    | Alta       |
 
 ## Restrições
 
 O projeto está restrito pelos itens apresentados na tabela a seguir.
 
-| ID  | Restrição                                             |
-| --- | ----------------------------------------------------- |
-| 01  | O projeto deverá ser entregue até o final do semestre |
-| 02  | Não pode ser desenvolvido um módulo de backend        |
-
-Enumere as restrições à sua solução. Lembre-se de que as restrições geralmente limitam a solução candidata.
-
-> **Links Úteis**:
->
-> - [O que são Requisitos Funcionais e Requisitos Não Funcionais?](https://codificar.com.br/requisitos-funcionais-nao-funcionais/)
-> - [O que são requisitos funcionais e requisitos não funcionais?](https://analisederequisitos.com.br/requisitos-funcionais-e-requisitos-nao-funcionais-o-que-sao/)
+| Id        | Identificação                      | Descrição                                                                                                                                                               |
+| --------- | ---------------------------------- | ----------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| RD-001.01 | Regras de criação de Leilões       | O leilão apenas estará disponível para lances após sua publicação pelo vendedor.                                                                                        |
+| RD-001.02 | Regras de criação de Leilões       | O leilão publicado só poderá ser cancelado caso ainda não tenha recebido lances.                                                                                        |
+| RD-001.03 | Regras de criação de Leilões       | O leilão publicado não poderá ser editado.                                                                                                                              |
+| RD-002.01 | Regras de Participação em Leilões  | Os usuários devem ter idade mínima de 18 anos para participar de leilões.                                                                                               |
+| RD-002.02 | Regras de Participação em Leilões  | Os lances feitos pelos usuários são vinculativos e não podem ser retirados após o término do leilão.                                                                    |
+| RD-003.01 | Regras de Pagamento e Transações   | O pagamento total pelo produto vencedor do leilão deve ser feito dentro de um prazo especificado após o término do leilão.                                              |
+| RD-003.02 | Regras de Pagamento e Transações   | O não pagamento no prazo especificado elimina o lance vencedor, sendo convocado o segundo colocado, após concordância do vendedor.                                      |
+| RD-004    | Regras de Listagem de Produtos     | Os produtos listados devem estar em conformidade com as políticas de conteúdo e não podem infringir direitos autorais ou marcas registradas de terceiros.               |
+| RD-005.01 | Regras de Cancelamento e Devolução | Os usuários têm o direito de cancelar seus lances em um leilão apenas em circunstâncias específicas, conforme estabelecido nas políticas de cancelamento da plataforma. |
+| RD-005.02 | Regras de Cancelamento e Devolução | As devoluções de produtos ganhos em leilões só são permitidas em caso de defeito ou discrepância significativa em relação à descrição do produto.                       |
+| RD-006.01 | Regras de Integridade do Sistema   | A plataforma deve ser monitorada regularmente para detectar e prevenir atividades fraudulentas, spam ou uso indevido.                                                   |
+| RD-006.02 | Regras de Integridade do Sistema   | Qualquer violação das políticas da plataforma ou uso inadequado do sistema pode resultar em suspensão ou exclusão da conta do usuário.                                  |
 
 ## Diagrama de Casos de Uso
 
