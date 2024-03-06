@@ -80,7 +80,7 @@ O desenvolvimento do projeto Geek Bid está sendo conduzido utilizando o framewo
 
 Figura 1 - kanban
 
-![kanban](https://github.com/ICEI-PUC-Minas-PMV-ADS/pmv-ads-2024-1-e3-proj-mov-t2-geekbid/blob/main/docs/img/00-kanban1.PNG)
+![kanban](https://github.com/ICEI-PUC-Minas-PMV-ADS/pmv-ads-2024-1-e3-proj-mov-t2-geekbid/blob/main/docs/img/00-kanban.PNG)
 
 </div>
 
