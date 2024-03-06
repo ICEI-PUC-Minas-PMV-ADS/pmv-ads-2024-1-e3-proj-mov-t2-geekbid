@@ -1,7 +1,7 @@
 
 # Metodologia
 
-<span style="color:red">Pré-requisitos: [Link](https://github.com/ICEI-PUC-Minas-PMV-ADS/pmv-ads-2024-1-e3-proj-mov-t2-geekbid/blob/spr01_metodologia/docs/02-Especifica%C3%A7%C3%A3o%20do%20Projeto.md)
+<span style="color:red">Pré-requisitos: [Especificação do Projeto](https://github.com/ICEI-PUC-Minas-PMV-ADS/pmv-ads-2024-1-e3-proj-mov-t2-geekbid/blob/spr01_metodologia/docs/02-Especifica%C3%A7%C3%A3o%20do%20Projeto.md)
 
 
 Para o desenvolvimento das etapas do projeto foram utilizadas as seguintes ferramentas: 
