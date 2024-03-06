@@ -1,7 +1,8 @@
 
 # Metodologia
 
-<span style="color:red">Pré-requisitos: <a href="2-Especificação do Projeto.md"> Documentação de Especificação</a></span>
+<span style="color:red">Pré-requisitos: [Link](https://github.com/ICEI-PUC-Minas-PMV-ADS/pmv-ads-2024-1-e3-proj-mov-t2-geekbid/blob/spr01_metodologia/docs/02-Especifica%C3%A7%C3%A3o%20do%20Projeto.md)
+
 
 Para o desenvolvimento das etapas do projeto foram utilizadas as seguintes ferramentas: 
 
@@ -33,12 +34,12 @@ Os artefatos do projeto são desenvolvidos a partir de diversas plataformas, cad
 
 | Ambiente | Plataforma | Link de Acesso |
 |----------|------------|----------------|
-| Repositório código fonte| GitHub | [Link](https://github.com/ICEI-PUC-Minas-PMV-ADS/pmv-ads-2024-1-e3-proj-mov-t2-geekbid/tree/main/src) |
-| Documentação | GitHub | [Link](https://github.com/ICEI-PUC-Minas-PMV-ADS/pmv-ads-2024-1-e3-proj-mov-t2-geekbid/tree/main) |
-| Gerenciamento do projeto | GitHub Projects| [Link](https://github.com/orgs/ICEI-PUC-Minas-PMV-ADS/projects/777) |
-| Wireframe | Figma | [Link](https://www.figma.com/file/tvTmw6ooRbQybDahix2925/Geek-bid?type=design&node-id=0-1&mode=design) |
-| Testes | A definir | [Link](https://travis-ci.com/seu-usuario/seu-repositorio) |
-| Banco de Dados | A definir | [Link](https://) |
+| Repositório código fonte| GitHub | [Acessar](https://github.com/ICEI-PUC-Minas-PMV-ADS/pmv-ads-2024-1-e3-proj-mov-t2-geekbid/tree/main/src) |
+| Documentação | GitHub | [Acessar](https://github.com/ICEI-PUC-Minas-PMV-ADS/pmv-ads-2024-1-e3-proj-mov-t2-geekbid/tree/main) |
+| Gerenciamento do projeto | GitHub Projects| [Acessar](https://github.com/orgs/ICEI-PUC-Minas-PMV-ADS/projects/777) |
+| Wireframe | Figma | [Acessar](https://www.figma.com/file/tvTmw6ooRbQybDahix2925/Geek-bid?type=design&node-id=0-1&mode=design) |
+| Testes | A definir | [-](https://travis-ci.com/seu-usuario/seu-repositorio) |
+| Banco de Dados | A definir | [-](https://) |
 
 
 ## Controle de Versão
