@@ -152,7 +152,61 @@ A matriz deve contemplar todos os elementos relevantes que fazem parte do sistem
 
 # Gerenciamento de Projeto
 
-De acordo com o PMBoK v6 as dez áreas que constituem os pilares para gerenciar projetos, e que caracterizam a multidisciplinaridade envolvida, são: Integração, Escopo, Cronograma (Tempo), Custos, Qualidade, Recursos, Comunicações, Riscos, Aquisições, Partes Interessadas. Para desenvolver projetos um profissional deve se preocupar em gerenciar todas essas dez áreas. Elas se complementam e se relacionam, de tal forma que não se deve apenas examinar uma área de forma estanque. É preciso considerar, por exemplo, que as áreas de Escopo, Cronograma e Custos estão muito relacionadas. Assim, se eu amplio o escopo de um projeto eu posso afetar seu cronograma e seus custos.
+*Integração:*
+- Desenvolvimento do plano de gerenciamento do projeto.
+- Coordenação e integração de todos os processos e atividades do projeto.
+- Realização de reuniões de acompanhamento e controle do projeto.
+
+*Escopo:*
+- Coleta de requisitos do aplicativo de leilão.
+- Elaboração da Declaração do Escopo do Projeto (DEP).
+- Desenvolvimento da Estrutura Analítica do Projeto (EAP) e do Dicionário da EAP.
+- Controle de mudanças no escopo do projeto.
+
+*Cronograma (Tempo):*
+- Sequenciamento das atividades do projeto.
+- Estimativa de duração das atividades.
+- Desenvolvimento do cronograma do projeto.
+- Controle do cronograma, identificando desvios e ajustando o plano conforme necessário.
+
+*Custos:*
+- Estimativa de custos do projeto, incluindo desenvolvimento do aplicativo, marketing, suporte, etc.
+- Elaboração do orçamento do projeto.
+- Controle de custos durante a execução do projeto.
+
+*Qualidade:*
+- Planejamento da qualidade do aplicativo de leilão.
+- Realização de garantia da qualidade.
+- Controle da qualidade, incluindo revisões de código, testes de aceitação do usuário, etc.
+
+*Recursos:*
+- Identificação e alocação de recursos necessários para o projeto, incluindo equipe, equipamentos e materiais.
+- Desenvolvimento do plano de gerenciamento de recursos humanos.
+- Gestão do desempenho da equipe.
+
+*Comunicações:*
+- Elaboração do plano de gerenciamento das comunicações.
+- Estabelecimento de canais de comunicação eficazes.
+- Distribuição de informações relevantes para todas as partes interessadas.
+- Gerenciamento das expectativas das partes interessadas.
+
+*Riscos:*
+- Identificação de riscos potenciais relacionados ao desenvolvimento e implementação do aplicativo de leilão.
+- Análise qualitativa e quantitativa de riscos.
+- Desenvolvimento de estratégias de resposta aos riscos.
+- Monitoramento e controle dos riscos ao longo do ciclo de vida do projeto.
+
+*Aquisições:*
+- Identificação de produtos ou serviços a serem adquiridos externamente para o projeto.
+- Desenvolvimento do plano de aquisições.
+- Seleção de fornecedores.
+- Administração e encerramento dos contratos de aquisição.
+
+*Partes Interessadas:*
+- Identificação de todas as partes interessadas no projeto.
+- Avaliação do impacto das partes interessadas no projeto.
+- Desenvolvimento de estratégias de engajamento das partes interessadas.
+- Gerenciamento das expectativas das partes interessadas ao longo do projeto.
 
 ## Gerenciamento de Tempo
 
