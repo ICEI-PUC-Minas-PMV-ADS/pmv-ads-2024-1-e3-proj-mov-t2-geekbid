@@ -210,9 +210,14 @@ Minhas Informações:
 
 Permite aos usuários visualizar e editar suas informações cadastrais, Também oferece a opção de excluir a conta, com uma confirmação para evitar exclusões acidentais.
 
+![Exemplo de Diagrama de Fluxo](img/tela-minhas-informações.png)
+
 Meus Leilões:
 
 Apresenta uma lista dos leilões cadastrados pelo usuário. Essa seção fornece uma visão consolidada dos itens que o usuário está leiloando, permitindo edições, exclusões ou acompanhamento do status dos leilões.
+
+![Exemplo de Diagrama de Fluxo](img/tela-meus-leilões.png)
+
 
 Meus Lances:
 
