@@ -22,11 +22,14 @@ As referências abaixo irão auxiliá-lo na geração do artefato “Diagramas d
 
 ## Wireframe Interativo
 
-Conforme o diagrama de fluxo do projeto apresentado anteriormente, as telas do sistema são detalhadas nos itens subsequentes. Para acessar o wireframe interativo, acesse o ambiente https://www.figma.com/file/tvTmw6ooRbQybDahix2925/Geek-bid?type=design&node-id=0-1&mode=design&t=UTHXdQbq9iEme6Qg-0
- disponível pela plataforma Figma.
+Conforme o diagrama de fluxo do projeto apresentado anteriormente, as telas do sistema são detalhadas nos itens subsequentes. 
+Para acessar o wireframe interativo, acesse o ambiente https://www.figma.com/file/tvTmw6ooRbQybDahix2925/Geek-bid?type=design&node-id=0-1&mode=design&t=UTHXdQbq9iEme6Qg-0  disponível pela plataforma Figma.
+ 
 As telas do sistema seguem uma estrutura padrão, conforme ilustrado na Figura 6. Nessa estrutura, identificamos dois principais blocos, os quais estão detalhados a seguir:
 Conteúdo: exibe o conteúdo da tela em questão;
 Barra de navegação: mostra os elementos de navegação disponíveis, que estão associados aos elementos do bloco de conteúdo.
+
+![Exemplo de Diagrama de Fluxo](img/template-do-sistema.png)
 
  
 > **Links Úteis**:
