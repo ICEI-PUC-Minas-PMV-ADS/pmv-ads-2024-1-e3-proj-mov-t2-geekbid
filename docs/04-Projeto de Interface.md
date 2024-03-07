@@ -286,7 +286,25 @@ Botão voltar
  Ao clicar nesse botão, o vendedor é redirecionado para a tela meus leilões.
  
 ![Exemplo de Diagrama de Fluxo](img/tela-detalhes.png)
- 
+
+- Tela Editar Leilão:
+
+A tela de editar leilão proporciona ao vendedor a oportunidade de ajustar as informações de um leilão antes de publicá-lo ou durante a fase de edição. Esta tela inclui:
+
+Detalhes do Item para Edição:
+
+Exibe os detalhes do leilão, incluindo imagem, nome, descrição, categoria, lance mínimo, duração, e outros detalhes relevantes. Todos esses campos estão prontos para edição.
+Campo para Upload de Nova Imagem:
+
+Permite ao vendedor fazer upload de uma nova imagem para representar o item em leilão, caso deseje realizar alterações visuais.
+
+Botão "Salvar Alterações":
+Ao clicar neste botão, as informações editadas são salvas, mas o leilão não é publicado imediatamente. Isso permite ao vendedor realizar edições sem tornar as alterações imediatamente visíveis aos participantes do leilão.
+
+Botão "Publicar":
+Ao clicar neste botão, as informações editadas são salvas e o leilão é publicado. Isso torna as alterações visíveis aos participantes do leilão. Se o leilão não foi publicado anteriormente, este botão realiza a publicação inicial.
+
+ ![Exemplo de Diagrama de Fluxo](img/editar-leilão.png)
 
 
 
