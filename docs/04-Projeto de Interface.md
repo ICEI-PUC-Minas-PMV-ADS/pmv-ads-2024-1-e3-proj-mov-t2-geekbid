@@ -31,6 +31,18 @@ Barra de navegação: mostra os elementos de navegação disponíveis, que estã
 
 ![Exemplo de Diagrama de Fluxo](img/template-do-sistema.png)
 
+- Tela inicial: 
+
+
+A tela de navegação inicial foi projetada para proporcionar uma transição intuitiva entre as opções de login e registro. Ela apresenta os seguintes elementos:
+
+Botão "Login": Ao clicar neste botão, os usuários são direcionados para a tela de login, onde podem inserir suas credenciais para acessar o sistema.
+
+Botão "Registro": Esta opção permite que novos usuários criem uma conta no sistema. Ao clicar neste botão, os usuários são encaminhados para a tela de cadastro, onde podem preencher as informações necessárias para criar uma nova conta.
+
+![Exemplo de Diagrama de Fluxo](img/tela-inicial.png)
+
+
  
 > **Links Úteis**:
 > - [Protótipos vs Wireframes](https://www.nngroup.com/videos/prototypes-vs-wireframes-ux-projects/)
