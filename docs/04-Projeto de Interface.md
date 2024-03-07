@@ -304,7 +304,7 @@ Ao clicar neste botão, as informações editadas são salvas, mas o leilão nã
 Botão "Publicar":
 Ao clicar neste botão, as informações editadas são salvas e o leilão é publicado. Isso torna as alterações visíveis aos participantes do leilão. Se o leilão não foi publicado anteriormente, este botão realiza a publicação inicial.
 
- ![Exemplo de Diagrama de Fluxo](img/editar-leilão.png)
+ ![Exemplo de Diagrama de Fluxo](img/tela-editar-leilão.png)
 
 
 
