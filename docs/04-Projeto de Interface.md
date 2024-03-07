@@ -206,6 +206,8 @@ Permite aos usuários excluir o leilão caso decidam não prosseguir com a publi
   
 A tela de perfil foi desenvolvida para oferecer aos usuários acesso rápido e às informações e funcionalidades relacionadas à sua conta. Nesta tela, são fornecidas as seguintes opções:
 
+![Exemplo de Diagrama de Fluxo](img/tela-perfil.png)
+
 Minhas Informações:
 
 Permite aos usuários visualizar e editar suas informações cadastrais, Também oferece a opção de excluir a conta, com uma confirmação para evitar exclusões acidentais.
@@ -216,12 +218,15 @@ Meus Leilões:
 
 Apresenta uma lista dos leilões cadastrados pelo usuário. Essa seção fornece uma visão consolidada dos itens que o usuário está leiloando, permitindo edições, exclusões ou acompanhamento do status dos leilões.
 
-![Exemplo de Diagrama de Fluxo](img/tela-meus-leilões.png)
+![Exemplo de Diagrama de Fluxo](img/tela-meus-leilões..png)
 
 
 Meus Lances:
 
 Permite ao usuário visualizar os itens nos quais realizou lances. Essa seção oferece uma visão organizada e acessível dos lances feitos, facilitando o acompanhamento e a gestão da participação em leilões.
+
+![Exemplo de Diagrama de Fluxo](img/tela-meus-lances.png)
+
 
 Novo Leilão:
 
@@ -231,7 +236,7 @@ Logout do Sistema:
 
 Ao clicar nesta opção, o usuário é desconectado e retorna à tela de login.
 
-![Exemplo de Diagrama de Fluxo](img/tela-perfil.png)
+
 
 
 - Tela notificações:
