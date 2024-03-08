@@ -132,17 +132,30 @@ As referências abaixo irão auxiliá-lo na geração do artefato “Diagrama de
 
 # Matriz de Rastreabilidade
 
-A matriz de rastreabilidade é uma ferramenta usada para facilitar a visualização dos relacionamento entre requisitos e outros artefatos ou objetos, permitindo a rastreabilidade entre os requisitos e os objetivos de negócio.
+## Requisitos Funcionais ↔ Requisitos de Domínio (Regras de negócio)
 
-A matriz deve contemplar todos os elementos relevantes que fazem parte do sistema, conforme a figura meramente ilustrativa apresentada a seguir.
+|           | RD-001.01 | RD-001.02 | RD-001.03 | RD-002.01 | RD-002.02 | RD-003.01 | RD-003.02 | RD-004 | RD-005.01 | RD-005.02 | RD-006.01 | RD-006.02 |
+| --------- | --------- | --------- | --------- | --------- | --------- | --------- | --------- | ------ | --------- | --------- | --------- | --------- |
+| RF-001.01 |           |           |           | x         |           |           |           |        |           |           |           |           |
+| RF-001.02 |           |           |           | x         |           |           |           |        |           |           |           |           |
+| RF-002.01 |           |           |           | x         |           |           |           |        |           |           |           |           |
+| RF-002.02 |           |           |           | x         |           |           |           |        |           |           |           |           |
+| RF-003    |           |           |           |           |           |           |           |        |           |           |           |           |
+| RF-004.01 |           |           |           |           |           |           |           |        |           |           |           |           |
+| RF-004.02 |           |           |           |           |           |           |           |        |           |           |           |           |
+| RF-005.01 | x         |           | x         |           |           |           |           | x      |           |           |           |           |
+| RF-005.02 |           | x         |           |           | x         |           |           |        |           |           |           |           |
+| RF-005.03 |           |           |           |           |           |           |           |        |           |           |           |           |
+| RF-006.01 |           |           |           |           |           | x         | x         |        |           |           |           |           |
+| RF-006.02 |           |           |           |           |           | x         | x         |        |           |           |           |           |
+| RF-007.01 |           |           |           |           |           |           |           |        |           |           |           |           |
+| RF-007.02 |           |           |           |           |           |           |           |        |           |           |           |           |
+| RF-008.01 |           |           |           |           |           |           |           |        |           |           | x         | x         |
+| RF-008.02 |           |           |           |           |           |           |           |        |           |           | x         | x         |
+| RF-009.01 |           |           |           |           |           |           |           |        | x         | x         | x         | x         |
+| RF-009.02 |           |           |           |           |           |           |           |        | x         | x         | x         | x         |
 
-![Exemplo de matriz de rastreabilidade](img/02-matriz-rastreabilidade.png)
-
-> **Links Úteis**:
->
-> - [Artigo Engenharia de Software 13 - Rastreabilidade](https://www.devmedia.com.br/artigo-engenharia-de-software-13-rastreabilidade/12822/)
-> - [Verificação da rastreabilidade de requisitos usando a integração do IBM Rational RequisitePro e do IBM ClearQuest Test Manager](https://developer.ibm.com/br/tutorials/requirementstraceabilityverificationusingrrpandcctm/)
-> - [IBM Engineering Lifecycle Optimization – Publishing](https://www.ibm.com/br-pt/products/engineering-lifecycle-optimization/publishing/)
+## \* Este item será atualizado com a inclusão de novos artefatos no projeto (diagramas de classe, implementação, casos de teste, etc)
 
 # Gerenciamento de Projeto
 
