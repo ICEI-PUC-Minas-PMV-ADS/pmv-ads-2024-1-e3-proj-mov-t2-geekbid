@@ -55,7 +55,7 @@ Apresente aqui o nome e as oportunidades de melhorias para o processo 2. Em segu
 Os indicadores de desempenho representam elementos fundamentais no gerenciamento eficiente de qualquer processo, abaixo listamos alguns indicadores de desempenho juntamente com as metas relacionadas para o aplicativo.
 
 
-![Indicadores de Desempenho](Indicadores-de-desempenho.png)
+![Indicadores de Desempenho](img/Indicadores-de-desempenho.png)
 
 
 ## Requisitos
