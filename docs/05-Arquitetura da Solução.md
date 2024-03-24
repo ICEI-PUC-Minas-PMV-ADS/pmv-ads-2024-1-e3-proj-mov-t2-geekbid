@@ -41,9 +41,7 @@ Essa estrutura permite uma arquitetura escalável, modular e robusta para o apli
 
 O diagrama de classes ilustra graficamente como será a estrutura do software, e como cada uma das classes da sua estrutura estarão interligadas. Essas classes servem de modelo para materializar os objetos que executarão na memória.
 
-As referências abaixo irão auxiliá-lo na geração do artefato “Diagrama de Classes”.
-
-![Diagrama de Classes](img/diagrama_classes.svg))
+![Diagrama de Classes](img/diagrama_classes.png)
 
 ## Modelo ER
 
