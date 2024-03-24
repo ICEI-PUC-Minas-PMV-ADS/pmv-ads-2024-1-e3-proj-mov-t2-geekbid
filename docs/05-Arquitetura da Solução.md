@@ -49,96 +49,9 @@ O Modelo ER representa através de um diagrama como as entidades (coisas, objeto
 
 ![Modelo Entidade-Relacionamento](img/modelo_er.png)
 
-Entidades:
-
-**Usuario**
-
-id (chave primária)
-nome
-email
-senha
-idade
-genero
-endereco_id (chave estrangeira referenciando Endereco)
-formaDePagamento_id (chave estrangeira referenciando FormaDePagamento)
-
-**Endereco**
-
-id (chave primária)
-rua
-numero
-bairro
-cidade
-estado
-cep
-
-**FormaDePagamento**
-
-id (chave primária)
-tipo
-numero
-nomeTitular
-dataValidade
-cvv
-
-**Produto**
-
-id (chave primária)
-nome
-descricao
-categoria
-estado
-precoInicial
-leilao_id (chave estrangeira referenciando Leilao)
-
-**Leilao**
-
-id (chave primária)
-dataInicio
-dataFim
-precoAtual
-status
-produto_id (chave estrangeira referenciando Produto)
-
-**Lance**
-
-id (chave primária)
-valor
-data
-usuario_id (chave estrangeira referenciando Usuario)
-leilao_id (chave estrangeira referenciando Leilao)
-
-**Pedido**
-
-id (chave primária)
-data
-status
-usuario_id (chave estrangeira referenciando Usuario)
-produto_id (chave estrangeira referenciando Produto)
-
-**Imagem**
-
-id (chave primária)
-nome
-url
-produto_id (chave estrangeira referenciando Produto)
-
 ## Esquema Relacional
 
-O Esquema Relacional corresponde à representação dos dados em tabelas juntamente com as restrições de integridade e chave primária.
-
-As referências abaixo irão auxiliá-lo na geração do artefato “Esquema Relacional”.
-
-> - [Criando um modelo relacional - Documentação da IBM](https://www.ibm.com/docs/pt-br/cognos-analytics/10.2.2?topic=designer-creating-relational-model)
-
-Relacionamentos:
-
-Usuario (1) -> (0..1) Endereco
-Produto (1) -> (1) Leilao
-Leilao (1) -> (0..n) Lance
-Usuario (1) -> (0..n) Lance
-
-Este Modelo Entidade-Relacional reflete as relações entre as entidades do sistema de leilão online para produtos do segmento nerd, permitindo uma compreensão clara da estrutura de dados e das associações entre elas.
+![Esquema Relacional](img/esquema_relacional.png)
 
 ## Modelo Físico
 
