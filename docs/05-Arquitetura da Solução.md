@@ -6,15 +6,98 @@ Definição de como o software é estruturado em termos dos componentes que faze
 
 ![Arquitetura da Solução](img/02-mob-arch.png)
 
+## Diagrama de Classes
+
+O diagrama de classes ilustra graficamente como será a estrutura do software, e como cada uma das classes da sua estrutura estarão interligadas. Essas classes servem de modelo para materializar os objetos que executarão na memória.
+
+![Diagrama de Classes](img/diagrama_classes.png)
+
+## Modelo Entidade-Relacionamento
+
+O Modelo Entidade-Relacionamento representa através de um diagrama como as entidades (coisas, objetos) se relacionam entre si na aplicação interativa.
+
+![Modelo Entidade-Relacionamento](img/modelo_er.png)
+
+## Esquema Relacional
+
+![Esquema Relacional](img/esquema_relacional.png)
+
+## Modelo Físico
+
+Entregar um arquivo banco.sql contendo os scripts de criação das tabelas do banco de dados. Este arquivo deverá ser incluído dentro da pasta src\bd.
+
+CREATE TABLE Endereco (
+idEndereco SERIAL PRIMARY KEY,
+rua VARCHAR(100),
+numero VARCHAR(10),
+complemento VARCHAR(50),
+bairro VARCHAR(100),
+cidade VARCHAR(100),
+estado VARCHAR(2),
+cep VARCHAR(9)
+idUsuario INTEGER REFERENTES Usuario(idUsuario)
+);
+
+CREATE TABLE Usuario (
+idUsuario SERIAL PRIMARY KEY,
+nome VARCHAR(255),
+email VARCHAR(255) UNIQUE,
+senha VARCHAR(30),
+dataNascimento TIMESTAMP,
+genero VARCHAR(20),
+idStatusUsuario INTEGER REFERENCES StatusUsuario(idStatusUsuario)
+);
+
+CREATE TABLE Leilao (
+idLeilao SERIAL PRIMARY KEY,
+dataInicio TIMESTAMP,
+dataFim TIMESTAMP,
+precoAtual NUMERIC(10, 2),
+idStatusProduto INTEGER REFERENCES StatusProduto(idStatusProduto),
+IdProduto INTEGER REFERENCES Produto(IdProduto),
+IdVendedor INTEGER REFERENCES Usuario(idUsuario),
+);
+
+CREATE TABLE Lance (
+idLance SERIAL PRIMARY KEY,
+valorLance NUMERIC(10, 2),
+dataLance TIMESTAMP,
+IdComprador INTEGER REFERENCES Usuario(idUsuario),
+idLeilao INTEGER REFERENCES Leilao(idLeilao)
+);
+
+CREATE TABLE ImagemProduto (
+idImagemProduto SERIAL PRIMARY KEY,
+url TEXT
+);
+
+CREATE TABLE CategoriaProduto (
+idCategoriaProduto SERIAL PRIMARY KEY,
+descricaoCategoriaProduto TEXT
+);
+
+CREATE TABLE EstadoProduto (
+idEstadoProduto SERIAL PRIMARY KEY,
+descricaoEstadoProduto TEXT
+);
+
+CREATE TABLE Produto (
+idProduto SERIAL PRIMARY KEY,
+nomeProduto VARCHAR(255),
+descricaoProduto TEXT,
+precoInicial NUMERIC(10, 2),
+idCategoriaProduto INTEGER REFERENCES CategoriaProduto(idCategoriaProduto),
+idEstadoProduto INTEGER REFERENCES EstadoProduto(idEstadoProduto),
+idImagemProduto INTEGER REFERENCES ImagemProduto(idImagemProduto),
+);
+
+## Tecnologias Utilizadas
+
 Arquitetura de componentes e ambiente de hospedagem:
-
-**Frontend Web:**
-
-O frontend web será responsável por fornecer a interface de usuário para os clientes acessarem o aplicativo por meio de navegadores da web. Será desenvolvido utilizando tecnologias como HTML, CSS e JavaScript, possivelmente com o auxílio de frameworks como React.js ou Angular.
 
 **Aplicativo Móvel:**
 
-Além do frontend web, pode-se desenvolver um aplicativo móvel para dispositivos iOS e Android, proporcionando uma experiência otimizada para usuários que preferem acessar a plataforma por meio de smartphones e tablets. O aplicativo móvel será desenvolvido utilizando tecnologias como Swift (para iOS) e Kotlin (para Android).
+O aplicativo móvel será desenvolvido em Reactive Native, pela facilidade de gerar elementos de inferface tanto para usuários de iOS quanto de Android.
 
 **Backend:**
 
@@ -37,114 +120,11 @@ Implementar ferramentas de monitoramento e logging para acompanhar o desempenho,
 
 Essa estrutura permite uma arquitetura escalável, modular e robusta para o aplicativo de leilão online, garantindo uma experiência confiável e satisfatória para os usuários, além de facilitar a manutenção e evolução contínua do sistema.
 
-## Diagrama de Classes
-
-O diagrama de classes ilustra graficamente como será a estrutura do software, e como cada uma das classes da sua estrutura estarão interligadas. Essas classes servem de modelo para materializar os objetos que executarão na memória.
-
-![Diagrama de Classes](img/diagrama_classes.png)
-
-## Modelo ER
-
-O Modelo ER representa através de um diagrama como as entidades (coisas, objetos) se relacionam entre si na aplicação interativa.]
-
-![Modelo Entidade-Relacionamento](img/modelo_er.png)
-
-## Esquema Relacional
-
-![Esquema Relacional](img/esquema_relacional.png)
-
-## Modelo Físico
-
-Entregar um arquivo banco.sql contendo os scripts de criação das tabelas do banco de dados. Este arquivo deverá ser incluído dentro da pasta src\bd.
-
-CREATE TABLE Endereco (
-id SERIAL PRIMARY KEY,
-rua VARCHAR(255),
-numero VARCHAR(50),
-bairro VARCHAR(100),
-cidade VARCHAR(100),
-estado VARCHAR(50),
-cep VARCHAR(20)
-);
-
-CREATE TABLE FormaDePagamento (
-id SERIAL PRIMARY KEY,
-tipo VARCHAR(100),
-numero VARCHAR(50),
-nomeTitular VARCHAR(255),
-dataValidade VARCHAR(10),
-cvv VARCHAR(10)
-);
-
-CREATE TABLE Usuario (
-id SERIAL PRIMARY KEY,
-nome VARCHAR(255),
-email VARCHAR(255) UNIQUE,
-senha VARCHAR(255),
-idade INTEGER,
-genero VARCHAR(20),
-endereco_id INTEGER REFERENCES Endereco(id),
-formaDePagamento_id INTEGER REFERENCES FormaDePagamento(id)
-);
-
-CREATE TABLE Produto (
-id SERIAL PRIMARY KEY,
-nome VARCHAR(255),
-descricao TEXT,
-categoria VARCHAR(100),
-estado VARCHAR(100),
-precoInicial NUMERIC(10, 2),
-leilao_id INTEGER REFERENCES Leilao(id)
-);
-
-CREATE TABLE Leilao (
-id SERIAL PRIMARY KEY,
-dataInicio TIMESTAMP,
-dataFim TIMESTAMP,
-precoAtual NUMERIC(10, 2),
-status VARCHAR(50),
-produto_id INTEGER REFERENCES Produto(id)
-);
-
-CREATE TABLE Lance (
-id SERIAL PRIMARY KEY,
-valor NUMERIC(10, 2),
-data TIMESTAMP,
-usuario_id INTEGER REFERENCES Usuario(id),
-leilao_id INTEGER REFERENCES Leilao(id)
-);
-
-CREATE TABLE Pedido (
-id SERIAL PRIMARY KEY,
-data TIMESTAMP,
-status VARCHAR(50),
-usuario_id INTEGER REFERENCES Usuario(id),
-produto_id INTEGER REFERENCES Produto(id)
-);
-
-CREATE TABLE Imagem (
-id SERIAL PRIMARY KEY,
-nome VARCHAR(255),
-url TEXT,
-produto_id INTEGER REFERENCES Produto(id)
-);
-
-## Tecnologias Utilizadas
-
-Descreva aqui qual(is) tecnologias você vai usar para resolver o seu problema, ou seja, implementar a sua solução. Liste todas as tecnologias envolvidas, linguagens a serem utilizadas, serviços web, frameworks, bibliotecas, IDEs de desenvolvimento, e ferramentas.
-
-Apresente também uma figura explicando como as tecnologias estão relacionadas ou como uma interação do usuário com o sistema vai ser conduzida, por onde ela passa até retornar uma resposta ao usuário.
-
 ## Hospedagem
 
 Explique como a hospedagem e o lançamento da plataforma foi feita.
 
-> **Links Úteis**:
->
-> - [Website com GitHub Pages](https://pages.github.com/)
-> - [Programação colaborativa com Repl.it](https://repl.it/)
-> - [Getting Started with Heroku](https://devcenter.heroku.com/start)
-> - [Publicando Seu Site No Heroku](http://pythonclub.com.br/publicando-seu-hello-world-no-heroku.html)
+O arquivo contendo o Diagrama de Classes, o Modelo Entidade-Relacionamento e o Esquema Relacional pode ser acessado [aqui](https://drive.google.com/file/d/19lwTGwUUOVjydgzok_bNiJ6nXujBxtfO/view?usp=sharing). Os esquemas foram confeccionados usando a ferramenta [draw.io](https://app.diagrams.net/).
 
 ## Qualidade de Software
 
