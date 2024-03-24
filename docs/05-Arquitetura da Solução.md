@@ -43,133 +43,7 @@ O diagrama de classes ilustra graficamente como será a estrutura do software, e
 
 As referências abaixo irão auxiliá-lo na geração do artefato “Diagrama de Classes”.
 
-> - [Diagramas de Classes - Documentação da IBM](https://www.ibm.com/docs/pt-br/rational-soft-arch/9.6.1?topic=diagrams-class)
-> - [O que é um diagrama de classe UML? | Lucidchart](https://www.lucidchart.com/pages/pt/o-que-e-diagrama-de-classe-uml)
-
-**Diagrama de Classes do Domínio:**
-
-+-------------------------------------+
-| Usuario |
-+-------------------------------------+
-| - id: int |
-| - nome: string |
-| - email: string |
-| - senha: string |
-| - idade: int |
-| - genero: string |
-| - endereco: Endereco |
-| - formaDePagamento: FormaDePagamento|
-| - leiloesParticipados: List<Leilao> |
-| - pedidos: List<Pedido> |
-+-------------------------------------+
-
-+-------------------------------------+
-| Endereco |
-+-------------------------------------+
-| - rua: string |
-| - numero: string |
-| - bairro: string |
-| - cidade: string |
-| - estado: string |
-| - cep: string |
-+-------------------------------------+
-
-+-------------------------------------+
-| FormaDePagamento |
-+-------------------------------------+
-| - tipo: string |
-| - numero: string |
-| - nomeTitular: string |
-| - dataValidade: string |
-| - cvv: string |
-+-------------------------------------+
-
-+-------------------------------------+
-| Produto |
-+-------------------------------------+
-| - id: int |
-| - nome: string |
-| - descricao: string |
-| - categoria: string |
-| - estado: string |
-| - precoInicial: double |
-| - leilao: Leilao |
-| - imagens: List<Imagem> |
-+-------------------------------------+
-
-+-------------------------------------+
-| Leilao |
-+-------------------------------------+
-| - id: int |
-| - dataInicio: Date |
-| - dataFim: Date |
-| - precoAtual: double |
-| - status: string |
-| - produto: Produto |
-| - lances: List<Lance> |
-+-------------------------------------+
-
-+-------------------------------------+
-| Lance |
-+-------------------------------------+
-| - id: int |
-| - valor: double |
-| - data: Date |
-| - usuario: Usuario |
-| - leilao: Leilao |
-+-------------------------------------+
-
-+-------------------------------------+
-| Pedido |
-+-------------------------------------+
-| - id: int |
-| - data: Date |
-| - status: string |
-| - usuario: Usuario |
-| - produto: Produto |
-+-------------------------------------+
-
-+-------------------------------------+
-| Imagem |
-+-------------------------------------+
-| - id: int |
-| - nome: string |
-| - url: string |
-| - produto: Produto |
-+-------------------------------------+
-
-**Diagrama de Classes do Sistema:**
-
-+-------------------------------------+
-| Autenticacao |
-+-------------------------------------+
-| + login(email: string, senha: string)|
-| + logout() |
-+-------------------------------------+
-
-+-------------------------------------+
-| Catalogo |
-+-------------------------------------+
-| + buscarProdutosPorCategoria(categoria: string): List<Produto>|
-| + buscarProdutoPorId(id: int): Produto |
-| + listarProdutosEmLeilao(): List<Produto> |
-| + listarProdutosUsuarioLogado(): List<Produto> |
-+-------------------------------------+
-
-+-------------------------------------+
-| GerenciadorLeilao |
-+-------------------------------------+
-| + criarLeilao(produto: Produto, precoInicial: double, dataFim: Date): Leilao |
-| + fazerLance(leilaoId: int, valor: double): Lance |
-+-------------------------------------+
-
-+-------------------------------------+
-| GerenciadorPedido |
-+-------------------------------------+
-| + fazerPedido(produtoId: int): Pedido |
-| + listarPedidosUsuarioLogado(): List<Pedido> |
-| + atualizarStatusPedido(pedidoId: int, novoStatus: string) |
-+-------------------------------------+
+![Diagrama de Classes](img/diagrama_classes.svg))
 
 ## Modelo ER
 
@@ -181,7 +55,7 @@ As referências abaixo irão auxiliá-lo na geração do artefato “Modelo ER�
 
 Entidades:
 
-Usuario
+**Usuario**
 
 id (chave primária)
 nome
@@ -191,7 +65,8 @@ idade
 genero
 endereco_id (chave estrangeira referenciando Endereco)
 formaDePagamento_id (chave estrangeira referenciando FormaDePagamento)
-Endereco
+
+**Endereco**
 
 id (chave primária)
 rua
@@ -200,7 +75,8 @@ bairro
 cidade
 estado
 cep
-FormaDePagamento
+
+**FormaDePagamento**
 
 id (chave primária)
 tipo
@@ -208,7 +84,8 @@ numero
 nomeTitular
 dataValidade
 cvv
-Produto
+
+**Produto**
 
 id (chave primária)
 nome
@@ -217,7 +94,8 @@ categoria
 estado
 precoInicial
 leilao_id (chave estrangeira referenciando Leilao)
-Leilao
+
+**Leilao**
 
 id (chave primária)
 dataInicio
@@ -225,21 +103,24 @@ dataFim
 precoAtual
 status
 produto_id (chave estrangeira referenciando Produto)
-Lance
+
+**Lance**
 
 id (chave primária)
 valor
 data
 usuario_id (chave estrangeira referenciando Usuario)
 leilao_id (chave estrangeira referenciando Leilao)
-Pedido
+
+**Pedido**
 
 id (chave primária)
 data
 status
 usuario_id (chave estrangeira referenciando Usuario)
 produto_id (chave estrangeira referenciando Produto)
-Imagem
+
+**Imagem**
 
 id (chave primária)
 nome
@@ -257,13 +138,9 @@ As referências abaixo irão auxiliá-lo na geração do artefato “Esquema Rel
 Relacionamentos:
 
 Usuario (1) -> (0..1) Endereco
-Usuario (1) -> (0..1) FormaDePagamento
-Produto (1) -> (0..1) Leilao
+Produto (1) -> (1) Leilao
 Leilao (1) -> (0..n) Lance
 Usuario (1) -> (0..n) Lance
-Usuario (1) -> (0..n) Pedido
-Produto (1) -> (0..n) Pedido
-Produto (1) -> (0..n) Imagem
 
 Este Modelo Entidade-Relacional reflete as relações entre as entidades do sistema de leilão online para produtos do segmento nerd, permitindo uma compreensão clara da estrutura de dados e das associações entre elas.
 
