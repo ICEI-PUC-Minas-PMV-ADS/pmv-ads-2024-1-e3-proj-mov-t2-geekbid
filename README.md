@@ -11,6 +11,7 @@ Descrever resumidamente, em um ou dois parágrafos, o projeto que está sendo de
 ## 👥 Integrantes
 
 * Bianca Moreira
+* Douglas Henrique Ferreira
 * Gabriel Russo
 * Irene Aparecida Couto Ferraz
 * Marco Binda
