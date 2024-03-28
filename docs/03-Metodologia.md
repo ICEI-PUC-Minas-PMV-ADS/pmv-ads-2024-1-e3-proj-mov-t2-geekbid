@@ -69,8 +69,8 @@ A equipe utiliza metodologias ágeis, tendo escolhido o Scrum como base para def
 - Scrum Master: Marco Binda
 - Product Owner:: Bianca Moreira;
 - Equipe de Design: Irene Couto;
-- Equipe de Desenvolvimento: Marco Binda, Gabriel Russo, Bianca Moreira, Irene Couto e Talita Fernandes;
-- QA Testers: Marco Binda, Gabriel Russo, Bianca Moreira, Irene Couto e Talita Fernandes.
+- Equipe de Desenvolvimento: Marco Binda, Gabriel Russo, Bianca Moreira, Irene Couto, Talita Fernandes e Douglas Ferreira;
+- QA Testers: Marco Binda, Gabriel Russo, Bianca Moreira, Irene Couto, Talita Fernandes e Douglas Ferreira.
 
 ### Processo
 
