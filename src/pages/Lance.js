@@ -25,7 +25,7 @@ const Lance = ({ item }) => {
         <View style={styles.itemContainer}>
         <Image
             style={styles.image}
-            source={{ uri: 'asset:/assets/images/mulherMaravilha.png' }}
+            source={{ uri: 'asset:/src/assets/mulherMaravilha.png' }}
           />
           <Text style={styles.title}>Quadro Mulher Maravilha</Text>
           <View style={styles.infoContainer}>
@@ -39,7 +39,7 @@ const Lance = ({ item }) => {
         <View style={styles.itemContainer}>
         <Image
             style={styles.image}
-            source={{ uri: 'asset:/assets/images/retroGeek.png' }}
+            source={{ uri: 'asset:/src/assets/retroGeek.png' }}
           />
           <Text style={styles.title}>Retro Geek Colecionável</Text>
           <View style={styles.infoContainer}>
