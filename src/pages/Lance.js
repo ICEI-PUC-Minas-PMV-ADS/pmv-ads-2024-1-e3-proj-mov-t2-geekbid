@@ -23,9 +23,9 @@ const Lance = ({ item }) => {
 
       <View style={styles.row}>
         <View style={styles.itemContainer}>
-          <Image
+        <Image
             style={styles.image}
-            source={require('../assets/mulherMaravilha.PNG')}
+            source={{ uri: 'asset:/assets/images/mulherMaravilha.png' }}
           />
           <Text style={styles.title}>Quadro Mulher Maravilha</Text>
           <View style={styles.infoContainer}>
@@ -37,9 +37,9 @@ const Lance = ({ item }) => {
           </TouchableOpacity>
         </View>
         <View style={styles.itemContainer}>
-          <Image
+        <Image
             style={styles.image}
-            source={require('../assets/retroGeek.PNG')}
+            source={{ uri: 'asset:/assets/images/retroGeek.png' }}
           />
           <Text style={styles.title}>Retro Geek Colecionável</Text>
           <View style={styles.infoContainer}>

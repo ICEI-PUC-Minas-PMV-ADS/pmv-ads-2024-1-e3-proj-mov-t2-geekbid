@@ -1,6 +1,5 @@
 import React from 'react';
-import { View, Text, StyleSheet,Image } from 'react-native';
-
+import { View, Text, StyleSheet, Image } from 'react-native';
 
 const MeusLeiloes = () => {
 
@@ -13,9 +12,9 @@ const MeusLeiloes = () => {
 
       <View style={styles.row}>
         <View style={styles.itemContainer}>
-          <Image
+        <Image
             style={styles.image}
-            source={require('../assets/mulherMaravilha.PNG')}
+            source={{ uri: 'asset:/assets/images/mulherMaravilha.png' }}
           />
           <Text style={styles.title}>Quadro Mulher Maravilha</Text>
           <View style={styles.infoContainer}>
@@ -24,11 +23,10 @@ const MeusLeiloes = () => {
           </View>
         </View>
         <View style={styles.itemContainer}>
-          <Image
+        <Image
             style={styles.image}
-            source={require('../assets/retroGeek.PNG')}
-          />
-          <Text style={styles.title}>Retro Geek Montável</Text>
+            source={{ uri: 'asset:/assets/images/retroGeek.png' }}
+          />          <Text style={styles.title}>Retro Geek Montável</Text>
           <View style={styles.infoContainer}>
             <Text style={styles.creator}>Criado por: Pedro</Text>
             <Text style={styles.price}>Valor do Lance: R$ 200.00</Text>
