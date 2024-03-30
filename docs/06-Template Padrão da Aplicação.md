@@ -8,3 +8,11 @@ Este template inclui a estrutura básica do aplicativo, como a navegação entre
 
 O Geek Bid tem como objetivo proporcionar uma experiência intuitiva e envolvente para os entusiastas da cultura geek que desejam participar de leilões exclusivos de itens colecionáveis e tecnológicos. Este template servirá como a base sólida para transformarmos essa visão em realidade.
 
+<div align="center">
+
+Vídeo demonstrando a execução do template
+
+https://github.com/ICEI-PUC-Minas-PMV-ADS/pmv-ads-2024-1-e3-proj-mov-t2-geekbid/tree/spr02_template/src/assets
+![Template](https://github.com/ICEI-PUC-Minas-PMV-ADS/pmv-ads-2024-1-e3-proj-mov-t2-geekbid/tree/spr02_template/src/assets/template-geekbid.gif)
+
+</div>
