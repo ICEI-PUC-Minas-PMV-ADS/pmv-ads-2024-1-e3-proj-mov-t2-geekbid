@@ -1,12 +1,17 @@
 # Template Padrão da Aplicação
 
-<span style="color:red">Pré-requisitos: <a href="2-Especificação do Projeto.md"> Especificação do Projeto</a></span>, <a href="3-Projeto de Interface.md"> Projeto de Interface</a>, <a href="4-Metodologia.md"> Metodologia</a>
+Este é o template base que será utilizado como referência e guia para o desenvolvimento do projeto Geek Bid. Todos os membros da equipe utilizarão este template como ponto de partida para a implementação das funcionalidades do aplicativo de leilões.
 
-Layout padrão da aplicação que será utilizado em todas as páginas com a definição de identidade visual, aspectos de responsividade e iconografia.
+Para visualizar o template em funcionamento e explorar suas funcionalidades, basta acessar o link [Geek Bid - Template no Expo](https://snack.expo.dev/@talitadev/geek-bid). Ao abrir o link, você poderá iniciar o aplicativo do lado direito da tela e interagir com as diferentes telas e elementos da aplicação.
 
-> **Links Úteis**:
->
-> - [CSS Website Layout (W3Schools)](https://www.w3schools.com/css/css_website_layout.asp)
-> - [Website Page Layouts](http://www.cellbiol.com/bioinformatics_web_development/chapter-3-your-first-web-page-learning-html-and-css/website-page-layouts/)
-> - [Perfect Liquid Layout](https://matthewjamestaylor.com/perfect-liquid-layouts)
-> - [How and Why Icons Improve Your Web Design](https://usabilla.com/blog/how-and-why-icons-improve-you-web-design/)
+Este template inclui a estrutura básica do aplicativo, como a navegação entre telas, exibição de leilões ativos, detalhes do leilão, cadastro de novos leilões e muito mais. Cada membro da equipe terá a responsabilidade de adicionar novas funcionalidades e aprimorar o design de acordo com as especificações do projeto.
+
+O Geek Bid tem como objetivo proporcionar uma experiência intuitiva e envolvente para os entusiastas da cultura geek que desejam participar de leilões exclusivos de itens colecionáveis e tecnológicos. Este template servirá como a base sólida para transformarmos essa visão em realidade.
+
+<div align="center">
+
+Vídeo demonstrando a execução do template
+
+![Template](https://github.com/ICEI-PUC-Minas-PMV-ADS/pmv-ads-2024-1-e3-proj-mov-t2-geekbid/blob/spr02_template/src/assets/template-geekbid.gif)
+
+</div>
