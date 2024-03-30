@@ -52,12 +52,18 @@ Apresente aqui o nome e as oportunidades de melhorias para o processo 2. Em segu
 
 ## Indicadores de Desempenho
 
-Apresente aqui os principais indicadores de desempenho e algumas metas para o processo. Atenção: as informações necessárias para gerar os indicadores devem estar contempladas no diagrama de classe. Colocar no mínimo 5 indicadores.
+Os indicadores de desempenho representam elementos fundamentais no gerenciamento eficiente de qualquer processo, abaixo listamos alguns indicadores de desempenho juntamente com as metas relacionadas para o aplicativo.
 
-Usar o seguinte modelo:
+| Indicador de Desempenho            | Descrição                                                           | Objetivo                                    | Fonte de Dados                   | Cálculo                               | Perspectiva/Meta                     |
+|------------------------------------|---------------------------------------------------------------------|---------------------------------------------|----------------------------------|---------------------------------------|--------------------------------------|
+| Taxa de Registro de Novos Usuários | Percentual de novos usuários que se cadastram no app                | Aumentar a base de usuários registrados     | Banco de Dados do Aplicativo     | Média de novos usuários mensais       | Alcançar 100 registros novos por mês |
+| Tempo Médio de Resposta do Sistema | Tempo médio que o sistema leva para responder às ações dos usuários | Melhorar a eficiência do sistema            | Logs de Servidor                 | Tempo Médio de Resposta do aplicativo | Manter abaixo de 1 segundo           |
+| Taxa de Conversão de Leilões       | Percentual de leilões iniciados que são concluídos com sucesso      | Garantir a eficácia dos leilões             | Banco de Dados do Aplicativo     | Média dos leilões concluídos          | Alcançar 60% de conversão de leilões |
+| Taxa de Participação dos Usuários  | Percentual de usuários ativos que participam de leilões             | Estimular a participação ativa dos usuários | Logs de Atividade do Usuário     | Média dos usuários ativos             | Aumentar em 20% nos próximos 6 meses |
+| Avaliações do Aplicativo           | Média das avaliações dos usuários sobre o aplicativo                | Melhorar a percepção geral do aplicativo    | Sistema de Avaliação de Usuários | Média das Avaliações dos Usuários     | Manter uma média de 4.5/5            |
 
-![Indicadores de Desempenho](img/02-indic-desemp.png)
-Obs.: todas as informações para gerar os indicadores devem estar no diagrama de classe a ser apresentado a posteriori.
+
+
 
 ## Requisitos
 
