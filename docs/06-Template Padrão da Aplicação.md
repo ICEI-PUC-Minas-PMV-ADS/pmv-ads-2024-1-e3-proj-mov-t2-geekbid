@@ -12,7 +12,6 @@ O Geek Bid tem como objetivo proporcionar uma experiência intuitiva e envolvent
 
 Vídeo demonstrando a execução do template
 
-https://github.com/ICEI-PUC-Minas-PMV-ADS/pmv-ads-2024-1-e3-proj-mov-t2-geekbid/tree/spr02_template/src/assets
-![Template](https://github.com/ICEI-PUC-Minas-PMV-ADS/pmv-ads-2024-1-e3-proj-mov-t2-geekbid/tree/spr02_template/src/assets/template-geekbid.gif)
+![Template](https://github.com/ICEI-PUC-Minas-PMV-ADS/pmv-ads-2024-1-e3-proj-mov-t2-geekbid/blob/spr02_template/src/assets/template-geekbid.gif)
 
 </div>
