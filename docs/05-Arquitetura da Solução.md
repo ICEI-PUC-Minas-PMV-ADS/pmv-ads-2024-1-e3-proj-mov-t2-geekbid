@@ -24,7 +24,7 @@ O Modelo Entidade-Relacionamento representa através de um diagrama como as enti
 
 ## Modelo Físico
 
-Entregar um arquivo banco.sql contendo os scripts de criação das tabelas do banco de dados. Este arquivo deverá ser incluído dentro da pasta src\bd.
+Arquivo disponível em [banco.sql](/src/bd/banco.sql).
 
 ## Tecnologias Utilizadas
 
