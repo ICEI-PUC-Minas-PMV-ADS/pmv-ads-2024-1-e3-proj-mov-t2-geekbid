@@ -1,68 +1,87 @@
 # Arquitetura da Solução
 
-<span style="color:red">Pré-requisitos: <a href="3-Projeto de Interface.md"> Projeto de Interface</a></span>
+<span style="color:red">Pré-requisitos: <a href="4-Projeto de Interface.md"> Projeto de Interface</a></span>
 
 Definição de como o software é estruturado em termos dos componentes que fazem parte da solução e do ambiente de hospedagem da aplicação.
 
-![Arquitetura da Solução](img/02-mob-arch.png)
+![Arquitetura da Solução](img/arquitetura_solucao.png)
 
 ## Diagrama de Classes
 
 O diagrama de classes ilustra graficamente como será a estrutura do software, e como cada uma das classes da sua estrutura estarão interligadas. Essas classes servem de modelo para materializar os objetos que executarão na memória.
 
-As referências abaixo irão auxiliá-lo na geração do artefato “Diagrama de Classes”.
+![Diagrama de Classes](img/diagrama_classes.png)
 
-> - [Diagramas de Classes - Documentação da IBM](https://www.ibm.com/docs/pt-br/rational-soft-arch/9.6.1?topic=diagrams-class)
-> - [O que é um diagrama de classe UML? | Lucidchart](https://www.lucidchart.com/pages/pt/o-que-e-diagrama-de-classe-uml)
+## Modelo Entidade-Relacionamento
 
-## Modelo ER
+O Modelo Entidade-Relacionamento representa através de um diagrama como as entidades (coisas, objetos) se relacionam entre si na aplicação interativa.
 
-O Modelo ER representa através de um diagrama como as entidades (coisas, objetos) se relacionam entre si na aplicação interativa.]
-
-As referências abaixo irão auxiliá-lo na geração do artefato “Modelo ER”.
-
-> - [Como fazer um diagrama entidade relacionamento | Lucidchart](https://www.lucidchart.com/pages/pt/como-fazer-um-diagrama-entidade-relacionamento)
+![Modelo Entidade-Relacionamento](img/modelo_er.png)
 
 ## Esquema Relacional
 
-O Esquema Relacional corresponde à representação dos dados em tabelas juntamente com as restrições de integridade e chave primária.
- 
-As referências abaixo irão auxiliá-lo na geração do artefato “Esquema Relacional”.
-
-> - [Criando um modelo relacional - Documentação da IBM](https://www.ibm.com/docs/pt-br/cognos-analytics/10.2.2?topic=designer-creating-relational-model)
+![Esquema Relacional](img/esquema_relacional.png)
 
 ## Modelo Físico
 
-Entregar um arquivo banco.sql contendo os scripts de criação das tabelas do banco de dados. Este arquivo deverá ser incluído dentro da pasta src\bd.
+Arquivo disponível em [banco.sql](/src/bd/banco.sql).
 
 ## Tecnologias Utilizadas
 
-Descreva aqui qual(is) tecnologias você vai usar para resolver o seu problema, ou seja, implementar a sua solução. Liste todas as tecnologias envolvidas, linguagens a serem utilizadas, serviços web, frameworks, bibliotecas, IDEs de desenvolvimento, e ferramentas.
+Arquitetura de componentes e ambiente de hospedagem:
 
-Apresente também uma figura explicando como as tecnologias estão relacionadas ou como uma interação do usuário com o sistema vai ser conduzida, por onde ela passa até retornar uma resposta ao usuário.
+**Aplicativo Móvel:**
+
+O aplicativo móvel será desenvolvido na linguagem JavaScript, utilizando React Native pela facilidade de gerar elementos de inferface tanto para usuários de iOS quanto de Android.
+
+**Repositório:**
+
+Utilizamos o GitHub como repositório, armazenando o código, arquivos e  histórico de revisão do projeto facilitando assim o acesso e colaboração dos integrantes.
+
+**Gestão de Projeto:**
+
+Foi feita atravás do Github Projects nele planejamos, distribuimos as tarefas e acompanhamos cada etapa da construção do projeto.
+
+**IDEs:**
+
+Como ambiente de desenvolvimento e teste utilizamos o tradicional Visual Studio Code e também o Expo, uma plataforma open-souce utilizada no desenvolvimento mobile com React Native que permite o fácil acesso às API’s nativas do dispositivo.
+
+**Backend:**
+
+Para desenvolvimento do backend, será utilizado o Node.js, ele será o cérebro do sistema, gerenciando toda a lógica de negócios, processamento de dados, gerenciamento de usuários e comunicação com o banco de dados.
+
+**Banco de Dados:**
+
+O sistema de banco de dados escolhido foi o PostgreSQL, um banco de dados relacional para garantir a integridade e consistência dos dados. Ele será responsável por armazenar todos os dados relacionados aos usuários, produtos, leilões, pedidos e outras informações essenciais da aplicação.
+
+**Prototipagem:**
+
+O protótipo da aplicação foi feito utilizando o Figma, uma plataforma colaborativa para construção de design de interfaces e protótipos.
+
+**Fluxogramas:**
+
+- Lucidchart: Uma ferramenta de colaboração visual ajuda a criar mapas e fluxogramas para visualizar qualquer processo.
+- Miro: Plataforma de colaboração digital projetada para facilitar a comunicação remota e distribuída de equipes e o gerenciamento de projetos.
+
+**Comunicação:**
+A equipe realiza reuniôes semanais com o orientador através do Teams, bem como reuniôes periódicas no Discord para discutir, dividir tarefas e acompanhar a evolução do projeto. Conversas pontuais e decisões rápidas no dia a dia são feitas através do Whatsapp.
+
+**Serviços de Terceiros:**
+
+O sistema pode integrar serviços de terceiros para funcionalidades adicionais, como sistemas de pagamento (ex: PayPal, Stripe), serviços de autenticação (ex: Auth0, Firebase Authentication), e serviços de envio e logística (ex: Correios, FedEx).
 
 ## Hospedagem
 
-Explique como a hospedagem e o lançamento da plataforma foi feita.
-
-> **Links Úteis**:
->
-> - [Website com GitHub Pages](https://pages.github.com/)
-> - [Programação colaborativa com Repl.it](https://repl.it/)
-> - [Getting Started with Heroku](https://devcenter.heroku.com/start)
-> - [Publicando Seu Site No Heroku](http://pythonclub.com.br/publicando-seu-hello-world-no-heroku.html)
+O aplicativo e seus componentes serão hospedados em uma infraestrutura de nuvem no Microsoft Azure, para garantir escalabilidade, disponibilidade, segurança e gerenciamento da aplicação de forma simplificada.
+Essa estrutura permite uma arquitetura escalável, modular e robusta para o aplicativo de leilão online, garantindo uma experiência confiável e satisfatória para os usuários, além de facilitar a manutenção e evolução contínua do sistema. 
 
 ## Qualidade de Software
 
-Conceituar qualidade de fato é uma tarefa complexa, mas ela pode ser vista como um método gerencial que através de procedimentos disseminados por toda a organização, busca garantir um produto final que satisfaça às expectativas dos stakeholders.
-
-No contexto de desenvolvimento de software, qualidade pode ser entendida como um conjunto de características a serem satisfeitas, de modo que o produto de software atenda às necessidades de seus usuários. Entretanto, tal nível de satisfação nem sempre é alcançado de forma espontânea, devendo ser continuamente construído. Assim, a qualidade do produto depende fortemente do seu respectivo processo de desenvolvimento.
-
-A norma internacional ISO/IEC 25010, que é uma atualização da ISO/IEC 9126, define oito características e 30 subcaracterísticas de qualidade para produtos de software.
-Com base nessas características e nas respectivas sub-características, identifique as sub-características que sua equipe utilizará como base para nortear o desenvolvimento do projeto de software considerando-se alguns aspectos simples de qualidade. Justifique as subcaracterísticas escolhidas pelo time e elenque as métricas que permitirão a equipe avaliar os objetos de interesse.
-
-> **Links Úteis**:
->
-> - [ISO/IEC 25010:2011 - Systems and software engineering — Systems and software Quality Requirements and Evaluation (SQuaRE) — System and software quality models](https://www.iso.org/standard/35733.html/)
-> - [Análise sobre a ISO 9126 – NBR 13596](https://www.tiespecialistas.com.br/analise-sobre-iso-9126-nbr-13596/)
-> - [Qualidade de Software - Engenharia de Software 29](https://www.devmedia.com.br/qualidade-de-software-engenharia-de-software-29/18209/)
+| Característica          | Requisito                                                                                                                                                            | Métricas                                                                                                                                                                                      |
+| ----------------------- | -------------------------------------------------------------------------------------------------------------------------------------------------------------------- | --------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| Funcionalidade          | O sistema deve permitir que os usuários se cadastrem, façam login, participem de leilões, realizem lances, realizem pedidos e gerenciem suas contas de forma eficaz. | Taxa de sucesso do cadastro e login. <br> Número de lances feitos por leilão. <br> Taxa de sucesso dos pedidos realizados.                                                                    |
+| Confiabilidade          | O sistema deve ser robusto e confiável, minimizando falhas e garantindo a disponibilidade do serviço.                                                                | Tempo médio entre falhas (MTBF). <br> Tempo médio de recuperação (MTTR). <br> Taxa de disponibilidade do sistema.                                                                             |
+| Usabilidade             | O sistema deve ser fácil de usar, com uma interface intuitiva e amigável para os usuários.                                                                           | Taxa de conclusão de tarefas. <br> Tempo médio de aprendizado para realizar tarefas comuns. <br> Nível de satisfação do usuário através de pesquisas de satisfação.                           |
+| Eficiência e Desempenho | O sistema deve responder rapidamente e ser eficiente em termos de uso de recursos.                                                                                   | Tempo de resposta das principais operações do sistema (cadastro, login, lances). <br> Utilização média da CPU e memória. Número máximo de usuários suportados simultaneamente.                |
+| Manutenibilidade        | O sistema deve ser facilmente mantido e evoluído, com código bem estruturado e documentação adequada.                                                                | Taxa de correção de defeitos. <br> Tempo médio para implementar uma nova funcionalidade. <br> Cobertura de código por testes automatizados.                                                   |
+| Portabilidade           | O sistema deve ser compatível com diferentes dispositivos e plataformas.                                                                                             | Número de plataformas suportadas (web, iOS, Android). <br> Tempo médio para adaptação do sistema a uma nova plataforma. <br> Facilidade de instalação e configuração em diferentes ambientes. |
