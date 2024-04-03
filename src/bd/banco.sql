@@ -14,7 +14,7 @@ email VARCHAR(255) UNIQUE,
 senha VARCHAR(30),
 dataNascimento TIMESTAMP,
 genero VARCHAR(20),
-idStatusUsuario INTEGER REFERENCES StatusUsuario(idStatusUsuario)
+FOREIGN KEY idStatusUsuario INTEGER REFERENCES StatusUsuario(idStatusUsuario)
 );
 
 CREATE TABLE Endereco (
@@ -26,7 +26,7 @@ bairro VARCHAR(100),
 cidade VARCHAR(100),
 estado VARCHAR(2),
 cep VARCHAR(9)
-idUsuario INTEGER REFERENTES Usuario(idUsuario)
+FOREIGN KEY idUsuario INTEGER REFERENCES Usuario(idUsuario)
 );
 
 CREATE TABLE ImagemProduto (
@@ -87,9 +87,9 @@ idProduto SERIAL PRIMARY KEY,
 nomeProduto VARCHAR(255),
 descricaoProduto TEXT,
 precoInicial NUMERIC(10, 2),
-idCategoriaProduto INTEGER REFERENCES CategoriaProduto(idCategoriaProduto),
-idEstadoProduto INTEGER REFERENCES EstadoProduto(idEstadoProduto),
-idImagemProduto INTEGER REFERENCES ImagemProduto(idImagemProduto),
+FOREIGN KEY idCategoriaProduto INTEGER REFERENCES CategoriaProduto(idCategoriaProduto),
+FOREIGN KEY idEstadoProduto INTEGER REFERENCES EstadoProduto(idEstadoProduto),
+FOREIGN KEY idImagemProduto INTEGER REFERENCES ImagemProduto(idImagemProduto),
 );
 
 CREATE TABLE StatusLeilao (
@@ -106,20 +106,20 @@ INSERT INTO StatusLeilao (descricaoStatusLeilao) VALUES
 
 CREATE TABLE Leilao (
 idLeilao SERIAL PRIMARY KEY,
-dataInicio TIMESTAMP,
+dataInicio TIMESTAMP CURRENT_TIMESTAMP,
 dataFim TIMESTAMP,
 precoAtual NUMERIC(10, 2),
-idStatusLeilao INTEGER REFERENCES StatusProduto(idStatusProduto),
-IdProduto INTEGER REFERENCES Produto(IdProduto),
-IdVendedor INTEGER REFERENCES Usuario(idUsuario),
+FOREIGN KEY idStatusLeilao INTEGER REFERENCES StatusProduto(idStatusProduto),
+FOREIGN KEY IdProduto INTEGER REFERENCES Produto(IdProduto),
+FOREIGN KEY IdVendedor INTEGER REFERENCES Usuario(idUsuario),
 );
 
 CREATE TABLE Lance (
 idLance SERIAL PRIMARY KEY,
 valorLance NUMERIC(10, 2),
-dataLance TIMESTAMP,
-IdComprador INTEGER REFERENCES Usuario(idUsuario),
-idLeilao INTEGER REFERENCES Leilao(idLeilao)
+dataLance TIMESTAMP CURRENT_TIMESTAMP,
+FOREIGN KEY IdComprador INTEGER REFERENCES Usuario(idUsuario),
+FOREIGN KEY idLeilao INTEGER REFERENCES Leilao(idLeilao)
 );
 
 CREATE TABLE Mensagem (
@@ -140,8 +140,8 @@ INSERT INTO CategoriaProduto (descricaoCategoriaProduto) VALUES
 
 CREATE TABLE HistoricoMensagem (
 idHistoricoMensagem SERIAL PRIMARY KEY,
-dataMensagem TIMESTAMP,
-idLance INTEGER REFERENCES Lance(idLance),
-idMensagem INTEGER REFERENCES Mensagem(idMensagem),
-idStatusMensagem INTEGER REFERENCES StatusMensagem(idStatusMensagem),
+dataMensagem TIMESTAMP CURRENT_TIMESTAMP,
+FOREIGN KEY idLance INTEGER REFERENCES Lance(idLance),
+FOREIGN KEY idMensagem INTEGER REFERENCES Mensagem(idMensagem),
+FOREIGN KEY idStatusMensagem INTEGER REFERENCES StatusMensagem(idStatusMensagem),
 );
