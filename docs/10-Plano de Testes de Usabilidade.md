@@ -1,4 +1,4 @@
-äa# Plano de Testes de Usabilidade
+# Plano de Testes de Usabilidade
 
 ## 1. Introdução
 
