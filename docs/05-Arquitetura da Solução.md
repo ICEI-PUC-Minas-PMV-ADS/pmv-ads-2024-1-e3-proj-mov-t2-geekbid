@@ -32,15 +32,39 @@ Arquitetura de componentes e ambiente de hospedagem:
 
 **Aplicativo Móvel:**
 
-O aplicativo móvel será desenvolvido em Reactive Native, pela facilidade de gerar elementos de inferface tanto para usuários de iOS quanto de Android.
+O aplicativo móvel será desenvolvido na linguagem JavaScript, utilizando React Native pela facilidade de gerar elementos de inferface tanto para usuários de iOS quanto de Android.
+
+**Repositório:**
+
+Utilizamos o GitHub como repositório, armazenando o código, arquivos e  histórico de revisão do projeto facilitando assim o acesso e colaboração dos integrantes.
+
+**Gestão de Projeto:**
+
+Foi feita atravás do Github Projects nele planejamos, distribuimos as tarefas e acompanhamos cada etapa da construção do projeto.
+
+**IDEs:**
+
+Como ambiente de desenvolvimento e teste utilizamos o tradicional Visual Studio Code e também o Expo, uma plataforma open-souce utilizada no desenvolvimento mobile com React Native que permite o fácil acesso às API’s nativas do dispositivo.
 
 **Backend:**
 
-Para desenvolvimento do backend, será utilizado o Node.js será o cérebro do sistema, gerenciando toda a lógica de negócios, processamento de dados, gerenciamento de usuários e comunicação com o banco de dados. Pode ser desenvolvido usando uma arquitetura de microsserviços, onde cada função do sistema é separada em serviços independentes. Tecnologias como Node.js, Python (com frameworks como Flask ou Django) ou Java (com Spring Boot) podem ser utilizadas para desenvolver o backend.
+Para desenvolvimento do backend, será utilizado o Node.js, ele será o cérebro do sistema, gerenciando toda a lógica de negócios, processamento de dados, gerenciamento de usuários e comunicação com o banco de dados.
 
 **Banco de Dados:**
 
-O banco de dados será responsável por armazenar todos os dados relacionados aos usuários, produtos, leilões, pedidos e outras informações essenciais do sistema. Um banco de dados relacional, como MySQL, PostgreSQL ou SQLite, pode ser utilizado para garantir integridade e consistência dos dados.
+O sistema de banco de dados escolhido foi o PostgreSQL, um banco de dados relacional para garantir a integridade e consistência dos dados. Ele será responsável por armazenar todos os dados relacionados aos usuários, produtos, leilões, pedidos e outras informações essenciais da aplicação.
+
+**Prototipagem:**
+
+O protótipo da aplicação foi feito utilizando o Figma, uma plataforma colaborativa para construção de design de interfaces e protótipos.
+
+**Fluxogramas:**
+
+- Lucidchart: Uma ferramenta de colaboração visual ajuda a criar mapas e fluxogramas para visualizar qualquer processo.
+- Miro: Plataforma de colaboração digital projetada para facilitar a comunicação remota e distribuída de equipes e o gerenciamento de projetos.
+
+**Comunicação:**
+A equipe realiza reuniôes semanais com o orientador através do Teams, bem como reuniôes periódicas no Discord para discutir, dividir tarefas e acompanhar a evolução do projeto. Conversas pontuais e decisões rápidas no dia a dia são feitas através do Whatsapp.
 
 **Serviços de Terceiros:**
 
@@ -48,12 +72,8 @@ O sistema pode integrar serviços de terceiros para funcionalidades adicionais, 
 
 ## Hospedagem
 
-O aplicativo e seus componentes podem ser hospedados em uma infraestrutura de nuvem, como Amazon Web Services (AWS), Google Cloud Platform (GCP) ou Microsoft Azure, para garantir escalabilidade, disponibilidade e segurança. Pode-se utilizar serviços como AWS Elastic Beanstalk, Google App Engine ou Azure App Service para implantar e gerenciar a aplicação de forma simplificada.
-Monitoramento e Logging:
-
-Implementar ferramentas de monitoramento e logging para acompanhar o desempenho, identificar possíveis problemas e garantir a estabilidade e disponibilidade do sistema. Ferramentas como AWS CloudWatch, Google Cloud Monitoring ou ELK Stack (Elasticsearch, Logstash, Kibana) podem ser utilizadas para essa finalidade.
-
-Essa estrutura permite uma arquitetura escalável, modular e robusta para o aplicativo de leilão online, garantindo uma experiência confiável e satisfatória para os usuários, além de facilitar a manutenção e evolução contínua do sistema.
+O aplicativo e seus componentes serão hospedados em uma infraestrutura de nuvem no Microsoft Azure, para garantir escalabilidade, disponibilidade, segurança e gerenciamento da aplicação de forma simplificada.
+Essa estrutura permite uma arquitetura escalável, modular e robusta para o aplicativo de leilão online, garantindo uma experiência confiável e satisfatória para os usuários, além de facilitar a manutenção e evolução contínua do sistema. 
 
 ## Qualidade de Software
 
