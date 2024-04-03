@@ -1,12 +1,8 @@
-# Registro de Testes de Software
+## Registro de Testes de Software
 
-<span style="color:red">Pré-requisitos: <a href="3-Projeto de Interface.md"> Projeto de Interface</a></span>, <a href="8-Plano de Testes de Software.md"> Plano de Testes de Software</a>
+| ID do Teste | Descrição                         | Pré-requisitos | Passos                      | Dados de Entrada        | Resultado Esperado       | Resultado Obtido | Status | Observações |
+|-------------|-----------------------------------|----------------|-----------------------------|-------------------------|--------------------------|------------------|--------|-------------|
+| TS-001      | Teste de Cadastro de Usuário      | Nenhum         | 1. Acessar tela de cadastro | Nome, email             | Cadastro bem-sucedido    | Sucesso          | Passou | N/A         |
+| TS-002      | Teste de Listagem de Itens        | Usuário logado | 1. Acessar tela de itens    | Nenhum                  | Lista de itens exibida   | Sucesso          | Passou | N/A         |
+| ...         | ...                               | ...            | ...                         | ...                     | ...                      | ...              | ...    | ...         |
 
-Relatório com as evidências dos testes de software realizados no sistema pela equipe, baseado em um plano de testes pré-definido.
-
-## Avaliação
-
-Discorra sobre os resultados do teste. Ressaltando pontos fortes e fracos identificados na solução. Comente como o grupo pretende atacar esses pontos nas próximas iterações. Apresente as falhas detectadas e as melhorias geradas a partir dos resultados obtidos nos testes.
-
-> **Links Úteis**:
-> - [Ferramentas de Test para Java Script](https://geekflare.com/javascript-unit-testing/)
