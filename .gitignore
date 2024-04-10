@@ -1,36 +1,36 @@
-backend/node_modules/
-backend/data/
+src/backend/node_modules/
+src/backend/data/
 
 # dependencies
-frontend/node_modules/
+src/frontend/node_modules/
 
 # Expo
-frontend/.expo/
-frontend/dist/
-frontend/web-build/
+src/frontend/.expo/
+src/frontend/dist/
+src/frontend/web-build/
 
 # Native
-frontend/*.orig.*
-frontend/*.jks
-frontend/*.p8
-frontend/*.p12
-frontend/*.key
-frontend/*.mobileprovision
+src/frontend/*.orig.*
+src/frontend/*.jks
+src/frontend/*.p8
+src/frontend/*.p12
+src/frontend/*.key
+src/frontend/*.mobileprovision
 
 # Metro
-frontend/.metro-health-check*
+src/frontend/.metro-health-check*
 
 # debug
-frontend/npm-debug.*
-frontend/yarn-debug.*
-frontend/yarn-error.*
+src/frontend/npm-debug.*
+src/frontend/yarn-debug.*
+src/frontend/yarn-error.*
 
 # macOS
-frontend/.DS_Store
-frontend/*.pem
+src/frontend/.DS_Store
+src/frontend/*.pem
 
 # local env files
-frontend/.env*.local
+src/frontend/.env*.local
 
 # typescript
-frontend/*.tsbuildinfo
+src/frontend/*.tsbuildinfo
