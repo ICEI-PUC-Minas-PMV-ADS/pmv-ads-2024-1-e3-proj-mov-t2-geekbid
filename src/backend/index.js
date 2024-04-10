@@ -66,37 +66,40 @@ const usuarioRoute = require('./routes/usuarioRoute');
 //   res.status(200).send(JSON.stringify(rows))
 // })
 
-Usuario.hasOne(StatusUsuario);
-StatusUsuario.belongsTo(Usuario);
 
-Usuario.hasOne(Endereco);
-Endereco.belongsTo(Usuario);
+// RELAÇÕES - COMENTADAS PORQUE AINDA NÃO ESTÃO FINALIZADAS
 
-Usuario.hasMany(Leilao);
-Leilao.belongsTo(Usuario);
+// Usuario.hasOne(StatusUsuario);
+// StatusUsuario.belongsTo(Usuario);
 
-Usuario.hasMany(Leilao);
-Leilao.hasMany(Usuario);
+// Usuario.hasOne(Endereco);
+// Endereco.belongsTo(Usuario);
 
-Produto.hasMany(CategoriaProduto);
-CategoriaProduto.belongsTo(Produto);
+// Usuario.hasMany(Leilao);
+// Leilao.belongsTo(Usuario);
 
-Produto.hasOne(EstadoProduto);
-EstadoProduto.belongsTo(Produto);
+// Usuario.hasMany(Leilao);
+// Leilao.hasMany(Usuario);
 
-Leilao.hasOne(StatusLeilao);
-StatusLeilao.belongsTo(Leilao);
+// Produto.hasMany(CategoriaProduto);
+// CategoriaProduto.belongsTo(Produto);
 
-Leilao.hasMany(Lance);
-Lance.hasMany(Leilao)
+// Produto.hasOne(EstadoProduto);
+// EstadoProduto.belongsTo(Produto);
+
+// Leilao.hasOne(StatusLeilao);
+// StatusLeilao.belongsTo(Leilao);
+
+// Leilao.hasMany(Lance);
+// Lance.hasMany(Leilao)
 
 app.listen(3000, () => {
   console.log('App running at http://localhost:3000')
 })
 
 sequelize
-  // .sync({ force: true }) // PARA ATUALIZAR AS TABELAS E RELAÇÕES -- APAGA OS DADOS
-  .sync() // DESABILITAR QUANTO HABILITAR A LLINHA DE CIMA
+  .sync({ force: true }) // PARA ATUALIZAR AS TABELAS E RELAÇÕES -- APAGA OS DADOS
+  // .sync() // DESABILITAR QUANTO HABILITAR A LLINHA DE CIMA
   .then(result => {
     return Usuario.findByPk(1);
     // console.log(result);
