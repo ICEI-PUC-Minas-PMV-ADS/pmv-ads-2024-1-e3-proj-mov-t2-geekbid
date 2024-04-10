@@ -24,9 +24,6 @@ const Usuario = sequelize.define("usuario", {
     dataNascimento: {
         type: Sequelize.DATEONLY,
         allowNull: false
-    },
-    genero: {
-
     }
 });
 

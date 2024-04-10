@@ -1,20 +1,20 @@
-const Sequelize = require("sequelize");
+const { Sequelize, DataTypes } = require("sequelize");
 
 const sequelize = require("../utils/database");
 
 const Lance = sequelize.define("lance", {
     id: {
-        type: Sequelize.INTEGER,
+        type: DataTypes.INTEGER,
         autoIncrement: true,
         allowNull: false,
         primaryKey: true
     },
     valorLance: {
-        type: Sequelize.DOUBLE,
+        type: DataTypes.DOUBLE,
         allowNull: false
     },
     dataLance: {
-        type: Sequelize.DATETIME,
+        type: DataTypes.DATE,
         defaultValue: DataTypes.NOW,
         allowNull: false
     }

@@ -1,6 +1,6 @@
 const path = require("path");
 
-import express from 'express';
+const express = require('express');
 
 const sequelize = require('./utils/database');
 
@@ -49,14 +49,14 @@ const app = express()
 
 app.use(express.static(path.join(__dirname, 'public')));
 
-app.use((req, res, next) => {
+/* app.use((req, res, next) => {
   Usuario.findByPk(1)
     .then(user => {
       req.user = user;
       next();
     })
     .catch(err => console.log(err));
-});
+}); */
 
 const usuarioRoute = require('./routes/usuarioRoute');
 
@@ -93,14 +93,10 @@ const usuarioRoute = require('./routes/usuarioRoute');
 // Leilao.hasMany(Lance);
 // Lance.hasMany(Leilao)
 
-app.listen(3000, () => {
-  console.log('App running at http://localhost:3000')
-})
-
 sequelize
   .sync({ force: true }) // PARA ATUALIZAR AS TABELAS E RELAÇÕES -- APAGA OS DADOS
   // .sync() // DESABILITAR QUANTO HABILITAR A LLINHA DE CIMA
-  .then(result => {
+  /* .then(result => {
     return Usuario.findByPk(1);
     // console.log(result);
   })
@@ -109,10 +105,8 @@ sequelize
       return Usuario.create({ name: 'Teste', email: 'teste@teste.com' });
     }
     return user;
-  })
+  }) */
   .then(user => {
     app.listen(3000, () => console.log("Server is running at port 3000...."));
   })
-  .catch(err => {
-    console.log(err);
-  });
+  .catch(err => console.log(err));

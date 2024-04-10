@@ -27,4 +27,4 @@ const Produto = sequelize.define("Produto", {
     }
 });
 
-module.exports = StatusLProdutoeilao;
+module.exports = Produto;
