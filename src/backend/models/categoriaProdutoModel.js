@@ -2,17 +2,17 @@ const Sequelize = require("sequelize");
 
 const sequelize = require("../utils/database");
 
-const StatusUsuario = sequelize.define("statusUsuario", {
-    idStatusUsuario: {
+const CategoriaProduto = sequelize.define("categoriaProduto", {
+    id: {
         type: Sequelize.INTEGER,
         autoIncrement: true,
         allowNull: false,
         primaryKey: true
     },
-    descricaoStatusUsuario: {
+    descricaoCategoriaProduto: {
         type: Sequelize.STRING,
         allowNull: false
     }
 });
 
-module.exports = StatusUsuario;
+module.exports = CategoriaProduto;

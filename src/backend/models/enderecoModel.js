@@ -2,32 +2,36 @@ const Sequelize = require("sequelize");
 
 const sequelize = require("../utils/database");
 
-const Usuario = sequelize.define("usuario", {
-    idUsuario: {
+const Endereco = sequelize.define("endereco", {
+    id: {
         type: Sequelize.INTEGER,
         autoIncrement: true,
         allowNull: false,
         primaryKey: true
     },
-    nome: {
+    rua: {
         type: Sequelize.STRING,
         allowNull: false
     },
-    email: {
+    numero: {
         type: Sequelize.STRING,
         allowNull: false
     },
-    senha: {
-        type: Sequelize.STRING,
-        allowNull: false
+    complemento: {
+        type: Sequelize.STRING
     },
-    dataNascimento: {
+    bairro: {
         type: Sequelize.DATEONLY,
         allowNull: false
     },
-    genero: {
-
+    estado: {
+        type: Sequelize.DATEONLY,
+        allowNull: false
+    },
+    cep: {
+        type: Sequelize.DATEONLY,
+        allowNull: false
     }
 });
 
-module.exports = Usuario;
+exports.endereco = Endereco;
