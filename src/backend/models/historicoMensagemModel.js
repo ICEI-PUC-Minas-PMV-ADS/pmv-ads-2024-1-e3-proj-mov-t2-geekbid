@@ -1,18 +1,17 @@
-const Sequelize = require("sequelize");
+const { Sequelize, DataTypes } = require("sequelize");
 
 const sequelize = require("../utils/database");
 
-const historicoMensagem = sequelize.define("historicoMensagem", {
+const HistoricoMensagem = sequelize.define("historicoMensagem", {
     id: {
-        type: Sequelize.INTEGER,
+        type: DataTypes.INTEGER,
         autoIncrement: true,
         allowNull: false,
         primaryKey: true
-    },
-    descricaoStatusMensagem: {
-        type: Sequelize.STRING,
-        allowNull: false
     }
+},
+{
+    freezeTableName: true
 });
 
-module.exports = historicoMensagem;
+module.exports = HistoricoMensagem;
