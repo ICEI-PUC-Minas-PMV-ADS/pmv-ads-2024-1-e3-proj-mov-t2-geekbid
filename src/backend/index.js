@@ -10,6 +10,7 @@ const Endereco = require('./models/enderecoModel');
 const CategoriaProduto = require('./models/categoriaProdutoModel');
 const EstadoProduto = require('./models/estadoProdutoModel');
 const Produto = require('./models/produtoModel');
+const ProdutoCategoria = require('./models/produtoCategoriaModel');
 const StatusLeilao = require('./models/statusLeilaoModel');
 const Leilao = require('./models/leilaoModel');
 const Lance = require('./models/lanceModel');
@@ -17,46 +18,10 @@ const Mensagem = require('./models/mensagemModel');
 const StatusMensagem = require('./models/statusMensagemModel');
 const HistoricoMensagem = require('./models/historicoMensagemModel');
 
-// SUBSTITUIDO PELA LINHA 05 => const sequelize = require('./utils/database');
-// postgresql(async connection => {
-//   await connection.query(
-//     'CREATE TABLE IF NOT EXISTS leilao (id bigserial primary key, titulo text, valor float);'
-//   )
-//   await connection.query(
-//     'CREATE UNIQUE INDEX IF NOT EXISTS titulo ON leilao (titulo);'
-//   )
-
-//   const leiloes = [
-//     {
-//       titulo: 'Processador Intel',
-//       valor: 40
-//     },
-//     { titulo: 'Placa de video nvidia', valor: 20 },
-//     { titulo: 'Pendrive 4gb', valor: 30 }
-//   ]
-
-//   for (let i = 0; i < leiloes.length; i += 1) {
-//     const leilao = leiloes[i]
-//     await connection.query(
-//       `INSERT INTO leilao (titulo, valor) VALUES ('${leilao.titulo}', '${leilao.valor}') ON CONFLICT DO NOTHING;`
-//     )
-//   }
-
-//   console.log('PostgreSQL database seeded!')
-// })
-
 const app = express()
 
 app.use(express.static(path.join(__dirname, 'public')));
 
-/* app.use((req, res, next) => {
-  Usuario.findByPk(1)
-    .then(user => {
-      req.user = user;
-      next();
-    })
-    .catch(err => console.log(err));
-}); */
 
 const usuarioRoute = require('./routes/usuarioRoute');
 
@@ -69,43 +34,70 @@ const usuarioRoute = require('./routes/usuarioRoute');
 
 // RELAÇÕES - COMENTADAS PORQUE AINDA NÃO ESTÃO FINALIZADAS
 
-// Usuario.hasOne(StatusUsuario);
-// StatusUsuario.belongsTo(Usuario);
+StatusUsuario.hasMany(Usuario);
 
-// Usuario.hasOne(Endereco);
-// Endereco.belongsTo(Usuario);
+Usuario.hasOne(Endereco);
 
-// Usuario.hasMany(Leilao);
-// Leilao.belongsTo(Usuario);
+Usuario.hasMany(Leilao);
 
-// Usuario.hasMany(Leilao);
-// Leilao.hasMany(Usuario);
+CategoriaProduto.belongsToMany(Produto, {through: ProdutoCategoria});
 
-// Produto.hasMany(CategoriaProduto);
-// CategoriaProduto.belongsTo(Produto);
+EstadoProduto.hasMany(Produto);
 
-// Produto.hasOne(EstadoProduto);
-// EstadoProduto.belongsTo(Produto);
+StatusLeilao.hasMany(Leilao);
 
-// Leilao.hasOne(StatusLeilao);
-// StatusLeilao.belongsTo(Leilao);
+Produto.hasOne(Leilao);
 
-// Leilao.hasMany(Lance);
-// Lance.hasMany(Leilao)
+Usuario.belongsToMany(Leilao, {through: Lance});
+
+Mensagem.belongsToMany(StatusMensagem, {through: HistoricoMensagem});
 
 sequelize
-  .sync({ force: true }) // PARA ATUALIZAR AS TABELAS E RELAÇÕES -- APAGA OS DADOS
+  .sync({ force: true }) // PARA CRIAR AS TABELAS E RELAÇÕES -- APAGA OS DADOS
+  // .sync({ alter: true }) // PARA ATUALIZAR AS TABELAS E RELAÇÕES -- NÃO APAGA OS DADOS
   // .sync() // DESABILITAR QUANTO HABILITAR A LLINHA DE CIMA
-  /* .then(result => {
-    return Usuario.findByPk(1);
-    // console.log(result);
+  .then(result => {
+    return StatusUsuario.bulkCreate([
+      {descricaoStatusUsuario: "cadastrado"},
+      {descricaoStatusUsuario: "validado"}
+    ]);
   })
-  .then(user => {
-    if (!user) {
-      return Usuario.create({ name: 'Teste', email: 'teste@teste.com' });
-    }
-    return user;
-  }) */
+  .then(result => {
+    return EstadoProduto.bulkCreate([
+      {descricaoEstadoProduto: "novo"},
+      {descricaoEstadoProduto: "usado"}
+    ]);
+  })
+  .then(result => {
+    return StatusMensagem.bulkCreate([
+      {descricaoStatusMensagem: "enviada"},
+      {descricaoStatusMensagem: "excluida"},
+      {descricaoStatusMensagem: "lida"}
+    ]);
+  })
+  .then(result => {
+    return StatusLeilao.bulkCreate([
+      {descricaoStatusLeilao: "cadastrado"},
+      {descricaoStatusLeilao: "publicado"},
+      {descricaoStatusLeilao: "ativo"},
+      {descricaoStatusLeilao: "encerrado"},
+      {descricaoStatusLeilao: "cancelado"}
+    ]);
+  })
+  .then(result => {
+    return CategoriaProduto.bulkCreate([
+      {descricaoCategoriaProduto: "Quadrinhos e Mangás"},
+      {descricaoCategoriaProduto: "Colecionáveis"},
+      {descricaoCategoriaProduto: "Jogos de Tabuleiro e Card Games"},
+      {descricaoCategoriaProduto: "Jogos Eletrônicos"},
+      {descricaoCategoriaProduto: "Livros e Literatura Fantástica"},
+      {descricaoCategoriaProduto: "Filmes e Séries"},
+      {descricaoCategoriaProduto: "Tecnologia e Gadgets"},
+      {descricaoCategoriaProduto: "Roupas e Acessórios"},
+      {descricaoCategoriaProduto: "Arte e Decoração"},
+      {descricaoCategoriaProduto: "Memorabilia"},
+    ]);
+  })
   .then(user => {
     app.listen(3000, () => console.log("Server is running at port 3000...."));
   })

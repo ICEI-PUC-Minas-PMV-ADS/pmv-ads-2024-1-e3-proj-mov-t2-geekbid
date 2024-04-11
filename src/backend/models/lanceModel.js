@@ -18,6 +18,9 @@ const Lance = sequelize.define("lance", {
         defaultValue: DataTypes.NOW,
         allowNull: false
     }
+},
+{
+    freezeTableName: true
 });
 
 module.exports = Lance;

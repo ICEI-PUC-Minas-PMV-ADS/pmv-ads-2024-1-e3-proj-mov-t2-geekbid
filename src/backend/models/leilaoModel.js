@@ -1,25 +1,28 @@
-const Sequelize = require("sequelize");
+const { Sequelize, DataTypes } = require("sequelize");
 
 const sequelize = require("../utils/database");
 
 const Leilao = sequelize.define("leilao", {
     id: {
-        type: Sequelize.INTEGER,
+        type: DataTypes.INTEGER,
         autoIncrement: true,
         allowNull: false,
         primaryKey: true
     },
     dataInicio: {
-        type: Sequelize.DATE,
+        type: DataTypes.DATE,
         allowNull: false
     },
     dataFim: {
-        type: Sequelize.DATE,
+        type: DataTypes.DATE,
         allowNull: false
     },
     precoAtual: {
-        type: Sequelize.DOUBLE,
+        type: DataTypes.DOUBLE,
     }
+},
+{
+    freezeTableName: true
 });
 
 module.exports = Leilao;

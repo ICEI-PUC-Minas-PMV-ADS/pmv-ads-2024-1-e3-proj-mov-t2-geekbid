@@ -1,37 +1,40 @@
-const Sequelize = require("sequelize");
+const { Sequelize, DataTypes } = require("sequelize");
 
 const sequelize = require("../utils/database");
 
 const Endereco = sequelize.define("endereco", {
     id: {
-        type: Sequelize.INTEGER,
+        type: DataTypes.INTEGER,
         autoIncrement: true,
         allowNull: false,
         primaryKey: true
     },
     rua: {
-        type: Sequelize.STRING,
+        type: DataTypes.STRING,
         allowNull: false
     },
     numero: {
-        type: Sequelize.STRING,
+        type: DataTypes.STRING,
         allowNull: false
     },
     complemento: {
-        type: Sequelize.STRING
+        type: DataTypes.STRING
     },
     bairro: {
-        type: Sequelize.DATEONLY,
+        type: DataTypes.STRING,
         allowNull: false
     },
     estado: {
-        type: Sequelize.DATEONLY,
+        type: DataTypes.STRING,
         allowNull: false
     },
     cep: {
-        type: Sequelize.DATEONLY,
+        type: DataTypes.STRING,
         allowNull: false
     }
+},
+{
+    freezeTableName: true
 });
 
-exports.endereco = Endereco;
+module.exports = Endereco;
