@@ -1,7 +1,7 @@
 import { NavigationContainer } from '@react-navigation/native';
-import Route from './src/navegations/Route';
+import Route from './../frontend/navegations/Route';
 
-import UserProvider from './src/contexts/UserContext';
+import UserProvider from './../frontend/contexts/UserContext';
 const App = () => {
   return (
     <UserProvider>
