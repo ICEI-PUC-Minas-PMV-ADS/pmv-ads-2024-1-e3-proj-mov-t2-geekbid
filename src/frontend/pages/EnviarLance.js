@@ -79,7 +79,7 @@ const EnviarLance = ({ navigation }) => {
       // Aqui seria a lógica para enviar o lance para o backend simulação apenas um alerta
       Alert.alert(
         "Lance Enviado",
-        `Seu lance de R$ ${novoLance} foi enviado com sucesso!`
+        `Seu lance de R$ ${formatCurrency(novoLance)} foi enviado com sucesso!`
       );
       setSeuLance(novoLance); // Atualiza o campo Seu Lance com o novo valor
     } else {
@@ -89,6 +89,14 @@ const EnviarLance = ({ navigation }) => {
         "O lance deve ser no mínimo 50 acima do último lance registrado."
       );
     }
+  };
+
+  // Função para formatar o valor para moeda brasileira
+  const formatCurrency = (value) => {
+    return (value).toLocaleString('pt-BR', {
+      style: 'currency',
+      currency: 'BRL',
+    });
   };
 
   return (
@@ -128,11 +136,11 @@ const EnviarLance = ({ navigation }) => {
         <View style={styles.infoLancesContainer}>
           <View style={styles.lanceItemLeft}>
             <Text style={styles.lanceTitulo}>Seu Lance</Text>
-            <Text style={styles.lanceValor}>R$ {seuLance}</Text>
+            <Text style={styles.lanceValor}>{formatCurrency(seuLance)}</Text>
           </View>
           <View style={styles.lanceItemRight}>
             <Text style={styles.lanceTitulo}>Último Lance</Text>
-            <Text style={styles.lanceValor}>R$ {ultimoLance}</Text>
+            <Text style={styles.lanceValor}>{formatCurrency(ultimoLance)}</Text>
           </View>
         </View>
         <Text style={styles.subtituloMenor}>Insira o valor do seu lance</Text>
@@ -142,7 +150,7 @@ const EnviarLance = ({ navigation }) => {
               <Text style={styles.botaoTexto}>-</Text>
             </TouchableOpacity>
             <View style={styles.valorInput}>
-              <Text style={styles.valorUltimoLance}>R$ {novoLance}</Text>
+              <Text style={styles.valorUltimoLance}>{formatCurrency(novoLance)}</Text>
             </View>
             <TouchableOpacity style={styles.botaoLance} onPress={aumentarLance}>
               <Text style={styles.botaoTexto}>+</Text>
