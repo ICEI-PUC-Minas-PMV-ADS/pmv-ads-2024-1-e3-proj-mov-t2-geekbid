@@ -32,38 +32,33 @@ Com base na análise das personas forma identificadas as seguintes histórias de
 
 ### Análise da Situação Atual
 
-Apresente aqui os problemas existentes que viabilizam sua proposta. Apresente o modelo do sistema como ele funciona hoje. Caso sua proposta seja inovadora e não existam processos claramente definidos, apresente como as tarefas que o seu sistema pretende implementar são executadas atualmente, mesmo que não se utilize tecnologia computacional.
+O GeekBid permite que os usuários cadastrem-se, naveguem pelos itens disponíveis, participem de leilões fazendo lances, acompanhem o progresso dos leilões, concluam as compras, realizem os pagamentos e organizem a entrega dos itens. Após a conclusão, os usuários podem avaliar e fornecer feedback sobre a transação.
+
+Os desafios para criar um aplicativo de leilão geek incluem competição intensa, garantia de autenticidade dos itens, oferta consistente de variedade e qualidade, construção de uma comunidade engajada, cumprimento de regulamentações legais, implementação de sistemas de pagamento seguros, gerenciamento de custos operacionais e priorização da experiência do usuário.
 
 ### Descrição Geral da Proposta
 
-Apresente aqui uma descrição da sua proposta abordando seus limites e suas ligações com as estratégias e objetivos do negócio. Apresente aqui as oportunidades de melhorias.
+GeekBid é um aplicativo de leilões especialmente projetado para entusiastas da cultura geek, oferecendo uma plataforma interativa onde os usuários podem comprar e vender itens colecionáveis, raridades e memorabilia relacionados à cultura pop, jogos, quadrinhos, filmes, séries de TV e outros nichos afins.
 
-### Processo 1 – NOME DO PROCESSO
+### Processo 1 – Cadastro e Login
 
-Apresente aqui o nome e as oportunidades de melhorias para o processo 1. Em seguida, apresente o modelo do processo 1, descrito no padrão BPMN.
+![Cadastro e Login](img/Processos-%20Login%20e%20Cadastro.png)
 
-![Processo 1](img/02-bpmn-proc1.png)
+### Processo 2 – Leilão
 
-### Processo 2 – NOME DO PROCESSO
-
-Apresente aqui o nome e as oportunidades de melhorias para o processo 2. Em seguida, apresente o modelo do processo 2, descrito no padrão BPMN.
-
-![Processo 2](img/02-bpmn-proc2.png)
+![Leilão](img/Processos%20-%20Leilão.png)
 
 ## Indicadores de Desempenho
 
 Os indicadores de desempenho representam elementos fundamentais no gerenciamento eficiente de qualquer processo, abaixo listamos alguns indicadores de desempenho juntamente com as metas relacionadas para o aplicativo.
 
 | Indicador de Desempenho            | Descrição                                                           | Objetivo                                    | Fonte de Dados                   | Cálculo                               | Perspectiva/Meta                     |
-|------------------------------------|---------------------------------------------------------------------|---------------------------------------------|----------------------------------|---------------------------------------|--------------------------------------|
+| ---------------------------------- | ------------------------------------------------------------------- | ------------------------------------------- | -------------------------------- | ------------------------------------- | ------------------------------------ |
 | Taxa de Registro de Novos Usuários | Percentual de novos usuários que se cadastram no app                | Aumentar a base de usuários registrados     | Banco de Dados do Aplicativo     | Média de novos usuários mensais       | Alcançar 100 registros novos por mês |
 | Tempo Médio de Resposta do Sistema | Tempo médio que o sistema leva para responder às ações dos usuários | Melhorar a eficiência do sistema            | Logs de Servidor                 | Tempo Médio de Resposta do aplicativo | Manter abaixo de 1 segundo           |
 | Taxa de Conversão de Leilões       | Percentual de leilões iniciados que são concluídos com sucesso      | Garantir a eficácia dos leilões             | Banco de Dados do Aplicativo     | Média dos leilões concluídos          | Alcançar 60% de conversão de leilões |
 | Taxa de Participação dos Usuários  | Percentual de usuários ativos que participam de leilões             | Estimular a participação ativa dos usuários | Logs de Atividade do Usuário     | Média dos usuários ativos             | Aumentar em 20% nos próximos 6 meses |
 | Avaliações do Aplicativo           | Média das avaliações dos usuários sobre o aplicativo                | Melhorar a percepção geral do aplicativo    | Sistema de Avaliação de Usuários | Média das Avaliações dos Usuários     | Manter uma média de 4.5/5            |
-
-
-
 
 ## Requisitos
 
@@ -126,7 +121,6 @@ O projeto está restrito pelos itens apresentados na tabela a seguir.
 
 ![Diagrama de caso de uso GEEKBID (3)](https://github.com/ICEI-PUC-Minas-PMV-ADS/pmv-ads-2024-1-e3-proj-mov-t2-geekbid/assets/101235591/cb014377-ef1e-4841-8059-8c95570b38ae)
 
-
 # Matriz de Rastreabilidade
 
 ## Requisitos Funcionais ↔ Requisitos de Domínio (Regras de negócio)
@@ -156,57 +150,67 @@ O projeto está restrito pelos itens apresentados na tabela a seguir.
 
 # Gerenciamento de Projeto
 
-*Integração:*
+_Integração:_
+
 - Desenvolvimento do plano de gerenciamento do projeto.
 - Coordenação e integração de todos os processos e atividades do projeto.
 - Realização de reuniões de acompanhamento e controle do projeto.
 
-*Escopo:*
+_Escopo:_
+
 - Coleta de requisitos do aplicativo de leilão.
 - Elaboração da Declaração do Escopo do Projeto (DEP).
 - Desenvolvimento da Estrutura Analítica do Projeto (EAP) e do Dicionário da EAP.
 - Controle de mudanças no escopo do projeto.
 
-*Cronograma (Tempo):*
+_Cronograma (Tempo):_
+
 - Sequenciamento das atividades do projeto.
 - Estimativa de duração das atividades.
 - Desenvolvimento do cronograma do projeto.
 - Controle do cronograma, identificando desvios e ajustando o plano conforme necessário.
 
-*Custos:*
+_Custos:_
+
 - Estimativa de custos do projeto, incluindo desenvolvimento do aplicativo, marketing, suporte, etc.
 - Elaboração do orçamento do projeto.
 - Controle de custos durante a execução do projeto.
 
-*Qualidade:*
+_Qualidade:_
+
 - Planejamento da qualidade do aplicativo de leilão.
 - Realização de garantia da qualidade.
 - Controle da qualidade, incluindo revisões de código, testes de aceitação do usuário, etc.
 
-*Recursos:*
+_Recursos:_
+
 - Identificação e alocação de recursos necessários para o projeto, incluindo equipe, equipamentos e materiais.
 - Desenvolvimento do plano de gerenciamento de recursos humanos.
 - Gestão do desempenho da equipe.
 
-*Comunicações:*
+_Comunicações:_
+
 - Elaboração do plano de gerenciamento das comunicações.
 - Estabelecimento de canais de comunicação eficazes.
 - Distribuição de informações relevantes para todas as partes interessadas.
 - Gerenciamento das expectativas das partes interessadas.
 
-*Riscos:*
+_Riscos:_
+
 - Identificação de riscos potenciais relacionados ao desenvolvimento e implementação do aplicativo de leilão.
 - Análise qualitativa e quantitativa de riscos.
 - Desenvolvimento de estratégias de resposta aos riscos.
 - Monitoramento e controle dos riscos ao longo do ciclo de vida do projeto.
 
-*Aquisições:*
+_Aquisições:_
+
 - Identificação de produtos ou serviços a serem adquiridos externamente para o projeto.
 - Desenvolvimento do plano de aquisições.
 - Seleção de fornecedores.
 - Administração e encerramento dos contratos de aquisição.
 
-*Partes Interessadas:*
+_Partes Interessadas:_
+
 - Identificação de todas as partes interessadas no projeto.
 - Avaliação do impacto das partes interessadas no projeto.
 - Desenvolvimento de estratégias de engajamento das partes interessadas.
