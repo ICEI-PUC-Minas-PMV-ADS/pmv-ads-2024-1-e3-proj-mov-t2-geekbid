@@ -133,7 +133,7 @@ idStatusMensagem SERIAL PRIMARY KEY,
 descricaoStatusMensagem VARCHAR(100)
 );
 
-INSERT INTO CategoriaProduto (descricaoCategoriaProduto) VALUES 
+INSERT INTO StatusMensagem (descricaoStatusMensagem) VALUES 
 ('enviada'), 
 ('excluida'), 
 ('lida');
