@@ -32,9 +32,9 @@ Com base na análise das personas forma identificadas as seguintes histórias de
 
 ### Análise da Situação Atual
 
-Os desafios para criar um aplicativo de leilão geek incluem competição intensa, garantia de autenticidade dos itens, oferta consistente de variedade e qualidade, construção de uma comunidade engajada, cumprimento de regulamentações legais, implementação de sistemas de pagamento seguros, gerenciamento de custos operacionais e priorização da experiência do usuário.
+O GeekBid permite que os usuários cadastrem-se, naveguem pelos itens disponíveis, participem de leilões fazendo lances, acompanhem o progresso dos leilões, concluam as compras, realizem os pagamentos e organizem a entrega dos itens. Após a conclusão, os usuários podem avaliar e fornecer feedback sobre a transação.
 
-Um aplicativo de leilões permite que os usuários cadastrem-se, naveguem pelos itens disponíveis, participem de leilões fazendo lances, acompanhem o progresso dos leilões, concluam as compras, realizem os pagamentos e organizem a entrega dos itens. Após a conclusão, os usuários podem avaliar e fornecer feedback sobre a transação.
+Os desafios para criar um aplicativo de leilão geek incluem competição intensa, garantia de autenticidade dos itens, oferta consistente de variedade e qualidade, construção de uma comunidade engajada, cumprimento de regulamentações legais, implementação de sistemas de pagamento seguros, gerenciamento de custos operacionais e priorização da experiência do usuário.
 
 ### Descrição Geral da Proposta
 
