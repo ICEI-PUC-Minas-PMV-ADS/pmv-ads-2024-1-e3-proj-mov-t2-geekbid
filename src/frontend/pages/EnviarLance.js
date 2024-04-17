@@ -19,6 +19,8 @@ const EnviarLance = ({ navigation }) => {
   const [seuLance, setSeuLance] = useState(0);
   const [novoLance, setNovoLance] = useState(0);
   const [modalVisible, setModalVisible] = useState(false);
+  const [lanceEnviadoModalVisible, setLanceEnviadoModalVisible] = useState(false);
+
 
   // Dados mocados enquanto aguardamos conexão com o backend
   const tituloProduto = "Título do Produto";
@@ -100,7 +102,7 @@ const EnviarLance = ({ navigation }) => {
     });
   };
 
-  // Funnção para abrir e fechar modal
+  // Funnção para abrir e fechar modal enviar lance
   const openModal = () => {
     setModalVisible(true);
   };
@@ -108,6 +110,16 @@ const EnviarLance = ({ navigation }) => {
   const closeModal = () => {
     setModalVisible(false);
   };
+
+  // Funnção para abrir e fechar modal confirmar envio
+  const openLanceEnviadoModal = () => {
+    setLanceEnviadoModalVisible(true);
+  };
+  
+  const closeLanceEnviadoModal = () => {
+    setLanceEnviadoModalVisible(false);
+  };
+  
 
   return (
     <ScrollView contentContainerStyle={styles.scrollContainer}>
@@ -196,20 +208,14 @@ const EnviarLance = ({ navigation }) => {
                 Total: {formatCurrency(novoLance)}
               </Text>
               <Text style={styles.modalText}>
-                Ao clicar em enviar, você confirma que comprará esse item e não poderá mais cancelar.
+                Ao clicar em enviar, você confirma que comprará esse item e não
+                poderá mais cancelar.
               </Text>
               <View style={styles.modalButtonContainer}>
                 <TouchableOpacity
                   style={[styles.modalButton, styles.sendButton]}
                   onPress={() => {
-                    closeModal();
-                    // Adicione a lógica para enviar o lance aqui
-                    Alert.alert(
-                      "Lance Enviado",
-                      `Seu lance de ${formatCurrency(
-                        novoLance
-                      )} foi enviado com sucesso!`
-                    );
+                    openLanceEnviadoModal();
                     setSeuLance(novoLance);
                   }}
                 >
@@ -226,9 +232,44 @@ const EnviarLance = ({ navigation }) => {
           </View>
         </TouchableWithoutFeedback>
       </Modal>
+      <Modal
+  animationType="slide"
+  transparent={true}
+  visible={lanceEnviadoModalVisible}
+  onRequestClose={() => {
+    Alert.alert("Modal has been closed.");
+    closeLanceEnviadoModal();
+  }}
+>
+  <TouchableWithoutFeedback onPress={Keyboard.dismiss} accessible={false}>
+    <View style={styles.modalContainer}>
+      <View style={styles.modalContent}>
+        <View style={styles.modalEnviado}>
+          {/* Ícone de check */}
+          <Image
+            source={require("./../assets/verifica.png")}
+            style={styles.modalIcon}
+          />
+          <Text style={styles.modalLanceEnviado}>Lance enviado!</Text>
+        </View>
+        <TouchableOpacity
+          style={[styles.modalButton, styles.sendButton]}
+          onPress={() => {
+            closeLanceEnviadoModal();
+            // Adicionar lógica para acompanhar o lance aqui
+          }}
+        >
+          <Text style={styles.modalButtonText}>Acompanhe seu lance</Text>
+        </TouchableOpacity>
+      </View>
+    </View>
+  </TouchableWithoutFeedback>
+</Modal>
+
     </ScrollView>
   );
 };
+
 
 const styles = StyleSheet.create({
   scrollContainer: {
@@ -404,6 +445,13 @@ const styles = StyleSheet.create({
     marginTop: 20,
     textAlign: "center",
   },
+  modalLanceEnviado: {
+    fontSize: 20,
+    fontWeight: "bold",
+    marginBottom: 80,
+    marginTop: 80,
+    textAlign: "center",
+  },
   modalSubTitle: {
     fontWeight: "bold",
     fontSize: 17,
@@ -470,6 +518,18 @@ const styles = StyleSheet.create({
     color: "black",
     fontSize: 16,
     textAlign: "center",
+  },
+  modalIcon: {
+    width: 18,
+    height: 18,
+    marginRight:10,
+  },
+  modalEnviado: {
+    flexDirection: "row", 
+    alignItems: "center",
+    alignContent: "center",
+    marginBottom: 20,
+    justifyContent: "center",
   },
 });
 
