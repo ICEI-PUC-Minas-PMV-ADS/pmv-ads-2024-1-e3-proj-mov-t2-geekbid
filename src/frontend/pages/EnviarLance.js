@@ -7,6 +7,10 @@ import {
   TouchableOpacity,
   ScrollView,
   Alert,
+  Modal,
+  TouchableHighlight,
+  TouchableWithoutFeedback,
+  Keyboard,
 } from "react-native";
 
 const EnviarLance = ({ navigation }) => {
@@ -14,9 +18,10 @@ const EnviarLance = ({ navigation }) => {
   const [ultimoLance, setUltimoLance] = useState(0);
   const [seuLance, setSeuLance] = useState(0);
   const [novoLance, setNovoLance] = useState(0);
+  const [modalVisible, setModalVisible] = useState(false);
 
   // Dados mocados enquanto aguardamos conexão com o backend
-  const tituloPagina = "Título da Página";
+  const tituloProduto = "Título do Produto";
   const responsavel = "Fulano";
   const imagemUrl = "https://via.placeholder.com/300";
 
@@ -76,11 +81,7 @@ const EnviarLance = ({ navigation }) => {
   const enviarLance = () => {
     // Verifica se o lance é válido
     if (novoLance >= ultimoLance + 50) {
-      // Aqui seria a lógica para enviar o lance para o backend simulação apenas um alerta
-      Alert.alert(
-        "Lance Enviado",
-        `Seu lance de R$ ${formatCurrency(novoLance)} foi enviado com sucesso!`
-      );
+      openModal();
       setSeuLance(novoLance); // Atualiza o campo Seu Lance com o novo valor
     } else {
       // Alerta se o lance não for válido
@@ -93,10 +94,19 @@ const EnviarLance = ({ navigation }) => {
 
   // Função para formatar o valor para moeda brasileira
   const formatCurrency = (value) => {
-    return (value).toLocaleString('pt-BR', {
-      style: 'currency',
-      currency: 'BRL',
+    return value.toLocaleString("pt-BR", {
+      style: "currency",
+      currency: "BRL",
     });
+  };
+
+  // Funnção para abrir e fechar modal
+  const openModal = () => {
+    setModalVisible(true);
+  };
+
+  const closeModal = () => {
+    setModalVisible(false);
   };
 
   return (
@@ -106,7 +116,7 @@ const EnviarLance = ({ navigation }) => {
           <TouchableOpacity onPress={() => navigation.goBack()}>
             <Text style={styles.voltarIcone}>{"<"}</Text>
           </TouchableOpacity>
-          <Text style={styles.titulo}>{tituloPagina}</Text>
+          <Text style={styles.titulo}>{tituloProduto}</Text>
         </View>
         <Text style={styles.responsavel}>By {responsavel}</Text>
         <Image source={{ uri: imagemUrl }} style={styles.imagem} />
@@ -150,7 +160,9 @@ const EnviarLance = ({ navigation }) => {
               <Text style={styles.botaoTexto}>-</Text>
             </TouchableOpacity>
             <View style={styles.valorInput}>
-              <Text style={styles.valorUltimoLance}>{formatCurrency(novoLance)}</Text>
+              <Text style={styles.valorUltimoLance}>
+                {formatCurrency(novoLance)}
+              </Text>
             </View>
             <TouchableOpacity style={styles.botaoLance} onPress={aumentarLance}>
               <Text style={styles.botaoTexto}>+</Text>
@@ -161,6 +173,59 @@ const EnviarLance = ({ navigation }) => {
           <Text style={styles.buttonText}>Envie seu lance</Text>
         </TouchableOpacity>
       </View>
+      <Modal
+        animationType="slide"
+        transparent={true}
+        visible={modalVisible}
+        onRequestClose={() => {
+          Alert.alert("Modal has been closed.");
+          closeModal();
+        }}
+      >
+        <TouchableWithoutFeedback onPress={Keyboard.dismiss} accessible={false}>
+          <View style={styles.modalContainer}>
+            <View style={styles.modalContent}>
+              <Text style={styles.modalTitle}>Confirme seu lance!</Text>
+              <Text style={styles.modalOferta}>
+                Sua oferta: {formatCurrency(novoLance)}
+              </Text>
+              <Text style={styles.modalSubTitle}>{tituloProduto}</Text>
+              <Text style={styles.modalResponsavel}>By {responsavel}</Text>
+              <Text>Código do Leilão</Text>
+              <Text style={styles.modalTotal}>
+                Total: {formatCurrency(novoLance)}
+              </Text>
+              <Text style={styles.modalText}>
+                Ao clicar em enviar, você confirma que comprará esse item e não poderá mais cancelar.
+              </Text>
+              <View style={styles.modalButtonContainer}>
+                <TouchableOpacity
+                  style={[styles.modalButton, styles.sendButton]}
+                  onPress={() => {
+                    closeModal();
+                    // Adicione a lógica para enviar o lance aqui
+                    Alert.alert(
+                      "Lance Enviado",
+                      `Seu lance de ${formatCurrency(
+                        novoLance
+                      )} foi enviado com sucesso!`
+                    );
+                    setSeuLance(novoLance);
+                  }}
+                >
+                  <Text style={styles.modalButtonText}>Enviar</Text>
+                </TouchableOpacity>
+                <TouchableOpacity
+                  style={[styles.modalButton, styles.buttonCancelar]}
+                  onPress={closeModal}
+                >
+                  <Text style={styles.buttonCancelarText}>Cancelar</Text>
+                </TouchableOpacity>
+              </View>
+            </View>
+          </View>
+        </TouchableWithoutFeedback>
+      </Modal>
     </ScrollView>
   );
 };
@@ -319,6 +384,92 @@ const styles = StyleSheet.create({
     color: "#fff",
     fontSize: 16,
     fontWeight: "bold",
+  },
+  modalContainer: {
+    flex: 1,
+    justifyContent: "center",
+    alignItems: "center",
+    backgroundColor: "rgba(0, 0, 0, 0.5)",
+  },
+  modalContent: {
+    backgroundColor: "#fff",
+    borderRadius: 10,
+    padding: 20,
+    width: "80%",
+  },
+  modalTitle: {
+    fontSize: 20,
+    fontWeight: "bold",
+    marginBottom: 20,
+    marginTop: 20,
+    textAlign: "center",
+  },
+  modalSubTitle: {
+    fontWeight: "bold",
+    fontSize: 17,
+  },
+  modalResponsavel: {
+    fontSize: 12,
+    marginBottom: 20,
+    alignSelf: "flex-start",
+  },
+  modalText: {
+    fontSize: 12,
+    marginBottom: 5,
+    backgroundColor: "#f0f1ff",
+    padding: 3,
+    lineHeight: 25,
+  },
+  modalOferta: {
+    fontSize: 16,
+    marginBottom: 5,
+  },
+  modalTotal: {
+    fontSize: 16,
+    fontWeight: "bold",
+    marginTop: 40,
+    marginBottom: 20,
+  },
+  modalButtonContainer: {
+    flexDirection: "colum",
+    marginTop: 20,
+  },
+  modalButton: {
+    padding: 10,
+    borderRadius: 5,
+    marginBottom: 5,
+    width: "100%",
+    alignItems: "center",
+  },
+  modalButtonText: {
+    color: "#fff",
+    fontSize: 16,
+    padding: 5,
+    fontWeight: "bold",
+  },
+  sendButton: {
+    backgroundColor: "#666cff",
+    shadowColor: "#000",
+    shadowOffset: {
+      width: 0,
+      height: 2,
+    },
+    shadowOpacity: 0.25,
+    shadowRadius: 3.84,
+    elevation: 5,
+  },
+  buttonCancelar: {
+    borderWidth: 1,
+    borderColor: "black",
+    padding: 12,
+    borderRadius: 0,
+    marginBottom: 20,
+    marginTop: 5,
+  },
+  buttonCancelarText: {
+    color: "black",
+    fontSize: 16,
+    textAlign: "center",
   },
 });
 
