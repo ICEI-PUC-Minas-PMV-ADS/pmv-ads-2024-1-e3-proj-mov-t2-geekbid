@@ -256,6 +256,7 @@ const EnviarLance = ({ navigation }) => {
           style={[styles.modalButton, styles.sendButton]}
           onPress={() => {
             closeLanceEnviadoModal();
+            closeModal();
             // Adicionar lógica para acompanhar o lance aqui
           }}
         >
