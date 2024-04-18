@@ -17,6 +17,7 @@ const Lance = require('./models/lanceModel');
 const Mensagem = require('./models/mensagemModel');
 const StatusMensagem = require('./models/statusMensagemModel');
 const HistoricoMensagem = require('./models/historicoMensagemModel');
+const loginRoute = require('./routes/loginRoute');
 
 const app = express()
 
