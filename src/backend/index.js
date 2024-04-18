@@ -20,11 +20,24 @@ const HistoricoMensagem = require('./models/historicoMensagemModel');
 const loginRoute = require('./routes/loginRoute');
 
 const app = express()
+const bodyParser = require('body-parser');
+
+// Configuração do body-parser para lidar com JSON
+app.use(bodyParser.json());
 
 app.use(express.static(path.join(__dirname, 'public')));
 
 
 const usuarioRoute = require('./routes/usuarioRoute');
+
+const produtoRoute = require('./routes/produtoRoute');
+app.use('/produto', produtoRoute);
+
+const leilaoRoute = require('./routes/leilaoRoute');
+app.use('/leilao', leilaoRoute);
+
+const categoriaRoute = require('./routes/categoriaRoute');
+app.use('/categorias', categoriaRoute);
 
 // MOVER PARA AS ROUTES
 // app.get('/leilao', async (req, res) => {
@@ -54,8 +67,8 @@ Usuario.belongsToMany(Leilao, {through: Lance});
 Mensagem.belongsToMany(StatusMensagem, {through: HistoricoMensagem});
 
 sequelize
-  .sync({ force: true }) // PARA CRIAR AS TABELAS E RELAÇÕES -- APAGA OS DADOS
-  // .sync({ alter: true }) // PARA ATUALIZAR AS TABELAS E RELAÇÕES -- NÃO APAGA OS DADOS
+  //.sync({ force: true }) // PARA CRIAR AS TABELAS E RELAÇÕES -- APAGA OS DADOS
+   .sync({ alter: true }) // PARA ATUALIZAR AS TABELAS E RELAÇÕES -- NÃO APAGA OS DADOS
   // .sync() // DESABILITAR QUANTO HABILITAR A LLINHA DE CIMA
   .then(result => {
     return StatusUsuario.bulkCreate([
