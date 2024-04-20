@@ -7,10 +7,10 @@ const router = express.Router();
 router.post('/', lanceController.cadastrarLance);
 
 // Retornar todos os lances de um leilão
-router.get('/:leilaoId/lances', lanceController.buscarLances);
+router.get('/:leilaoId', lanceController.buscarLances);
 
 // Retornar os detalhes de um lance específico
-router.get('/:id', lanceController.buscarLance);
+router.get('/lance/:id', lanceController.buscarLance);
 
 // Excluir lance
 // router.delete('/lances/:id', lanceController.excluirLance);
