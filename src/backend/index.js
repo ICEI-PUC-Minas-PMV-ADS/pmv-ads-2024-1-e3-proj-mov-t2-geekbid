@@ -1,64 +1,57 @@
-const path = require("path");
+const path = require('path')
 
-const express = require('express');
+const express = require('express')
 
-const sequelize = require('./utils/database');
+const sequelize = require('./utils/database')
 
-const StatusUsuario = require('./models/statusUsuarioModel');
-const Usuario = require('./models/usuarioModel');
-const Endereco = require('./models/enderecoModel');
-const CategoriaProduto = require('./models/categoriaProdutoModel');
-const EstadoProduto = require('./models/estadoProdutoModel');
-const Produto = require('./models/produtoModel');
-const ProdutoCategoria = require('./models/produtoCategoriaModel');
-const StatusLeilao = require('./models/statusLeilaoModel');
-const Leilao = require('./models/leilaoModel');
-const Lance = require('./models/lanceModel');
-const Mensagem = require('./models/mensagemModel');
-const StatusMensagem = require('./models/statusMensagemModel');
-const HistoricoMensagem = require('./models/historicoMensagemModel');
+const StatusUsuario = require('./models/statusUsuarioModel')
+const Usuario = require('./models/usuarioModel')
+const Endereco = require('./models/enderecoModel')
+const CategoriaProduto = require('./models/categoriaProdutoModel')
+const EstadoProduto = require('./models/estadoProdutoModel')
+const Produto = require('./models/produtoModel')
+const ProdutoCategoria = require('./models/produtoCategoriaModel')
+const StatusLeilao = require('./models/statusLeilaoModel')
+const Leilao = require('./models/leilaoModel')
+const Lance = require('./models/lanceModel')
+const Mensagem = require('./models/mensagemModel')
+const StatusMensagem = require('./models/statusMensagemModel')
+const HistoricoMensagem = require('./models/historicoMensagemModel')
 
 const app = express()
-const bodyParser = require('body-parser');
 
-// Configuração do body-parser para lidar com JSON
-app.use(bodyParser.json());
+const usuarioRoute = require('./routes/usuarioRoute')
+app.use('/usuario', usuarioRoute)
 
-app.use(express.static(path.join(__dirname, 'public')));
 
-const loginRoute = require('./routes/loginRoute');
-// const usuarioRoute = require('./routes/usuarioRoute');
-const produtoRoute = require('./routes/produtoRoute');
-const leilaoRoute = require('./routes/leilaoRoute');
-const categoriaRoute = require('./routes/categoriaRoute');
-const lanceRoute = require('./routes/lanceRoute');
+const usuarioRoute = require('./routes/usuarioRoute');
 
-app.use('/login', loginRoute);
-// app.use('/usuario', usuarioRoute);
-app.use('/produto', produtoRoute);
-app.use('/leilao', leilaoRoute);
-app.use('/categorias', categoriaRoute);
-app.use('/lances', lanceRoute);
+// MOVER PARA AS ROUTES
+// app.get('/leilao', async (req, res) => {
+//   const rows = await process.postgresql.query('SELECT * FROM leilao')
+//   res.status(200).send(JSON.stringify(rows))
+// })
+
 
 // RELAÇÕES - COMENTADAS PORQUE AINDA NÃO ESTÃO FINALIZADAS
 
-StatusUsuario.hasMany(Usuario);
+StatusUsuario.hasMany(Usuario)
 
-Usuario.hasOne(Endereco);
+Usuario.hasOne(Endereco)
 
-Usuario.hasMany(Leilao);
+Usuario.hasMany(Leilao)
 
-CategoriaProduto.belongsToMany(Produto, {through: ProdutoCategoria});
+CategoriaProduto.belongsToMany(Produto, { through: ProdutoCategoria })
 
-EstadoProduto.hasMany(Produto);
+EstadoProduto.hasMany(Produto)
 
-StatusLeilao.hasMany(Leilao);
+StatusLeilao.hasMany(Leilao)
 
-Produto.hasOne(Leilao);
+Produto.hasOne(Leilao)
 
-Usuario.belongsToMany(Leilao, {through: Lance});
+Usuario.belongsToMany(Leilao, { through: Lance })
 
-Mensagem.belongsToMany(StatusMensagem, {through: HistoricoMensagem});
+Mensagem.belongsToMany(StatusMensagem, { through: HistoricoMensagem })
 
 sequelize
   .sync({ force: true }) // PARA CRIAR AS TABELAS E RELAÇÕES -- APAGA OS DADOS
@@ -66,47 +59,47 @@ sequelize
   // .sync() // DESABILITAR QUANTO HABILITAR A LLINHA DE CIMA
   .then(result => {
     return StatusUsuario.bulkCreate([
-      {descricaoStatusUsuario: "cadastrado"},
-      {descricaoStatusUsuario: "validado"}
-    ]);
+      { descricaoStatusUsuario: 'cadastrado' },
+      { descricaoStatusUsuario: 'validado' }
+    ])
   })
   .then(result => {
     return EstadoProduto.bulkCreate([
-      {descricaoEstadoProduto: "novo"},
-      {descricaoEstadoProduto: "usado"}
-    ]);
+      { descricaoEstadoProduto: 'novo' },
+      { descricaoEstadoProduto: 'usado' }
+    ])
   })
   .then(result => {
     return StatusMensagem.bulkCreate([
-      {descricaoStatusMensagem: "enviada"},
-      {descricaoStatusMensagem: "excluida"},
-      {descricaoStatusMensagem: "lida"}
-    ]);
+      { descricaoStatusMensagem: 'enviada' },
+      { descricaoStatusMensagem: 'excluida' },
+      { descricaoStatusMensagem: 'lida' }
+    ])
   })
   .then(result => {
     return StatusLeilao.bulkCreate([
-      {descricaoStatusLeilao: "cadastrado"},
-      {descricaoStatusLeilao: "publicado"},
-      {descricaoStatusLeilao: "ativo"},
-      {descricaoStatusLeilao: "encerrado"},
-      {descricaoStatusLeilao: "cancelado"}
-    ]);
+      { descricaoStatusLeilao: 'cadastrado' },
+      { descricaoStatusLeilao: 'publicado' },
+      { descricaoStatusLeilao: 'ativo' },
+      { descricaoStatusLeilao: 'encerrado' },
+      { descricaoStatusLeilao: 'cancelado' }
+    ])
   })
   .then(result => {
     return CategoriaProduto.bulkCreate([
-      {descricaoCategoriaProduto: "Quadrinhos e Mangás"},
-      {descricaoCategoriaProduto: "Colecionáveis"},
-      {descricaoCategoriaProduto: "Jogos de Tabuleiro e Card Games"},
-      {descricaoCategoriaProduto: "Jogos Eletrônicos"},
-      {descricaoCategoriaProduto: "Livros e Literatura Fantástica"},
-      {descricaoCategoriaProduto: "Filmes e Séries"},
-      {descricaoCategoriaProduto: "Tecnologia e Gadgets"},
-      {descricaoCategoriaProduto: "Roupas e Acessórios"},
-      {descricaoCategoriaProduto: "Arte e Decoração"},
-      {descricaoCategoriaProduto: "Memorabilia"},
-    ]);
+      { descricaoCategoriaProduto: 'Quadrinhos e Mangás' },
+      { descricaoCategoriaProduto: 'Colecionáveis' },
+      { descricaoCategoriaProduto: 'Jogos de Tabuleiro e Card Games' },
+      { descricaoCategoriaProduto: 'Jogos Eletrônicos' },
+      { descricaoCategoriaProduto: 'Livros e Literatura Fantástica' },
+      { descricaoCategoriaProduto: 'Filmes e Séries' },
+      { descricaoCategoriaProduto: 'Tecnologia e Gadgets' },
+      { descricaoCategoriaProduto: 'Roupas e Acessórios' },
+      { descricaoCategoriaProduto: 'Arte e Decoração' },
+      { descricaoCategoriaProduto: 'Memorabilia' }
+    ])
   })
   .then(user => {
-    app.listen(3000, () => console.log("Server is running at port 3000...."));
+    app.listen(3000, () => console.log('Server is running at port 3000....'))
   })
-  .catch(err => console.log(err));
+  .catch(err => console.log(err))
