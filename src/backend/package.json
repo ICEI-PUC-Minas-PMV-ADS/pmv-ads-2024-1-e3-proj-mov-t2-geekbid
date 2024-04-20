@@ -16,6 +16,7 @@
   "author": "",
   "license": "ISC",
   "dependencies": {
+    "bcryptjs": "^2.4.3",
     "express": "^4.17.3",
     "pg": "^8.11.5",
     "pg-hstore": "^2.3.4",

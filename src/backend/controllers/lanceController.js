@@ -31,8 +31,8 @@ const lanceController = {
                 return res.status(403).json({ message: 'Você não pode dar lances em seus leilões' });
             }
 
-            const bid = await Lance.create({ valorLance, dataLance, usuarioId, leilaoId });
-            res.status(201).json(bid);
+            const lance = await Lance.create({ valorLance, dataLance, usuarioId, leilaoId });
+            res.status(201).json(lance);
         } catch (err) {
             const errors = handleErrors(err);
             res.status(400).json({ errors });

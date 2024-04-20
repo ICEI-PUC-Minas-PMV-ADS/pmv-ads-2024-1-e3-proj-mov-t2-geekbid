@@ -3,18 +3,19 @@ const router = express.Router();
 const Leilao = require('../models/leilaoModel');
 const Produto = require('../models/produtoModel');
 const ProdutoCategoria = require('../models/produtoCategoriaModel');
+const EstadoProduto = require('../models/estadoProdutoModel');
 
 // Rota para cadastrar um novo leilão com produto e categoria
 router.post('/', async (req, res) => {
   try {
-    const { dataInicio, dataFim, precoInicial, imagem, nomeProduto, descricaoProduto, categoriaId, duracao, statusLeilaoId } = req.body;
+    const { dataInicio, dataFim, precoInicial, imagem, nomeProduto, descricaoProduto, categoriaId, estadoId, statusLeilaoId } = req.body;
 
     // Criar um novo produto
     const novoProduto = await Produto.create({
       nomeProduto,
       descricaoProduto,
       categoriaId: categoriaId, // Associar o produto à categoria criada
-      duracao,
+      estadoProduto: estadoId,
       precoInicial,
       imagem
     });
