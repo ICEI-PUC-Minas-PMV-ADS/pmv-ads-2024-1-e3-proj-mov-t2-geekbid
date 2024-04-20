@@ -17,7 +17,6 @@ const Lance = require('./models/lanceModel');
 const Mensagem = require('./models/mensagemModel');
 const StatusMensagem = require('./models/statusMensagemModel');
 const HistoricoMensagem = require('./models/historicoMensagemModel');
-const loginRoute = require('./routes/loginRoute');
 
 const app = express()
 const bodyParser = require('body-parser');
@@ -27,24 +26,15 @@ app.use(bodyParser.json());
 
 app.use(express.static(path.join(__dirname, 'public')));
 
-
+const loginRoute = require('./routes/loginRoute');
 const usuarioRoute = require('./routes/usuarioRoute');
-
 const produtoRoute = require('./routes/produtoRoute');
-app.use('/produto', produtoRoute);
-
 const leilaoRoute = require('./routes/leilaoRoute');
-app.use('/leilao', leilaoRoute);
-
 const categoriaRoute = require('./routes/categoriaRoute');
+
+app.use('/produto', produtoRoute);
+app.use('/leilao', leilaoRoute);
 app.use('/categorias', categoriaRoute);
-
-// MOVER PARA AS ROUTES
-// app.get('/leilao', async (req, res) => {
-//   const rows = await process.postgresql.query('SELECT * FROM leilao')
-//   res.status(200).send(JSON.stringify(rows))
-// })
-
 
 // RELAÇÕES - COMENTADAS PORQUE AINDA NÃO ESTÃO FINALIZADAS
 
