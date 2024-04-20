@@ -8,12 +8,16 @@ const cadastroTesteController = new CadastroTesteController()
 usuarioRoute.post('/', cadastroTesteController.create)
 
 // Rota para atualizar um usuário
+usuarioRoute.put('/:id', cadastroTesteController.update)
 
-usuarioRoute.post('/', async (req, res) => {
+usuarioRoute.delete('/:id', cadastroTesteController.delete)
+
+/*usuarioRoute.post('/', async (req, res) => {
   const { nome, dataNascimento } = req.body
   const usuarioId = req.usuario.id // Supondo que o ID do usuário esteja disponível na sessão
+*/
 
-  try {
+/*try {
     // Atualiza as informações adicionais do usuário no banco de dados
     const usuario = await Usuario.findByPk(usuarioId)
     if (!usuario) {
@@ -29,6 +33,6 @@ usuarioRoute.post('/', async (req, res) => {
     console.error('Erro ao cadastrar informações adicionais:', error.message)
     res.status(error.status || 500).json({ error: error.message })
   }
-})
+})*/
 
 module.exports = usuarioRoute

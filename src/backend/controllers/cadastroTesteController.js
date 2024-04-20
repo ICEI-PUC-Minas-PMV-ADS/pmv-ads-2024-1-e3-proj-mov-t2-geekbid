@@ -31,44 +31,43 @@ class CadastroTesteController {
     }
   }
 
-  async update(request, response) {
-    const { nome, email, senha, senha_antiga } = request.body
-    const usuario_id = request.usuario.id
-
+  async update(req, res) {
     try {
-      const usuario = await User.findByPk(usuario_id)
+      const { id } = req.params
+      const { nome, email, senha } = req.body
 
-      if (!usuario) {
-        throw new AppError('Usuário não encontrado.')
+      const [updatedRowsCount, [updateUsuario]] = await Usuario.update(
+        { nome, email, senha },
+        { where: { id }, returning: true }
+      )
+
+      if (updatedRowsCount === 0) {
+        return res.status(404).json({ error: 'Usuário não encontrado' })
       }
 
-      if (email !== usuario.email) {
-        const checkIfEmailExists = await User.findOne({ where: { email } })
-        if (checkIfEmailExists) {
-          throw new AppError('Este email já está em uso.')
-        }
-      }
-
-      usuario.nome = nome ?? usuario.nome
-      usuario.email = email ?? usuario.email
-      usuario.senha = senha ?? usuario.senha
-
-      if (senha && senha_antiga) {
-        const checarSenha = await compare(senha_antiga, usuario.senha)
-        if (!checarSenha) {
-          throw new AppError('A senha antiga está inválida.')
-        }
-        usuario.senha = await hash(senha, 8)
-      }
-
-      await usuario.save()
-
-      return response.json(usuario)
+      res.json(updateUsuario)
     } catch (error) {
-      console.error('Erro ao atualizar usuário:', error.message)
-      return response.status(500).json({ error: 'Erro do servidor' })
+      console.error('Erro ao atualizar cadastro de usuário:', error.message)
+      res.status(500).json({ error: 'Erro do servidor' })
     }
   }
+
+  async delete(req, res) {
+    try {
+        const { id } = req.params;
+
+        const deletedRowsCount = await Usuario.destroy({ where: { id } });
+
+        if (deletedRowsCount === 0) {
+            return res.status(404).json({ error: 'Usuário não encontrado' });
+        }
+
+        res.json({ message: 'Usuário excluído com sucesso' });
+    } catch (error) {
+        console.error('Erro ao excluir cadastro de usuário:', error.message);
+        res.status(500).json({ error: 'Erro do servidor' });
+    }
+}
 }
 
 module.exports = CadastroTesteController
