@@ -17,7 +17,6 @@ const Lance = require('./models/lanceModel');
 const Mensagem = require('./models/mensagemModel');
 const StatusMensagem = require('./models/statusMensagemModel');
 const HistoricoMensagem = require('./models/historicoMensagemModel');
-const loginRoute = require('./routes/loginRoute');
 
 const app = express()
 const bodyParser = require('body-parser');
@@ -27,24 +26,19 @@ app.use(bodyParser.json());
 
 app.use(express.static(path.join(__dirname, 'public')));
 
-
-const usuarioRoute = require('./routes/usuarioRoute');
-
+const loginRoute = require('./routes/loginRoute');
+// const usuarioRoute = require('./routes/usuarioRoute');
 const produtoRoute = require('./routes/produtoRoute');
-app.use('/produto', produtoRoute);
-
 const leilaoRoute = require('./routes/leilaoRoute');
-app.use('/leilao', leilaoRoute);
-
 const categoriaRoute = require('./routes/categoriaRoute');
+const lanceRoute = require('./routes/lanceRoute');
+
+app.use('/login', loginRoute);
+// app.use('/usuario', usuarioRoute);
+app.use('/produto', produtoRoute);
+app.use('/leilao', leilaoRoute);
 app.use('/categorias', categoriaRoute);
-
-// MOVER PARA AS ROUTES
-// app.get('/leilao', async (req, res) => {
-//   const rows = await process.postgresql.query('SELECT * FROM leilao')
-//   res.status(200).send(JSON.stringify(rows))
-// })
-
+app.use('/lances', lanceRoute);
 
 // RELAÇÕES - COMENTADAS PORQUE AINDA NÃO ESTÃO FINALIZADAS
 
@@ -67,8 +61,8 @@ Usuario.belongsToMany(Leilao, {through: Lance});
 Mensagem.belongsToMany(StatusMensagem, {through: HistoricoMensagem});
 
 sequelize
-  //.sync({ force: true }) // PARA CRIAR AS TABELAS E RELAÇÕES -- APAGA OS DADOS
-   .sync({ alter: true }) // PARA ATUALIZAR AS TABELAS E RELAÇÕES -- NÃO APAGA OS DADOS
+  .sync({ force: true }) // PARA CRIAR AS TABELAS E RELAÇÕES -- APAGA OS DADOS
+  //  .sync({ alter: true }) // PARA ATUALIZAR AS TABELAS E RELAÇÕES -- NÃO APAGA OS DADOS
   // .sync() // DESABILITAR QUANTO HABILITAR A LLINHA DE CIMA
   .then(result => {
     return StatusUsuario.bulkCreate([
