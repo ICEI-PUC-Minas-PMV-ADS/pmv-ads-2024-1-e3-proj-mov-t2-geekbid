@@ -50,6 +50,29 @@ Assim que a primeira versão do sistema estiver disponível, deverá complementa
 
 <li><a href="src/README.md"> Código Fonte</a></li>
 
+
+ # Requisitos do Sistema
+
+Repositório: GitHub
+
+Desenvolvimento: JavaScript, React, React Native.
+
+IDE: Visual Studio Code, Expo.
+
+Backend: Node.js.
+
+Banco de dados: PostgreSQL.
+
+Hospedagem: Azure.
+
+Prototipagem: Figma.
+
+Comunicação: Whatsapp, Discord e Teams.
+
+Gestão de Projeto: Github Projects.
+
+Diagramas: Lucidchart.
+
 # Apresentação
 
 <li><a href="presentation/README.md"> Apresentação da solução</a></li>
