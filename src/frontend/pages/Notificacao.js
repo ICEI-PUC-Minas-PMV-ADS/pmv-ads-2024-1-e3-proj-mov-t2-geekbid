@@ -1,8 +1,9 @@
 import React from 'react';
 import { View, Text, StyleSheet, Image } from 'react-native';
+import { TextInput, Headline, Button } from 'react-native-paper';
 
 const NotificacaoItem = ({ titulo, subtitulo, imagem }) => {
-  return (
+  return (    
     <View style={styles.notificacaoContainer}>
       <View style={styles.imageContainer}>
         <Image source={{ uri: imagem }} style={styles.image} />
@@ -44,9 +45,13 @@ const Notificacoes = () => {
   ];
 
   return (
+    
     <View style={styles.container}>
+      <View style={styles.head}>
+      <Headline style={styles.textHeader}>Notificações</Headline>
+      </View>
       <View style={styles.section}>
-        <Text style={styles.sectionTitle}>Ontem</Text>
+        <Text style={styles.sectionTitle}>Hoje</Text>
         {notificacoes.slice(0, 3).map((notificacao) => (
           <NotificacaoItem
             key={notificacao.id}
@@ -57,7 +62,7 @@ const Notificacoes = () => {
         ))}
       </View>
       <View style={styles.section}>
-        <Text style={styles.sectionTitle}>Hoje</Text>
+        <Text style={styles.sectionTitle}>Ontem</Text>
         {notificacoes.slice(3, 6).map((notificacao) => (
           <NotificacaoItem
             key={notificacao.id}
@@ -89,7 +94,7 @@ const styles = StyleSheet.create({
     flexDirection: 'row',
     alignItems: 'center',
     marginBottom: 10,
-    marginTop:40,
+    marginTop:10,
     borderWidth: 1,
     borderColor: '#ccc',
     borderRadius: 5,
@@ -112,6 +117,12 @@ const styles = StyleSheet.create({
   },
   subtitulo: {
     fontSize: 14,
+  },
+  textHeader: {
+    textAlign: 'center',
+    fontSize: 25,
+    marginTop: 30,
+    marginBottom: 30
   },
 });
 
