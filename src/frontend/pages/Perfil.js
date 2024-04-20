@@ -75,7 +75,7 @@ const Perfil = () => {
             />
           </View>
         </TouchableOpacity>
-        <TouchableOpacity onPress={handleNovoLeilaoPress} style={styles.sair}>
+        <TouchableOpacity onPress={console.log("Logout")} style={styles.sair}>
           <View style={styles.linkContent}>
             <Icon name="sign-out" size={20} color="#666CFF" style={styles.icon} />
             <Text style={styles.linkText}>Sair</Text>
