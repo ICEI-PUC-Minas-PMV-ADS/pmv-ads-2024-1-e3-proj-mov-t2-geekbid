@@ -8,6 +8,7 @@ import Input from '../components/Input';
 
 import { useNavigation } from '@react-navigation/native';
 import { register } from '../services/auth.services';
+import { DEFAULT_ICON_SIZE } from '@expo/vector-icons/build/createIconSet';
 
 const Register = () => {
   const navigation = useNavigation();
@@ -44,7 +45,7 @@ const Register = () => {
     <Container>
       <View style={styles.voltar}>
         <Button
-          icon="keyboard-backspace"
+          icon="chevron-left"
           onPress={() => navigation.goBack()}></Button>
       </View>
       <Headline style={styles.textHeader}>Cadastre-se e comece!</Headline>
@@ -77,7 +78,7 @@ const Register = () => {
           secureTextEntry
         />
         <Input
-          label="Senha"
+          label="Confirme sua senha"
           value={confirmPassword}
           mode="outlined"
           onChangeText={(text) => setConfirmPassword(text)}
@@ -94,14 +95,22 @@ const Register = () => {
 const styles = StyleSheet.create({
   button: {
     marginBottom: 8,
+    height: 60,
+    justifyContent: 'center',
+    marginTop: 15
   },
   textHeader: {
     textAlign: 'center',
+    marginBottom: 30,
+    fontSize: 25
+
   },
   voltar: {
-    marginLeft: 16,
-    color: 'red',
-    marginTop: 100,
+    marginRight: 350,
+    marginLeft: 10,
+    marginBottom: 20,
+    marginTop: 80,
+    height: 60,
   },
 });
 

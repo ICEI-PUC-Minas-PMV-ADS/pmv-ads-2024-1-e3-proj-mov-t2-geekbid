@@ -29,8 +29,8 @@ const Perfil = () => {
           onPress={handleMinhasInformacoesPress}
           style={styles.link}>
           <View style={styles.linkContent}>
-            <Icon name="user" size={20} color="#666" style={styles.icon} />
-            <Text style={styles.linkText}>Minhas Informações</Text>
+            <Icon name="user" size={20} color="#666CFF" style={styles.icon} />
+            <Text style={styles.linkText}> Minhas Informações</Text>
             <Icon
               name="angle-right"
               size={20}
@@ -41,7 +41,7 @@ const Perfil = () => {
         </TouchableOpacity>
         <TouchableOpacity onPress={handleMeusLeiloesPress} style={styles.link}>
           <View style={styles.linkContent}>
-            <Icon name="user" size={20} color="#666" style={styles.icon} />
+            <Icon name="image" size={20} color="#666CFF" style={styles.icon} />
             <Text style={styles.linkText}>Meus Leilões</Text>
             <Icon
               name="angle-right"
@@ -53,7 +53,7 @@ const Perfil = () => {
         </TouchableOpacity>
         <TouchableOpacity onPress={handleMeusLancesPress} style={styles.link}>
           <View style={styles.linkContent}>
-            <Icon name="user" size={20} color="#666" style={styles.icon} />
+            <Icon name="image" size={20} color="#666CFF" style={styles.icon} />
             <Text style={styles.linkText}>Meus Lances</Text>
             <Icon
               name="angle-right"
@@ -65,14 +65,20 @@ const Perfil = () => {
         </TouchableOpacity>
         <TouchableOpacity onPress={handleNovoLeilaoPress} style={styles.link}>
           <View style={styles.linkContent}>
-            <Icon name="user" size={20} color="#666" style={styles.icon} />
-            <Text style={styles.linkText}>Novo Leilão</Text>
+            <Icon name="plus" size={20} color="#666CFF" style={styles.icon} />
+            <Text style={styles.linkText}> Novo Leilão</Text>
             <Icon
               name="angle-right"
               size={20}
               color="#666"
               style={styles.icon}
             />
+          </View>
+        </TouchableOpacity>
+        <TouchableOpacity onPress={handleNovoLeilaoPress} style={styles.sair}>
+          <View style={styles.linkContent}>
+            <Icon name="sign-out" size={20} color="#666CFF" style={styles.icon} />
+            <Text style={styles.linkText}>Sair</Text>
           </View>
         </TouchableOpacity>
       </View>
@@ -83,25 +89,33 @@ const Perfil = () => {
 const styles = StyleSheet.create({
   sceneContainer: {
     flex: 1,
+    marginTop: 40
   },
   link: {
     marginBottom: 20,
+  },
+  sair: {
+    marginBottom: 20,
+    marginTop: 40
   },
   linkContent: {
     flexDirection: 'row',
     alignItems: 'center',
     justifyContent: 'space-between',
-    borderBottomWidth: 1,
+    borderBottomWidth: 0,
     borderBottomColor: '#ccc',
     paddingVertical: 10,
+    marginBottom: 20
   },
   linkText: {
     fontSize: 16,
     color: '#333',
     marginLeft: 10,
+    flex: 1, flexDirection: 'row'
   },
   icon: {
-    marginRight: 10,
+    marginRight: 20,
+    marginLeft: 20,
   },
 });
 

@@ -1,13 +1,10 @@
 import React, { useState } from 'react';
 import { Button, Headline } from 'react-native-paper';
 import { StyleSheet, View } from 'react-native';
-
 import Container from '../components/Container';
 import Body from '../components/Body';
 import Input from '../components/Input';
 import { login } from '../services/auth.services';
-
-
 import { useNavigation } from '@react-navigation/native';
 
 const Login = () => {
@@ -34,7 +31,7 @@ const Login = () => {
     <Container>
       <View style={styles.voltar}>
         <Button
-          icon="keyboard-backspace"
+          icon="chevron-left"
           onPress={() => navigation.goBack()}></Button>
       </View>
       <Headline style={styles.textHeader}>
@@ -65,14 +62,21 @@ const Login = () => {
 const styles = StyleSheet.create({
   button: {
     marginBottom: 8,
+    height: 60,
+    justifyContent: 'center',
+    marginTop: 15
   },
   textHeader: {
     textAlign: 'center',
+    marginBottom: 30,
+    fontSize: 25
   },
   voltar: {
-    marginLeft: 16,
-    color: 'red',
-    marginTop: 100,
+    marginRight: 350,
+    marginLeft: 10,
+    marginBottom: 50,
+    marginTop: 80,
+    height: 60,
   },
 });
 
