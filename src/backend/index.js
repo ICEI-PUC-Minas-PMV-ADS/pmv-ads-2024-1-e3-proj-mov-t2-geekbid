@@ -19,22 +19,19 @@ const StatusMensagem = require('./models/statusMensagemModel')
 const HistoricoMensagem = require('./models/historicoMensagemModel')
 
 const app = express()
-app.use(express.json())
 
 const usuarioRoute = require('./routes/usuarioRoute')
 app.use('/usuario', usuarioRoute)
 
-app.get('/cadastro-informacoes-adicionais', (req, res) => {
-  res.render('cadastro-informacoes-adicionais') // Renderize a página com o formulário de cadastro de informações adicionais
-})
 
-const { request } = require('http')
+const usuarioRoute = require('./routes/usuarioRoute');
 
 // MOVER PARA AS ROUTES
 // app.get('/leilao', async (req, res) => {
 //   const rows = await process.postgresql.query('SELECT * FROM leilao')
 //   res.status(200).send(JSON.stringify(rows))
 // })
+
 
 // RELAÇÕES - COMENTADAS PORQUE AINDA NÃO ESTÃO FINALIZADAS
 
@@ -58,7 +55,7 @@ Mensagem.belongsToMany(StatusMensagem, { through: HistoricoMensagem })
 
 sequelize
   .sync({ force: true }) // PARA CRIAR AS TABELAS E RELAÇÕES -- APAGA OS DADOS
-  // .sync({ alter: true }) // PARA ATUALIZAR AS TABELAS E RELAÇÕES -- NÃO APAGA OS DADOS
+  //  .sync({ alter: true }) // PARA ATUALIZAR AS TABELAS E RELAÇÕES -- NÃO APAGA OS DADOS
   // .sync() // DESABILITAR QUANTO HABILITAR A LLINHA DE CIMA
   .then(result => {
     return StatusUsuario.bulkCreate([

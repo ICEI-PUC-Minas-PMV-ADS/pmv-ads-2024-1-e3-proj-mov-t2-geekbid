@@ -71,6 +71,8 @@ const styles = StyleSheet.create({
     borderRadius: 10,
     padding: 10,
     marginHorizontal: 5,
+    marginLeft: 15,
+    marginRight: 15
   },
   image: {
     width: '100%',
@@ -109,7 +111,8 @@ const styles = StyleSheet.create({
     textAlign: 'right',
     paddingTop: 15,
     paddingBottom: 15,
-  },
+    fontWeight: 'bold'
+  },  
 });
 
 export default Lance;

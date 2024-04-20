@@ -36,12 +36,15 @@ const styles = StyleSheet.create({
     textAlign: 'left',
     marginTop: 60,
     paddingLeft: 10,
+    marginLeft: 15
+    
   },
   subtitle: {
     fontSize: 18,
     textAlign: 'left',
     marginBottom: 4,
     paddingLeft: 10,
+    marginLeft: 15
   },
   searchContainer: {
     flexDirection: 'row',
