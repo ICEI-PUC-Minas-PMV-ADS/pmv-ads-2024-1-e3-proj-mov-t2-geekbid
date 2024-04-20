@@ -22,7 +22,7 @@ const app = express()
 app.use(express.json())
 
 const usuarioRoute = require('./routes/usuarioRoute')
-app.use("/usuario", usuarioRoute)
+app.use('/usuario', usuarioRoute)
 
 app.get('/cadastro-informacoes-adicionais', (req, res) => {
   res.render('cadastro-informacoes-adicionais') // Renderize a página com o formulário de cadastro de informações adicionais

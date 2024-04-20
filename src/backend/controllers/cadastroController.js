@@ -1,61 +1,73 @@
-const express = require('express')
-const router = express.Router()
+const app = require('express')
+const router = app.Router()
 const Usuario = require('../models/usuarioModel')
 const AppError = require('../utils/AppError')
+const transporter = require('./emailController')
 
 class CadastroController {
   async create(request, response) {
-    const { email, senha } = request.body
-
-  
+    const { nome, email, senha } = request.body
 
     try {
-      const novoUsuario = await Usuario.create({ email, senha })
-      return response.status(201).json(novoUsuario)
+      // Verifica se o email já está em uso
+      const usuarioExistente = await Usuario.findOne({ where: { email } })
+      if (usuarioExistente) {
+        throw new AppError('Este email já está em uso.', 400)
+      }
+
+      // Cria o usuário
+      const novoUsuario = await Usuario.create({ nome, email, senha })
+
+      // Envia e-mail de validação de cadastro
+      if (novoUsuario) {
+        transporter(email)
+      }
+
+      // Redireciona o usuário para a página de cadastro de informações adicionais
+      return response.status(201).json({ redirectUrl: '/usuario' })
     } catch (error) {
       console.error('Erro ao criar usuário:', error.message)
-      return response.status(500).json({ error: 'Erro do servidor' })
+      return response.status(error.status || 500).json({ error: error.message })
     }
   }
 
-  async update(request, response) {
-    const {nome, email, senha, senha_antiga } = request.body
-    const usuario_id = request.usuario.id
-
+  async update(req, res) {
     try {
-      const usuario = await User.findByPk(usuario_id)
+      const { id } = req.params
+      const { nome, email, senha } = req.body
 
-      if (!usuario) {
-        throw new AppError('Usuário não encontrado.')
+      const [updatedRowsCount, [updateUsuario]] = await Usuario.update(
+        { nome, email, senha },
+        { where: { id }, returning: true }
+      )
+
+      if (updatedRowsCount === 0) {
+        return res.status(404).json({ error: 'Usuário não encontrado' })
       }
 
-      if (email !== usuario.email) {
-        const checkIfEmailExists = await User.findOne({ where: { email } })
-        if (checkIfEmailExists) {
-          throw new AppError('Este email já está em uso.')
-        }
-      }
-
-      usuario.nome = nome ?? usuario.nome
-      usuario.email = email ?? usuario.email
-      usuario.senha = senha ?? usuario.senha
-
-      if (senha && senha_antiga) {
-        const checarSenha = await compare(senha_antiga, usuario.senha)
-        if (!checarSenha) {
-          throw new AppError('A senha antiga está inválida.')
-        }
-        usuario.senha = await hash(senha, 8)
-      }
-
-      await usuario.save()
-
-      return response.json(usuario)
+      res.json(updateUsuario)
     } catch (error) {
-      console.error('Erro ao atualizar usuário:', error.message)
-      return response.status(500).json({ error: 'Erro do servidor' })
+      console.error('Erro ao atualizar cadastro de usuário:', error.message)
+      res.status(500).json({ error: 'Erro do servidor' })
     }
   }
+
+  async delete(req, res) {
+    try {
+        const { id } = req.params;
+
+        const deletedRowsCount = await Usuario.destroy({ where: { id } });
+
+        if (deletedRowsCount === 0) {
+            return res.status(404).json({ error: 'Usuário não encontrado' });
+        }
+
+        res.json({ message: 'Usuário excluído com sucesso' });
+    } catch (error) {
+        console.error('Erro ao excluir cadastro de usuário:', error.message);
+        res.status(500).json({ error: 'Erro do servidor' });
+    }
+}
 }
 
 module.exports = CadastroController
