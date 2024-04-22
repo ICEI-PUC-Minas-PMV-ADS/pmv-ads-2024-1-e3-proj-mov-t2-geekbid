@@ -14,7 +14,7 @@ const ProdutoCategoria = require('./models/produtoCategoriaModel')
 const StatusLeilao = require('./models/statusLeilaoModel')
 const Leilao = require('./models/leilaoModel')
 const Lance = require('./models/lanceModel')
-const Mensagem = require('./models/mensagemModel')
+const Mensagem = require('./modelsa/mensagemModel')
 const StatusMensagem = require('./models/statusMensagemModel')
 const HistoricoMensagem = require('./models/historicoMensagemModel')
 
@@ -23,8 +23,6 @@ const app = express()
 const usuarioRoute = require('./routes/usuarioRoute')
 app.use('/usuario', usuarioRoute)
 
-
-const usuarioRoute = require('./routes/usuarioRoute');
 
 // MOVER PARA AS ROUTES
 // app.get('/leilao', async (req, res) => {

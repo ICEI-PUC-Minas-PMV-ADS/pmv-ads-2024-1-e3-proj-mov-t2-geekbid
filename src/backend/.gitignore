@@ -1,0 +1,53 @@
+# Ignore node_modules directory
+node_modules/
+
+# Ignore arquivos de configuração específicos para o ambiente de desenvolvimento
+.env
+
+# Ignore arquivos de log
+logs/
+
+# Ignore arquivos de backup
+*.bak
+
+# Ignore arquivos de cache
+.cache/
+
+# Ignore arquivos de saída compilados ou gerados
+dist/
+build/
+
+# Ignore arquivos de dependências instaladas
+package-lock.json
+yarn.lock
+
+# Ignore arquivos de backup do editor
+.vscode/
+.idea/
+*.sublime-*
+
+# Ignore arquivos de registro
+*.log
+
+# Ignore arquivos de dados de banco de dados
+*.sqlite
+*.db
+
+# Ignore arquivos de saída do ESLint
+.eslintcache
+
+# Ignore arquivos de saída do TypeScript
+*.js
+*.js.map
+
+# Ignore arquivos de saída do Babel
+*.js
+*.js.map
+
+# Ignore arquivos de saída do TypeScript
+*.ts
+*.ts.map
+
+# Ignore arquivos de saída do Babel
+*.ts
+*.ts.map
