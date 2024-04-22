@@ -14,7 +14,7 @@ const ProdutoCategoria = require('./models/produtoCategoriaModel')
 const StatusLeilao = require('./models/statusLeilaoModel')
 const Leilao = require('./models/leilaoModel')
 const Lance = require('./models/lanceModel')
-const Mensagem = require('./modelsa/mensagemModel')
+const Mensagem = require('./models/mensagemModel')
 const StatusMensagem = require('./models/statusMensagemModel')
 const HistoricoMensagem = require('./models/historicoMensagemModel')
 
