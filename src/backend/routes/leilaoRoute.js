@@ -3,7 +3,6 @@ const router = express.Router();
 const Leilao = require('../models/leilaoModel');
 const Produto = require('../models/produtoModel');
 const ProdutoCategoria = require('../models/produtoCategoriaModel');
-const EstadoProduto = require('../models/estadoProdutoModel');
 
 // Rota para cadastrar um novo leilão com produto e categoria
 router.post('/', async (req, res) => {
