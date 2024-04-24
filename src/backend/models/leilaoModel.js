@@ -19,6 +19,16 @@ const Leilao = sequelize.define("leilao", {
     },
     precoAtual: {
         type: DataTypes.DOUBLE,
+        allowNull: false
+    },
+    statusLeilao: {
+        type: DataTypes.ENUM(
+            'cadastrado',
+            'publicado',
+            'ativo',
+            'encerrado',
+            'cancelado'),
+        defaultValue: 'cadastrado'
     }
 },
 {

@@ -22,9 +22,12 @@ const Usuario = sequelize.define(
       type: DataTypes.STRING,
       allowNull: false
     },
-
     dataNascimento: {
       type: DataTypes.DATEONLY
+    },
+    statusUsuario: {
+      type: DataTypes.ENUM("cadastrado", "validado"),
+      defaultValue: "cadastrado"
     }
   },
   {

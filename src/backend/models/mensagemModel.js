@@ -16,6 +16,10 @@ const Mensagem = sequelize.define("mensagem", {
     descricaoMensagem: {
         type: DataTypes.STRING,
         allowNull: false
+    },
+    statusMensagem: {
+        type: DataTypes.ENUM("enviada", "excluída", "lida"),
+        defaultValue: "enviada"
     }
 },
 {

@@ -1,6 +1,5 @@
 const Lance = require('../models/lanceModel');
 const Leilao = require('../models/leilaoModel');
-const Usuario = require('../models/usuarioModel');
 
 // Função para controlar erros
 const handleErrors = (err) => {
@@ -21,8 +20,7 @@ const lanceController = {
     // Dar lance em um leilão
     async cadastrarLance(req, res) {
         try {
-            const { usuarioId } = req.params;
-            const { leilaoId, valorLance } = req.body;
+            const { usuarioId, leilaoId, valorLance } = req.body;
             const dataLance = new Date();
 
             // Checar se o usuário dando lance é o mesmo que criou o leilão

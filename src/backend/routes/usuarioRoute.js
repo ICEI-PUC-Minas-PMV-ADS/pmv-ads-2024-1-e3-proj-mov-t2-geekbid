@@ -1,18 +1,18 @@
-const express = require('express')
-const usuarioRoute = express.Router()
-const CadastroController = require('../controllers/cadastroController')
-
-const cadastroController = new CadastroController()
+const express = require('express');
+const router = express.Router();
+const usuarioController = require('../controllers/usuarioController');
 
 // Rota para criar um usuário
-usuarioRoute.post('/', cadastroController.create)
+router.post('/', usuarioController.cadastrarUsuario);
 
 // Rota para atualizar um usuário
-usuarioRoute.put('/:id', cadastroController.update)
+router.put('/:id', usuarioController.atualizarUsuario);
 
 // Rota para deletar um usuário
-usuarioRoute.delete('/:id', cadastroController.delete)
+router.delete('/:id', usuarioController.excluirUsuario);
+
+// Rota para consultar um usuário
+router.get('/:id', usuarioController.buscarUsuario);
 
 
-
-module.exports = usuarioRoute
+module.exports = router;
