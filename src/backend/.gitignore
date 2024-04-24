@@ -37,11 +37,9 @@ yarn.lock
 .eslintcache
 
 # Ignore arquivos de saída do TypeScript
-*.js
 *.js.map
 
 # Ignore arquivos de saída do Babel
-*.js
 *.js.map
 
 # Ignore arquivos de saída do TypeScript
