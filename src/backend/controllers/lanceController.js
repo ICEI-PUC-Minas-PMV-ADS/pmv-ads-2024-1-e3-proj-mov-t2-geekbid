@@ -1,6 +1,5 @@
 const Lance = require('../models/lanceModel');
 const Leilao = require('../models/leilaoModel');
-const Usuario = require('../models/usuarioModel');
 
 // Função para controlar erros
 const handleErrors = (err) => {

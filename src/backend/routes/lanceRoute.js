@@ -10,7 +10,7 @@ router.post('/', lanceController.cadastrarLance);
 router.get('/:leilaoId', lanceController.buscarLances);
 
 // Retornar os detalhes de um lance específico
-router.get('/lance/:id', lanceController.buscarLance);
+router.get('/:id', lanceController.buscarLance);
 
 // Excluir lance
 // router.delete('/lances/:id', lanceController.excluirLance);

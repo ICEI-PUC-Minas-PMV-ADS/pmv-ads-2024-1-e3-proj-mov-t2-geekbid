@@ -26,14 +26,14 @@ app.use((req, res, next) => {
 });
 
 const loginRoute = require('./routes/loginRoute');
-// const usuarioRoute = require('./routes/usuarioRoute');
+const usuarioRoute = require('./routes/usuarioRoute');
 const produtoRoute = require('./routes/produtoRoute');
 const leilaoRoute = require('./routes/leilaoRoute');
 const categoriaRoute = require('./routes/categoriaRoute');
 const lanceRoute = require('./routes/lanceRoute');
 
 app.use('/login', loginRoute);
-// app.use('/usuario', usuarioRoute);
+app.use('/usuario', usuarioRoute);
 app.use('/produto', produtoRoute);
 app.use('/leilao', leilaoRoute);
 app.use('/categorias', categoriaRoute);
