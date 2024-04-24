@@ -9,7 +9,7 @@ const leilaoController = {
     async cadastrarLeilao (req, res) {
         
         try {
-            const { dataInicio, dataFim, precoInicial, imagem, nomeProduto, descricaoProduto, categoriaId, estadoProduto, statusLeilao } = req.body;
+            const { dataInicio, dataFim, precoInicial, precoAtual, urlImagemProduto, nomeProduto, descricaoProduto, categoriaId, estadoProduto, statusLeilao } = req.body;
             // Criar um novo produto
             const novoProduto = await Produto.create({
                 nomeProduto,
@@ -17,17 +17,20 @@ const leilaoController = {
                 categoriaId: categoriaId, // Associar o produto à categoria criada
                 estadoProduto,
                 precoInicial,
-                imagem
+                urlImagemProduto
             });
       
             await ProdutoCategoria.create({ categoriaProdutoId: categoriaId, produtoId: novoProduto.id  });
         
             // Criar um novo leilão associado ao produto
+            const { usuarioId } = req.body;
             const novoLeilao = await Leilao.create({
                 dataInicio,
                 dataFim,
+                precoAtual,
                 produtoId: novoProduto.id,
                 statusLeilao,
+                usuarioId: usuarioId
             });
       
             // Responder com o novo leilão e o novo produto criado
@@ -66,7 +69,7 @@ const leilaoController = {
         }
     },
   
-  // Rota para atualizar um leilão por ID
+  // Atualizar um leilão por ID
     async atualizarLeilao(req, res) {
 
         try {

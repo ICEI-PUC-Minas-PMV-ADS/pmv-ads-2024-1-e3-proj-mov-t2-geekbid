@@ -42,35 +42,37 @@ app.use('/lances', lanceRoute);
 
 // RELAÇÕES - COMENTADAS PORQUE AINDA NÃO ESTÃO FINALIZADAS
 
-Usuario.hasOne(Endereco)
+Usuario.hasOne(Endereco);
 
-CategoriaProduto.belongsToMany(Produto, { through: ProdutoCategoria })
+CategoriaProduto.belongsToMany(Produto, { through: ProdutoCategoria });
 
-Produto.hasOne(Leilao)
+Produto.hasOne(Leilao);
 
-Usuario.belongsToMany(Leilao, { through: Lance })
+Usuario.hasMany(Leilao);
 
-Mensagem.belongsToMany(Usuario, { through: HistoricoMensagem })
+Usuario.belongsToMany(Leilao, { through: Lance });
+
+Mensagem.belongsToMany(Usuario, { through: HistoricoMensagem });
 
 sequelize
-  .sync({ force: true }) // PARA CRIAR AS TABELAS E RELAÇÕES -- APAGA OS DADOS
+  // .sync({ force: true }) // PARA CRIAR AS TABELAS E RELAÇÕES -- APAGA OS DADOS
   //  .sync({ alter: true }) // PARA ATUALIZAR AS TABELAS E RELAÇÕES -- NÃO APAGA OS DADOS
-  // .sync() // DESABILITAR QUANTO HABILITAR A LLINHA DE CIMA
-  .then(result => {
-    return CategoriaProduto.bulkCreate([
-      { descricaoCategoriaProduto: 'Quadrinhos e Mangás' },
-      { descricaoCategoriaProduto: 'Colecionáveis' },
-      { descricaoCategoriaProduto: 'Jogos de Tabuleiro e Card Games' },
-      { descricaoCategoriaProduto: 'Jogos Eletrônicos' },
-      { descricaoCategoriaProduto: 'Livros e Literatura Fantástica' },
-      { descricaoCategoriaProduto: 'Filmes e Séries' },
-      { descricaoCategoriaProduto: 'Tecnologia e Gadgets' },
-      { descricaoCategoriaProduto: 'Roupas e Acessórios' },
-      { descricaoCategoriaProduto: 'Arte e Decoração' },
-      { descricaoCategoriaProduto: 'Memorabilia' }
-    ])
-  })
+  .sync() // DESABILITAR QUANTO HABILITAR A LLINHA DE CIMA
+  // .then(result => {
+  //   return CategoriaProduto.bulkCreate([
+  //     { descricaoCategoriaProduto: 'Quadrinhos e Mangás' },
+  //     { descricaoCategoriaProduto: 'Colecionáveis' },
+  //     { descricaoCategoriaProduto: 'Jogos de Tabuleiro e Card Games' },
+  //     { descricaoCategoriaProduto: 'Jogos Eletrônicos' },
+  //     { descricaoCategoriaProduto: 'Livros e Literatura Fantástica' },
+  //     { descricaoCategoriaProduto: 'Filmes e Séries' },
+  //     { descricaoCategoriaProduto: 'Tecnologia e Gadgets' },
+  //     { descricaoCategoriaProduto: 'Roupas e Acessórios' },
+  //     { descricaoCategoriaProduto: 'Arte e Decoração' },
+  //     { descricaoCategoriaProduto: 'Memorabilia' }
+  //   ])
+  // })
   .then(user => {
     app.listen(3000, () => console.log('Server is running at port 3000....'))
   })
-  .catch(err => console.log(err))
+  .catch(err => console.log(err));

@@ -33,10 +33,10 @@ const usuarioController = {
     async atualizarUsuario(req, res) {
         try {
           const { id } = req.params
-          const { nome, email, senha } = req.body
+          const { nome, email, senha, dataNascimento } = req.body
     
           const [updatedRowsCount, [updateUsuario]] = await Usuario.update(
-            { nome, email, senha },
+            { nome, email, senha, dataNascimento },
             { where: { id }, returning: true }
           )
     
@@ -71,11 +71,14 @@ const usuarioController = {
     async buscarUsuario(req, res) {
         try {
             const id = req.params.id;
-            const user = await Users.findByPk(id);
+            if (!id) {
+              return res.status(404).json({ error: 'Usuário não encontrado' });
+            }
+            const user = await Usuario.findByPk(id);
             res.status(200).json(user);
-        } catch {
-            console.error("Erro ao buscar usuário", err.message);
-            return res.status(err.status || 500).json({ error: err.message })
+        } catch (error) {
+            console.error("Erro ao buscar usuário", error.message);
+            return res.status(error.status || 500).json({ error: error.message });
         }
     }
 }
