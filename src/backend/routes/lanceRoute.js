@@ -1,7 +1,6 @@
 const express = require('express');
-const lanceController = require('../controllers/lanceController');
-
 const router = express.Router();
+const lanceController = require('../controllers/lanceController');
 
 // Cadastrar lance em leilão
 router.post('/', lanceController.cadastrarLance);

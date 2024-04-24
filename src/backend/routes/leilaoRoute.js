@@ -1,4 +1,5 @@
 const express = require('express');
+const router = express.Router();
 const leilaoController = require('../controllers/leilaoController');
 
 // Rota para cadastrar um novo leilão com produto e categoria
