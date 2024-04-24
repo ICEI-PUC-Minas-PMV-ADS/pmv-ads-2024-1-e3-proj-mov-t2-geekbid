@@ -15,4 +15,4 @@ router.delete('/:id', usuarioController.excluirUsuario);
 router.get('/:id', usuarioController.buscarUsuario);
 
 
-module.exports = usuarioRoute;
+module.exports = router;
