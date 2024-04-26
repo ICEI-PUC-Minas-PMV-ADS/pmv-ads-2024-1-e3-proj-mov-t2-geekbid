@@ -9,6 +9,9 @@ import MeusLeiloes from '../pages/MeusLeiloes';
 import MeusLances from '../pages/MeusLances';
 import NovoLeilao from '../pages/NovoLeilao';
 import EnviarLance from '../pages/EnviarLance';
+import Perfil from '../pages/Perfil';
+import Notificacao from '../pages/Notificacao';
+import Footer from './Footer';
 
 const Stack = createNativeStackNavigator();
 
@@ -78,6 +81,28 @@ const Route = () => {
           headerShown: false,
         }}
       />
+            <Stack.Screen
+        name="Perfil"
+        component={Perfil}
+        options={{
+          headerShown: false,
+        }}
+      />
+      <Stack.Screen
+        name="Notificacao"
+        component={Notificacao}
+        options={{
+          headerShown: false,
+        }}
+      />
+      <Stack.Screen
+        name="Footer"
+        component={Footer}
+        options={{
+          headerShown: false,
+        }}
+      />
+
     </Stack.Navigator>
   );
 };
