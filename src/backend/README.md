@@ -8,9 +8,9 @@ Algumas orientações para usar:
 
       Opcional:   
          quem quiser fazer instalação global do nodemon no Node (`nmp install -g nodemon`), ele é bem útil; reinicia automaticamente o servidor toda vez que é salva uma alteração nos arquivos;  
-         quem fizer isso pode iniciar o node com o comando `npm start-server` (ou editar o arquivo /src/backend/package.json e substituir a chave "start": "node index.js", por "start": "nodemon index.js", para inciar o nodemon com o comando npm start);
+         quem fizer isso pode iniciar o node com o comando `nodemon index.js` (ou editar o arquivo /src/backend/package.json e substituir a chave "start": "node index.js", por "start": "nodemon index.js", para inciar o nodemon com o comando npm start);
 
-3. Editar o arquivo` /src/backend/utils/database.js` para incluir o nome da tabela ("database_schema"), usuário ("user") e senha ("password") - os valores devem estar entre aspas;
+3. Editar o arquivo `/src/backend/utils/database.js` para incluir o nome da tabela ("database_schema"), usuário ("user") e senha ("password") - os valores devem estar entre aspas;
 
 4. Na primeira vez que for iniciado o backend, conforme instruções do item 2, o arquivo `/src/backend/index.js` deve estar da seguinte forma:
 
