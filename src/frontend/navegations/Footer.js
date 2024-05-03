@@ -1,11 +1,10 @@
 import React from 'react';
-import { View, StyleSheet, Dimensions  } from 'react-native';
+import { View, StyleSheet, Dimensions } from 'react-native';
 import { IconButton } from 'react-native-paper';
 import { useNavigation } from '@react-navigation/native';
 import footerStyles from './../css/FooterStyles';
 
 const BottomNavigation = () => {
-
   const navigation = useNavigation();
 
   const handleNavigation = (routeName) => {

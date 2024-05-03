@@ -21,7 +21,7 @@ const Leilao = sequelize.define("leilao", {
         type: DataTypes.DOUBLE,
         allowNull: false
     },
-    statusLeilaoId: {
+    statusLeilao: {
         type: DataTypes.ENUM(
             'cadastrado',
             'publicado',
