@@ -5,6 +5,8 @@ var width = Dimensions.get('window').width;
 const styles = StyleSheet.create({
   
   container: {
+    flex: 1,
+    position: 'fixed',
     height: 60,
     flexDirection: 'row',
     alignSelf: 'center',
