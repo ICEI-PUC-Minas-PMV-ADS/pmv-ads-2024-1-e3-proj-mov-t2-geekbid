@@ -24,6 +24,8 @@ const leilaoController = {
         
             // Criar um novo leilão associado ao produto
             const { usuarioId } = req.body;
+            console.log("Dados recebidos no backend:", req.body);
+
             const novoLeilao = await Leilao.create({
                 dataInicio,
                 dataFim,

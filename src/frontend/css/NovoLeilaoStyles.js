@@ -63,7 +63,7 @@ const styles = StyleSheet.create({
       paddingBottom: 15,
       marginBottom: 20,
       marginTop: 0,
-      fontSize: 10,
+      fontSize: 14,
     },
     inputDescription: {
       borderWidth: 1,
@@ -73,7 +73,7 @@ const styles = StyleSheet.create({
       paddingBottom: 35,
       marginBottom: 20,
       marginTop: 0,
-      fontSize: 10,
+      fontSize: 14,
     },
     button: {
       backgroundColor: "#666cff",
@@ -101,7 +101,7 @@ const styles = StyleSheet.create({
     },
     duracaoLabel: {
       color: "gray",
-      fontSize: 10,
+      fontSize: 14,
       marginRight: 10,
     },
     duracaoInputContainer: {
@@ -116,7 +116,7 @@ const styles = StyleSheet.create({
       paddingTop: 10,
       marginRight: 10,
       width: 50,
-      fontSize: 8,
+      fontSize: 13,
     },
   });
 
