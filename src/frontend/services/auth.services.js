@@ -1,25 +1,23 @@
-export const register = async () => {
+import { createContext, useContext } from 'react'
 
-  try{
-    return (
-      console.log('Registrar_chamar backend')
-    );
-    
-  }catch(error){
-    console.log(error)
-    return null;
-  }
+import { api } from './api'
+
+export const AuthContext = createContext({})
+
+function AuthProvider({ children }) {
+  return (
+    <AuthContext.Provider
+      value={{ nome: 'Gabriel', email: 'gabriel@hotmail.com' }}
+    >
+      {children}
+    </AuthContext.Provider>
+  )
 }
 
-export const login = async () => {
+function useAuth() {
+  const context = useContext(AuthContext)
 
-  try{
-    return (
-      console.log('Login_chamar backend')
-    );
-    
-  }catch(error){
-    console.log(error)
-    return null;
-  }
+  return context
 }
+
+export { AuthProvider, useAuth }

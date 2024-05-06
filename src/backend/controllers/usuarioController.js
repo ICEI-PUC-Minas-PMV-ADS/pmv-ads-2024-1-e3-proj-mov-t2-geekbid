@@ -5,7 +5,7 @@ const transporter = require('./emailController')
 const usuarioController = {
 
     async cadastrarUsuario(request, response) {
-        const { nome, email, senha } = request.body
+        const { nome, email, senha, statusUsuario } = request.body
     
         try {
           // Verifica se o email já está em uso
@@ -15,7 +15,7 @@ const usuarioController = {
           }
     
           // Cria o usuário
-          const novoUsuario = await Usuario.create({ nome, email, senha })
+          const novoUsuario = await Usuario.create({ nome, email, senha, statusUsuario })
     
           // Envia e-mail de validação de cadastro
           if (novoUsuario) {
