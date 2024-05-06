@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useEffect, useState } from 'react';
 import { View, Text, Image, TouchableOpacity, StyleSheet } from 'react-native';
 import { useNavigation } from '@react-navigation/native';
 
@@ -13,6 +13,26 @@ const Lance = ({ item }) => {
     console.log('Link pressed!');
   };
 
+  const [leilao, setLeilao] = useState([]);
+
+  const getLeilao = () => {
+    fetch("http://localhost:3000/leilao")
+    .then(res => res.json())
+    .then(json => setLeilao(json))
+    // .then(leilao.map((item, index) => <Text key={index}>{item.text}</Text>))
+    .catch(error => console.error(error))
+  }
+
+  useEffect(() => {
+    getLeilao();
+  }, []);
+
+  console.log("Leilões: ", leilao);
+
+  function renderLeiloes() {
+    return leilao.map((item, index) => <Text key={index}>{item.id}</Text>);
+  };
+
   return (
     <View style={styles.container}>
       <View style={styles.container}>
@@ -20,6 +40,8 @@ const Lance = ({ item }) => {
           <Text style={styles.linkText}>Filtrar</Text>
         </TouchableOpacity>
       </View>
+
+      <View>{renderLeiloes()}</View>
 
       <View style={styles.row}>
         <View style={styles.itemContainer}>
