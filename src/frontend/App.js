@@ -1,14 +1,14 @@
 import { NavigationContainer } from '@react-navigation/native'
+import { useAuth } from './services/auth.services'
 import Route from './navegations/Route'
 import { AuthProvider } from './services/auth.services'
 
-import UserProvider from './contexts/UserContext'
 const App = () => {
+  const { usuario } = useAuth()
+
   return (
     <NavigationContainer>
-      <AuthProvider>
-        <Route />
-      </AuthProvider> 
+      <AuthProvider>{{ usuario } ? '/inicial' : <Route />}</AuthProvider>
     </NavigationContainer>
   )
 }

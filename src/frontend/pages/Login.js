@@ -7,19 +7,26 @@ import Body from '../components/Body'
 import Input from '../components/Input'
 import { login } from '../services/auth.services'
 import { useNavigation } from '@react-navigation/native'
+import Usuario from '../../backend/models/usuarioModel'
 
 export function Login() {
   const navigation = useNavigation()
 
   const [email, setEmail] = useState('')
-  const [password, setPassword] = useState('')
+  const [senha, setSenha] = useState('')
+  const { signIn } = useAuth()
+  const { usuario } = useAuth()
 
   function handleLogin() {
-    const data = useAuth()
-    alert('MEU CONTEXTO', data)
+    signIn({ email, senha })
 
+    if (!{ usuario }) {
+      alert('Preencha os campos corretamente.')
+    }
+    if ({ usuario }) {
+      navigation.navigate('Home')
+    }
     // const handleLoginPress = () => {
-    //   navigation.navigate('Home')
     // }
 
     // login({
@@ -51,9 +58,9 @@ export function Login() {
         />
         <Input
           label="Senha"
-          value={password}
+          value={senha}
           mode="outlined"
-          onChangeText={text => setPassword(text)}
+          onChangeText={text => setSenha(text)}
           secureTextEntry
         />
         <Button style={styles.button} mode="contained" onPress={handleLogin}>
