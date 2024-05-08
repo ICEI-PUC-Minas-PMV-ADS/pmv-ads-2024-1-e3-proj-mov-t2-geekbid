@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from 'react';
-import { View, Text, Image, TouchableOpacity, StyleSheet, ScrollView } from 'react-native';
+import { View, Text, Image, StyleSheet, ScrollView, TouchableOpacity } from 'react-native';
 import { useNavigation } from '@react-navigation/native';
 
 const Lance = ({ item }) => {
@@ -10,9 +10,9 @@ const Lance = ({ item }) => {
     navigation.navigate('EnviarLance');
   };
 
-  const handlePress = () => {
-    console.log('handlePress!');
-  };
+  // const handlePress = () => {
+  //   console.log('handlePress!');
+  // };
 
   const [leiloes, setLeiloes] = useState([]);
 
@@ -30,13 +30,15 @@ const Lance = ({ item }) => {
   console.log("Leilões: ", leiloes);
 
   return (
-    <View style={styles.container}>
+    <ScrollView>
+
       <View style={styles.container}>
-        <TouchableOpacity style={styles.link} onPress={handlePress}>
-          <Text style={styles.linkText}>Filtrar</Text>
-        </TouchableOpacity>
-      </View>
-      <ScrollView>
+        {/* <View style={styles.container}>
+          <TouchableOpacity style={styles.link} onPress={handlePress}>
+            <Text style={styles.linkText}>Filtrar</Text>
+          </TouchableOpacity>
+        </View> */}
+        
         <View style={styles.container}>
           <View>
             {leiloes.map((item, index) =>
@@ -57,8 +59,9 @@ const Lance = ({ item }) => {
             )}
           </View>
         </View>
-      </ScrollView>
-    </View>
+        
+      </View>
+    </ScrollView>
   );
 };
 

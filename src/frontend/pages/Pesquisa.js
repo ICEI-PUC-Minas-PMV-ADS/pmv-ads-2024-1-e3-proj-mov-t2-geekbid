@@ -1,8 +1,13 @@
 import React from 'react';
-import { View, Text, TextInput, StyleSheet } from 'react-native';
+import { View, Text, TextInput, TouchableOpacity, StyleSheet } from 'react-native';
 import Icon from 'react-native-vector-icons/FontAwesome';
 
 const Pesquisa = () => {
+
+  const handlePress = () => {
+    console.log('handlePress!');
+  };
+
   return (
     <View>
       <Text style={styles.title}>Olá Fulano</Text>
@@ -17,6 +22,13 @@ const Pesquisa = () => {
           />
         </View>
       </View>
+      <View style={styles.containerFiltrar}>
+        <View style={styles.containerFiltrar}>
+          <TouchableOpacity style={styles.link} onPress={handlePress}>
+            <Text style={styles.linkText}>Filtrar</Text>
+          </TouchableOpacity>
+        </View>
+        </View>    
     </View>
   );
 };
@@ -29,6 +41,9 @@ const styles = StyleSheet.create({
     paddingHorizontal: 20,
     marginTop: 15,
     height: 60,
+  },
+  containerFiltrar: {
+    paddingHorizontal: 5,
   },
   title: {
     fontSize: 20,
@@ -64,8 +79,16 @@ const styles = StyleSheet.create({
   input: {
     flex: 1,
     fontSize: 12,
-    backgroundColor: 'transparent',
+    backgroundColor: 'white',
   },
+  linkText: {
+    color: 'blue',
+    fontSize: 15,
+    textAlign: 'right',
+    paddingTop: 15,
+    paddingBottom: 15,
+    fontWeight: 'bold'
+  },  
 });
 
 export default Pesquisa;
