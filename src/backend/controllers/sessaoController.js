@@ -11,12 +11,11 @@ class sessaoController {
     // Busca o usuário no banco de dados usando o Sequelize
     const usuario = await Usuario.findOne({ where: { email } })
     if (!usuario) {
-      return response.json('Erro da porra')
+      return response.json('Email e/ou senha inválido(s).', 401)
     }
 
-
     if (senha != usuario.senha) {
-      return response.json('Erro esquisito que nao tenho a minima ideia')
+      return response.json('Email e/ou senha inválido(s).', 401)
     }
 
     const { secret, expiresIn } = authConfig.jwt

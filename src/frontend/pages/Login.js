@@ -8,19 +8,19 @@ import Input from '../components/Input'
 import { useNavigation } from '@react-navigation/native'
 
 export function Login() {
+  const { signIn } = useAuth()
   const navigation = useNavigation()
 
   const [email, setEmail] = useState('')
   const [senha, setSenha] = useState('')
-  const { signIn } = useAuth()
 
   function handleLogin() {
-    signIn({ email, senha })
-    navigation.navigate('Home')
-
     if (!email || !senha) {
       return alert('Preencha todos os campos!')
     }
+
+    signIn({ email, senha })
+    navigation.navigate('Home')
 
     // const handleLoginPress = () => {
     // }
