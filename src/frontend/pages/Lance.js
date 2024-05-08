@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from 'react';
-import { View, Text, Image, TouchableOpacity, StyleSheet } from 'react-native';
+import { View, Text, Image, TouchableOpacity, StyleSheet, ScrollView } from 'react-native';
 import { useNavigation } from '@react-navigation/native';
 
 const Lance = ({ item }) => {
@@ -13,25 +13,20 @@ const Lance = ({ item }) => {
     console.log('Link pressed!');
   };
 
-  const [leilao, setLeilao] = useState([]);
+  const [leiloes, setLeiloes] = useState([]);
 
-  const getLeilao = () => {
-    fetch("http://localhost:3000/leilao")
+  const getLeiloes = () => {
+    fetch("http://localhost:3000/leilao/home")
     .then(res => res.json())
-    .then(json => setLeilao(json))
-    // .then(leilao.map((item, index) => <Text key={index}>{item.text}</Text>))
+    .then(data => setLeiloes(data.leiloes))
     .catch(error => console.error(error))
   }
 
   useEffect(() => {
-    getLeilao();
+    getLeiloes();
   }, []);
 
-  console.log("Leilões: ", leilao);
-
-  function renderLeiloes() {
-    return leilao.map((item, index) => <Text key={index}>{item.id}</Text>);
-  };
+  console.log("Leilões: ", leiloes);
 
   return (
     <View style={styles.container}>
@@ -40,39 +35,28 @@ const Lance = ({ item }) => {
           <Text style={styles.linkText}>Filtrar</Text>
         </TouchableOpacity>
       </View>
-
-      <View>{renderLeiloes()}</View>
-
-      <View style={styles.row}>
+      <ScrollView>
         <View style={styles.itemContainer}>
-        <Image
-            style={styles.image}
-            source={{ uri: 'asset:/src/assets/mulherMaravilha.png' }}
-          />
-          <Text style={styles.title}>Quadro Mulher Maravilha</Text>
-          <View style={styles.infoContainer}>
-            <Text style={styles.creator}>Criado por: Cleiton</Text>
-            <Text style={styles.price}>Valor do Lance: R$ 100.00</Text>
+          <View>
+            {leiloes.map((item, index) =>
+              <View style={styles.itemContainer}>
+                    <Image
+                      style={styles.image}
+                      source={{ uri: item.produto.urlImagemProduto }}
+                    />
+                    <Text style={styles.title} key={index}>{item.produto.nomeProduto}</Text>
+                    <View style={styles.infoContainer}>
+                      <Text style={styles.creator}>Criado por: {item.usuario.nome}</Text>
+                      <Text style={styles.price}>Valor do Lance: R$ {item.precoAtual}</Text>
+                    </View>
+                    <TouchableOpacity style={styles.button} onPress={handleLancePress}>
+                      <Text style={styles.buttonText}>Dar Lance</Text>
+                    </TouchableOpacity>
+              </View>
+            )}
           </View>
-          <TouchableOpacity style={styles.button} onPress={handleLancePress}>
-            <Text style={styles.buttonText}>Dar Lance</Text>
-          </TouchableOpacity>
         </View>
-        <View style={styles.itemContainer}>
-        <Image
-            style={styles.image}
-            source={{ uri: 'asset:/src/assets/retroGeek.png' }}
-          />
-          <Text style={styles.title}>Retro Geek Colecionável</Text>
-          <View style={styles.infoContainer}>
-            <Text style={styles.creator}>Criado por: Pedro</Text>
-            <Text style={styles.price}>Valor do Lance: R$ 200.00</Text>
-          </View>
-          <TouchableOpacity style={styles.button} onPress={handleLancePress}>
-            <Text style={styles.buttonText}>Dar Lance</Text>
-          </TouchableOpacity>
-        </View>
-      </View>
+      </ScrollView>
     </View>
   );
 };

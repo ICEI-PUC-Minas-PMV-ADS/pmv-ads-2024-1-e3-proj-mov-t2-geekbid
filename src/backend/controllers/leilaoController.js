@@ -1,5 +1,6 @@
 const Leilao = require('../models/leilaoModel');
 const Produto = require('../models/produtoModel');
+const Usuario = require('../models/usuarioModel');
 const ProdutoCategoria = require('../models/produtoCategoriaModel');
 
 
@@ -48,6 +49,53 @@ const leilaoController = {
 
         try {
             const leiloes = await Leilao.findAll();
+            res.status(200).json({ leiloes });
+        } catch (error) {
+            console.error('Erro ao buscar leilões:', error);
+            res.status(500).json({ error: 'Erro interno do servidor' });
+        }
+    },
+
+    // // Buscar todos os leilões para a home
+    // async listarLeiloesHome(req, res) {
+
+    //     try {
+    //         const leiloes = await Leilao.findAll()
+    //         .then(function(DadosLeilao) {
+    //             Usuario.findAll()
+    //             .then(function(DadosUsuario) {
+    //                 Produto.findAll()
+    //                 .then(function(DadosProduto) {
+    //                     var data = {
+    //                         Leilao: DadosLeilao,
+    //                         Usuario: DadosUsuario,
+    //                         Produto: DadosProduto
+    //                     }
+    //                     console.log(data);
+    //                 })
+    //             })
+    //         })
+    //         res.status(200).json({ leiloes });
+    //     } catch (error) {
+    //         console.error('Erro ao buscar leilões:', error);
+    //         res.status(500).json({ error: 'Erro interno do servidor' });
+    //     }
+    // },
+    // Buscar todos os leilões para a home
+    async listarLeiloesHome(req, res) {
+
+        try {
+            const leiloes = await Leilao.findAll({
+                // raw: true,
+                where: {
+                    statusLeilao: ['ativo', 'publicado']
+                },
+                include: [
+                    {model: Usuario, as: "usuario"},
+                    {model: Produto, as: "produto"}
+                ]
+            })
+            console.log(JSON.stringify(leiloes, null, 2));
             res.status(200).json({ leiloes });
         } catch (error) {
             console.error('Erro ao buscar leilões:', error);

@@ -46,9 +46,11 @@ Usuario.hasOne(Endereco);
 
 CategoriaProduto.belongsToMany(Produto, { through: ProdutoCategoria });
 
-Produto.hasOne(Leilao);
+// Produto.belongsTo(Leilao);
+Leilao.belongsTo(Produto);
 
-Usuario.hasMany(Leilao);
+// Usuario.hasMany(Leilao, {foreignKey: 'usuarioId', targetKey: 'id'});
+Leilao.belongsTo(Usuario);
 
 Usuario.belongsToMany(Leilao, { through: Lance });
 
