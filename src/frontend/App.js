@@ -4,11 +4,11 @@ import Route from './navegations/Route'
 import { AuthProvider } from './services/auth.services'
 
 const App = () => {
-  const { usuario } = useAuth()
-
   return (
     <NavigationContainer>
-      <AuthProvider>{{ usuario } ? '/inicial' : <Route />}</AuthProvider>
+      <AuthProvider>
+        <Route />
+      </AuthProvider>
     </NavigationContainer>
   )
 }

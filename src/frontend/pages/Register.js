@@ -20,10 +20,6 @@ export function Register() {
   const [senha, setSenha] = useState('')
   const [confirmSenha, setConfirmSenha] = useState('')
 
-  const handleLoginPress = () => {
-    navigation.navigate('Login')
-  }
-
   function handleRegister() {
     if (!nome || !email || !senha) {
       return alert('Preencha todos os campos!')

@@ -5,9 +5,7 @@ import { StyleSheet, View } from 'react-native'
 import Container from '../components/Container'
 import Body from '../components/Body'
 import Input from '../components/Input'
-import { login } from '../services/auth.services'
 import { useNavigation } from '@react-navigation/native'
-import Usuario from '../../backend/models/usuarioModel'
 
 export function Login() {
   const navigation = useNavigation()
@@ -15,17 +13,15 @@ export function Login() {
   const [email, setEmail] = useState('')
   const [senha, setSenha] = useState('')
   const { signIn } = useAuth()
-  const { usuario } = useAuth()
 
   function handleLogin() {
     signIn({ email, senha })
+    navigation.navigate('Home')
 
-    if (!{ usuario }) {
-      alert('Preencha os campos corretamente.')
+    if (!email || !senha) {
+      return alert('Preencha todos os campos!')
     }
-    if ({ usuario }) {
-      navigation.navigate('Home')
-    }
+
     // const handleLoginPress = () => {
     // }
 

@@ -1,30 +1,26 @@
 import React, { useState } from 'react'
-import api from '../services/api'
 import { View, StyleSheet } from 'react-native'
 import { TextInput, Headline, Button } from 'react-native-paper'
 import { useNavigation } from '@react-navigation/native'
 import Input from '../components/Input'
+import { useAuth } from '../services/auth.services'
 
 function MinhasInformacoes() {
-  const navigation = useNavigation()
-  const handleExcluirCadastroPress = () => {}
-
-  const [nome, setNome] = useState('')
+  const { usuario, updatePerfil } = useAuth()
+  const [nome, setNome] = useState(usuario.nome)
   const [lastNome, setLastNome] = useState('')
-  const [email, setEmail] = useState('')
+  const [email, setEmail] = useState(usuario.email)
   const [senha, setSenha] = useState('')
   const [confirmSenha, setConfirmSenha] = useState('')
 
-  function handleSalvarAlteracoesPress() {
-    api
-      .put('/usuario', { nome, email, senha })
-      .then(() => {
-        alert('Usuário atualizado com sucesso!')
-      })
-      .catch(error => {
-        alert('Não foi possivel atualizar.')
-      })
+  async function handleSalvarAlteracoesPress() {
+    const usuario = { nome, email, senha }
+
+    await updatePerfil({ usuario })
   }
+
+  const navigation = useNavigation()
+  const handleExcluirCadastroPress = () => {}
   return (
     <View style={styles.container}>
       <View style={styles.head}>
