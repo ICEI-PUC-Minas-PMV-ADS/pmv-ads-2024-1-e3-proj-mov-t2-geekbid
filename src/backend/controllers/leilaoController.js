@@ -88,7 +88,7 @@ const leilaoController = {
             const leiloes = await Leilao.findAll({
                 // raw: true,
                 where: {
-                    statusLeilao: ['ativo', 'publicado']
+                    // statusLeilao: ['ativo', 'publicado']
                 },
                 include: [
                     {model: Usuario, as: "usuario"},

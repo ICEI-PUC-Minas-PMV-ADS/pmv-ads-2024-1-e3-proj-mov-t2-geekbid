@@ -6,11 +6,12 @@ const Lance = ({ item }) => {
   const navigation = useNavigation();
 
   const handleLancePress = () => {
+    console.log('handleLancePress');
     navigation.navigate('EnviarLance');
   };
 
   const handlePress = () => {
-    console.log('Link pressed!');
+    console.log('handlePress!');
   };
 
   const [leiloes, setLeiloes] = useState([]);
@@ -36,22 +37,22 @@ const Lance = ({ item }) => {
         </TouchableOpacity>
       </View>
       <ScrollView>
-        <View style={styles.itemContainer}>
+        <View style={styles.container}>
           <View>
             {leiloes.map((item, index) =>
-              <View style={styles.itemContainer}>
-                    <Image
-                      style={styles.image}
-                      source={{ uri: item.produto.urlImagemProduto }}
-                    />
-                    <Text style={styles.title} key={index}>{item.produto.nomeProduto}</Text>
-                    <View style={styles.infoContainer}>
-                      <Text style={styles.creator}>Criado por: {item.usuario.nome}</Text>
-                      <Text style={styles.price}>Valor do Lance: R$ {item.precoAtual}</Text>
-                    </View>
-                    <TouchableOpacity style={styles.button} onPress={handleLancePress}>
-                      <Text style={styles.buttonText}>Dar Lance</Text>
-                    </TouchableOpacity>
+              <View style={styles.itemContainer} key={item.id}>
+                <Image
+                  style={styles.image}
+                  source={{ uri: item.produto.urlImagemProduto }}
+                />
+                <Text style={styles.title} key={index}>{item.produto.nomeProduto}</Text>
+                <View style={styles.infoContainer}>
+                  <Text style={styles.creator}>Criado por: {item.usuario.nome}</Text>
+                  <Text style={styles.price}>Valor do Lance: R$ {item.precoAtual}</Text>
+                </View>
+                <TouchableOpacity style={styles.button} onPress={handleLancePress}>
+                  <Text style={styles.buttonText}>Dar Lance</Text>
+                </TouchableOpacity>
               </View>
             )}
           </View>
@@ -63,15 +64,14 @@ const Lance = ({ item }) => {
 
 const styles = StyleSheet.create({
   container: {
-    paddingHorizontal: 10,
+    paddingHorizontal: 5,
   },
   row: {
-    flexDirection: 'row',
     justifyContent: 'space-between',
     marginBottom: 20,
   },
   itemContainer: {
-    flex: 1,
+    widht: '80%',
     borderWidth: 1,
     borderColor: '#ccc',
     borderRadius: 10,
