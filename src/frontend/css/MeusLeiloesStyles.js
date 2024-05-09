@@ -1,10 +1,12 @@
-import { StyleSheet, } from 'react-native';
+import { StyleSheet } from 'react-native';
 
 const styles = StyleSheet.create({
   container: {
-    flex: 9,
-    paddingHorizontal: 10,
-    marginTop: 40,
+    flex: 1,
+  },
+  scrollContent: {
+    flexGrow: 1,
+    paddingHorizontal:20,
   },
   row: {
     flexDirection: 'row',
@@ -20,8 +22,10 @@ const styles = StyleSheet.create({
   },
   textHeader: {
     fontSize: 25,
+    textAlign:'left',
+    paddingLeft: 30,
+    width: '60%',
   },
-
   itemContainer: {
     flex: 1,
     borderWidth: 1,
@@ -41,6 +45,7 @@ const styles = StyleSheet.create({
     fontWeight: 'bold',
     marginBottom: 5,
   },
+
   infoContainer: {
     flexDirection: 'column',
     marginBottom: 10,
@@ -51,17 +56,6 @@ const styles = StyleSheet.create({
   price: {
     marginBottom: 10,
   },
-  titleContainer: {
-    alignItems: 'center',
-    marginBottom: 20,
-  },
-  titlePage: {
-    fontSize: 24,
-    fontWeight: 'bold',
-    marginTop: 30,
-  },
- 
 });
-
 
 export default styles;
