@@ -14,12 +14,12 @@ const Lance = ({ item }) => {
   //   console.log('handlePress!');
   // };
 
-  const [leiloes, setLeiloes] = useState([]);
+  const [leiloesHome, setLeiloesHome] = useState([]);
 
   const getLeiloes = () => {
-    fetch("http://localhost:3000/leilao/home")
+    fetch(`http://localhost:3000/leilao/home`)
     .then(res => res.json())
-    .then(data => setLeiloes(data.leiloes))
+    .then(data => setLeiloesHome(data.leiloesHome))
     .catch(error => console.error(error))
   }
 
@@ -27,37 +27,30 @@ const Lance = ({ item }) => {
     getLeiloes();
   }, []);
 
-  console.log("Leilões: ", leiloes);
+  console.log("Leilões: ", leiloesHome);
 
   return (
     <ScrollView>
 
       <View style={styles.container}>
-        {/* <View style={styles.container}>
-          <TouchableOpacity style={styles.link} onPress={handlePress}>
-            <Text style={styles.linkText}>Filtrar</Text>
-          </TouchableOpacity>
-        </View> */}
         
         <View style={styles.container}>
-          <View>
-            {leiloes.map((item, index) =>
-              <View style={styles.itemContainer} key={item.id}>
-                <Image
-                  style={styles.image}
-                  source={{ uri: item.produto.urlImagemProduto }}
-                />
-                <Text style={styles.title} key={index}>{item.produto.nomeProduto}</Text>
-                <View style={styles.infoContainer}>
-                  <Text style={styles.creator}>Criado por: {item.usuario.nome}</Text>
-                  <Text style={styles.price}>Valor do Lance: R$ {item.precoAtual}</Text>
-                </View>
-                <TouchableOpacity style={styles.button} onPress={handleLancePress}>
-                  <Text style={styles.buttonText}>Dar Lance</Text>
-                </TouchableOpacity>
+          {leiloesHome.map((item, index) =>
+            <View style={styles.itemContainer} key={item.id}>
+              <Image
+                style={styles.image}
+                source={{ uri: item.produto.urlImagemProduto }}
+              />
+              <Text style={styles.title} key={index}>{item.produto.nomeProduto}</Text>
+              <View style={styles.infoContainer}>
+                <Text style={styles.creator}>Criado por: {item.usuario.nome}</Text>
+                <Text style={styles.price}>Valor do Lance: R$ {item.precoAtual}</Text>
               </View>
-            )}
-          </View>
+              <TouchableOpacity style={styles.button} onPress={handleLancePress}>
+                <Text style={styles.buttonText}>Dar Lance</Text>
+              </TouchableOpacity>
+            </View>
+          )}
         </View>
         
       </View>

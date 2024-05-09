@@ -11,6 +11,9 @@ router.get('/', leilaoController.listarLeiloes);
 // Rota para buscar todos os leilões
 router.get('/home', leilaoController.listarLeiloesHome);
 
+// Rota para pesquisar leilões 
+router.get('/pesquisa', leilaoController.pesquisarLeilaoHome);
+
 // Rota para buscar um leilão por ID
 router.get('/:id', leilaoController.listarLeilao);
 

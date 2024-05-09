@@ -1,12 +1,29 @@
-import React from 'react';
-import { View, Text, TextInput, TouchableOpacity, StyleSheet } from 'react-native';
+import React, {useState} from 'react';
+import { View, Text, TextInput, TouchableOpacity, StyleSheet, Button } from 'react-native';
 import Icon from 'react-native-vector-icons/FontAwesome';
 
 const Pesquisa = () => {
 
-  const handlePress = () => {
-    console.log('handlePress!');
-  };
+  const [queryPesquisa, setQueryPesquisa] = useState('');
+  const [leiloesPesquisa, setLeiloesPesquisa] = useState([]);
+
+  const handlePesquisa = () => {
+    fetch(`http://localhost:3000/leilao/pesquisa?`)
+    // .then(console.log(".then() queryPesquisa", queryPesquisa))
+    .then(res => res.json())
+    .then(data => console.log("data.leiloesPesquisa: ", data.leiloesPesquisa))
+    .catch(error => console.error(error))
+  }
+
+  const handleFiltro = () => {
+    console.log("handleFiltro");
+  }
+
+  // useEffect(() => {
+  //   handlePesquisa();
+  // }, []);
+
+  // console.log("Leilões: ", leiloes);
 
   return (
     <View>
@@ -17,14 +34,17 @@ const Pesquisa = () => {
           <Icon name="search" size={20} color="#666" style={styles.icon} />
           <TextInput
             placeholder="Pesquisar"
+            onChangeText={text => setQueryPesquisa(text)}
+            value={queryPesquisa}
             placeholderTextColor="#666"
             style={styles.input}
           />
+          <Button title="Pesquisar" onPress={handlePesquisa()} />
         </View>
       </View>
-      <View style={styles.containerFiltrar}>
+      <View style={styles.container}>
         <View style={styles.containerFiltrar}>
-          <TouchableOpacity style={styles.link} onPress={handlePress}>
+          <TouchableOpacity style={styles.link} onPress={handleFiltro}>
             <Text style={styles.linkText}>Filtrar</Text>
           </TouchableOpacity>
         </View>
