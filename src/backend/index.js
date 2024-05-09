@@ -1,63 +1,66 @@
-const path = require('path');
-const express = require('express');
-const bodyParser = require('body-parser');
+const path = require('path')
+const express = require('express')
+const bodyParser = require('body-parser')
+const cors = require('cors')
 
-const sequelize = require('./utils/database');
+const sequelize = require('./utils/database')
 
-const Usuario = require('./models/usuarioModel');
-const Endereco = require('./models/enderecoModel');
-const CategoriaProduto = require('./models/categoriaProdutoModel');
-const Produto = require('./models/produtoModel');
-const ProdutoCategoria = require('./models/produtoCategoriaModel');
-const Leilao = require('./models/leilaoModel');
-const Lance = require('./models/lanceModel');
-const Mensagem = require('./models/mensagemModel');
-const HistoricoMensagem = require('./models/historicoMensagemModel');
+const Usuario = require('./models/usuarioModel')
+const Endereco = require('./models/enderecoModel')
+const CategoriaProduto = require('./models/categoriaProdutoModel')
+const Produto = require('./models/produtoModel')
+const ProdutoCategoria = require('./models/produtoCategoriaModel')
+const Leilao = require('./models/leilaoModel')
+const Lance = require('./models/lanceModel')
+const Mensagem = require('./models/mensagemModel')
+const HistoricoMensagem = require('./models/historicoMensagemModel')
 
-const app = express();
+const app = express()
 
-app.use(bodyParser.json());
-app.use(express.static(path.join(__dirname, 'public')));
+app.use(bodyParser.json())
+app.use(express.static(path.join(__dirname, 'public')))
 
 app.use((req, res, next) => {
-  res.setHeader("Access-Control-Allow-Origin", "*");
-  res.setHeader("Access-Control-Allow-Methods", "GET, POST, PUT, PATCH, DELETE");
-  res.setHeader("Access-Control-Allow-Headers", "Content-Type, Authorization");next();
-});
+  res.setHeader('Access-Control-Allow-Origin', '*')
+  res.setHeader('Access-Control-Allow-Methods', 'GET, POST, PUT, PATCH, DELETE')
+  res.setHeader('Access-Control-Allow-Headers', 'Content-Type, Authorization')
+  next()
+})
 
-const loginRoute = require('./routes/loginRoute');
-const usuarioRoute = require('./routes/usuarioRoute');
-const produtoRoute = require('./routes/produtoRoute');
-const leilaoRoute = require('./routes/leilaoRoute');
-const categoriaRoute = require('./routes/categoriaRoute');
-const lanceRoute = require('./routes/lanceRoute');
+const loginRoute = require('./routes/loginRoute')
+const usuarioRoute = require('./routes/usuarioRoute')
+const produtoRoute = require('./routes/produtoRoute')
+const leilaoRoute = require('./routes/leilaoRoute')
+const categoriaRoute = require('./routes/categoriaRoute')
+const lanceRoute = require('./routes/lanceRoute')
+const sessaoRoute = require('./routes/sessaoRoute')
 
-app.use('/login', loginRoute);
-app.use('/usuario', usuarioRoute);
-app.use('/produto', produtoRoute);
-app.use('/leilao', leilaoRoute);
-app.use('/categorias', categoriaRoute);
-app.use('/lances', lanceRoute);
-
+app.use('/login', loginRoute)
+app.use('/usuario', usuarioRoute)
+app.use('/produto', produtoRoute)
+app.use('/leilao', leilaoRoute)
+app.use('/categorias', categoriaRoute)
+app.use('/lances', lanceRoute)
+app.use('/sessao', sessaoRoute)
 
 // RELAÇÕES - COMENTADAS PORQUE AINDA NÃO ESTÃO FINALIZADAS
 
-Usuario.hasOne(Endereco);
+Usuario.hasOne(Endereco)
 
-CategoriaProduto.belongsToMany(Produto, { through: ProdutoCategoria });
+CategoriaProduto.belongsToMany(Produto, { through: ProdutoCategoria })
 
-Produto.hasOne(Leilao);
+Produto.hasOne(Leilao)
 
-Usuario.hasMany(Leilao);
+Usuario.hasMany(Leilao)
 
-Usuario.belongsToMany(Leilao, { through: Lance });
+Usuario.belongsToMany(Leilao, { through: Lance })
 
-Mensagem.belongsToMany(Usuario, { through: HistoricoMensagem });
+Mensagem.belongsToMany(Usuario, { through: HistoricoMensagem })
 
 sequelize
-   //.sync({ force: true }) // PARA CRIAR AS TABELAS E RELAÇÕES -- APAGA OS DADOS
-   .sync({ alter: true }) // PARA ATUALIZAR AS TABELAS E RELAÇÕES -- NÃO APAGA OS DADOS
-  // .sync()  DESABILITAR QUANTO HABILITAR A LLINHA DE CIMA
+  // .sync({ force: true }) // PARA CRIAR AS TABELAS E RELAÇÕES -- APAGA OS DADOS
+  //  .sync({ alter: true }) // PARA ATUALIZAR AS TABELAS E RELAÇÕES -- NÃO APAGA OS DADOS
+  .sync() // DESABILITAR QUANTO HABILITAR A LLINHA DE CIMA
   // .then(result => {
   //   return CategoriaProduto.bulkCreate([
   //     { descricaoCategoriaProduto: 'Quadrinhos e Mangás' },
@@ -75,4 +78,4 @@ sequelize
   .then(user => {
     app.listen(3000, () => console.log('Server is running at port 3000....'))
   })
-  .catch(err => console.log(err));
+  .catch(err => console.log(err))
