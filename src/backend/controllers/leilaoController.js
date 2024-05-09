@@ -9,18 +9,18 @@ const leilaoController = {
     async cadastrarLeilao (req, res) {
         
         try {
-            const { dataInicio, dataFim, precoInicial, precoAtual, urlImagemProduto, nomeProduto, descricaoProduto, categoriaId, estadoProduto, statusLeilao } = req.body;
+            const { dataInicio, dataFim, precoInicial, precoAtual, urlImagemProduto, nomeProduto, descricaoProduto, categoriaProduto, estadoProduto, statusLeilao } = req.body;
             // Criar um novo produto
             const novoProduto = await Produto.create({
                 nomeProduto,
                 descricaoProduto,
-                categoriaId: categoriaId, // Associar o produto à categoria criada
+                categoriaProduto,
                 estadoProduto,
                 precoInicial,
                 urlImagemProduto
             });
       
-            await ProdutoCategoria.create({ categoriaProdutoId: categoriaId, produtoId: novoProduto.id  });
+            // await ProdutoCategoria.create({ categoriaProdutoId: categoriaId, produtoId: novoProduto.id  });
         
             // Criar um novo leilão associado ao produto
             const { usuarioId } = req.body;

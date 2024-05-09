@@ -7,13 +7,14 @@ const produtoController = {
     async cadastrarProduto(req, res) {
         try {
             // Extrair os dados do corpo da requisição
-            const { nomeProduto, descricaoProduto, precoInicial } = req.body;
+            const { nomeProduto, descricaoProduto, precoInicial, categoriaProduto } = req.body;
         
             // Criar o produto no banco de dados
             const novoProduto = await Produto.create({
                 nomeProduto,
                 descricaoProduto,
-                precoInicial
+                precoInicial,
+                categoriaProduto
         });
     
             // Responder com o novo produto criado

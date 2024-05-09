@@ -28,7 +28,13 @@ const Produto = sequelize.define("produto",
         estadoProduto: {
             type: DataTypes.ENUM('novo','usado'),
             defaultValue: "novo"
-        }
+        },
+        categoriaProduto: {
+            type: DataTypes.ENUM('Quadrinhos e Mangás', 'Colecionáveis', 'Jogos de Tabuleiro e Card Games', 'Jogos Eletrônicos',
+                                'Livros e Literatura Fantástica', 'Filmes e Séries', 'Tecnologia e Gadgets', 'Roupas e Acessórios',
+                                'Arte e Decoração', 'Memorabilia'),
+            defaultValue: "Colecionáveis"
+        },
     },
     {
         freezeTableName: true

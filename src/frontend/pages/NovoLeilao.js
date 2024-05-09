@@ -18,7 +18,7 @@ const NovoLeilao = () => {
 
   const [nomeProduto, setNomeProduto] = useState("");
   const [descricaoProduto, setDescricaoProduto] = useState("");
-  const [categoria, setCategoria] = useState("");
+  const [categoriaProduto, setCategoriaProduto] = useState("");
   const [precoInicial, setPrecoInicial] = useState("");
   const [duracaoDias, setDuracaoDias] = useState("");
   const [duracaoHoras, setDuracaoHoras] = useState("");
@@ -37,7 +37,7 @@ const NovoLeilao = () => {
       const novoLeilao = {
         nomeProduto,
         descricaoProduto,
-        categoria,
+        categoriaProduto,
         precoInicial,
         duracao: `${duracaoDias} dias ${duracaoHoras} horas ${duracaoMinutos} minutos`,
         urlImagemProduto,
