@@ -1,5 +1,6 @@
 {
   "name": "geekbid",
+  "type": "commonjs",
   "version": "1.0.0",
   "main": "index.js",
   "scripts": {
@@ -23,8 +24,6 @@
     "nodemailer": "^6.9.13",
     "pg": "^8.11.5",
     "pg-hstore": "^2.3.4",
-    "sequelize": "^6.37.3",
-    "sequelize-cli": "^6.6.2"
-  },
-  "description": ""
+    "sequelize": "^6.37.3"
+  }
 }

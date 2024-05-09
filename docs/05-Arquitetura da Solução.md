@@ -20,7 +20,7 @@ O Modelo Entidade-Relacionamento representa através de um diagrama como as enti
 
 ## Esquema Relacional
 
-![Esquema Relacional](img/esquema_relacional.png)
+![Esquema Relacional](img/esquema_relacional.jpg)
 
 ## Modelo Físico
 
