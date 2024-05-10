@@ -32,7 +32,7 @@ const NovoLeilao = () => {
     // Fetch categories from the database
     const fetchCategories = async () => {
       try {
-        const response = await fetch("http://192.168.1.106:3000/categorias");
+        const response = await fetch("http://localhost:3000/produto/categoria");
         console.log("Buscou categoria:", response);
         if (response.ok) {
           const data = await response.json();
@@ -56,7 +56,7 @@ const NovoLeilao = () => {
       const novoLeilao = {
         nomeProduto,
         descricaoProduto,
-        categoriaSelecionada,
+        categoriaProduto: categoriaSelecionada,
         precoInicial,
         duracao: `${duracaoDias} dias ${duracaoHoras} horas ${duracaoMinutos} minutos`,
         urlImagemProduto,
@@ -66,7 +66,7 @@ const NovoLeilao = () => {
       };
       console.log("Dados do novo leilão:", novoLeilao);
 
-      const response = await fetch("http://192.168.1.106:3000/leilao", {
+      const response = await fetch("http://localhost:3000/leilao", {
         method: "POST",
         headers: {
           "Content-Type": "application/json",
@@ -151,7 +151,7 @@ const NovoLeilao = () => {
           {categorias.length > 0 && (
             <Picker
               onValueChange={(itemValue, itemIndex) => {
-              console.log(itemValue);
+              console.log(itemValue, itemIndex);
               setCategoriaSelecionada(itemValue);
             }}
               selectedValue={categoriaSelecionada}
@@ -160,8 +160,8 @@ const NovoLeilao = () => {
               {categorias.map((cat,index) => (
                 <Picker.Item
                   key={cat.id}
-                  label={cat.descricaoCategoriaProduto}
-                  value={cat.id}
+                  label={cat.categoriaProduto}
+                  value={cat.categoriaProduto}
                 />
               ))}
             </Picker>
