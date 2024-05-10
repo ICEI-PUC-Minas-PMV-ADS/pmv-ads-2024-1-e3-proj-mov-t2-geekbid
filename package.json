@@ -1,6 +1,10 @@
 {
   "dependencies": {
-    "expo": "^51.0.0",
+    "@expo/vector-icons": "^14.0.1",
+    "@react-native-picker/picker": "^2.7.5",
+    "crypto": "^1.0.1",
+    "expo": "~51.0.2",
+    "expo-asset": "^10.0.6",
     "expo-cli": "^6.3.10",
     "react-native": "^0.74.1",
     "react-native-dropdown-picker": "^5.4.6"

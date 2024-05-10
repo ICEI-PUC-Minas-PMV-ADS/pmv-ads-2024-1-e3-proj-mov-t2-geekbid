@@ -5,11 +5,11 @@ import {
   Pressable,
   TextInput,
   Image,
-  Picker,
   ScrollView,
 } from "react-native";
 import { Button, Headline } from "react-native-paper";
 import { useNavigation } from "@react-navigation/native";
+import { Picker } from "@react-native-picker/picker";
 import Footer from "./../navegations/Footer";
 import novoLeilaoStyles from "./../css/NovoLeilaoStyles";
 
@@ -27,17 +27,20 @@ const NovoLeilao = () => {
   const [mensagemSalvo, setMensagemSalvo] = useState("");
   const [precoAtual, setPrecoAtual] = useState(precoInicial || 0);
   const [categorias, setCategorias] = useState([]);
+  const [mensagemURLInvalida, setMensagemURLInvalida] = useState("");
 
   useEffect(() => {
     // Fetch categories from the database
     const fetchCategories = async () => {
       try {
-        const response = await fetch("http://localhost:3000/produto/categoria");
+        const response = await fetch(
+          "http://192.168.1.106:3000/produto/categoria"
+        );
         console.log("Buscou categoria:", response);
         if (response.ok) {
           const data = await response.json();
           setCategorias(data.categorias);
-          console.log("Categorias armazenadas:", data.categorias); 
+          console.log("Categorias armazenadas:", data.categorias);
         } else {
           throw new Error("Erro ao buscar categorias");
         }
@@ -66,7 +69,7 @@ const NovoLeilao = () => {
       };
       console.log("Dados do novo leilão:", novoLeilao);
 
-      const response = await fetch("http://localhost:3000/leilao", {
+      const response = await fetch("http://192.168.1.106:3000/leilao", {
         method: "POST",
         headers: {
           "Content-Type": "application/json",
@@ -85,6 +88,31 @@ const NovoLeilao = () => {
       }
     } catch (error) {
       console.error("Erro ao salvar o leilão:", error);
+    }
+  };
+
+  // Função para verificar se uma string é uma URL válida
+  const isURLValid = (text) => {
+    const urlRegex = /^(ftp|http|https):\/\/[^ "]+$/;
+    return urlRegex.test(text);
+  };
+
+  // Função para lidar com a mudança de texto na entrada de URL
+  const handleURLChange = (text) => {
+    setUrlImagemProduto(text);
+    if (!isURLValid(text)) {
+      setMensagemURLInvalida("Insira uma URL válida.");
+    } else {
+      setMensagemURLInvalida("");
+    }
+  };
+
+  // Função para lidar com o envio do formulário
+  const handleSubmit = () => {
+    if (isURLValid(urlImagemProduto)) {
+      setMensagemURLInvalida("");
+    } else {
+      setMensagemURLInvalida("Insira uma URL válida.");
     }
   };
 
@@ -126,10 +154,11 @@ const NovoLeilao = () => {
           <Text style={novoLeilaoStyles.inputTitle}>URL da Imagem</Text>
           <TextInput
             value={urlImagemProduto}
-            onChangeText={(text) => setUrlImagemProduto(text)}
+            onChangeText={handleURLChange}
             style={novoLeilaoStyles.inputText}
           />
         </View>
+        <Text style={novoLeilaoStyles.errorMessage}>{mensagemURLInvalida}</Text>
         <View style={novoLeilaoStyles.inputBox}>
           <Text style={novoLeilaoStyles.inputTitle}>Nome</Text>
           <TextInput
@@ -151,13 +180,14 @@ const NovoLeilao = () => {
           {categorias.length > 0 && (
             <Picker
               onValueChange={(itemValue, itemIndex) => {
-              console.log(itemValue, itemIndex);
-              setCategoriaSelecionada(itemValue);
-            }}
+                console.log(itemValue, itemIndex);
+                setCategoriaSelecionada(itemValue);
+              }}
               selectedValue={categoriaSelecionada}
-              mode='dropdown'
+              mode="dropdown"
+              style={novoLeilaoStyles.categoria}
             >
-              {categorias.map((cat,index) => (
+              {categorias.map((cat, index) => (
                 <Picker.Item
                   key={cat.id}
                   label={cat.categoriaProduto}
@@ -213,11 +243,16 @@ const NovoLeilao = () => {
 
         <Pressable
           style={novoLeilaoStyles.button}
-          onPress={handleSalvarAlteracoesPress}
+          onPress={() => {
+            if (isURLValid(urlImagemProduto)) {
+              handleSalvarAlteracoesPress();
+            } else {
+              alert("Insira uma URL válida antes de salvar.");
+            }
+          }}
         >
           <Text style={novoLeilaoStyles.buttonText}>Salvar Alterações</Text>
         </Pressable>
-
         {mensagemSalvo ? <Text>{mensagemSalvo}</Text> : null}
       </ScrollView>
       <View>

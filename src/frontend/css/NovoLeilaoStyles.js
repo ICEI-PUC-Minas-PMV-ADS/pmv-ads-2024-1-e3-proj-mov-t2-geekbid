@@ -124,7 +124,10 @@ const styles = StyleSheet.create({
     fontSize: 20,
     textAlign: 'center',
     width: 60,
-  }
+  },
+  errorMessage: {
+    color: 'red',
+  },
 });
 
 export default styles;
