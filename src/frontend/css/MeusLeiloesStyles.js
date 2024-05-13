@@ -56,6 +56,64 @@ const styles = StyleSheet.create({
   price: {
     marginBottom: 10,
   },
+  container: {
+    paddingHorizontal: 5,
+  },
+  row: {
+    justifyContent: 'space-between',
+    marginBottom: 20,
+  },
+  itemContainer: {
+    widht: '80%',
+    height: 'auto',
+    borderWidth: 1,
+    borderColor: '#ccc',
+    borderRadius: 10,
+    padding: 10,
+    marginHorizontal: 5,
+    marginLeft: 15,
+    marginRight: 15,
+    marginBottom: 100,
+  },
+  image: {
+    width: '100%',
+    height: 160,
+    borderRadius: 10,
+    marginBottom: 10,
+  },
+  title: {
+    fontSize: 15,
+    fontWeight: 'bold',
+    marginBottom: 5,
+  },
+  infoContainer: {
+    flexDirection: 'column',
+    marginBottom: 10,
+  },
+  creator: {
+    marginBottom: 5,
+  },
+  price: {
+    marginBottom: 10,
+  },
+  button: {
+    backgroundColor: '#666cff',
+    paddingVertical: 10,
+    borderRadius: 5,
+    alignItems: 'center',
+  },
+  buttonText: {
+    color: '#fff',
+    fontSize: 16,
+  },
+  linkText: {
+    color: 'blue',
+    fontSize: 15,
+    textAlign: 'right',
+    paddingTop: 15,
+    paddingBottom: 15,
+    fontWeight: 'bold'
+  },  
 });
 
 export default styles;

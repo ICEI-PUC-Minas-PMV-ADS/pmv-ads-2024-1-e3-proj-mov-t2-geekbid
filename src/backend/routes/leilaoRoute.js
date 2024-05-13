@@ -8,6 +8,9 @@ router.post('/', leilaoController.cadastrarLeilao);
 // Rota para buscar todos os leilões
 router.get('/', leilaoController.listarLeiloes);
 
+// Rota para buscar todos os leilões - meusLeiloes
+router.get('/meusleiloes', leilaoController.listarMeusLeiloes);
+
 // Rota para buscar um leilão por ID
 router.get('/:id', leilaoController.listarLeilao);
 
