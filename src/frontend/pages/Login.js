@@ -1,38 +1,46 @@
-import React, { useState } from 'react';
-import { Button, Headline } from 'react-native-paper';
-import { StyleSheet, View } from 'react-native';
-import Container from '../components/Container';
-import Body from '../components/Body';
-import Input from '../components/Input';
-import { login } from '../services/auth.services';
-import { useNavigation } from '@react-navigation/native';
+import React, { useState } from 'react'
+import { useAuth } from '../services/auth.services'
+import { Button, Headline } from 'react-native-paper'
+import { StyleSheet, View } from 'react-native'
+import Container from '../components/Container'
+import Body from '../components/Body'
+import Input from '../components/Input'
+import { useNavigation } from '@react-navigation/native'
 
-const Login = () => {
-  const navigation = useNavigation();
+export function Login() {
+  const { signIn } = useAuth()
+  const navigation = useNavigation()
 
-  const [email, setEmail] = useState('');
-  const [password, setPassword] = useState('');
+  const [email, setEmail] = useState('')
+  const [senha, setSenha] = useState('')
 
-  const handleLoginPress = () => {
-    navigation.navigate('Home');
-  };
+  function handleLogin() {
+    if (!email || !senha) {
+      return alert('Preencha todos os campos!')
+    }
 
-  const handleLogin = () => {
-    login({
-      email: email,
-      password: password,
-    }).then((res) => {
-      console.log(res);
-      handleLoginPress();
-    });
-  };
+    signIn({ email, senha })
+    navigation.navigate('Home')
+
+    // const handleLoginPress = () => {
+    // }
+
+    // login({
+    //   email: email,
+    //   password: password
+    // }).then(() => {
+    //   console.log(email, password)
+    //   handleLoginPress()
+    // })
+  }
 
   return (
     <Container>
       <View style={styles.voltar}>
         <Button
           icon="chevron-left"
-          onPress={() => navigation.goBack()}></Button>
+          onPress={() => navigation.goBack()}
+        ></Button>
       </View>
       <Headline style={styles.textHeader}>
         Faça o Login para continuar!
@@ -42,13 +50,13 @@ const Login = () => {
           label="E-mail"
           value={email}
           mode="outlined"
-          onChangeText={(text) => setEmail(text)}
+          onChangeText={text => setEmail(text)}
         />
         <Input
           label="Senha"
-          value={password}
+          value={senha}
           mode="outlined"
-          onChangeText={(text) => setPassword(text)}
+          onChangeText={text => setSenha(text)}
           secureTextEntry
         />
         <Button style={styles.button} mode="contained" onPress={handleLogin}>
@@ -56,8 +64,8 @@ const Login = () => {
         </Button>
       </Body>
     </Container>
-  );
-};
+  )
+}
 
 const styles = StyleSheet.create({
   button: {
@@ -76,8 +84,8 @@ const styles = StyleSheet.create({
     marginLeft: 10,
     marginBottom: 50,
     marginTop: 80,
-    height: 60,
-  },
-});
+    height: 60
+  }
+})
 
-export default Login;
+export default Login

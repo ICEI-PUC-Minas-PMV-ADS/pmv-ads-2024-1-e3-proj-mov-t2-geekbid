@@ -38,5 +38,11 @@
     "metro-config": "^0.80.8",
     "react-app-rewired": "^2.2.1"
   },
-  "private": true
+  "private": true,
+  "name": "frontend",
+  "version": "1.0.0",
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "description": ""
 }
