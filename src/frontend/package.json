@@ -14,12 +14,8 @@
     "@react-navigation/native": "*",
     "@react-navigation/native-stack": "*",
     "axios": "^1.6.8",
-<<<<<<< HEAD
     "bootstrap": "^3.4.1",
     "expo": "^49.0.23",
-=======
-    "expo": "^50.0.17",
->>>>>>> origin/main
     "expo-cli": "^4.0.17",
     "expo-constants": "~14.4.2",
     "expo-status-bar": "~1.6.0",
