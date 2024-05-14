@@ -11,4 +11,7 @@ router.get('/', produtoController.buscarProdutos);
 // Rota para excluir produto
 router.delete('/:id', produtoController.excluirProduto);
 
+// Rota para buscar todas as categorias
+router.get('/categoria', produtoController.buscarCategorias)
+
 module.exports = router;
