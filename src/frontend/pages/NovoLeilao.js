@@ -10,12 +10,13 @@ import {
 import { Button, Headline } from "react-native-paper";
 import { useNavigation } from "@react-navigation/native";
 import { Picker } from "@react-native-picker/picker";
+import { useAuth } from '../services/auth.services'
 import Footer from "./../navegations/Footer";
 import novoLeilaoStyles from "./../css/NovoLeilaoStyles";
 
 const NovoLeilao = () => {
   const navigation = useNavigation();
-
+  const { usuario } = useAuth();
   const [nomeProduto, setNomeProduto] = useState("");
   const [descricaoProduto, setDescricaoProduto] = useState("");
   const [categoriaSelecionada, setCategoriaSelecionada] = useState("");
@@ -28,6 +29,7 @@ const NovoLeilao = () => {
   const [precoAtual, setPrecoAtual] = useState(precoInicial || 0);
   const [categorias, setCategorias] = useState([]);
   const [mensagemURLInvalida, setMensagemURLInvalida] = useState("");
+
 
   useEffect(() => {
     // Fetch categories from the database
@@ -66,6 +68,7 @@ const NovoLeilao = () => {
         dataInicio: dataInicioFim,
         dataFim: dataInicioFim,
         precoAtual,
+        // usuarioId: usuario.id, Retornando undefined
       };
       console.log("Dados do novo leilão:", novoLeilao);
 
