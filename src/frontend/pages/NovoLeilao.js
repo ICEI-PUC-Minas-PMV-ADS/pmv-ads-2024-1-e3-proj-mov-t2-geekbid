@@ -36,7 +36,7 @@ const NovoLeilao = () => {
     const fetchCategories = async () => {
       try {
         const response = await fetch(
-          "http://192.168.1.106:3000/produto/categoria"
+          "http://localhost:3000/produto/categoria"
         );
         console.log("Buscou categoria:", response);
         if (response.ok) {
