@@ -8,7 +8,13 @@ router.post('/', produtoController.cadastrarProduto);
 // Rota para buscar todos os produtos
 router.get('/', produtoController.buscarProdutos);
 
+// Rota para buscar detalhes de um produto por ID
+router.get('/:id', produtoController.buscarProdutoPorId);
+
 // Rota para excluir produto
 router.delete('/:id', produtoController.excluirProduto);
+
+// Rota para buscar todas as categorias
+router.get('/categoria', produtoController.buscarCategorias)
 
 module.exports = router;
