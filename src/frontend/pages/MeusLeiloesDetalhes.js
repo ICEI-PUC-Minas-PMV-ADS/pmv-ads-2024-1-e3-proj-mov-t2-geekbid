@@ -16,12 +16,14 @@ const MeusLeiloesDetalhes = () => {
   useEffect(() => {
     const fetchProduto = async () => {
       try {
-        const response = await fetch(`http://localhost:3000/produto/${id}`);
+        const response = await fetch(`http://192.168.1.106:3000/produto/${id}`);
         const data = await response.json();
         setProduto(data.produto);
       } catch (error) {
         console.error("Erro ao buscar detalhes do produto:", error);
-        Alert.alert("Erro ao buscar detalhes do produto. Por favor, tente novamente mais tarde.");
+        Alert.alert(
+          "Erro ao buscar detalhes do produto. Por favor, tente novamente mais tarde."
+        );
       }
     };
 
@@ -36,10 +38,12 @@ const MeusLeiloesDetalhes = () => {
     <View style={MeusLeiloesDetalhesStyles.container}>
       <View style={MeusLeiloesDetalhesStyles.head}>
         <Button icon="chevron-left" onPress={() => navigation.goBack()} />
-        <Headline style={MeusLeiloesDetalhesStyles.textHeader}>Detalhes do produto</Headline>
+        <Headline style={MeusLeiloesDetalhesStyles.textHeader}>
+          Detalhes do produto
+        </Headline>
         <IconButton
-          icon="trash-can-outline"
-          color="red"
+          icon="circle-edit-outline"
+          color="#666cff"
           size={30}
           onPress={handleExcluirLeilao}
           style={MeusLeiloesDetalhesStyles.iconTrash}
@@ -52,8 +56,14 @@ const MeusLeiloesDetalhes = () => {
             style={MeusLeiloesDetalhesStyles.image}
             source={{ uri: produto.urlImagemProduto }}
           />
-          <Text style={MeusLeiloesDetalhesStyles.title}>{produto.nomeProduto}</Text>
-          <Text style={MeusLeiloesDetalhesStyles.description}>{produto.descricaoProduto}</Text>
+          <View style={MeusLeiloesDetalhesStyles.box}>
+            <Text style={MeusLeiloesDetalhesStyles.title}>Nome</Text>
+            <Text style={MeusLeiloesDetalhesStyles.boxContent}>{produto.nomeProduto}</Text>
+          </View>
+          <View style={MeusLeiloesDetalhesStyles.box}>
+            <Text style={MeusLeiloesDetalhesStyles.title}>Descrição</Text>
+            <Text style={MeusLeiloesDetalhesStyles.boxContent}>{produto.descricaoProduto}</Text>
+          </View>
         </>
       )}
 

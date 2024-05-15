@@ -498,14 +498,7 @@ const styles = StyleSheet.create({
   },
   sendButton: {
     backgroundColor: "#666cff",
-    shadowColor: "#000",
-    shadowOffset: {
-      width: 0,
-      height: 2,
-    },
-    shadowOpacity: 0.25,
-    shadowRadius: 3.84,
-    elevation: 5,
+    boxShadow: "0px 2px 3.84px rgba(0, 0, 0, 0.25)", // Ajuste pois ShadowOffset está depreciated e quebrando no projeto
   },
   buttonCancelar: {
     borderWidth: 1,

@@ -10,13 +10,13 @@ import {
 import { Button, Headline } from "react-native-paper";
 import { useNavigation } from "@react-navigation/native";
 import { Picker } from "@react-native-picker/picker";
-import { useAuth } from '../services/auth.services'
+// import { useAuth } from '../services/auth.services'
 import Footer from "./../navegations/Footer";
 import novoLeilaoStyles from "./../css/NovoLeilaoStyles";
 
 const NovoLeilao = () => {
   const navigation = useNavigation();
-  const { usuario } = useAuth();
+  // const { usuario } = useAuth();
   const [nomeProduto, setNomeProduto] = useState("");
   const [descricaoProduto, setDescricaoProduto] = useState("");
   const [categoriaSelecionada, setCategoriaSelecionada] = useState("");
