@@ -1,12 +1,32 @@
-import React from "react";
-import { View, Text, Image } from "react-native";
+import React, { useState, useEffect } from "react";
+import { View, Text, Image, Alert } from "react-native";
 import { Button, Headline, IconButton } from "react-native-paper";
-import { useNavigation } from "@react-navigation/native";
+import { useNavigation, useRoute } from "@react-navigation/native";
 import Footer from "./../navegations/Footer";
 import MeusLeiloesDetalhesStyles from "./../css/MeusLeiloesDetalhesStyles";
 
 const MeusLeiloesDetalhes = () => {
   const navigation = useNavigation();
+  const route = useRoute();
+  const { id } = route.params;
+  console.log("ID do produto:", id);
+
+  const [produto, setProduto] = useState(null);
+
+  useEffect(() => {
+    const fetchProduto = async () => {
+      try {
+        const response = await fetch(`http://localhost:3000/produto/${id}`);
+        const data = await response.json();
+        setProduto(data.produto);
+      } catch (error) {
+        console.error("Erro ao buscar detalhes do produto:", error);
+        Alert.alert("Erro ao buscar detalhes do produto. Por favor, tente novamente mais tarde.");
+      }
+    };
+
+    fetchProduto();
+  }, [id]);
 
   const handleExcluirLeilao = () => {
     // Implemente a lógica para excluir o leilão
@@ -16,7 +36,7 @@ const MeusLeiloesDetalhes = () => {
     <View style={MeusLeiloesDetalhesStyles.container}>
       <View style={MeusLeiloesDetalhesStyles.head}>
         <Button icon="chevron-left" onPress={() => navigation.goBack()} />
-        <Headline style={MeusLeiloesDetalhesStyles.textHeader}>Detalhes do leilão</Headline>
+        <Headline style={MeusLeiloesDetalhesStyles.textHeader}>Detalhes do produto</Headline>
         <IconButton
           icon="trash-can-outline"
           color="red"
@@ -26,19 +46,17 @@ const MeusLeiloesDetalhes = () => {
         />
       </View>
 
-      {/* Renderizar a imagem */}
-      <Image
-        style={MeusLeiloesDetalhesStyles.image}
-        source={{ uri: "caminho/para/imagem.jpg" }} // Substitua pelo caminho da imagem
-      />
+      {produto && ( // Verifica se produto está definido
+        <>
+          <Image
+            style={MeusLeiloesDetalhesStyles.image}
+            source={{ uri: produto.urlImagemProduto }}
+          />
+          <Text style={MeusLeiloesDetalhesStyles.title}>{produto.nomeProduto}</Text>
+          <Text style={MeusLeiloesDetalhesStyles.description}>{produto.descricaoProduto}</Text>
+        </>
+      )}
 
-      {/* Renderizar o nome */}
-      <Text style={MeusLeiloesDetalhesStyles.title}>Nome do produto</Text>
-
-      {/* Renderizar a descrição */}
-      <Text style={MeusLeiloesDetalhesStyles.description}>Descrição do produto</Text>
-
-      {/* Botão de voltar */}
       <Button
         icon="chevron-left"
         mode="contained"
@@ -48,8 +66,6 @@ const MeusLeiloesDetalhes = () => {
       >
         Voltar
       </Button>
-
-      {/* Footer */}
       <Footer />
     </View>
   );

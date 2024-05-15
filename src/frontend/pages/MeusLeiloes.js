@@ -1,13 +1,5 @@
 import React, { useState, useEffect } from "react";
-import {
-  View,
-  Text,
-  StyleSheet,
-  Image,
-  ScrollView,
-  TouchableOpacity,
-  Alert,
-} from "react-native";
+import { View, Text, StyleSheet, Image, ScrollView, TouchableOpacity, Alert } from "react-native";
 import { Button, Headline, IconButton } from "react-native-paper";
 import { useNavigation } from "@react-navigation/native";
 import Footer from "./../navegations/Footer";
@@ -17,34 +9,31 @@ const MeusLeiloes = () => {
   const navigation = useNavigation();
   const [meusLeiloes, setMeusLeiloes] = useState([]);
 
-  const handleMeusLeiloesDetalhes = () => {
-    navigation.navigate("MeusLeiloesDetalhes");
-  };
-  
-  const getLeiloes = () => {
-    fetch(`http://192.168.1.106:3000/leilao/meusleiloes`)
-      .then((res) => res.json())
-      .then((data) => {
+  useEffect(() => {
+    const getLeiloes = async () => {
+      try {
+        const response = await fetch(`http://localhost:3000/leilao/meusleiloes`);
+        const data = await response.json();
         console.log("Dados recebidos:", data);
         setMeusLeiloes(data.meusLeiloes);
-      })
-      .catch((error) => console.error(error));
-  };
+      } catch (error) {
+        console.error(error);
+      }
+    };
 
-  useEffect(() => {
     getLeiloes();
   }, []);
 
-  console.log("Leilões: ", meusLeiloes);
-
+  const handleMeusLeiloesDetalhes = (produtoId) => {
+    console.log("ID do produto selecionado:", produtoId);
+    navigation.navigate('MeusLeiloesDetalhes', { id: produtoId });
+  };
+ 
   return (
     <View style={MeusLeiloesStyles.container}>
       <ScrollView style={MeusLeiloesStyles.scrollContent}>
         <View style={MeusLeiloesStyles.head}>
-          <Button
-            icon="chevron-left"
-            onPress={() => navigation.goBack()}
-          ></Button>
+          <Button icon="chevron-left" onPress={() => navigation.goBack()} />
           <Headline style={MeusLeiloesStyles.textHeader}>Meus Leilões</Headline>
           <IconButton
             icon="plus-circle-outline"
@@ -55,6 +44,7 @@ const MeusLeiloes = () => {
           />
         </View>
 
+        
         {meusLeiloes &&
           meusLeiloes.map((item, index) => (
             <View style={MeusLeiloesStyles.itemContainer} key={item.id}>
@@ -67,7 +57,6 @@ const MeusLeiloes = () => {
                 )}
               <Text style={MeusLeiloesStyles.title} key={index}>
                 {item.produto && item.produto.nomeProduto}
-              
               </Text>
               <View style={MeusLeiloesStyles.infoContainer}>
                 <Text style={MeusLeiloesStyles.creator}>
@@ -82,11 +71,10 @@ const MeusLeiloes = () => {
               </View>
               <TouchableOpacity
                 style={MeusLeiloesStyles.button}
-                onPress={handleMeusLeiloesDetalhes}
+                onPress={() => handleMeusLeiloesDetalhes(item.id)} 
               >
                 <Text style={MeusLeiloesStyles.buttonText}>Ver detalhes</Text>
               </TouchableOpacity>
-              
             </View>
           ))}
       </ScrollView>

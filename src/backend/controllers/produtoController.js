@@ -38,6 +38,27 @@ const produtoController = {
         }
     },
   
+    // Buscar detalhes de um produto por ID
+    async buscarProdutoPorId(req, res) {
+        try {
+            const { id } = req.params;
+        
+            // Buscar o produto pelo ID no banco de dados
+            const produto = await Produto.findByPk(id);
+        
+            // Verificar se o produto foi encontrado
+            if (!produto) {
+                return res.status(404).json({ error: 'Produto não encontrado' });
+            }
+        
+            // Responder com o produto encontrado
+            res.status(200).json({ produto });
+        } catch (error) {
+            console.error('Erro ao buscar detalhes do produto:', error);
+            res.status(500).json({ error: 'Erro interno do servidor' });
+        }
+    },
+
     // Excluir produto
     async excluirProduto(req, res) {
         try {
@@ -62,8 +83,6 @@ const produtoController = {
 
     // Rota para buscar todas as categorias
     async buscarCategorias(req, res) {
-    
-        
         try {
             // Buscar todas as categorias no banco de dados
             index = Array(10).fill().map((e, index) => index + 1);

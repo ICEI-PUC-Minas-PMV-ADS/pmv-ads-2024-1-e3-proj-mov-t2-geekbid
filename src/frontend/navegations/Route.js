@@ -1,17 +1,18 @@
-import React from 'react';
-import { createNativeStackNavigator } from '@react-navigation/native-stack';
-import Inicial from './Inicial';
-import Register from '../pages/Register';
-import Login from '../pages/Login';
-import Home from '../pages/Home';
-import MinhasInformacoes from '../pages/MinhasInformacoes';
-import MeusLeiloes from '../pages/MeusLeiloes';
-import MeusLances from '../pages/MeusLances';
-import NovoLeilao from '../pages/NovoLeilao';
-import EnviarLance from '../pages/EnviarLance';
-import Perfil from '../pages/Perfil';
-import Notificacao from '../pages/Notificacao';
-import Footer from './Footer';
+import React from "react";
+import { createNativeStackNavigator } from "@react-navigation/native-stack";
+import Inicial from "./Inicial";
+import Register from "../pages/Register";
+import Login from "../pages/Login";
+import Home from "../pages/Home";
+import MinhasInformacoes from "../pages/MinhasInformacoes";
+import MeusLeiloes from "../pages/MeusLeiloes";
+import MeusLeiloesDetalhes from "../pages/MeusLeiloesDetalhes";
+import MeusLances from "../pages/MeusLances";
+import NovoLeilao from "../pages/NovoLeilao";
+import EnviarLance from "../pages/EnviarLance";
+import Perfil from "../pages/Perfil";
+import Notificacao from "../pages/Notificacao";
+import Footer from "./Footer";
 
 const Stack = createNativeStackNavigator();
 
@@ -61,6 +62,13 @@ const Route = () => {
         }}
       />
       <Stack.Screen
+        name="MeusLeiloesDetalhes"
+        component={MeusLeiloesDetalhes}
+        options={{
+          headerShown: false,
+        }}
+      />
+      <Stack.Screen
         name="MeusLances"
         component={MeusLances}
         options={{
@@ -81,7 +89,7 @@ const Route = () => {
           headerShown: false,
         }}
       />
-            <Stack.Screen
+      <Stack.Screen
         name="Perfil"
         component={Perfil}
         options={{
@@ -102,7 +110,6 @@ const Route = () => {
           headerShown: false,
         }}
       />
-
     </Stack.Navigator>
   );
 };
