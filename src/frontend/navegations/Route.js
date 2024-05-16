@@ -7,6 +7,7 @@ import Home from "../pages/Home";
 import MinhasInformacoes from "../pages/MinhasInformacoes";
 import MeusLeiloes from "../pages/MeusLeiloes";
 import MeusLeiloesDetalhes from "../pages/MeusLeiloesDetalhes";
+import EditarLeilao from "../pages/EditarLeilao";
 import MeusLances from "../pages/MeusLances";
 import NovoLeilao from "../pages/NovoLeilao";
 import EnviarLance from "../pages/EnviarLance";
@@ -68,6 +69,14 @@ const Route = () => {
           headerShown: false,
         }}
       />
+      <Stack.Screen
+        name="EditarLeilao"
+        component={EditarLeilao}
+        options={{
+          headerShown: false,
+        }}
+      />
+
       <Stack.Screen
         name="MeusLances"
         component={MeusLances}

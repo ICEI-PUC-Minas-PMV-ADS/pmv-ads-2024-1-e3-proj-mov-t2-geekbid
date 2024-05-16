@@ -73,7 +73,7 @@ const styles = StyleSheet.create({
     marginHorizontal: 5,
     marginLeft: 15,
     marginRight: 15,
-    marginBottom: 100,
+    marginBottom: 10,
   },
   image: {
     width: '100%',

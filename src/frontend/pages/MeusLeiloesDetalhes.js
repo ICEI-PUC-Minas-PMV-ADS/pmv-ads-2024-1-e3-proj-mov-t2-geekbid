@@ -30,6 +30,11 @@ const MeusLeiloesDetalhes = () => {
     fetchProduto();
   }, [id]);
 
+  const handleEditarLeilao = (produtoId) => {
+    console.log("ID do produto selecionado:", produtoId);
+    navigation.navigate('EditarLeilao', { id: produtoId });
+  };
+
   const handleExcluirLeilao = () => {
     // Implemente a lógica para excluir o leilão
   };
@@ -39,18 +44,18 @@ const MeusLeiloesDetalhes = () => {
       <View style={MeusLeiloesDetalhesStyles.head}>
         <Button icon="chevron-left" onPress={() => navigation.goBack()} />
         <Headline style={MeusLeiloesDetalhesStyles.textHeader}>
-          Detalhes do produto
+          Detalhes do Leilão
         </Headline>
         <IconButton
           icon="circle-edit-outline"
           color="#666cff"
           size={30}
-          onPress={handleExcluirLeilao}
+          onPress={() => handleEditarLeilao(id)}
           style={MeusLeiloesDetalhesStyles.iconTrash}
         />
       </View>
 
-      {produto && ( // Verifica se produto está definido
+      {produto && (
         <>
           <Image
             style={MeusLeiloesDetalhesStyles.image}

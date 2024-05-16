@@ -12,7 +12,7 @@ const MeusLeiloesDetalhesStyles = StyleSheet.create({
     marginBottom: 20,
   },
   textHeader: {
-    fontSize: 24,
+    fontSize: 20,
     marginLeft: 20,
   },
   iconTrash: {
