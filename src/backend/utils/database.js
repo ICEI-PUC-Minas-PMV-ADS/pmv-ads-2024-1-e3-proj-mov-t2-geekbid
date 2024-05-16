@@ -3,7 +3,7 @@
 
 const Sequelize = require('sequelize')
 
-const sequelize = new Sequelize('geekbid', 'postgres', '1234', {
+const sequelize = new Sequelize('geekbid', 'postgres', '123456', {
   dialect: 'postgres',
   host: 'localhost'
 })
