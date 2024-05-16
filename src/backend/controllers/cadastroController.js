@@ -15,7 +15,8 @@ class CadastroController {
         throw new AppError('Este email já está em uso.', 400)
       }
       
-      const hashedSenha = await bcrypt.hash(senha, 10)
+
+      // const hashedSenha = await bcrypt.hash(senha, 10)
 
       // Cria o usuário
       const novoUsuario = await Usuario.create({

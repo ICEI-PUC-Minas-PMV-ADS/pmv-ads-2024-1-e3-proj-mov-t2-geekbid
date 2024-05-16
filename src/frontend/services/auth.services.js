@@ -12,10 +12,10 @@ function AuthProvider({ children }) {
       const response = await api.post('/sessao', { email, senha })
       const { usuario, token } = response.data
 
-      AsyncStorage.setItem('@geekbid:usuario', JSON.stringify(usuario))
-      AsyncStorage.setItem('@geekbid:token', token)
+      // AsyncStorage.setItem('@geekbid:usuario', JSON.stringify(usuario))
+      // AsyncStorage.setItem('@geekbid:token', token)
 
-      api.defaults.headers.common['Authorization'] = `Bearer ${token}`
+      // api.defaults.headers.common['Authorization'] = `Bearer ${token}`
       setData({ usuario, token })
       console.log(response)
     } catch (error) {
@@ -42,19 +42,19 @@ function AuthProvider({ children }) {
     }
   }
 
-  useEffect(() => {
-    const token = AsyncStorage.getItem('@geekbid:token')
-    const usuario = AsyncStorage.getItem('@geekbid:usuario')
+  // useEffect(() => {
+  //   const token = AsyncStorage.getItem('@geekbid:token')
+  //   const usuario = AsyncStorage.getItem('@geekbid:usuario')
 
-    if (token && usuario) {
-      api.defaults.headers.common['Authorization'] = `Bearer ${token}`
+  //   if (token && usuario) {
+  //     api.defaults.headers.common['Authorization'] = `Bearer ${token}`
 
-      setData({
-        token,
-        usuario: JSON.parse(usuario)
-      })
-    }
-  }, [])
+  //     setData({
+  //       token,
+  //       usuario: JSON.parse(usuario)
+  //     })
+  //   }
+  // }, [])
   return (
     <AuthContext.Provider
       value={{ signIn, updatePerfil, usuario: data.usuario }}
