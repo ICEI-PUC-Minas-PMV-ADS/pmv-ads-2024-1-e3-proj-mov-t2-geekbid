@@ -24,18 +24,35 @@ const MeusLeiloesDetalhesStyles = StyleSheet.create({
     resizeMode: "cover",
     marginBottom: 20,
   },
-  title: {
-    fontSize: 20,
-    fontWeight: "bold",
+  box: {
+    borderWidth: 1,
+    borderColor: "#ccc",
+    borderRadius: 5,
+    paddingLeft: 10,
     marginBottom: 10,
+    height: 60,
   },
-  description: {
+  boxTitle: {
+    marginTop:2,
+    paddingBottom: 5,
+    fontSize: 11,
+    color: "#6f6f6f",
+  },
+  boxContent: {
+    height: 30,
+    marginTop: 5,
     fontSize: 16,
-    marginBottom: 20,
+    color: "#000000",
   },
-  backButton: {
-    alignSelf: "flex-start",
-    marginTop: 20,
+    backButton: {
+    color: "#fff",
+    fontSize: 16,
+    fontWeight: "bold",
+    backgroundColor: "#666cff",
+    padding: 15,
+    borderRadius: 5,
+    alignItems: "center",
+    marginBottom: 5,
   },
 });
 

@@ -96,6 +96,7 @@ const produtoController = {
                     "categoriaProduto": categorias_vec[i]
                 });
             }
+            console.log("Categorias: ", categorias);
 
             // Responder com as categorias encontradas
             res.status(200).json({ categorias });

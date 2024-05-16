@@ -1,5 +1,9 @@
 {
   "devDependencies": {
     "nodemon": "^3.1.0"
+  },
+  "dependencies": {
+    "@react-native-picker/picker": "^2.7.5",
+    "expo": "~51.0.6"
   }
 }
