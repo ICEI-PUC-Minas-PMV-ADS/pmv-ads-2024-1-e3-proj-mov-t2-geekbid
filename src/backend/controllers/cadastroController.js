@@ -7,6 +7,7 @@ const transporter = require('./emailController')
 class CadastroController {
   async create(request, response) {
     const { nome, email, senha } = request.body
+    const hashedSenha = await bcrypt.hash(senha, 10)
 
     try {
       // Verifica se o email já está em uso
@@ -16,7 +17,11 @@ class CadastroController {
       }
 
       // Cria o usuário
-      const novoUsuario = await Usuario.create({ nome, email, senha })
+      const novoUsuario = await Usuario.create({
+        nome,
+        email,
+        senha: hashedSenha
+      })
 
       // Envia e-mail de validação de cadastro
       if (novoUsuario) {
@@ -54,20 +59,20 @@ class CadastroController {
 
   async delete(req, res) {
     try {
-        const { id } = req.params;
+      const { id } = req.params
 
-        const deletedRowsCount = await Usuario.destroy({ where: { id } });
+      const deletedRowsCount = await Usuario.destroy({ where: { id } })
 
-        if (deletedRowsCount === 0) {
-            return res.status(404).json({ error: 'Usuário não encontrado' });
-        }
+      if (deletedRowsCount === 0) {
+        return res.status(404).json({ error: 'Usuário não encontrado' })
+      }
 
-        res.json({ message: 'Usuário excluído com sucesso' });
+      res.json({ message: 'Usuário excluído com sucesso' })
     } catch (error) {
-        console.error('Erro ao excluir cadastro de usuário:', error.message);
-        res.status(500).json({ error: 'Erro do servidor' });
+      console.error('Erro ao excluir cadastro de usuário:', error.message)
+      res.status(500).json({ error: 'Erro do servidor' })
     }
-}
+  }
 }
 
 module.exports = CadastroController

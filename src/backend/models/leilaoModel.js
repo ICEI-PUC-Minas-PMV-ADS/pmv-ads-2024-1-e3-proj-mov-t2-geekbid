@@ -1,6 +1,7 @@
 const { Sequelize, DataTypes } = require("sequelize");
-
 const sequelize = require("../utils/database");
+const Usuario = require("./usuarioModel"); 
+const Produto = require("./produtoModel");
 
 const Leilao = sequelize.define("leilao", {
     id: {
@@ -34,5 +35,10 @@ const Leilao = sequelize.define("leilao", {
 {
     freezeTableName: true
 });
+
+// Definição da associação com o modelo Usuario e Produto
+Leilao.belongsTo(Usuario, { foreignKey: 'usuarioId', as: 'usuario' });
+Leilao.belongsTo(Produto, { foreignKey: 'produtoId', as: 'produto' });
+
 
 module.exports = Leilao;

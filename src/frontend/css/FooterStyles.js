@@ -13,14 +13,7 @@ const styles = StyleSheet.create({
     borderTopWidth: 1,
     borderTopColor: 'rgba(204, 204, 204, 0.05)',
     backgroundColor: '#f9f9f9', 
-    shadowColor: 'rgba(128, 128, 128, 0.3)', 
-    shadowOffset: {
-      width: 0, 
-      height: -3, 
-    },
-    shadowOpacity: 0.3, 
-    shadowRadius: 4, 
-    elevation: 6, 
+    boxShadow: '0px -3px 4px rgba(128, 128, 128, 0.3)', 
   },
   iconButtonHome: {
     marginLeft: 20,

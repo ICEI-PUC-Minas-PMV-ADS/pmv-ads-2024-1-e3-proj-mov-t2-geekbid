@@ -1,4 +1,5 @@
-import React, { useState, useEffect } from "react";
+import axios from 'axios'
+import React, { useState, useEffect } from 'react'
 import {
   View,
   Text,
@@ -10,150 +11,185 @@ import {
   Modal,
   TouchableHighlight,
   TouchableWithoutFeedback,
-  Keyboard,
-} from "react-native";
+  Keyboard
+} from 'react-native'
+import moment from 'moment'
 
-const EnviarLance = ({ navigation }) => {
-  const [tempoRestante, setTempoRestante] = useState("");
-  const [ultimoLance, setUltimoLance] = useState(0);
-  const [seuLance, setSeuLance] = useState(0);
-  const [novoLance, setNovoLance] = useState(0);
-  const [modalVisible, setModalVisible] = useState(false);
-  const [lanceEnviadoModalVisible, setLanceEnviadoModalVisible] = useState(false);
-
-
+const EnviarLance = ({ route, navigation }) => {
+  const [tempoRestante, setTempoRestante] = useState('')
+  const [ultimoLance, setUltimoLance] = useState(0)
+  const [seuLance, setSeuLance] = useState(0)
+  const [novoLance, setNovoLance] = useState(0)
+  const [modalVisible, setModalVisible] = useState(false)
+  const [lanceEnviadoModalVisible, setLanceEnviadoModalVisible] =
+    useState(false)
+  const { leilaoId, leilaoDataFim, nomeProduto, nomeUsuario, imagemProduto } =
+    route.params
   // Dados mocados enquanto aguardamos conexão com o backend
-  const tituloProduto = "Título do Produto";
-  const responsavel = "Fulano";
-  const imagemUrl = "https://via.placeholder.com/300";
+  const tituloProduto = 'Título do Produto'
+  const responsavel = 'Fulano'
+  const imagemUrl = 'https://via.placeholder.com/300'
+
+  useEffect(() => {
+    fetchLances()
+  }, [])
+
+  async function fetchLances() {
+    const resp = await axios.get('http://localhost:3000/lances/' + leilaoId)
+    console.log(resp)
+
+    if (resp.data.length > 0) {
+      // Use reduce para calcular o maior lance
+      const maiorLance = resp.data.reduce((maior, lance) => {
+        return lance.valorLance > maior ? lance.valorLance : maior
+      }, resp.data[0].valorLance) // Inicialize com o primeiro lance
+
+      console.log('Maior lance:', maiorLance)
+      setUltimoLance(maiorLance)
+      setNovoLance(maiorLance)
+    } else {
+      console.log('Não há lances para este leilão.')
+      setNovoLance(50)
+    }
+  }
 
   useEffect(() => {
     const countdown = () => {
       // Lógica para calcular tempo restante
-      const dataLeilao = new Date("2024-04-21T23:59:59"); // Data de encerramento do leilão
-      const agora = new Date();
-      const diff = dataLeilao - agora;
+      const dataLeilao = new Date('2024-04-21T23:59:59') // Data de encerramento do leilão
+      const agora = new Date()
+      const diff = dataLeilao - agora
 
-      const dias = Math.floor(diff / (1000 * 60 * 60 * 24));
+      const dias = Math.floor(diff / (1000 * 60 * 60 * 24))
       const horas = Math.floor(
         (diff % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60)
-      );
-      const minutos = Math.floor((diff % (1000 * 60 * 60)) / (1000 * 60));
+      )
+      const minutos = Math.floor((diff % (1000 * 60 * 60)) / (1000 * 60))
 
-      setTempoRestante(`${dias} dias ${horas} horas ${minutos} minutos`);
-    };
+      setTempoRestante(`${dias} dias ${horas} horas ${minutos} minutos`)
+    }
 
-    // Simulação de busca do último lance do backend
-    const fetchUltimoLance = async () => {
-      // Aqui seria a lógica para buscar o último lance do backend
-      // Como não temos o backend, vamos simular um valor aleatório
-      const valorUltimoLance = Math.floor(Math.random() * 10000) + 1000;
-      setUltimoLance(valorUltimoLance);
-      setNovoLance(valorUltimoLance); // Inicializa a div do meio com o valor do último lance
-    };
-
-    fetchUltimoLance();
-    countdown(); // Chama a função inicialmente
+    countdown() // Chama a função inicialmente
 
     // Atualiza o tempo restante a cada minuto
-    const intervalId = setInterval(countdown, 60000); // 60000 milissegundos = 1 minuto
+    const intervalId = setInterval(countdown, 60000) // 60000 milissegundos = 1 minuto
 
     // Limpa o intervalo ao desmontar o componente
-    return () => clearInterval(intervalId);
-  }, []);
+    return () => clearInterval(intervalId)
+  }, [])
 
   // Função para aumentar o lance em 50
   const aumentarLance = () => {
-    setNovoLance(novoLance + 50);
-  };
+    setNovoLance(novoLance + 50)
+  }
 
   // Função para diminuir o lance em 50
   const diminuirLance = () => {
     if (novoLance >= ultimoLance + 50) {
-      setNovoLance(novoLance - 50);
+      setNovoLance(novoLance - 50)
     } else {
       Alert.alert(
-        "Atenção",
-        "O lance não pode ser menor que o último lance registrado."
-      );
+        'Atenção',
+        'O lance não pode ser menor que o último lance registrado.'
+      )
     }
-  };
+  }
 
   // Função para enviar o lance para o backend
   const enviarLance = () => {
     // Verifica se o lance é válido
     if (novoLance >= ultimoLance + 50) {
-      openModal();
-      setSeuLance(novoLance); // Atualiza o campo Seu Lance com o novo valor
+      openModal()
+      setSeuLance(novoLance) // Atualiza o campo Seu Lance com o novo valor
     } else {
       // Alerta se o lance não for válido
       Alert.alert(
-        "Atenção",
-        "O lance deve ser no mínimo 50 acima do último lance registrado."
-      );
+        'Atenção',
+        'O lance deve ser no mínimo 50 acima do último lance registrado.'
+      )
     }
-  };
+  }
+
+  const doEnviarLance = async () => {
+    const resp = await axios.post('http://localhost:3000/lances/', {
+      usuarioId: 1,
+      leilaoId: leilaoId,
+      valorLance: novoLance
+    })
+
+    console.log(resp)
+
+    openLanceEnviadoModal()
+    setSeuLance(novoLance)
+  }
 
   // Função para formatar o valor para moeda brasileira
-  const formatCurrency = (value) => {
-    return value.toLocaleString("pt-BR", {
-      style: "currency",
-      currency: "BRL",
-    });
-  };
+  const formatCurrency = value => {
+    return value.toLocaleString('pt-BR', {
+      style: 'currency',
+      currency: 'BRL'
+    })
+  }
 
   // Funnção para abrir e fechar modal enviar lance
   const openModal = () => {
-    setModalVisible(true);
-  };
+    setModalVisible(true)
+  }
 
   const closeModal = () => {
-    setModalVisible(false);
-  };
+    setModalVisible(false)
+  }
 
   // Funnção para abrir e fechar modal confirmar envio
   const openLanceEnviadoModal = () => {
-    setLanceEnviadoModalVisible(true);
-  };
-  
+    setLanceEnviadoModalVisible(true)
+  }
+
   const closeLanceEnviadoModal = () => {
-    setLanceEnviadoModalVisible(false);
-  };
-  
+    setLanceEnviadoModalVisible(false)
+  }
+
+  function tempoRestanteF() {
+    console.log(leilaoDataFim)
+    const dataFim = moment(leilaoDataFim, 'YYYY-MM-DD HH:mm:ss.SSS Z')
+    const agora = moment()
+    console.log(dataFim)
+    console.log(agora)
+
+    // Calcule a diferença de tempo em dias, horas e minutos
+    const diff = moment.duration(dataFim.diff(agora))
+    const dias = diff.days()
+    const horas = diff.hours()
+    const minutos = diff.minutes()
+
+    return `${dias} dias ${horas} horas ${minutos} minutos`
+  }
+
+  function leilaoAcabou() {
+    return tempoRestanteF().split(' ')[4] <= 0
+  }
 
   return (
     <ScrollView contentContainerStyle={styles.scrollContainer}>
       <View style={styles.container}>
         <View style={styles.header}>
           <TouchableOpacity onPress={() => navigation.goBack()}>
-            <Text style={styles.voltarIcone}>{"<"}</Text>
+            <Text style={styles.voltarIcone}>{'<'}</Text>
           </TouchableOpacity>
-          <Text style={styles.titulo}>{tituloProduto}</Text>
+          <Text style={styles.titulo}>{nomeProduto}</Text>
         </View>
-        <Text style={styles.responsavel}>By {responsavel}</Text>
-        <Image source={{ uri: imagemUrl }} style={styles.imagem} />
+        <Text style={styles.responsavel}>By {nomeUsuario}</Text>
+        <Image source={{ uri: imagemProduto }} style={styles.imagem} />
         <View style={styles.infoContainer}>
-          <Text style={styles.subtitulo}>Tempo Restante</Text>
-          <View style={styles.infoItem}>
-            <View style={styles.infoBox}>
-              <Text style={styles.infoValue}>
-                {tempoRestante.split(" ")[0]}
-              </Text>
-              <Text style={styles.infoLabel}>dias</Text>
-            </View>
-            <View style={styles.infoBox}>
-              <Text style={styles.infoValue}>
-                {tempoRestante.split(" ")[2]}
-              </Text>
-              <Text style={styles.infoLabel}>horas</Text>
-            </View>
-            <View style={styles.infoBox}>
-              <Text style={styles.infoValue}>
-                {tempoRestante.split(" ")[4]}
-              </Text>
-              <Text style={styles.infoLabel}>minutos</Text>
-            </View>
-          </View>
+          {!leilaoAcabou() ? (
+            <Text style={styles.infoValue}>
+              {`${tempoRestanteF().split(' ')[0]} Dias `}
+              {`${tempoRestanteF().split(' ')[2]} Horas `}
+              {`${tempoRestanteF().split(' ')[4]} Minutos`}
+            </Text>
+          ) : (
+            <Text style={styles.infoValue}>Finalizado</Text>
+          )}
         </View>
         <View style={styles.infoLancesContainer}>
           <View style={styles.lanceItemLeft}>
@@ -190,8 +226,8 @@ const EnviarLance = ({ navigation }) => {
         transparent={true}
         visible={modalVisible}
         onRequestClose={() => {
-          Alert.alert("Modal has been closed.");
-          closeModal();
+          Alert.alert('Modal has been closed.')
+          closeModal()
         }}
       >
         <TouchableWithoutFeedback onPress={Keyboard.dismiss} accessible={false}>
@@ -214,10 +250,7 @@ const EnviarLance = ({ navigation }) => {
               <View style={styles.modalButtonContainer}>
                 <TouchableOpacity
                   style={[styles.modalButton, styles.sendButton]}
-                  onPress={() => {
-                    openLanceEnviadoModal();
-                    setSeuLance(novoLance);
-                  }}
+                  onPress={() => doEnviarLance()}
                 >
                   <Text style={styles.modalButtonText}>Enviar</Text>
                 </TouchableOpacity>
@@ -233,305 +266,305 @@ const EnviarLance = ({ navigation }) => {
         </TouchableWithoutFeedback>
       </Modal>
       <Modal
-  animationType="slide"
-  transparent={true}
-  visible={lanceEnviadoModalVisible}
-  onRequestClose={() => {
-    Alert.alert("Modal has been closed.");
-    closeLanceEnviadoModal();
-  }}
->
-  <TouchableWithoutFeedback onPress={Keyboard.dismiss} accessible={false}>
-    <View style={styles.modalContainer}>
-      <View style={styles.modalContent}>
-        <View style={styles.modalEnviado}>
-          {/* Ícone de check */}
-          <Image
-            source={require("./../assets/verifica.png")}
-            style={styles.modalIcon}
-          />
-          <Text style={styles.modalLanceEnviado}>Lance enviado!</Text>
-        </View>
-        <TouchableOpacity
-          style={[styles.modalButton, styles.sendButton]}
-          onPress={() => {
-            closeLanceEnviadoModal();
-            closeModal();
-            // Adicionar lógica para acompanhar o lance aqui
-          }}
-        >
-          <Text style={styles.modalButtonText}>Acompanhe seu lance</Text>
-        </TouchableOpacity>
-      </View>
-    </View>
-  </TouchableWithoutFeedback>
-</Modal>
-
+        animationType="slide"
+        transparent={true}
+        visible={lanceEnviadoModalVisible}
+        onRequestClose={() => {
+          Alert.alert('Modal has been closed.')
+          closeLanceEnviadoModal()
+        }}
+      >
+        <TouchableWithoutFeedback onPress={Keyboard.dismiss} accessible={false}>
+          <View style={styles.modalContainer}>
+            <View style={styles.modalContent}>
+              <View style={styles.modalEnviado}>
+                {/* Ícone de check */}
+                <Image
+                  source={require('./../assets/verifica.png')}
+                  style={styles.modalIcon}
+                />
+                <Text style={styles.modalLanceEnviado}>Lance enviado!</Text>
+              </View>
+              <TouchableOpacity
+                style={[styles.modalButton, styles.sendButton]}
+                onPress={() => {
+                  closeLanceEnviadoModal()
+                  closeModal()
+                  // Adicionar lógica para acompanhar o lance aqui
+                }}
+              >
+                <Text style={styles.modalButtonText}>Acompanhe seu lance</Text>
+              </TouchableOpacity>
+            </View>
+          </View>
+        </TouchableWithoutFeedback>
+      </Modal>
     </ScrollView>
-  );
-};
-
+  )
+}
 
 const styles = StyleSheet.create({
   scrollContainer: {
-    flexGrow: 1,
+    flexGrow: 1
   },
   container: {
     flex: 1,
-    backgroundColor: "#fff",
+    backgroundColor: '#fff',
     padding: 20,
-    alignItems: "center",
+    alignItems: 'center'
   },
   header: {
-    flexDirection: "row",
-    alignItems: "center",
-    marginBottom: 5,
+    flexDirection: 'row',
+    alignItems: 'center',
+    marginBottom: 5
   },
   voltarIcone: {
     fontSize: 24,
-    fontWeight: "bold",
+    fontWeight: 'bold',
     marginRight: 10,
-    marginTop: 20,
+    marginTop: 20
   },
   titulo: {
     fontSize: 24,
-    fontWeight: "bold",
+    fontWeight: 'bold',
     marginTop: 25,
-    flex: 1,
+    flex: 1
   },
   responsavel: {
     fontSize: 12,
     marginBottom: 20,
     marginLeft: 25,
-    alignSelf: "flex-start",
+    alignSelf: 'flex-start'
   },
   imagem: {
-    width: "80%",
+    width: '80%',
     height: 200,
     borderRadius: 10,
-    marginBottom: 20,
+    marginBottom: 20
   },
   infoContainer: {
-    width: "80%",
+    width: '80%',
     marginBottom: 20,
-    alignItems: "center",
+    alignItems: 'center'
   },
   subtitulo: {
     fontSize: 20,
-    fontWeight: "bold",
+    fontWeight: 'bold',
     marginBottom: 10,
-    textAlign: "center",
+    textAlign: 'center'
   },
   infoItem: {
-    flexDirection: "row",
-    justifyContent: "space-between",
-    marginTop: 10,
+    flexDirection: 'row',
+    justifyContent: 'space-between',
+    marginTop: 10
   },
   infoBox: {
     flex: 1,
     borderWidth: 1,
-    borderColor: "#ccc",
+    borderColor: '#ccc',
     padding: 10,
     borderRadius: 5,
-    marginHorizontal: 5,
+    marginHorizontal: 5
   },
   infoValue: {
     fontSize: 18,
-    fontWeight: "bold",
-    textAlign: "center",
+    fontWeight: 'bold',
+    textAlign: 'center'
   },
   infoLabel: {
     fontSize: 12,
-    textAlign: "center",
+    textAlign: 'center'
   },
   infoLancesContainer: {
-    width: "80%",
-    flexDirection: "row",
-    justifyContent: "space-between",
-    marginBottom: 20,
+    width: '80%',
+    flexDirection: 'row',
+    justifyContent: 'space-between',
+    marginBottom: 20
   },
   lanceItemLeft: {
-    alignItems: "flex-start",
+    alignItems: 'flex-start',
     padding: 10,
-    width: "48%",
+    width: '48%'
   },
   lanceItemRight: {
-    alignItems: "flex-end",
+    alignItems: 'flex-end',
     padding: 10,
-    width: "48%",
+    width: '48%'
   },
   lanceTitulo: {
     fontSize: 16,
-    fontWeight: "bold",
+    fontWeight: 'bold'
   },
   lanceValor: {
     fontSize: 14,
-    marginTop: 5,
+    marginTop: 5
   },
   subtituloMenor: {
     fontSize: 16,
-    marginBottom: 10,
+    marginBottom: 10
   },
   inputLanceContainer: {
-    flexDirection: "row",
-    width: "80%",
-    justifyContent: "space-between",
-    marginBottom: 20,
+    flexDirection: 'row',
+    width: '80%',
+    justifyContent: 'space-between',
+    marginBottom: 20
   },
   bordaLance: {
-    flexDirection: "row",
+    flexDirection: 'row',
     borderWidth: 1,
-    borderColor: "#ccc",
+    borderColor: '#ccc',
     borderRadius: 5,
-    alignItems: "center",
-    width: "100%",
-    justifyContent: "space-between",
-    paddingVertical: 5,
+    alignItems: 'center',
+    width: '100%',
+    justifyContent: 'space-between',
+    paddingVertical: 5
   },
   botaoLance: {
-    alignItems: "center",
-    justifyContent: "center",
-    width: "20%",
+    alignItems: 'center',
+    justifyContent: 'center',
+    width: '20%',
     paddingVertical: 10,
     borderRightWidth: 1,
-    borderRightColor: "#ccc",
+    borderRightColor: '#ccc'
   },
   botaoTexto: {
     fontSize: 20,
-    fontWeight: "bold",
+    fontWeight: 'bold'
   },
   valorInput: {
     flex: 1,
-    alignItems: "center",
-    justifyContent: "center",
+    alignItems: 'center',
+    justifyContent: 'center',
     paddingVertical: 10,
     borderLeftWidth: 1,
-    borderLeftColor: "#ccc",
+    borderLeftColor: '#ccc',
     borderRightWidth: 1,
-    borderRightColor: "#ccc",
+    borderRightColor: '#ccc'
   },
   valorUltimoLance: {
     fontSize: 16,
-    textAlign: "center",
+    textAlign: 'center'
   },
   button: {
-    backgroundColor: "#666cff",
+    backgroundColor: '#666cff',
     padding: 15,
     borderRadius: 5,
-    alignItems: "center",
-    width: "90%",
-    marginBottom: 20,
+    alignItems: 'center',
+    width: '90%',
+    marginBottom: 20
   },
   buttonText: {
-    color: "#fff",
+    color: '#fff',
     fontSize: 16,
-    fontWeight: "bold",
+    fontWeight: 'bold'
   },
   modalContainer: {
     flex: 1,
-    justifyContent: "center",
-    alignItems: "center",
-    backgroundColor: "rgba(0, 0, 0, 0.5)",
+    justifyContent: 'center',
+    alignItems: 'center',
+    backgroundColor: 'rgba(0, 0, 0, 0.5)'
   },
   modalContent: {
-    backgroundColor: "#fff",
+    backgroundColor: '#fff',
     borderRadius: 10,
     padding: 20,
-    width: "80%",
+    width: '80%'
   },
   modalTitle: {
     fontSize: 20,
-    fontWeight: "bold",
+    fontWeight: 'bold',
     marginBottom: 20,
     marginTop: 20,
-    textAlign: "center",
+    textAlign: 'center'
   },
   modalLanceEnviado: {
     fontSize: 20,
-    fontWeight: "bold",
+    fontWeight: 'bold',
     marginBottom: 80,
     marginTop: 80,
-    textAlign: "center",
+    textAlign: 'center'
   },
   modalSubTitle: {
-    fontWeight: "bold",
-    fontSize: 17,
+    fontWeight: 'bold',
+    fontSize: 17
   },
   modalResponsavel: {
     fontSize: 12,
     marginBottom: 20,
-    alignSelf: "flex-start",
+    alignSelf: 'flex-start'
   },
   modalText: {
     fontSize: 12,
     marginBottom: 5,
-    backgroundColor: "#f0f1ff",
+    backgroundColor: '#f0f1ff',
     padding: 3,
-    lineHeight: 25,
+    lineHeight: 25
   },
   modalOferta: {
     fontSize: 16,
-    marginBottom: 5,
+    marginBottom: 5
   },
   modalTotal: {
     fontSize: 16,
-    fontWeight: "bold",
+    fontWeight: 'bold',
     marginTop: 40,
-    marginBottom: 20,
+    marginBottom: 20
   },
   modalButtonContainer: {
-    flexDirection: "colum",
-    marginTop: 20,
+    flexDirection: 'colum',
+    marginTop: 20
   },
   modalButton: {
     padding: 10,
     borderRadius: 5,
     marginBottom: 5,
-    width: "100%",
-    alignItems: "center",
+    width: '100%',
+    alignItems: 'center'
   },
   modalButtonText: {
-    color: "#fff",
+    color: '#fff',
     fontSize: 16,
     padding: 5,
-    fontWeight: "bold",
+    fontWeight: 'bold'
   },
   sendButton: {
     backgroundColor: "#666cff",
-    shadowColor: "#000",
-    shadowOffset: {
-      width: 0,
-      height: 2,
-    },
-    shadowOpacity: 0.25,
-    shadowRadius: 3.84,
-    elevation: 5,
+    boxShadow: "0px 2px 3.84px rgba(0, 0, 0, 0.25)", // Tentativa de ajuste pois ShadowOffset está depreciated e quebrando no projeto
+//     backgroundColor: '#666cff',
+//     shadowColor: '#000',
+//     shadowOffset: {
+//       width: 0,
+//       height: 2
+//     },
+//     shadowOpacity: 0.25,
+//     shadowRadius: 3.84,
+//     elevation: 5
   },
   buttonCancelar: {
     borderWidth: 1,
-    borderColor: "black",
+    borderColor: 'black',
     padding: 12,
     borderRadius: 0,
     marginBottom: 20,
-    marginTop: 5,
+    marginTop: 5
   },
   buttonCancelarText: {
-    color: "black",
+    color: 'black',
     fontSize: 16,
-    textAlign: "center",
+    textAlign: 'center'
   },
   modalIcon: {
     width: 18,
     height: 18,
-    marginRight:10,
+    marginRight: 10
   },
   modalEnviado: {
-    flexDirection: "row", 
-    alignItems: "center",
-    alignContent: "center",
+    flexDirection: 'row',
+    alignItems: 'center',
+    alignContent: 'center',
     marginBottom: 20,
-    justifyContent: "center",
-  },
-});
+    justifyContent: 'center'
+  }
+})
 
-export default EnviarLance;
+export default EnviarLance
