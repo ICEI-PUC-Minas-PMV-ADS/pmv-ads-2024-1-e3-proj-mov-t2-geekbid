@@ -13,6 +13,7 @@ import NovoLeilao from "../pages/NovoLeilao";
 import EnviarLance from "../pages/EnviarLance";
 import Perfil from "../pages/Perfil";
 import Notificacao from "../pages/Notificacao";
+import ConfirmarExclusaoLeilao from "../pages/ConfirmarExclusaoLeilao";
 import Footer from "./Footer";
 
 const Stack = createNativeStackNavigator();
@@ -101,6 +102,13 @@ const Route = () => {
       <Stack.Screen
         name="Perfil"
         component={Perfil}
+        options={{
+          headerShown: false,
+        }}
+      />
+      <Stack.Screen
+        name="ConfirmarExclusaoLeilao"
+        component={ConfirmarExclusaoLeilao}
         options={{
           headerShown: false,
         }}

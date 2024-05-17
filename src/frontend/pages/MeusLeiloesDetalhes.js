@@ -16,7 +16,7 @@ const MeusLeiloesDetalhes = () => {
   useEffect(() => {
     const fetchProduto = async () => {
       try {
-        const response = await fetch(`http://192.168.1.106:3000/produto/${id}`);
+        const response = await fetch(`http://localhost:3000/produto/${id}`);
         const data = await response.json();
         setProduto(data.produto);
       } catch (error) {
@@ -33,10 +33,6 @@ const MeusLeiloesDetalhes = () => {
   const handleEditarLeilao = (produtoId) => {
     console.log("ID do produto selecionado:", produtoId);
     navigation.navigate('EditarLeilao', { id: produtoId });
-  };
-
-  const handleExcluirLeilao = () => {
-    // Implemente a lógica para excluir o leilão
   };
 
   return (

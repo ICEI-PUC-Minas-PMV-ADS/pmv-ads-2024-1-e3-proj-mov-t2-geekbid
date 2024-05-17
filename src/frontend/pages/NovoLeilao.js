@@ -30,14 +30,11 @@ const NovoLeilao = () => {
   const [categorias, setCategorias] = useState([]);
   const [mensagemURLInvalida, setMensagemURLInvalida] = useState("");
 
-
   useEffect(() => {
     // Fetch categories from the database
     const fetchCategories = async () => {
       try {
-        const response = await fetch(
-          "http://localhost:3000/produto/categoria"
-        );
+        const response = await fetch("http://localhost:3000/produto/categoria");
         console.log("Buscou categoria:", response);
         if (response.ok) {
           const data = await response.json();
@@ -71,8 +68,15 @@ const NovoLeilao = () => {
         // usuarioId: usuario.id, Retornando undefined
       };
       console.log("Dados do novo leilão:", novoLeilao);
-
-      const response = await fetch("http://192.168.1.106:3000/leilao", {
+      console.log("Duração:", duracaoDias, duracaoHoras, duracaoMinutos);
+      console.log(
+        "Partes da duração:",
+        duracaoDias,
+        duracaoHoras,
+        duracaoMinutos
+      );
+      
+      const response = await fetch("http://localhost:3000/leilao", {
         method: "POST",
         headers: {
           "Content-Type": "application/json",

@@ -13,6 +13,7 @@ import { useNavigation, useRoute } from "@react-navigation/native";
 import { Picker } from "@react-native-picker/picker";
 import Footer from "./../navegations/Footer";
 import editarLeilaoStyles from "./../css/EditarLeilaoStyles";
+import ConfirmarExclusaoLeilao from './ConfirmarExclusaoLeilao'; 
 
 const EditarLeilao = () => {
   const navigation = useNavigation();
@@ -32,6 +33,7 @@ const EditarLeilao = () => {
   const [precoAtual, setPrecoAtual] = useState(0);
   const [categorias, setCategorias] = useState([]);
   const [mensagemURLInvalida, setMensagemURLInvalida] = useState("");
+  const [exibindoConfirmacao, setExibindoConfirmacao] = useState(false);
 
   useEffect(() => {
     const fetchCategories = async () => {
@@ -58,17 +60,30 @@ const EditarLeilao = () => {
       try {
         const response = await fetch(`http://192.168.1.106:3000/produto/${id}`);
         const data = await response.json();
+        console.log("Dados do produto:", data.produto);
         setNomeProduto(data.produto.nomeProduto);
         setDescricaoProduto(data.produto.descricaoProduto);
         setCategoriaSelecionada(data.produto.categoriaProduto);
         setPrecoInicial(data.produto.precoInicial.toString());
         setPrecoAtual(data.produto.precoInicial);
         setUrlImagemProduto(data.produto.urlImagemProduto);
-        // Assumindo que os campos de duração estão armazenados como "X dias Y horas Z minutos"
-        const duracaoParts = data.produto.duracao.split(" ");
-        setDuracaoDias(duracaoParts[0]);
-        setDuracaoHoras(duracaoParts[2]);
-        setDuracaoMinutos(duracaoParts[4]);
+        
+        // Observe a string de duração antes de tentar extrair suas partes
+        const duracao = data.produto.duracao || "";
+        console.log("String de duração:", duracao);
+  
+        const duracaoParts = duracao.match(/(\d+)\s*dias\s*(\d+)\s*horas\s*(\d+)\s*minutos/);
+        console.log("Partes da duração:", duracaoParts);
+        
+        if (duracaoParts) {
+          setDuracaoDias(duracaoParts[1]);
+          setDuracaoHoras(duracaoParts[2]);
+          setDuracaoMinutos(duracaoParts[3]);
+        } else {
+          setDuracaoDias("0");
+          setDuracaoHoras("0");
+          setDuracaoMinutos("0");
+        }
       } catch (error) {
         console.error("Erro ao buscar detalhes do produto:", error);
         Alert.alert(
@@ -76,10 +91,10 @@ const EditarLeilao = () => {
         );
       }
     };
-
+  
     fetchProduto();
   }, [id]);
-
+      
   const handleSalvarAlteracoesPress = async () => {
     try {
       const dataInicioFim = new Date();
@@ -98,7 +113,7 @@ const EditarLeilao = () => {
       };
       console.log("Dados do novo leilão:", novoLeilao);
 
-      const response = await fetch("http://192.168.1.106:3000/leilao", {
+      const response = await fetch("http://localhost:3000/leilao", {
         method: "POST",
         headers: {
           "Content-Type": "application/json",
@@ -134,12 +149,46 @@ const EditarLeilao = () => {
     }
   };
 
+  const handleExcluirLeilao = async (idLeilao) => {
+    try {
+      // Envia uma requisição DELETE para excluir o leilão
+      const response = await fetch(
+        `http://localhost:3000/leilao/${idLeilao}`,
+        {
+          method: "DELETE",
+        }
+      );
+      if (response.ok) {
+        const updatedLeiloes = meusLeiloes.filter(
+          (leilao) => leilao.id !== idLeilao
+        );
+        console.log("Leilões atualizados após exclusão:", updatedLeiloes);
+        setMeusLeiloes(updatedLeiloes);
+        Alert.alert("Sucesso", "Leilão excluído com sucesso!");
+      } else {
+        throw new Error("Erro ao excluir o leilão");
+      }
+    } catch (error) {
+      console.error("Erro ao excluir o leilão:", error.message);
+      Alert.alert(
+        "Erro",
+        "Erro ao excluir o leilão. Por favor, tente novamente."
+      );
+    }
+  };
+
+  const handleCancelarExclusao = () => {
+    setExibindoConfirmacao(false);
+  };
+
   return (
     <View style={editarLeilaoStyles.container}>
       <ScrollView
         style={editarLeilaoStyles.scrollContent}
         contentContainerStyle={editarLeilaoStyles.contentContainer}
       >
+              {console.log("Valores dos estados:", nomeProduto, descricaoProduto, categoriaSelecionada, precoInicial, duracaoDias, duracaoHoras, duracaoMinutos, urlImagemProduto)}
+
         <View style={editarLeilaoStyles.head}>
           <Button
             icon="chevron-left"
@@ -154,7 +203,7 @@ const EditarLeilao = () => {
             icon="trash-can-outline"
             color="red"
             size={30}
-            onPress={() => navigation.navigate("EditarLeilao")}
+            onPress={() => setExibindoConfirmacao(true)} 
           />
         </View>
 
@@ -283,6 +332,18 @@ const EditarLeilao = () => {
           <Text style={editarLeilaoStyles.buttonText}>Salvar Alterações</Text>
         </Pressable>
         {mensagemSalvo ? <Text>{mensagemSalvo}</Text> : null}
+
+        {exibindoConfirmacao && (
+          <ConfirmarExclusaoLeilao
+            nomeProduto={nomeProduto} 
+            // usuario={nomeUsuario} 
+            idLeilao={id}
+            onConfirmarExclusao={handleExcluirLeilao} 
+            onCancel={handleCancelarExclusao}
+            
+          />
+        )}
+
       </ScrollView>
       <View>
         <Footer />
