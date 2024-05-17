@@ -1,5 +1,5 @@
 import { createContext, useContext, useEffect, useState } from 'react'
-import { AsyncStorage } from 'react-native'
+import AsyncStorage from '@react-native-async-storage/async-storage'
 
 import { api } from './api'
 
@@ -12,10 +12,10 @@ function AuthProvider({ children }) {
       const response = await api.post('/sessao', { email, senha })
       const { usuario, token } = response.data
 
-      // AsyncStorage.setItem('@geekbid:usuario', JSON.stringify(usuario))
-      // AsyncStorage.setItem('@geekbid:token', token)
+      AsyncStorage.setItem('@geekbid:usuario', JSON.stringify(usuario))
+      AsyncStorage.setItem('@geekbid:token', token)
 
-      // api.defaults.headers.common['Authorization'] = `Bearer ${token}`
+      api.defaults.headers.common['Authorization'] = `Bearer ${token}`
       setData({ usuario, token })
       console.log(response)
     } catch (error) {
@@ -25,6 +25,13 @@ function AuthProvider({ children }) {
         alert('Não foi possível entrar.')
       }
     }
+  }
+
+  function signOut() {
+    AsyncStorage.removeItem('@geekbid:usuario')
+    AsyncStorage.removeItem('@geekbid:token')
+
+    setData({})
   }
 
   async function updatePerfil({ usuario }) {
@@ -57,7 +64,7 @@ function AuthProvider({ children }) {
   // }, [])
   return (
     <AuthContext.Provider
-      value={{ signIn, updatePerfil, usuario: data.usuario }}
+      value={{ signIn, updatePerfil, usuario: data.usuario, signOut }}
     >
       {children}
     </AuthContext.Provider>

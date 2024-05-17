@@ -1,25 +1,32 @@
-import React from 'react';
-import { View, StyleSheet, TouchableOpacity, Text } from 'react-native';
-import Icon from 'react-native-vector-icons/FontAwesome';
-import Container from '../components/Container';
-import Header from '../components/Header';
-import { useNavigation } from '@react-navigation/native';
+import React from 'react'
+import { View, StyleSheet, TouchableOpacity, Text } from 'react-native'
+import Icon from 'react-native-vector-icons/FontAwesome'
+import Container from '../components/Container'
+import Header from '../components/Header'
+import { useNavigation } from '@react-navigation/native'
+import { useAuth } from '../services/auth.services'
 
 const Perfil = () => {
-  const navigation = useNavigation();
+  const { signOut, usuario } = useAuth()
+  const navigation = useNavigation()
+
+  function handleSignOut() {
+    navigation.navigate('Inicial')
+    signOut()
+  }
 
   const handleMinhasInformacoesPress = () => {
-    navigation.navigate('MinhasInformacoes');
-  };
+    navigation.navigate('MinhasInformacoes')
+  }
   const handleMeusLeiloesPress = () => {
-    navigation.navigate('MeusLeiloes');
-  };
+    navigation.navigate('MeusLeiloes')
+  }
   const handleMeusLancesPress = () => {
-    navigation.navigate('MeusLances');
-  };
+    navigation.navigate('MeusLances')
+  }
   const handleNovoLeilaoPress = () => {
-    navigation.navigate('NovoLeilao');
-  };
+    navigation.navigate('NovoLeilao')
+  }
 
   return (
     <Container>
@@ -27,7 +34,8 @@ const Perfil = () => {
       <View style={styles.sceneContainer}>
         <TouchableOpacity
           onPress={handleMinhasInformacoesPress}
-          style={styles.link}>
+          style={styles.link}
+        >
           <View style={styles.linkContent}>
             <Icon name="user" size={20} color="#666CFF" style={styles.icon} />
             <Text style={styles.linkText}> Minhas Informações</Text>
@@ -75,16 +83,21 @@ const Perfil = () => {
             />
           </View>
         </TouchableOpacity>
-        <TouchableOpacity onPress={handleNovoLeilaoPress} style={styles.sair}>
+        <TouchableOpacity onPress={handleSignOut} style={styles.sair}>
           <View style={styles.linkContent}>
-            <Icon name="sign-out" size={20} color="#666CFF" style={styles.icon} />
+            <Icon
+              name="sign-out"
+              size={20}
+              color="#666CFF"
+              style={styles.icon}
+            />
             <Text style={styles.linkText}>Sair</Text>
           </View>
         </TouchableOpacity>
       </View>
     </Container>
-  );
-};
+  )
+}
 
 const styles = StyleSheet.create({
   sceneContainer: {
@@ -92,7 +105,7 @@ const styles = StyleSheet.create({
     marginTop: 40
   },
   link: {
-    marginBottom: 20,
+    marginBottom: 20
   },
   sair: {
     marginBottom: 20,
@@ -111,12 +124,13 @@ const styles = StyleSheet.create({
     fontSize: 16,
     color: '#333',
     marginLeft: 10,
-    flex: 1, flexDirection: 'row'
+    flex: 1,
+    flexDirection: 'row'
   },
   icon: {
     marginRight: 20,
-    marginLeft: 20,
-  },
-});
+    marginLeft: 20
+  }
+})
 
-export default Perfil;
+export default Perfil
