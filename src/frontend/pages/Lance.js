@@ -35,7 +35,7 @@ const Lance = ({ item }) => {
   const [leiloes, setLeiloes] = useState([])
 
   const getLeiloes = () => {
-    fetch('http://localhost:3000/leilao/home')
+    fetch('http://localhost:3000/leilao')
       .then(res => res.json())
       .then(data => setLeiloes(data.leiloes))
       .catch(error => console.error(error))
