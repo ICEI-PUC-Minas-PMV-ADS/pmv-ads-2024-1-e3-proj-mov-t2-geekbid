@@ -1,17 +1,27 @@
-import { Pressable } from 'react';
-import { View, Text, Button, StyleSheet } from 'react-native';
-import ConfirmarExclusaoLeilaoStyles from "./../css/ConfirmarExclusaoLeilaoStyles";
+import React from "react";
+import { View, Text, Pressable } from "react-native";
+import editarLeilaoStyles from "./../css/EditarLeilaoStyles";
 
-const ConfirmarExclusaoLeilao = ({ nomeProduto, usuario, idLeilao, onConfirmarExclusao, onCancel }) => {
+const ConfirmarExclusaoLeilao = ({ nomeProduto, idLeilao, onConfirmarExclusao, onCancel }) => {
   return (
-    <View style={ConfirmarExclusaoLeilaoStyles.container}>
-      <Text style={ConfirmarExclusaoLeilaoStyles.titulo}>Confirma exclusão do leilão?</Text>
-      <Text style={ConfirmarExclusaoLeilaoStyles.texto}>{nomeProduto}</Text>
-      <Text style={ConfirmarExclusaoLeilaoStyles.textoBy}>By: {usuario}</Text>
-      <Text style={ConfirmarExclusaoLeilaoStyles.texto}>Código do leilão: {idLeilao}</Text>
-      <View style={ConfirmarExclusaoLeilaoStyles.espaco}></View>
-      <Pressable title="Confirmar" onPress={onConfirmarExclusao} color="#666cff" />
-      <Pressable title="Cancelar" onPress={onCancel} />
+    <View style={editarLeilaoStyles.confirmationContainer}>
+      <Text style={editarLeilaoStyles.confirmationText}>
+        Tem certeza que deseja excluir o leilão do produto {nomeProduto}?
+      </Text>
+      <View style={editarLeilaoStyles.confirmationButtons}>
+        <Pressable
+          style={[editarLeilaoStyles.confirmationButton, editarLeilaoStyles.confirmButton]}
+          onPress={() => onConfirmarExclusao(idLeilao)}
+        >
+          <Text style={editarLeilaoStyles.confirmationButtonText}>Confirmar</Text>
+        </Pressable>
+        <Pressable
+          style={[editarLeilaoStyles.confirmationButton, editarLeilaoStyles.cancelButton]}
+          onPress={onCancel}
+        >
+          <Text style={editarLeilaoStyles.confirmationButtonText}>Cancelar</Text>
+        </Pressable>
+      </View>
     </View>
   );
 };

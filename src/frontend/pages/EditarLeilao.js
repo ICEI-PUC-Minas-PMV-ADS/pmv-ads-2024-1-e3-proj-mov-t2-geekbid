@@ -353,4 +353,3 @@ const EditarLeilao = () => {
 };
 
 export default EditarLeilao;
-
