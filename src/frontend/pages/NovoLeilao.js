@@ -10,13 +10,13 @@ import {
 import { Button, Headline } from "react-native-paper";
 import { useNavigation } from "@react-navigation/native";
 import { Picker } from "@react-native-picker/picker";
-// import { useAuth } from '../services/auth.services'
+import { useAuth } from '../services/auth.services'
 import Footer from "./../navegations/Footer";
 import novoLeilaoStyles from "./../css/NovoLeilaoStyles";
 
 const NovoLeilao = () => {
   const navigation = useNavigation();
-  // const { usuario } = useAuth();
+  const { usuario } = useAuth();
   const [nomeProduto, setNomeProduto] = useState("");
   const [descricaoProduto, setDescricaoProduto] = useState("");
   const [categoriaSelecionada, setCategoriaSelecionada] = useState("");
@@ -25,7 +25,6 @@ const NovoLeilao = () => {
   const [duracaoHoras, setDuracaoHoras] = useState("");
   const [duracaoMinutos, setDuracaoMinutos] = useState("");
   const [urlImagemProduto, setUrlImagemProduto] = useState("");
-  const [mensagemSalvo, setMensagemSalvo] = useState("");
   const [precoAtual, setPrecoAtual] = useState(precoInicial || 0);
   const [categorias, setCategorias] = useState([]);
   const [mensagemURLInvalida, setMensagemURLInvalida] = useState("");
@@ -65,7 +64,7 @@ const NovoLeilao = () => {
         dataInicio: dataInicioFim,
         dataFim: dataInicioFim,
         precoAtual,
-        // usuarioId: usuario.id, Retornando undefined
+        usuarioId: usuario?.id,
       };
       console.log("Dados do novo leilão:", novoLeilao);
       console.log("Duração:", duracaoDias, duracaoHoras, duracaoMinutos);
@@ -86,7 +85,7 @@ const NovoLeilao = () => {
       console.log("Resposta da requisição:", response);
 
       if (response.ok) {
-        setMensagemSalvo("Leilão salvo com sucesso!");
+        alert("Leilão cadastrado com sucesso! Acesse-o em 'Meus Leilões' para publicá-lo.");
         setTimeout(() => {
           navigation.navigate("MeusLeiloes");
         }, 2000);
@@ -209,10 +208,12 @@ const NovoLeilao = () => {
           <TextInput
             value={precoInicial}
             onChangeText={(text) => {
-              setPrecoInicial(text);
-              setPrecoAtual(text);
+              const numericText = text.replace(/[^0-9]/g, '');
+              setPrecoInicial(numericText);
+              setPrecoAtual(numericText);
             }}
             style={novoLeilaoStyles.inputText}
+            keyboardType="numeric"
           />
         </View>
         <View style={novoLeilaoStyles.duracaoContainer}>
@@ -222,8 +223,12 @@ const NovoLeilao = () => {
               <TextInput
                 placeholder="00"
                 value={duracaoDias}
-                onChangeText={(text) => setDuracaoDias(text)}
+                onChangeText={(text) => {
+                  const numericText = text.replace(/[^0-9]/g, '');
+                  setDuracaoDias(numericText)}
+                }
                 style={novoLeilaoStyles.duracaoPlaceholder}
+                keyboardType="numeric"
               />
               <Text>dias</Text>
             </View>
@@ -231,8 +236,12 @@ const NovoLeilao = () => {
               <TextInput
                 placeholder="00"
                 value={duracaoHoras}
-                onChangeText={(text) => setDuracaoHoras(text)}
+                onChangeText={(text) => {
+                  const numericText = text.replace(/[^0-9]/g, '');
+                  setDuracaoHoras(numericText)
+                }}
                 style={novoLeilaoStyles.duracaoPlaceholder}
+                keyboardType="numeric"
               />
               <Text>horas</Text>
             </View>
@@ -240,8 +249,12 @@ const NovoLeilao = () => {
               <TextInput
                 placeholder="00"
                 value={duracaoMinutos}
-                onChangeText={(text) => setDuracaoMinutos(text)}
+                onChangeText={(text) => {
+                  const numericText = text.replace(/[^0-9]/g, '');
+                  setDuracaoMinutos(numericText)
+                }}
                 style={novoLeilaoStyles.duracaoPlaceholder}
+                keyboardType="numeric"
               />
               <Text>minutos</Text>
             </View>
@@ -260,7 +273,6 @@ const NovoLeilao = () => {
         >
           <Text style={novoLeilaoStyles.buttonText}>Salvar Alterações</Text>
         </Pressable>
-        {mensagemSalvo ? <Text>{mensagemSalvo}</Text> : null}
       </ScrollView>
       <View>
         <Footer />

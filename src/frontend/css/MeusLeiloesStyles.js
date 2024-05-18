@@ -34,6 +34,9 @@ const styles = StyleSheet.create({
     padding: 10,
     marginHorizontal: 5,
   },
+  lastItem: {
+    marginBottom: 80, // Ajuste para ficar acima do rodapé
+  },
   image: {
     width: '100%',
     height: 160,
