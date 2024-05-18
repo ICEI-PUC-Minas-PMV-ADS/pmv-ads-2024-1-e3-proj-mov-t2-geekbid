@@ -12,17 +12,21 @@ import { Button, Headline, IconButton } from "react-native-paper";
 import { useNavigation } from "@react-navigation/native";
 import Footer from "./../navegations/Footer";
 import MeusLeiloesStyles from "./../css/MeusLeiloesStyles";
+import { useAuth } from '../services/auth.services';
 
 const MeusLeiloes = () => {
   const navigation = useNavigation();
   const [meusLeiloes, setMeusLeiloes] = useState([]);
-
+  const { usuario } = useAuth();
+  const usuarioId = usuario.id;
+  
   useEffect(() => {
     const getLeiloes = async () => {
       try {
-        const response = await fetch(
-          `http://localhost:3000/leilao/meusleiloes`
-        );
+        // const response = await fetch(
+        //   `http://localhost:3000/leilao/meusleiloes`
+        // );
+        const response = await fetch(`http://localhost:3000/leilao/meusleiloes?usuarioId=${usuarioId}`);
         const data = await response.json();
         console.log("Dados recebidos:", data);
         setMeusLeiloes(data.meusLeiloes);

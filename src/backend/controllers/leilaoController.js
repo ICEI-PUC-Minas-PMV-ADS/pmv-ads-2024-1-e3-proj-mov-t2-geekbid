@@ -69,10 +69,10 @@ const leilaoController = {
       // Buscar todos os leilões para a meusLeiloes
       async listarMeusLeiloes(req, res) {
         try {
+            const { usuarioId } = req.query;
             const meusLeiloes = await Leilao.findAll({
-                // raw: true,
                 where: {
-                    statusLeilao: ['ativo', 'publicado','cadastrado']
+                    usuarioId: usuarioId,
                 },
                 include: [
                     {model: Usuario, as: 'usuario'},
