@@ -10,7 +10,7 @@ import {
 import { Button, Headline } from "react-native-paper";
 import { useNavigation } from "@react-navigation/native";
 import { Picker } from "@react-native-picker/picker";
-import { useAuth } from '../services/auth.services'
+import { useAuth } from "../services/auth.services";
 import Footer from "./../navegations/Footer";
 import novoLeilaoStyles from "./../css/NovoLeilaoStyles";
 
@@ -74,7 +74,7 @@ const NovoLeilao = () => {
         duracaoHoras,
         duracaoMinutos
       );
-      
+
       const response = await fetch("http://localhost:3000/leilao", {
         method: "POST",
         headers: {
@@ -85,10 +85,22 @@ const NovoLeilao = () => {
       console.log("Resposta da requisição:", response);
 
       if (response.ok) {
-        alert("Leilão cadastrado com sucesso! Acesse-o em 'Meus Leilões' para publicá-lo.");
+        alert(
+          "Leilão cadastrado com sucesso! Acesse-o em 'Meus Leilões' para publicá-lo."
+        );
         setTimeout(() => {
           navigation.navigate("MeusLeiloes");
-        }, 2000);
+        // Limpar os campos apenas se o cadastro for bem-sucedido
+        setNomeProduto("");
+        setDescricaoProduto("");
+        setCategoriaSelecionada("");
+        setPrecoInicial("");
+        setDuracaoDias("");
+        setDuracaoHoras("");
+        setDuracaoMinutos("");
+        setUrlImagemProduto("");
+        setPrecoAtual(0);
+      }, 1200);
       } else {
         throw new Error("Erro ao salvar o leilão");
       }
@@ -208,7 +220,7 @@ const NovoLeilao = () => {
           <TextInput
             value={precoInicial}
             onChangeText={(text) => {
-              const numericText = text.replace(/[^0-9]/g, '');
+              const numericText = text.replace(/[^0-9]/g, "");
               setPrecoInicial(numericText);
               setPrecoAtual(numericText);
             }}
@@ -224,9 +236,9 @@ const NovoLeilao = () => {
                 placeholder="00"
                 value={duracaoDias}
                 onChangeText={(text) => {
-                  const numericText = text.replace(/[^0-9]/g, '');
-                  setDuracaoDias(numericText)}
-                }
+                  const numericText = text.replace(/[^0-9]/g, "");
+                  setDuracaoDias(numericText);
+                }}
                 style={novoLeilaoStyles.duracaoPlaceholder}
                 keyboardType="numeric"
               />
@@ -237,8 +249,8 @@ const NovoLeilao = () => {
                 placeholder="00"
                 value={duracaoHoras}
                 onChangeText={(text) => {
-                  const numericText = text.replace(/[^0-9]/g, '');
-                  setDuracaoHoras(numericText)
+                  const numericText = text.replace(/[^0-9]/g, "");
+                  setDuracaoHoras(numericText);
                 }}
                 style={novoLeilaoStyles.duracaoPlaceholder}
                 keyboardType="numeric"
@@ -250,8 +262,8 @@ const NovoLeilao = () => {
                 placeholder="00"
                 value={duracaoMinutos}
                 onChangeText={(text) => {
-                  const numericText = text.replace(/[^0-9]/g, '');
-                  setDuracaoMinutos(numericText)
+                  const numericText = text.replace(/[^0-9]/g, "");
+                  setDuracaoMinutos(numericText);
                 }}
                 style={novoLeilaoStyles.duracaoPlaceholder}
                 keyboardType="numeric"

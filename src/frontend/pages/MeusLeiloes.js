@@ -23,9 +23,6 @@ const MeusLeiloes = () => {
   useEffect(() => {
     const getLeiloes = async () => {
       try {
-        // const response = await fetch(
-        //   `http://localhost:3000/leilao/meusleiloes`
-        // );
         const response = await fetch(`http://localhost:3000/leilao/meusleiloes?usuarioId=${usuarioId}`);
         const data = await response.json();
         console.log("Dados recebidos:", data);

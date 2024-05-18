@@ -21,7 +21,7 @@ const styles = StyleSheet.create({
     marginBottom: 30,
   },
   textHeader: {
-    fontSize: 25,
+    fontSize: 22,
     textAlign:'left',
     paddingLeft: 30,
     width: '60%',

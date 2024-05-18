@@ -77,6 +77,9 @@ const leilaoController = {
                 include: [
                     {model: Usuario, as: 'usuario'},
                     {model: Produto, as: 'produto'}
+                ],
+                order: [
+                  ['dataInicio', 'DESC']
                 ]
             })
             console.log(JSON.stringify(meusLeiloes, null, 2));
