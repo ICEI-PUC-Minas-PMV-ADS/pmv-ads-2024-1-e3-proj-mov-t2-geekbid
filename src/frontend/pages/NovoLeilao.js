@@ -83,17 +83,17 @@ const NovoLeilao = () => {
         );
         setTimeout(() => {
           navigation.navigate("MeusLeiloes");
-        // Limpar os campos apenas se o cadastro for bem-sucedido
-        setNomeProduto("");
-        setDescricaoProduto("");
-        setCategoriaSelecionada("");
-        setPrecoInicial("");
-        setDuracaoDias("");
-        setDuracaoHoras("");
-        setDuracaoMinutos("");
-        setUrlImagemProduto("");
-        setPrecoAtual(0);
-      }, 1200);
+          // Limpar os campos apenas se o cadastro for bem-sucedido
+          setNomeProduto("");
+          setDescricaoProduto("");
+          setCategoriaSelecionada("");
+          setPrecoInicial("");
+          setDuracaoDias("");
+          setDuracaoHoras("");
+          setDuracaoMinutos("");
+          setUrlImagemProduto("");
+          setPrecoAtual(0);
+        }, 1200);
       } else {
         throw new Error("Erro ao salvar o leilão");
       }
@@ -111,7 +111,9 @@ const NovoLeilao = () => {
   // Função para lidar com a mudança de texto na entrada de URL
   const handleURLChange = (text) => {
     setUrlImagemProduto(text);
-    if (!isURLValid(text)) {
+    if (!text) {
+      setMensagemURLInvalida(""); // Limpa a mensagem de erro se o campo estiver vazio
+    } else if (!isURLValid(text)) {
       setMensagemURLInvalida("Insira uma URL válida.");
     } else {
       setMensagemURLInvalida("");
@@ -164,6 +166,8 @@ const NovoLeilao = () => {
         <View style={novoLeilaoStyles.inputBox}>
           <Text style={novoLeilaoStyles.inputTitle}>URL da Imagem</Text>
           <TextInput
+            placeholder="link de imagem hospedada (jpg/png)"
+            placeholderTextColor="#a9a9a9"
             value={urlImagemProduto}
             onChangeText={handleURLChange}
             style={novoLeilaoStyles.inputText}
@@ -171,7 +175,9 @@ const NovoLeilao = () => {
         </View>
         <Text style={novoLeilaoStyles.errorMessage}>{mensagemURLInvalida}</Text>
         <View style={novoLeilaoStyles.inputBox}>
-          <Text style={novoLeilaoStyles.inputTitle}>Nome</Text>
+          <Text style={novoLeilaoStyles.inputTitle}>Nome
+            <Text style={novoLeilaoStyles.obrigatorio}> *</Text>
+          </Text>
           <TextInput
             value={nomeProduto}
             onChangeText={(text) => setNomeProduto(text)}
@@ -187,7 +193,9 @@ const NovoLeilao = () => {
           />
         </View>
         <View style={novoLeilaoStyles.inputBox}>
-          <Text style={novoLeilaoStyles.inputTitle}>Categoria</Text>
+          <Text style={novoLeilaoStyles.inputTitle}>Categoria
+            <Text style={novoLeilaoStyles.obrigatorio}> *</Text>
+          </Text>
           {categorias.length > 0 && (
             <Picker
               onValueChange={(itemValue, itemIndex) => {
@@ -198,6 +206,7 @@ const NovoLeilao = () => {
               mode="dropdown"
               style={novoLeilaoStyles.categoria}
             >
+              <Picker.Item label="Selecione uma categoria" value="" />
               {categorias.map((cat, index) => (
                 <Picker.Item
                   key={cat.id}
@@ -209,7 +218,9 @@ const NovoLeilao = () => {
           )}
         </View>
         <View style={novoLeilaoStyles.inputBox}>
-          <Text style={novoLeilaoStyles.inputTitle}>Lance mínimo</Text>
+          <Text style={novoLeilaoStyles.inputTitle}>Lance mínimo
+            <Text style={novoLeilaoStyles.obrigatorio}> *</Text>
+         </Text>
           <TextInput
             value={precoInicial}
             onChangeText={(text) => {
@@ -222,7 +233,9 @@ const NovoLeilao = () => {
           />
         </View>
         <View style={novoLeilaoStyles.duracaoContainer}>
-          <Text style={novoLeilaoStyles.duracaoLabel}>Duração</Text>
+          <Text style={novoLeilaoStyles.duracaoLabel}>Duração
+            <Text style={novoLeilaoStyles.obrigatorio}> *</Text>
+          </Text>
           <View style={novoLeilaoStyles.duracaoInputContainer}>
             <View style={novoLeilaoStyles.duracaoInput}>
               <TextInput
@@ -269,10 +282,23 @@ const NovoLeilao = () => {
         <Pressable
           style={novoLeilaoStyles.button}
           onPress={() => {
-            if (isURLValid(urlImagemProduto)) {
-              handleSalvarAlteracoesPress();
+            // Verificar se todos os campos obrigatórios estão preenchidos
+            if (
+              nomeProduto &&
+              categoriaSelecionada &&
+              precoInicial &&
+              duracaoDias &&
+              duracaoHoras &&
+              duracaoMinutos
+            ) {
+              // Verificar se a URL da imagem é válida
+              if (urlImagemProduto === "" || isURLValid(urlImagemProduto)) {
+                handleSalvarAlteracoesPress();
+              } else {
+                alert("Insira uma URL válida antes de salvar.");
+              }
             } else {
-              alert("Insira uma URL válida antes de salvar.");
+              alert("Preencha os campos obrigatórios antes de salvar.");
             }
           }}
         >

@@ -76,6 +76,9 @@ const styles = StyleSheet.create({
     fontSize: 11,
     color: "#6f6f6f",
   },
+  obrigatorio: {
+    color: 'red',
+  },
   inputText: {
     height: 30,
     marginBottom: 5,
