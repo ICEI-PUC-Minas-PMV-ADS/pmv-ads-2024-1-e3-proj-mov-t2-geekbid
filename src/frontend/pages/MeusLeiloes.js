@@ -71,7 +71,7 @@ const MeusLeiloes = () => {
                 />
               )}
               <Text style={MeusLeiloesStyles.title} key={index}>
-                {item.produto && item.produto.nomeProduto}
+                {item.produto && item.produto.nomeProduto} - Cód.: {item.produto && item.produto.id} 
               </Text>
               <View style={MeusLeiloesStyles.infoContainer}>
                 <Text style={MeusLeiloesStyles.creator}>

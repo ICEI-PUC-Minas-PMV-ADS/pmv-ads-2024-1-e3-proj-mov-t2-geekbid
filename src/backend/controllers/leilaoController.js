@@ -94,7 +94,12 @@ const leilaoController = {
   async listarLeilao(req, res) {
     try {
       const { id } = req.params;
-      const leilao = await Leilao.findByPk(id);
+      const leilao = await Leilao.findByPk(id, {
+        include: [
+          { model: Produto, as: 'produto' },
+          { model: Usuario, as: 'usuario' } 
+        ]      
+  });
       if (!leilao) {
         return res.status(404).json({ error: 'Leilão não encontrado' });
       }

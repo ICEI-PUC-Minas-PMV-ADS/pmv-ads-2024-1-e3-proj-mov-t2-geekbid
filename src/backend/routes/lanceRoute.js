@@ -2,6 +2,9 @@ const express = require('express');
 const router = express.Router();
 const lanceController = require('../controllers/lanceController');
 
+// Retornar ultimos lances de um leilão
+router.get('/:leilaoId/ultimos', lanceController.buscarUltimosLances);  // Nova rota
+
 // Cadastrar lance em leilão
 router.post('/', lanceController.cadastrarLance);
 
