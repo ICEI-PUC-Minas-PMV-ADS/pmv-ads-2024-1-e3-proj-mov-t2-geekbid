@@ -21,6 +21,9 @@ const leilaoController = {
         categoriaProduto,
         estadoProduto,
         statusLeilao,
+        duracaoDias,
+        duracaoHoras,
+        duracaoMinutos,
       } = req.body;
       // Criar um novo produto
       const novoProduto = await Produto.create({
@@ -45,6 +48,9 @@ const leilaoController = {
         produtoId: novoProduto.id,
         statusLeilao,
         usuarioId: usuarioId,
+        duracaoDias,
+        duracaoHoras,
+        duracaoMinutos,
       });
 
       // Responder com o novo leilão e o novo produto criado

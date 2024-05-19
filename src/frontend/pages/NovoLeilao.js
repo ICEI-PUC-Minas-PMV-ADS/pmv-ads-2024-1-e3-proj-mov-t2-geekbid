@@ -59,21 +59,15 @@ const NovoLeilao = () => {
         descricaoProduto,
         categoriaProduto: categoriaSelecionada,
         precoInicial,
-        duracao: `${duracaoDias} dias ${duracaoHoras} horas ${duracaoMinutos} minutos`,
+        duracaoDias: Number(duracaoDias) || 0,
+        duracaoHoras: Number(duracaoHoras) || 0,
+        duracaoMinutos: Number(duracaoMinutos) || 0,
         urlImagemProduto,
         dataInicio: dataInicioFim,
         dataFim: dataInicioFim,
         precoAtual,
         usuarioId: usuario?.id,
       };
-      console.log("Dados do novo leilão:", novoLeilao);
-      console.log("Duração:", duracaoDias, duracaoHoras, duracaoMinutos);
-      console.log(
-        "Partes da duração:",
-        duracaoDias,
-        duracaoHoras,
-        duracaoMinutos
-      );
 
       const response = await fetch("http://localhost:3000/leilao", {
         method: "POST",
@@ -82,7 +76,6 @@ const NovoLeilao = () => {
         },
         body: JSON.stringify(novoLeilao),
       });
-      console.log("Resposta da requisição:", response);
 
       if (response.ok) {
         alert(
