@@ -40,6 +40,7 @@ const Lance = ({ item }) => {
       const response = await axios.get(
         'http://localhost:3000/leilao/meusleiloes'
       )
+      
       console.log(response)
       setLeiloes(response.data?.meusLeiloes)
     } catch (error) {
@@ -90,6 +91,8 @@ const Lance = ({ item }) => {
             </TouchableOpacity>
           </View>
         ))}
+
+        
       </ScrollView>
     </View>
   )
