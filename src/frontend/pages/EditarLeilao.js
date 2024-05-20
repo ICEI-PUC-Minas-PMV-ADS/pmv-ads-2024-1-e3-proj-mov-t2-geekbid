@@ -6,6 +6,7 @@ import {
   TextInput,
   Image,
   ScrollView,
+  Modal,
   Alert,
 } from "react-native";
 import { Button, Headline, IconButton } from "react-native-paper";
@@ -13,13 +14,13 @@ import { useNavigation, useRoute } from "@react-navigation/native";
 import { Picker } from "@react-native-picker/picker";
 import Footer from "./../navegations/Footer";
 import editarLeilaoStyles from "./../css/EditarLeilaoStyles";
-import ConfirmarExclusaoLeilao from './ConfirmarExclusaoLeilao'; 
+import ConfirmarExclusaoLeilao from "./ConfirmarExclusaoLeilao";
 
 const EditarLeilao = () => {
   const navigation = useNavigation();
   const route = useRoute();
   const { id } = route.params;
-  console.log("ID do produto:", id);
+  console.log("ID do leilão:", id);
 
   const [nomeProduto, setNomeProduto] = useState("");
   const [descricaoProduto, setDescricaoProduto] = useState("");
@@ -34,6 +35,10 @@ const EditarLeilao = () => {
   const [categorias, setCategorias] = useState([]);
   const [mensagemURLInvalida, setMensagemURLInvalida] = useState("");
   const [exibindoConfirmacao, setExibindoConfirmacao] = useState(false);
+  const [dataInicio, setDataInicio] = useState("");
+  const [dataFim, setDataFim] = useState("");
+  const [statusLeilao, setStatusLeilao] = useState("");
+  const [modalVisible, setModalVisible] = useState(false);
 
   useEffect(() => {
     const fetchCategories = async () => {
@@ -56,76 +61,70 @@ const EditarLeilao = () => {
   }, []);
 
   useEffect(() => {
-    const fetchProduto = async () => {
+    const fetchLeilao = async () => {
       try {
-        const response = await fetch(`http://192.168.1.106:3000/produto/${id}`);
+        const response = await fetch(`http://192.168.1.106:3000/leilao/${id}`);
         const data = await response.json();
-        console.log("Dados do produto:", data.produto);
-        setNomeProduto(data.produto.nomeProduto);
-        setDescricaoProduto(data.produto.descricaoProduto);
-        setCategoriaSelecionada(data.produto.categoriaProduto);
-        setPrecoInicial(data.produto.precoInicial.toString());
-        setPrecoAtual(data.produto.precoInicial);
-        setUrlImagemProduto(data.produto.urlImagemProduto);
-        
-        // Observe a string de duração antes de tentar extrair suas partes
-        const duracao = data.produto.duracao || "";
-        console.log("String de duração:", duracao);
-  
-        const duracaoParts = duracao.match(/(\d+)\s*dias\s*(\d+)\s*horas\s*(\d+)\s*minutos/);
-        console.log("Partes da duração:", duracaoParts);
-        
-        if (duracaoParts) {
-          setDuracaoDias(duracaoParts[1]);
-          setDuracaoHoras(duracaoParts[2]);
-          setDuracaoMinutos(duracaoParts[3]);
-        } else {
-          setDuracaoDias("0");
-          setDuracaoHoras("0");
-          setDuracaoMinutos("0");
-        }
+        console.log("Dados do leilão:", data.leilao);
+
+        setNomeProduto(data.leilao.produto.nomeProduto);
+        setDescricaoProduto(data.leilao.produto.descricaoProduto);
+        setCategoriaSelecionada(data.leilao.produto.categoriaProduto);
+        setPrecoInicial(data.leilao.produto.precoInicial.toString());
+        setPrecoAtual(data.leilao.precoAtual);
+        setUrlImagemProduto(data.leilao.produto.urlImagemProduto);
+
+        setDuracaoDias(data.leilao.duracaoDias.toString());
+        setDuracaoHoras(data.leilao.duracaoHoras.toString());
+        setDuracaoMinutos(data.leilao.duracaoMinutos.toString());
+
+        setDataInicio(data.leilao.dataInicio);
+        setDataFim(data.leilao.dataFim);
+        setStatusLeilao(data.leilao.statusLeilao);
       } catch (error) {
-        console.error("Erro ao buscar detalhes do produto:", error);
+        console.error("Erro ao buscar detalhes do leilão:", error);
         Alert.alert(
-          "Erro ao buscar detalhes do produto. Por favor, tente novamente mais tarde."
+          "Erro ao buscar detalhes do leilão. Por favor, tente novamente mais tarde."
         );
       }
     };
-  
-    fetchProduto();
+
+    fetchLeilao();
   }, [id]);
-      
+
   const handleSalvarAlteracoesPress = async () => {
     try {
-      const dataInicioFim = new Date();
-
-      const novoLeilao = {
+      const leilaoAtualizado = {
         nomeProduto,
         descricaoProduto,
         categoriaProduto: categoriaSelecionada,
-        precoInicial,
-        duracao: `${duracaoDias} dias ${duracaoHoras} horas ${duracaoMinutos} minutos`,
+        precoInicial: parseFloat(precoInicial),
+        duracaoDias: parseInt(duracaoDias),
+        duracaoHoras: parseInt(duracaoHoras),
+        duracaoMinutos: parseInt(duracaoMinutos),
         urlImagemProduto,
-        dataInicio: dataInicioFim,
-        dataFim: dataInicioFim,
+        dataInicio,
+        dataFim,
         precoAtual,
-        // usuarioId: usuario.id, Retornando undefined
+        statusLeilao,
       };
-      console.log("Dados do novo leilão:", novoLeilao);
 
-      const response = await fetch("http://localhost:3000/leilao", {
-        method: "POST",
+      console.log("Dados do leilão atualizado:", leilaoAtualizado);
+
+      const response = await fetch(`http://localhost:3000/leilao/${id}`, {
+        method: "PUT",
         headers: {
           "Content-Type": "application/json",
         },
-        body: JSON.stringify(novoLeilao),
+        body: JSON.stringify(leilaoAtualizado),
       });
+
       console.log("Resposta da requisição:", response);
 
       if (response.ok) {
         setMensagemSalvo("Alterações salvas com sucesso!");
         setTimeout(() => {
-          navigation.navigate("MeusLeiloesDetalhes");
+          navigation.goBack();
         }, 2000);
       } else {
         throw new Error("Erro ao salvar o leilão");
@@ -149,36 +148,111 @@ const EditarLeilao = () => {
     }
   };
 
+  // EXCLUIR VERIFICANDO LANCE VINCULADO
+  // const handleExcluirLeilao = async (idLeilao) => {
+  //   try {
+  //     const leilaoResponse = await fetch(
+  //       `http://localhost:3000/leilao/${idLeilao}`
+  //     );
+  //     const leilaoData = await leilaoResponse.json();
+  //     const produtoId = leilaoData.leilao.produto.id;
+
+  //     const lancesResponse = await fetch(
+  //       `http://localhost:3000/lance/${idLeilao}`
+  //     );
+  //     const lancesData = await lancesResponse.json();
+
+  //     if (lancesData.length > 0) {
+  //       Alert.alert(
+  //         "Erro",
+  //         "Não é possível excluir o leilão. Existem lances vinculados a este leilão."
+  //       );
+  //       return;
+  //     }
+
+  //     const leilaoDeleteResponse = await fetch(
+  //       `http://localhost:3000/leilao/${idLeilao}`,
+  //       {
+  //         method: "DELETE",
+  //       }
+  //     );
+
+  //     if (leilaoDeleteResponse.ok) {
+  //       const produtoDeleteResponse = await fetch(
+  //         `http://localhost:3000/produto/${produtoId}`,
+  //         {
+  //           method: "DELETE",
+  //         }
+  //       );
+
+  //       if (produtoDeleteResponse.ok) {
+  //         console.log("Produto excluído com sucesso!");
+  //         Alert.alert("Sucesso", "Leilão e produto excluídos com sucesso!");
+  //         setModalVisible(false);
+  //         navigation.navigate("MeusLeiloes");
+  //       } else {
+  //         throw new Error("Erro ao excluir o produto");
+  //       }
+  //     } else {
+  //       throw new Error("Erro ao excluir o leilão");
+  //     }
+  //   } catch (error) {
+  //     console.error("Erro ao excluir o leilão e produto:", error.message);
+  //     Alert.alert(
+  //       "Erro",
+  //       "Erro ao excluir o leilão e produto. Por favor, tente novamente."
+  //     );
+  //   }
+  // };
+
   const handleExcluirLeilao = async (idLeilao) => {
     try {
-      // Envia uma requisição DELETE para excluir o leilão
-      const response = await fetch(
+      // Obter os dados do leilão
+      const leilaoResponse = await fetch(
+        `http://localhost:3000/leilao/${idLeilao}`
+      );
+      const leilaoData = await leilaoResponse.json();
+      const produtoId = leilaoData.leilao.produto.id;
+
+      // Excluir o leilão
+      const leilaoDeleteResponse = await fetch(
         `http://localhost:3000/leilao/${idLeilao}`,
         {
           method: "DELETE",
         }
       );
-      if (response.ok) {
-        const updatedLeiloes = meusLeiloes.filter(
-          (leilao) => leilao.id !== idLeilao
+
+      if (leilaoDeleteResponse.ok) {
+        // Excluir o produto associado ao leilão
+        const produtoDeleteResponse = await fetch(
+          `http://localhost:3000/produto/${produtoId}`,
+          {
+            method: "DELETE",
+          }
         );
-        console.log("Leilões atualizados após exclusão:", updatedLeiloes);
-        setMeusLeiloes(updatedLeiloes);
-        Alert.alert("Sucesso", "Leilão excluído com sucesso!");
+
+        if (produtoDeleteResponse.ok) {
+          console.log("Produto excluído com sucesso!");
+          Alert.alert("Sucesso", "Leilão e produto excluídos com sucesso!");
+          setModalVisible(false);
+          navigation.navigate("MeusLeiloes");
+        } else {
+          throw new Error("Erro ao excluir o produto");
+        }
       } else {
         throw new Error("Erro ao excluir o leilão");
       }
     } catch (error) {
-      console.error("Erro ao excluir o leilão:", error.message);
+      console.error("Erro ao excluir o leilão e produto:", error.message);
       Alert.alert(
         "Erro",
-        "Erro ao excluir o leilão. Por favor, tente novamente."
+        "Erro ao excluir o leilão e produto. Por favor, tente novamente."
       );
     }
   };
 
-  const handleCancelarExclusao = () => {
-    setExibindoConfirmacao(false);
+  const openModal = () => {
+    setModalVisible(true);
   };
 
   return (
@@ -187,7 +261,17 @@ const EditarLeilao = () => {
         style={editarLeilaoStyles.scrollContent}
         contentContainerStyle={editarLeilaoStyles.contentContainer}
       >
-              {console.log("Valores dos estados:", nomeProduto, descricaoProduto, categoriaSelecionada, precoInicial, duracaoDias, duracaoHoras, duracaoMinutos, urlImagemProduto)}
+        {console.log(
+          "Valores dos estados:",
+          nomeProduto,
+          descricaoProduto,
+          categoriaSelecionada,
+          precoInicial,
+          duracaoDias,
+          duracaoHoras,
+          duracaoMinutos,
+          urlImagemProduto
+        )}
 
         <View style={editarLeilaoStyles.head}>
           <Button
@@ -203,7 +287,7 @@ const EditarLeilao = () => {
             icon="trash-can-outline"
             color="red"
             size={30}
-            onPress={() => setExibindoConfirmacao(true)} 
+            onPress={openModal}
           />
         </View>
 
@@ -333,17 +417,42 @@ const EditarLeilao = () => {
         </Pressable>
         {mensagemSalvo ? <Text>{mensagemSalvo}</Text> : null}
 
-        {exibindoConfirmacao && (
-          <ConfirmarExclusaoLeilao
-            nomeProduto={nomeProduto} 
-            // usuario={nomeUsuario} 
-            idLeilao={id}
-            onConfirmarExclusao={handleExcluirLeilao} 
-            onCancel={handleCancelarExclusao}
-            
-          />
-        )}
+        <Modal
+          animationType="slide"
+          transparent={true}
+          visible={modalVisible}
+          onRequestClose={() => {
+            Alert.alert("Modal has been closed.");
+            setModalVisible(!modalVisible);
+          }}
+        >
+          <View style={editarLeilaoStyles.modalView}>
+            <Text style={editarLeilaoStyles.confirmationText}>
+              Tem certeza que deseja excluir o leilão do produto {nomeProduto}?
+            </Text>
+            <View style={editarLeilaoStyles.confirmationButtons}>
+              <Pressable
+                style={[
+                  editarLeilaoStyles.buttonModal,
+                  editarLeilaoStyles.buttonCancelModal,
+                ]}
+                onPress={() => setModalVisible(false)}
+              >
+                <Text style={editarLeilaoStyles.buttonTextModal}>Cancelar</Text>
+              </Pressable>
 
+              <Pressable
+                style={[
+                  editarLeilaoStyles.buttonModal,
+                  editarLeilaoStyles.buttonDeleteModal,
+                ]}
+                onPress={() => handleExcluirLeilao(id)}
+              >
+                <Text style={editarLeilaoStyles.buttonTextModal}>Excluir</Text>
+              </Pressable>
+            </View>
+          </View>
+        </Modal>
       </ScrollView>
       <View>
         <Footer />
