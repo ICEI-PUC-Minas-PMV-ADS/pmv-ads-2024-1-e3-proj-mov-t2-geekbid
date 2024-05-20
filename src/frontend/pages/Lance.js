@@ -9,6 +9,7 @@ import {
 } from 'react-native'
 import { useNavigation } from '@react-navigation/native'
 import axios from 'axios'
+import moment from 'moment'
 
 const Lance = ({ item }) => {
   const navigation = useNavigation()
@@ -40,7 +41,7 @@ const Lance = ({ item }) => {
       const response = await axios.get(
         'http://localhost:3000/leilao/meusleiloes'
       )
-      
+
       console.log(response)
       setLeiloes(response.data?.meusLeiloes)
     } catch (error) {
@@ -60,39 +61,46 @@ const Lance = ({ item }) => {
         <Text style={styles.linkText}>Filtrar</Text>
       </TouchableOpacity>
       <ScrollView>
-        {leiloes?.map((item, index) => (
-          <View style={styles.itemContainer} key={index}>
-            <Image
-              style={styles.image}
-              source={{ uri: item.produto?.urlImagemProduto }}
-            />
-            <Text style={styles.title}>{item.produto.nomeProduto}</Text>
-            <View style={styles.infoContainer}>
-              <Text style={styles.creator}>
-                Criado por: {item.usuario.nome}
-              </Text>
-              <Text style={styles.price}>
-                Valor do Lance: R$ {item.precoAtual}
-              </Text>
-            </View>
-            <TouchableOpacity
-              style={styles.button}
-              onPress={() =>
-                handleLancePress(
-                  item.id,
-                  item.dataFim,
-                  item.produto.nomeProduto,
-                  item.produto.urlImagemProduto,
-                  item.usuario.nome
-                )
-              }
-            >
-              <Text style={styles.buttonText}>Dar Lance</Text>
-            </TouchableOpacity>
-          </View>
-        ))}
+        {leiloes?.map((item, index) => {
+          const leilaoFinalizado = moment(item.dataFim).isBefore(moment())
 
-        
+          return (
+            <View style={styles.itemContainer} key={index}>
+              <Image
+                style={styles.image}
+                source={{ uri: item.produto?.urlImagemProduto }}
+              />
+              <Text style={styles.title}>{item.produto.nomeProduto}</Text>
+              <View style={styles.infoContainer}>
+                <Text style={styles.creator}>
+                  Criado por: {item.usuario.nome}
+                </Text>
+                <Text style={styles.price}>
+                  Valor do Lance: R$ {item.precoAtual}
+                </Text>
+              </View>
+              <TouchableOpacity
+                style={[
+                  styles.button,
+                  leilaoFinalizado && styles.buttonFinalizado
+                ]}
+                onPress={() => {
+                  handleLancePress(
+                    item.id,
+                    item.dataFim,
+                    item.produto.nomeProduto,
+                    item.produto.urlImagemProduto,
+                    item.usuario.nome
+                  )
+                }}
+              >
+                <Text style={styles.buttonText}>
+                  {leilaoFinalizado ? 'Leilão Finalizado' : 'Dar Lance'}
+                </Text>
+              </TouchableOpacity>
+            </View>
+          )
+        })}
       </ScrollView>
     </View>
   )
@@ -136,6 +144,9 @@ const styles = StyleSheet.create({
     paddingVertical: 10,
     borderRadius: 5,
     alignItems: 'center'
+  },
+  buttonFinalizado: {
+    backgroundColor: '#ccc'
   },
   buttonText: {
     color: '#fff',
