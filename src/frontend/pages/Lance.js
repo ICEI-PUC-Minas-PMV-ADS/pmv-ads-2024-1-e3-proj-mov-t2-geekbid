@@ -49,9 +49,9 @@ const Lance = ({ item }) => {
     }
   }
 
-  useEffect(() => {
-    getLeiloes()
-  }, [])
+  // useEffect(() => {
+  //   getLeiloes()
+  // }, [])
 
   console.log('Leilões: ', leiloes)
 

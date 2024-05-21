@@ -21,7 +21,7 @@ const styles = StyleSheet.create({
     marginBottom: 30,
   },
   textHeader: {
-    fontSize: 25,
+    fontSize: 22,
     textAlign:'left',
     paddingLeft: 30,
     width: '60%',
@@ -33,6 +33,9 @@ const styles = StyleSheet.create({
     borderRadius: 10,
     padding: 10,
     marginHorizontal: 5,
+  },
+  lastItem: {
+    marginBottom: 80, // Ajuste para ficar acima do rodapé
   },
   image: {
     width: '100%',
@@ -73,7 +76,7 @@ const styles = StyleSheet.create({
     marginHorizontal: 5,
     marginLeft: 15,
     marginRight: 15,
-    marginBottom: 100,
+    marginBottom: 10,
   },
   image: {
     width: '100%',

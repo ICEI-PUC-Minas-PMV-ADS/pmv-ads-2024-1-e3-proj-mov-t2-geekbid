@@ -1,4 +1,4 @@
-import { StyleSheet } from 'react-native';
+import { StyleSheet } from "react-native";
 
 const styles = StyleSheet.create({
   container: {
@@ -6,23 +6,26 @@ const styles = StyleSheet.create({
   },
   scrollContent: {
     flexGrow: 1,
-    paddingHorizontal:20,
+    paddingHorizontal: 20,
   },
   contentContainer: {
-    paddingBottom: 80, 
+    paddingBottom: 80,
   },
   head: {
     flexDirection: "row",
-    justifyContent: 'flex-start',
-    alignItems: 'center',
+    justifyContent: "flex-start",
+    alignItems: "center",
     marginTop: 20,
     marginBottom: 30,
   },
+  iconTrash: {
+    color: "red",
+  },
   textHeader: {
     fontSize: 25,
-    textAlign:'left',
+    textAlign: "left",
     paddingLeft: 30,
-    width: '80%',
+    width: "80%",
   },
   uploadButton: {
     backgroundColor: "#f0f0f0",
@@ -71,13 +74,10 @@ const styles = StyleSheet.create({
     height: 60,
   },
   inputTitle: {
-    marginTop:2,
+    marginTop: 2,
     paddingBottom: 5,
     fontSize: 11,
     color: "#6f6f6f",
-  },
-  obrigatorio: {
-    color: 'red',
   },
   inputText: {
     height: 30,
@@ -92,6 +92,14 @@ const styles = StyleSheet.create({
     alignItems: "center",
     marginBottom: 5,
   },
+  buttonDelete: {
+    marginBottom: 8,
+    height: 60,
+    justifyContent: 'center',
+    marginTop: 15,
+    borderColor:'red',
+  },
+
   buttonText: {
     color: "#fff",
     fontSize: 16,
@@ -114,7 +122,7 @@ const styles = StyleSheet.create({
     borderWidth: 1,
     borderColor: "#ccc",
     borderRadius: 5,
-    alignItems: 'center',
+    alignItems: "center",
     paddingBottom: 0,
     paddingTop: 10,
     marginRight: 10,
@@ -123,13 +131,55 @@ const styles = StyleSheet.create({
   },
   duracaoPlaceholder: {
     color: "#666cff",
-    fontWeight: 'bold',
+    fontWeight: "bold",
     fontSize: 20,
-    textAlign: 'center',
+    textAlign: "center",
     width: 60,
   },
   errorMessage: {
-    color: 'red',
+    color: "red",
+  },
+  modalView: {
+    margin: 20,
+    backgroundColor: "white",
+    borderRadius: 20,
+    padding: 35,
+    alignItems: "center",
+    shadowColor: "#000",
+    shadowOffset: {
+      width: 0,
+      height: 2,
+    },
+    shadowOpacity: 0.25,
+    shadowRadius: 4,
+    elevation: 5,
+  },
+  confirmationButtons: {
+    flexDirection: 'row',
+    justifyContent: 'space-between',
+    width: '100%',
+  },
+  confirmationText: {
+    padding: 10,
+    fontSize: 12
+  },
+  buttonModal: {
+    padding: 15,
+    borderRadius: 5,
+    alignItems: 'center',
+    flex: 1,
+    marginHorizontal: 5,
+  },
+  buttonDeleteModal: {
+    backgroundColor: 'red',
+  },
+  buttonCancelModal: {
+    backgroundColor: '#666cff',
+  },
+  buttonTextModal: {
+    color: '#fff',
+    fontSize: 16,
+    fontWeight: 'bold',
   },
 });
 

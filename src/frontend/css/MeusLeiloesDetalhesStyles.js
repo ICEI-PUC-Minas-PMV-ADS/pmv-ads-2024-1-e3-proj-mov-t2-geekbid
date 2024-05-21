@@ -12,7 +12,7 @@ const MeusLeiloesDetalhesStyles = StyleSheet.create({
     marginBottom: 20,
   },
   textHeader: {
-    fontSize: 24,
+    fontSize: 20,
     marginLeft: 20,
   },
   iconTrash: {
@@ -22,7 +22,7 @@ const MeusLeiloesDetalhesStyles = StyleSheet.create({
     width: "100%",
     height: 200,
     resizeMode: "cover",
-    marginBottom: 20,
+    marginBottom: 10,
   },
   box: {
     borderWidth: 1,
@@ -44,7 +44,7 @@ const MeusLeiloesDetalhesStyles = StyleSheet.create({
     fontSize: 16,
     color: "#000000",
   },
-    backButton: {
+    publicButton: {
     color: "#fff",
     fontSize: 16,
     fontWeight: "bold",
@@ -54,6 +54,20 @@ const MeusLeiloesDetalhesStyles = StyleSheet.create({
     alignItems: "center",
     marginBottom: 5,
   },
-});
+  inactiveButton: {
+    color: "#808080",
+    fontSize: 16,
+    fontWeight: "bold",
+    backgroundColor: "#cccccc",
+    padding: 15,
+    borderRadius: 5,
+    alignItems: "center",
+    marginBottom: 5,
+  },
+  status: {
+    marginBottom: 20,
+    fontSize: 12,
+    color: "#808080",
+  },});
 
 export default MeusLeiloesDetalhesStyles;

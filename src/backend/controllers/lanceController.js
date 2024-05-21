@@ -4,6 +4,7 @@ const Produto = require('../models/produtoModel')
 const Usuario = require('../models/usuarioModel')
 
 // Função para controlar erros
+
 const handleErrors = err => {
   let errors = {}
 
@@ -57,23 +58,35 @@ const lanceController = {
     }
   },
 
-  // Retornar todos os lances de um usuário
-  async buscarLancesPorUsuario(req, res) {
+  // Retornar os últimos 5 lances de um leilão
+  async buscarUltimosLances(req, res) {
     try {
-      const { userId } = req.params
+      console.log('Conteúdo do objeto req:', req) // Adicione este log
+      const { leilaoId } = req.params
+      console.log('ID do leilão:', leilaoId) // Verifica o ID recebido
+
       const lances = await Lance.findAll({
-        //where: { userId }
-        include: [
-            { model: Usuario, as: 'usuario' },
-            {
-              model: Leilao,
-              as: 'leilao',
-              include: [
-                { model: Produto, as: 'produto' }
-              ]
-            }
-          ]
+        where: { leilaoId },
+        order: [['createdAt', 'DESC']],
+        limit: 5
       })
+      console.log('Lances encontrados:', lances) // Verifica os lances encontrados
+
+      // Verifica se lances não está indefinido
+      if (!lances) {
+        throw new Error('Nenhum lance encontrado para este leilão')
+      }
+
+      res.status(200).json(lances)
+    } catch (err) {
+      console.error('Erro ao buscar últimos lances:', err) // Adiciona log de erro
+      res.status(404).json({ message: err.message })
+    }
+  },
+
+  async buscarTodosLances(req, res) {
+    try {
+      const lances = await Lance.findAll() // Buscar todos os lances sem filtro
       res.status(200).json(lances)
     } catch (err) {
       res.status(404).json({ message: err.message })

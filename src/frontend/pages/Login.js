@@ -14,25 +14,32 @@ export function Login() {
   const [email, setEmail] = useState('')
   const [senha, setSenha] = useState('')
 
-  function handleLogin() {
+  async function handleLogin() {
     if (!email || !senha) {
       return alert('Preencha todos os campos!')
     }
 
-    signIn({ email, senha })
-    navigation.navigate('Home')
+    try {
+      const success = await signIn({ email, senha })
 
-    // const handleLoginPress = () => {
-    // }
-
-    // login({
-    //   email: email,
-    //   password: password
-    // }).then(() => {
-    //   console.log(email, password)
-    //   handleLoginPress()
-    // })
+      if (success) {
+        navigation.navigate('Home')
+      }
+    } catch (error) {
+      alert('Erro ao fazer login: ' + error.message)
+    }
   }
+
+  // const handleLoginPress = () => {
+  // }
+
+  // login({
+  //   email: email,
+  //   password: password
+  // }).then(() => {
+  //   console.log(email, password)
+  //   handleLoginPress()
+  // })
 
   return (
     <Container>
