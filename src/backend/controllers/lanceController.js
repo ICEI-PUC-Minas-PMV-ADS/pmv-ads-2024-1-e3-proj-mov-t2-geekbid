@@ -1,7 +1,10 @@
-const Lance = require('../models/lanceModel');
-const Leilao = require('../models/leilaoModel');
+const Lance = require('../models/lanceModel')
+const Leilao = require('../models/leilaoModel')
+const Produto = require('../models/produtoModel')
+const Usuario = require('../models/usuarioModel')
 
 // Função para controlar erros
+
 const handleErrors = (err) => {
   let errors = {};
 
@@ -13,13 +16,14 @@ const handleErrors = (err) => {
   }
 
   return errors;
-}
+
 
 // Métodos do controller
 const lanceController = {
   // Dar lance em um leilão
   async cadastrarLance(req, res) {
     try {
+
       const { usuarioId, leilaoId, valorLance } = req.body;
       const dataLance = new Date();
 
@@ -109,11 +113,14 @@ const lanceController = {
   //             throw new Error('Lance não encontrado');
   //         }
 
+
   //         res.status(204).json({ message: 'Lance excluído com sucesso' });
   //     } catch (err) {
   //         res.status(404).json({ message: err.message });
   //     }
   // }
+
 };
 
-module.exports = lanceController;
+
+module.exports = lanceController

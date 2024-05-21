@@ -8,6 +8,7 @@ import {
   ScrollView
 } from 'react-native'
 import { useNavigation } from '@react-navigation/native'
+import axios from 'axios'
 
 const Lance = ({ item }) => {
   const navigation = useNavigation()
@@ -34,16 +35,22 @@ const Lance = ({ item }) => {
 
   const [leiloes, setLeiloes] = useState([])
 
-  const getLeiloes = () => {
-    fetch('http://localhost:3000/leilao/home')
-      .then(res => res.json())
-      .then(data => setLeiloes(data.leiloes))
-      .catch(error => console.error(error))
+  const getLeiloes = async () => {
+    try {
+      const response = await axios.get(
+        'http://localhost:3000/leilao/meusleiloes'
+      )
+      
+      console.log(response)
+      setLeiloes(response.data?.meusLeiloes)
+    } catch (error) {
+      console.error(error)
+    }
   }
 
-  useEffect(() => {
-    getLeiloes()
-  }, [])
+  // useEffect(() => {
+  //   getLeiloes()
+  // }, [])
 
   console.log('Leilões: ', leiloes)
 
@@ -57,7 +64,7 @@ const Lance = ({ item }) => {
           <View style={styles.itemContainer} key={index}>
             <Image
               style={styles.image}
-              source={{ uri: item.produto.urlImagemProduto }}
+              source={{ uri: item.produto?.urlImagemProduto }}
             />
             <Text style={styles.title}>{item.produto.nomeProduto}</Text>
             <View style={styles.infoContainer}>
@@ -84,6 +91,8 @@ const Lance = ({ item }) => {
             </TouchableOpacity>
           </View>
         ))}
+
+        
       </ScrollView>
     </View>
   )

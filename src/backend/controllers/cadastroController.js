@@ -7,6 +7,7 @@ const transporter = require('./emailController')
 class CadastroController {
   async create(request, response) {
     const { nome, email, senha } = request.body
+    const hashedSenha = await bcrypt.hash(senha, 10)
 
     try {
       // Verifica se o email já está em uso
@@ -14,9 +15,6 @@ class CadastroController {
       if (usuarioExistente) {
         throw new AppError('Este email já está em uso.', 400)
       }
-      
-
-      // const hashedSenha = await bcrypt.hash(senha, 10)
 
       // Cria o usuário
       const novoUsuario = await Usuario.create({

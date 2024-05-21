@@ -1,3 +1,4 @@
+
 const Sequelize = require('sequelize');
 const { Op } = Sequelize;
 const sequelize = require("../utils/database");
@@ -65,14 +66,15 @@ const leilaoController = {
       }
     },
 
+
   // Buscar todos os leilões
   async listarLeiloes(req, res) {
     try {
-      const leiloes = await Leilao.findAll();
-      res.status(200).json({ leiloes });
+      const leiloes = await Leilao.findAll()
+      res.status(200).json({ leiloes })
     } catch (error) {
-      console.error('Erro ao buscar leilões:', error);
-      res.status(500).json({ error: 'Erro interno do servidor' });
+      console.error('Erro ao buscar leilões:', error)
+      res.status(500).json({ error: 'Erro interno do servidor' })
     }
   },
 
@@ -100,6 +102,7 @@ const leilaoController = {
         }
     },
 
+
   // Buscar um leilão por ID
   async listarLeilao(req, res) {
     try {
@@ -110,13 +113,14 @@ const leilaoController = {
           { model: Usuario, as: 'usuario' } 
         ]      
   });
+
       if (!leilao) {
-        return res.status(404).json({ error: 'Leilão não encontrado' });
+        return res.status(404).json({ error: 'Leilão não encontrado' })
       }
-      res.status(200).json({ leilao });
+      res.status(200).json({ leilao })
     } catch (error) {
-      console.error('Erro ao buscar o leilão:', error);
-      res.status(500).json({ error: 'Erro interno do servidor' });
+      console.error('Erro ao buscar o leilão:', error)
+      res.status(500).json({ error: 'Erro interno do servidor' })
     }
   },
 
@@ -143,8 +147,9 @@ const leilaoController = {
 
       const leilao = await Leilao.findByPk(id);
 
+
       if (!leilao) {
-        return res.status(404).json({ error: 'Leilão não encontrado' });
+        return res.status(404).json({ error: 'Leilão não encontrado' })
       }
 
       // Atualizar o produto associado ao leilão
@@ -173,9 +178,10 @@ const leilaoController = {
       console.log('Leilão atualizado com sucesso:', leilao);
 
       res.status(200).json({ leilao });
+
     } catch (error) {
-      console.error('Erro ao atualizar o leilão:', error);
-      res.status(500).json({ error: 'Erro interno do servidor' });
+      console.error('Erro ao atualizar o leilão:', error)
+      res.status(500).json({ error: 'Erro interno do servidor' })
     }
   },
 
@@ -183,18 +189,18 @@ const leilaoController = {
   // Rota para excluir um leilão por ID
   async excluirLeilao(req, res) {
     try {
-      const { id } = req.params;
-      const leilao = await Leilao.findByPk(id);
+      const { id } = req.params
+      const leilao = await Leilao.findByPk(id)
       if (!leilao) {
-        return res.status(404).json({ error: 'Leilão não encontrado' });
+        return res.status(404).json({ error: 'Leilão não encontrado' })
       }
-      await leilao.destroy();
-      res.status(200).json({ message: 'Leilão excluído com sucesso' });
+      await leilao.destroy()
+      res.status(200).json({ message: 'Leilão excluído com sucesso' })
     } catch (error) {
-      console.error('Erro ao excluir o leilão:', error);
-      res.status(500).json({ error: 'Erro interno do servidor' });
+      console.error('Erro ao excluir o leilão:', error)
+      res.status(500).json({ error: 'Erro interno do servidor' })
     }
-  },
-};
+  }
+}
 
-module.exports = leilaoController;
+module.exports = leilaoController
