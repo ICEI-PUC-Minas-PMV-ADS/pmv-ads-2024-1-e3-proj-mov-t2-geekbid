@@ -5,103 +5,109 @@ const Usuario = require('../models/usuarioModel')
 
 // Função para controlar erros
 
-const handleErrors = (err) => {
-  let errors = {};
+const handleErrors = err => {
+  let errors = {}
 
   // Erros de validação
-    if (err.name === 'SequelizeValidationError') {
-        err.errors.forEach(error => {
-      errors[error.path] = error.message;
-    });
+  if (err.name === 'SequelizeValidationError') {
+    err.errors.forEach(error => {
+      errors[error.path] = error.message
+    })
   }
 
-  return errors;
-
+  return errors
+}
 
 // Métodos do controller
 const lanceController = {
   // Dar lance em um leilão
   async cadastrarLance(req, res) {
     try {
-
-      const { usuarioId, leilaoId, valorLance } = req.body;
-      const dataLance = new Date();
+      const { usuarioId, leilaoId, valorLance } = req.body
+      const dataLance = new Date()
 
       // Checar se o usuário dando lance é o mesmo que criou o leilão
-      const leilao = await Leilao.findByPk(leilaoId);
+      const leilao = await Leilao.findByPk(leilaoId)
       if (leilao.usuarioId === usuarioId) {
-                return res.status(403).json({ message: 'Você não pode dar lances em seus leilões' });
+        return res
+          .status(403)
+          .json({ message: 'Você não pode dar lances em seus leilões' })
       }
 
-            const lance = await Lance.create({ valorLance, dataLance, usuarioId, leilaoId });
-      res.status(201).json(lance);
+      const lance = await Lance.create({
+        valorLance,
+        dataLance,
+        usuarioId,
+        leilaoId
+      })
+      res.status(201).json(lance)
     } catch (err) {
-      const errors = handleErrors(err);
-      res.status(400).json({ errors });
+      const errors = handleErrors(err)
+      res.status(400).json({ errors })
     }
   },
 
   // Retornar todos os lances de um leilão
   async buscarLances(req, res) {
     try {
-      const { leilaoId } = req.params;
-      const lances = await Lance.findAll({ where: { leilaoId } });
-      res.status(200).json(lances);
+      const { leilaoId } = req.params
+      const lances = await Lance.findAll({ where: { leilaoId } })
+      res.status(200).json(lances)
     } catch (err) {
-      res.status(404).json({ message: err.message });
+      res.status(404).json({ message: err.message })
     }
   },
 
   // Retornar os últimos 5 lances de um leilão
   async buscarUltimosLances(req, res) {
     try {
-      console.log("Conteúdo do objeto req:", req); // Adicione este log
-      const { leilaoId } = req.params;
-      console.log("ID do leilão:", leilaoId); // Verifica o ID recebido
-  
+      console.log('Conteúdo do objeto req:', req) // Adicione este log
+      const { leilaoId } = req.params
+      console.log('ID do leilão:', leilaoId) // Verifica o ID recebido
+
       const lances = await Lance.findAll({
         where: { leilaoId },
-        order: [["createdAt", "DESC"]],
-        limit: 5,
-      });
-      console.log("Lances encontrados:", lances); // Verifica os lances encontrados
-  
+        order: [['createdAt', 'DESC']],
+        limit: 5
+      })
+      console.log('Lances encontrados:', lances) // Verifica os lances encontrados
+
       // Verifica se lances não está indefinido
       if (!lances) {
-        throw new Error("Nenhum lance encontrado para este leilão");
+        throw new Error('Nenhum lance encontrado para este leilão')
       }
-  
-      res.status(200).json(lances);
+
+      res.status(200).json(lances)
     } catch (err) {
-      console.error("Erro ao buscar últimos lances:", err); // Adiciona log de erro
-      res.status(404).json({ message: err.message });
+      console.error('Erro ao buscar últimos lances:', err) // Adiciona log de erro
+      res.status(404).json({ message: err.message })
     }
   },
-  
+
   async buscarTodosLances(req, res) {
     try {
-      const lances = await Lance.findAll(); // Buscar todos os lances sem filtro
-      res.status(200).json(lances);
+      const lances = await Lance.findAll() // Buscar todos os lances sem filtro
+      res.status(200).json(lances)
     } catch (err) {
-      res.status(404).json({ message: err.message });
+      res.status(404).json({ message: err.message })
     }
   },
 
   // Retornar os detalhes de um lance específico
   async buscarLance(req, res) {
     try {
-      const { id } = req.params;
-      const lance = await Lance.findByPk(id);
+      const { id } = req.params
+      const lance = await Lance.findByPk(id)
 
       if (!lance) {
-                throw new Error('Bid not found');
+        throw new Error('Bid not found')
       }
 
-      res.status(200).json(lance);
+      res.status(200).json(lance)
     } catch (err) {
-      res.status(404).json({ message: err.message });
+      res.status(404).json({ message: err.message })
     }
-  },
+  }
 
   // Excluir lance
   // async excluirLance(req, res) {
@@ -113,14 +119,11 @@ const lanceController = {
   //             throw new Error('Lance não encontrado');
   //         }
 
-
   //         res.status(204).json({ message: 'Lance excluído com sucesso' });
   //     } catch (err) {
   //         res.status(404).json({ message: err.message });
   //     }
   // }
-
-};
-
+}
 
 module.exports = lanceController
