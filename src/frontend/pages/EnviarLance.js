@@ -30,6 +30,8 @@ const EnviarLance = ({ route, navigation }) => {
     useState(false)
   const { leilaoId, leilaoDataFim, nomeProduto, nomeUsuario, imagemProduto } =
     route.params
+  const [aguardeContatoModalVisible, setAguardeContatoModalVisible] =
+    useState(false)
   // Dados mocados enquanto aguardamos conexão com o backend
   const tituloProduto = 'Título do Produto'
   const responsavel = 'Fulano'
@@ -158,6 +160,16 @@ const EnviarLance = ({ route, navigation }) => {
 
   const closeLanceEnviadoModal = () => {
     setLanceEnviadoModalVisible(false)
+  }
+
+  const openAguardeContatoModal = () => {
+    // Função para abrir o modal de "Aguarde Contato"
+    setAguardeContatoModalVisible(true)
+  }
+
+  const closeAguardeContatoModal = () => {
+    // Função para fechar o modal de "Aguarde Contato"
+    setAguardeContatoModalVisible(false)
   }
 
   function tempoRestanteF() {
@@ -346,14 +358,43 @@ const EnviarLance = ({ route, navigation }) => {
               </Text>
 
               <TouchableOpacity
-                style={[styles.modalButton, styles.payButton]}
-                onPress={() => {
-                  closeLanceEnviadoModal()
-                  closeModal()
-                  // Adicionar lógica para pagar aqui
-                }}
+                style={styles.button}
+                onPress={openAguardeContatoModal} // Abre o modal de "Aguarde Contato" ao clicar no botão "Pagar agora"
               >
                 <Text style={styles.buttonText}>Pagar agora</Text>
+              </TouchableOpacity>
+            </View>
+          </View>
+        </TouchableWithoutFeedback>
+      </Modal>
+      <Modal
+        animationType="slide"
+        transparent={true}
+        visible={aguardeContatoModalVisible} // Modal de "Aguarde Contato"
+        onRequestClose={() => {
+          Alert.alert('Modal has been closed.')
+          closeAguardeContatoModal()
+        }}
+      >
+        <TouchableWithoutFeedback onPress={Keyboard.dismiss} accessible={false}>
+          <View style={styles.modalContainer}>
+            <View style={styles.modalContent}>
+              <Image
+                source={require('./../assets/img-modal-contato.png')}
+                style={styles.modalImage}
+              />
+              <Text style={styles.modalMessage}>
+                Aguarde que o vendedor entrará em contato com você em breve para
+                fornecer os detalhes de pagamento.
+              </Text>
+              <TouchableOpacity
+                style={styles.button}
+                onPress={() => {
+                  closeAguardeContatoModal()
+                  navigation.navigate('Home') // Redireciona para a tela inicial ao clicar em "Concluir"
+                }}
+              >
+                <Text style={styles.buttonText}>Concluir</Text>
               </TouchableOpacity>
             </View>
           </View>
@@ -418,6 +459,18 @@ const styles = StyleSheet.create({
     justifyContent: 'space-between',
     marginTop: 10
   },
+  modalImage: {
+    width: 180,
+    height: 180,
+    marginBottom: 20
+  },
+
+  modalMessage: {
+    fontSize: 18,
+    fontWeight: 600
+  },
+
+
   infoBox: {
     flex: 1,
     borderWidth: 1,
@@ -511,12 +564,14 @@ const styles = StyleSheet.create({
     borderRadius: 5,
     alignItems: 'center',
     width: '90%',
-    marginBottom: 20
+    marginBottom: 20,
+    marginTop:18
   },
   buttonText: {
     color: '#fff',
     fontSize: 16,
-    fontWeight: 'bold'
+    fontWeight: 'bold',
+    
   },
   modalContainer: {
     flex: 1,

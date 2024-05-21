@@ -24,7 +24,13 @@ const Lance = sequelize.define(
     }
   },
   {
-    freezeTableName: true
+    freezeTableName: true,
+    indexes: [
+      {
+        unique: false,
+        fields: ['usuarioId', 'leilaoId']
+      }
+    ]
   }
 )
 
