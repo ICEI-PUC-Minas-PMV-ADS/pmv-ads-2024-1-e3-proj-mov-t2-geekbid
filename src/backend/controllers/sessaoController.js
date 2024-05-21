@@ -15,7 +15,7 @@ class sessaoController {
     }
 
     if (senha != usuario.senha) {
-      return response.json('Email e/ou senha inválido(s).', 401)
+      return response.json('Senha inválida.', 401)
     }
 
     const { secret, expiresIn } = authConfig.jwt

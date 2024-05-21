@@ -14,8 +14,11 @@ import {
   Keyboard
 } from 'react-native'
 import moment from 'moment'
+import { useAuth } from '../services/auth.services'
 
 const EnviarLance = ({ route, navigation }) => {
+  const { usuario } = useAuth()
+
   const [tempoRestante, setTempoRestante] = useState('')
   const [ultimoLance, setUltimoLance] = useState(0)
   const [seuLance, setSeuLance] = useState(0)
@@ -23,12 +26,15 @@ const EnviarLance = ({ route, navigation }) => {
   const [modalVisible, setModalVisible] = useState(false)
   const [lanceEnviadoModalVisible, setLanceEnviadoModalVisible] =
     useState(false)
+  const [leilaoArremetadoModalVisible, setLeilaoArrematadoModalVisible] =
+    useState(false)
   const { leilaoId, leilaoDataFim, nomeProduto, nomeUsuario, imagemProduto } =
     route.params
   // Dados mocados enquanto aguardamos conexão com o backend
   const tituloProduto = 'Título do Produto'
   const responsavel = 'Fulano'
   const imagemUrl = 'https://via.placeholder.com/300'
+  console.log(usuario)
 
   useEffect(() => {
     fetchLances()
@@ -41,12 +47,17 @@ const EnviarLance = ({ route, navigation }) => {
     if (resp.data.length > 0) {
       // Use reduce para calcular o maior lance
       const maiorLance = resp.data.reduce((maior, lance) => {
-        return lance.valorLance > maior ? lance.valorLance : maior
-      }, resp.data[0].valorLance) // Inicialize com o primeiro lance
+        return lance.valorLance > maior.valorLance ? lance : maior
+      }, resp.data[0]) // Inicialize com o primeiro lance
 
       console.log('Maior lance:', maiorLance)
-      setUltimoLance(maiorLance)
-      setNovoLance(maiorLance)
+      setUltimoLance(maiorLance.valorLance)
+      setNovoLance(maiorLance.valorLance)
+
+      // Verifique se o maior lance é do usuário logado
+      if (maiorLance.usuarioId === usuario.id && leilaoAcabou()) {
+        setLeilaoArrematadoModalVisible(true)
+      }
     } else {
       console.log('Não há lances para este leilão.')
       setNovoLance(50)
@@ -112,7 +123,7 @@ const EnviarLance = ({ route, navigation }) => {
 
   const doEnviarLance = async () => {
     const resp = await axios.post('http://localhost:3000/lances/', {
-      usuarioId: 1,
+      usuarioId: usuario.id,
       leilaoId: leilaoId,
       valorLance: novoLance
     })
@@ -294,6 +305,55 @@ const EnviarLance = ({ route, navigation }) => {
                 }}
               >
                 <Text style={styles.modalButtonText}>Acompanhe seu lance</Text>
+              </TouchableOpacity>
+            </View>
+          </View>
+        </TouchableWithoutFeedback>
+      </Modal>
+
+      <Modal
+        animationType="slide"
+        transparent={true}
+        visible={leilaoArremetadoModalVisible}
+        onRequestClose={() => {
+          Alert.alert('Modal has been closed.')
+          closeLanceEnviadoModal()
+        }}
+      >
+        <TouchableWithoutFeedback onPress={Keyboard.dismiss} accessible={false}>
+          <View style={styles.modalContainer}>
+            <View style={styles.modalContent}>
+              <View style={styles.modalEnviado}>
+                <Text style={styles.modalLanceEnviado}>Parabéns!</Text>
+              </View>
+              <View style={styles.modalSubtitleContainer}>
+                <Image
+                  source={require('./../assets/hammer.png')}
+                  style={styles.modalHammerIcon}
+                />
+                <Text style={styles.modalSubtitleText}>
+                  Você arrematou este item!
+                </Text>
+              </View>
+              <Image
+                source={{ uri: imagemProduto }}
+                style={styles.modalProductImage}
+              />
+              <Text style={styles.modalProductName}>{nomeProduto}</Text>
+              <Text style={styles.modalCreator}>Criador: Pedro</Text>
+              <Text>
+                Seu lance <Text style={styles.modalBid}>R$ {ultimoLance}</Text>
+              </Text>
+
+              <TouchableOpacity
+                style={[styles.modalButton, styles.payButton]}
+                onPress={() => {
+                  closeLanceEnviadoModal()
+                  closeModal()
+                  // Adicionar lógica para pagar aqui
+                }}
+              >
+                <Text style={styles.buttonText}>Pagar agora</Text>
               </TouchableOpacity>
             </View>
           </View>
@@ -528,17 +588,17 @@ const styles = StyleSheet.create({
     fontWeight: 'bold'
   },
   sendButton: {
-    backgroundColor: "#666cff",
-    boxShadow: "0px 2px 3.84px rgba(0, 0, 0, 0.25)", // Tentativa de ajuste pois ShadowOffset está depreciated e quebrando no projeto
-//     backgroundColor: '#666cff',
-//     shadowColor: '#000',
-//     shadowOffset: {
-//       width: 0,
-//       height: 2
-//     },
-//     shadowOpacity: 0.25,
-//     shadowRadius: 3.84,
-//     elevation: 5
+    backgroundColor: '#666cff',
+    boxShadow: '0px 2px 3.84px rgba(0, 0, 0, 0.25)' // Tentativa de ajuste pois ShadowOffset está depreciated e quebrando no projeto
+    //     backgroundColor: '#666cff',
+    //     shadowColor: '#000',
+    //     shadowOffset: {
+    //       width: 0,
+    //       height: 2
+    //     },
+    //     shadowOpacity: 0.25,
+    //     shadowRadius: 3.84,
+    //     elevation: 5
   },
   buttonCancelar: {
     borderWidth: 1,
@@ -558,12 +618,80 @@ const styles = StyleSheet.create({
     height: 18,
     marginRight: 10
   },
+  modalHammerIcon: {
+    width: 32,
+    height: 32
+  },
   modalEnviado: {
     flexDirection: 'row',
     alignItems: 'center',
     alignContent: 'center',
     marginBottom: 20,
     justifyContent: 'center'
+  },
+  modalContainer: {
+    flex: 1,
+    justifyContent: 'center',
+    alignItems: 'center',
+    backgroundColor: 'rgba(0, 0, 0, 0.5)'
+  },
+  modalContent: {
+    width: '80%',
+    backgroundColor: 'white',
+    borderRadius: 10,
+    padding: 50,
+    alignItems: 'center'
+  },
+  modalEnviado: {
+    marginBottom: 10
+  },
+  modalLanceEnviado: {
+    fontSize: 24,
+    fontWeight: 'bold'
+  },
+  modalSubtitleContainer: {
+    flexDirection: 'row',
+    alignItems: 'center',
+    marginBottom: 10
+  },
+  modalHammerIcon: {
+    width: 36,
+    height: 36,
+    marginRight: 5
+  },
+  modalSubtitleText: {
+    fontSize: 22
+  },
+  modalProductImage: {
+    width: 100,
+    height: 100,
+    marginBottom: 10
+  },
+  modalProductName: {
+    fontSize: 18,
+    fontWeight: 'bold',
+    marginBottom: 5
+  },
+  modalCreator: {
+    fontSize: 16,
+    marginBottom: 5
+  },
+  modalBid: {
+    fontSize: 20,
+    fontWeight: 'bold',
+    marginBottom: 20
+  },
+  modalButton: {
+    padding: 10,
+    borderRadius: 5,
+    alignItems: 'center'
+  },
+  payButton: {
+    backgroundColor: '#666cff'
+  },
+  modalButtonText: {
+    color: 'white',
+    fontSize: 16
   }
 })
 
