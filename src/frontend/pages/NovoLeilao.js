@@ -10,13 +10,13 @@ import {
 import { Button, Headline } from "react-native-paper";
 import { useNavigation } from "@react-navigation/native";
 import { Picker } from "@react-native-picker/picker";
-// import { useAuth } from '../services/auth.services'
+import { useAuth } from "../services/auth.services";
 import Footer from "./../navegations/Footer";
 import novoLeilaoStyles from "./../css/NovoLeilaoStyles";
 
 const NovoLeilao = () => {
   const navigation = useNavigation();
-  // const { usuario } = useAuth();
+  const { usuario } = useAuth();
   const [nomeProduto, setNomeProduto] = useState("");
   const [descricaoProduto, setDescricaoProduto] = useState("");
   const [categoriaSelecionada, setCategoriaSelecionada] = useState("");
@@ -25,19 +25,15 @@ const NovoLeilao = () => {
   const [duracaoHoras, setDuracaoHoras] = useState("");
   const [duracaoMinutos, setDuracaoMinutos] = useState("");
   const [urlImagemProduto, setUrlImagemProduto] = useState("");
-  const [mensagemSalvo, setMensagemSalvo] = useState("");
   const [precoAtual, setPrecoAtual] = useState(precoInicial || 0);
   const [categorias, setCategorias] = useState([]);
   const [mensagemURLInvalida, setMensagemURLInvalida] = useState("");
-
 
   useEffect(() => {
     // Fetch categories from the database
     const fetchCategories = async () => {
       try {
-        const response = await fetch(
-          "http://localhost:3000/produto/categoria"
-        );
+        const response = await fetch("http://localhost:3000/produto/categoria");
         console.log("Buscou categoria:", response);
         if (response.ok) {
           const data = await response.json();
@@ -63,29 +59,41 @@ const NovoLeilao = () => {
         descricaoProduto,
         categoriaProduto: categoriaSelecionada,
         precoInicial,
-        duracao: `${duracaoDias} dias ${duracaoHoras} horas ${duracaoMinutos} minutos`,
+        duracaoDias: Number(duracaoDias) || 0,
+        duracaoHoras: Number(duracaoHoras) || 0,
+        duracaoMinutos: Number(duracaoMinutos) || 0,
         urlImagemProduto,
         dataInicio: dataInicioFim,
         dataFim: dataInicioFim,
         precoAtual,
-        // usuarioId: usuario.id, Retornando undefined
+        usuarioId: usuario?.id,
       };
-      console.log("Dados do novo leilão:", novoLeilao);
 
-      const response = await fetch("http://192.168.1.106:3000/leilao", {
+      const response = await fetch("http://localhost:3000/leilao", {
         method: "POST",
         headers: {
           "Content-Type": "application/json",
         },
         body: JSON.stringify(novoLeilao),
       });
-      console.log("Resposta da requisição:", response);
 
       if (response.ok) {
-        setMensagemSalvo("Leilão salvo com sucesso!");
+        alert(
+          "Leilão cadastrado com sucesso! Acesse-o em 'Meus Leilões' para publicá-lo."
+        );
         setTimeout(() => {
           navigation.navigate("MeusLeiloes");
-        }, 2000);
+          // Limpar os campos apenas se o cadastro for bem-sucedido
+          setNomeProduto("");
+          setDescricaoProduto("");
+          setCategoriaSelecionada("");
+          setPrecoInicial("");
+          setDuracaoDias("");
+          setDuracaoHoras("");
+          setDuracaoMinutos("");
+          setUrlImagemProduto("");
+          setPrecoAtual(0);
+        }, 1200);
       } else {
         throw new Error("Erro ao salvar o leilão");
       }
@@ -103,7 +111,9 @@ const NovoLeilao = () => {
   // Função para lidar com a mudança de texto na entrada de URL
   const handleURLChange = (text) => {
     setUrlImagemProduto(text);
-    if (!isURLValid(text)) {
+    if (!text) {
+      setMensagemURLInvalida(""); // Limpa a mensagem de erro se o campo estiver vazio
+    } else if (!isURLValid(text)) {
       setMensagemURLInvalida("Insira uma URL válida.");
     } else {
       setMensagemURLInvalida("");
@@ -156,6 +166,8 @@ const NovoLeilao = () => {
         <View style={novoLeilaoStyles.inputBox}>
           <Text style={novoLeilaoStyles.inputTitle}>URL da Imagem</Text>
           <TextInput
+            placeholder="link de imagem hospedada (jpg/png)"
+            placeholderTextColor="#a9a9a9"
             value={urlImagemProduto}
             onChangeText={handleURLChange}
             style={novoLeilaoStyles.inputText}
@@ -163,7 +175,9 @@ const NovoLeilao = () => {
         </View>
         <Text style={novoLeilaoStyles.errorMessage}>{mensagemURLInvalida}</Text>
         <View style={novoLeilaoStyles.inputBox}>
-          <Text style={novoLeilaoStyles.inputTitle}>Nome</Text>
+          <Text style={novoLeilaoStyles.inputTitle}>Nome
+            <Text style={novoLeilaoStyles.obrigatorio}> *</Text>
+          </Text>
           <TextInput
             value={nomeProduto}
             onChangeText={(text) => setNomeProduto(text)}
@@ -179,7 +193,9 @@ const NovoLeilao = () => {
           />
         </View>
         <View style={novoLeilaoStyles.inputBox}>
-          <Text style={novoLeilaoStyles.inputTitle}>Categoria</Text>
+          <Text style={novoLeilaoStyles.inputTitle}>Categoria
+            <Text style={novoLeilaoStyles.obrigatorio}> *</Text>
+          </Text>
           {categorias.length > 0 && (
             <Picker
               onValueChange={(itemValue, itemIndex) => {
@@ -190,6 +206,7 @@ const NovoLeilao = () => {
               mode="dropdown"
               style={novoLeilaoStyles.categoria}
             >
+              <Picker.Item label="Selecione uma categoria" value="" />
               {categorias.map((cat, index) => (
                 <Picker.Item
                   key={cat.id}
@@ -201,25 +218,35 @@ const NovoLeilao = () => {
           )}
         </View>
         <View style={novoLeilaoStyles.inputBox}>
-          <Text style={novoLeilaoStyles.inputTitle}>Lance mínimo</Text>
+          <Text style={novoLeilaoStyles.inputTitle}>Lance mínimo
+            <Text style={novoLeilaoStyles.obrigatorio}> *</Text>
+         </Text>
           <TextInput
             value={precoInicial}
             onChangeText={(text) => {
-              setPrecoInicial(text);
-              setPrecoAtual(text);
+              const numericText = text.replace(/[^0-9]/g, "");
+              setPrecoInicial(numericText);
+              setPrecoAtual(numericText);
             }}
             style={novoLeilaoStyles.inputText}
+            keyboardType="numeric"
           />
         </View>
         <View style={novoLeilaoStyles.duracaoContainer}>
-          <Text style={novoLeilaoStyles.duracaoLabel}>Duração</Text>
+          <Text style={novoLeilaoStyles.duracaoLabel}>Duração
+            <Text style={novoLeilaoStyles.obrigatorio}> *</Text>
+          </Text>
           <View style={novoLeilaoStyles.duracaoInputContainer}>
             <View style={novoLeilaoStyles.duracaoInput}>
               <TextInput
                 placeholder="00"
                 value={duracaoDias}
-                onChangeText={(text) => setDuracaoDias(text)}
+                onChangeText={(text) => {
+                  const numericText = text.replace(/[^0-9]/g, "");
+                  setDuracaoDias(numericText);
+                }}
                 style={novoLeilaoStyles.duracaoPlaceholder}
+                keyboardType="numeric"
               />
               <Text>dias</Text>
             </View>
@@ -227,8 +254,12 @@ const NovoLeilao = () => {
               <TextInput
                 placeholder="00"
                 value={duracaoHoras}
-                onChangeText={(text) => setDuracaoHoras(text)}
+                onChangeText={(text) => {
+                  const numericText = text.replace(/[^0-9]/g, "");
+                  setDuracaoHoras(numericText);
+                }}
                 style={novoLeilaoStyles.duracaoPlaceholder}
+                keyboardType="numeric"
               />
               <Text>horas</Text>
             </View>
@@ -236,8 +267,12 @@ const NovoLeilao = () => {
               <TextInput
                 placeholder="00"
                 value={duracaoMinutos}
-                onChangeText={(text) => setDuracaoMinutos(text)}
+                onChangeText={(text) => {
+                  const numericText = text.replace(/[^0-9]/g, "");
+                  setDuracaoMinutos(numericText);
+                }}
                 style={novoLeilaoStyles.duracaoPlaceholder}
+                keyboardType="numeric"
               />
               <Text>minutos</Text>
             </View>
@@ -247,16 +282,28 @@ const NovoLeilao = () => {
         <Pressable
           style={novoLeilaoStyles.button}
           onPress={() => {
-            if (isURLValid(urlImagemProduto)) {
-              handleSalvarAlteracoesPress();
+            // Verificar se todos os campos obrigatórios estão preenchidos
+            if (
+              nomeProduto &&
+              categoriaSelecionada &&
+              precoInicial &&
+              duracaoDias &&
+              duracaoHoras &&
+              duracaoMinutos
+            ) {
+              // Verificar se a URL da imagem é válida
+              if (urlImagemProduto === "" || isURLValid(urlImagemProduto)) {
+                handleSalvarAlteracoesPress();
+              } else {
+                alert("Insira uma URL válida antes de salvar.");
+              }
             } else {
-              alert("Insira uma URL válida antes de salvar.");
+              alert("Preencha os campos obrigatórios antes de salvar.");
             }
           }}
         >
           <Text style={novoLeilaoStyles.buttonText}>Salvar Alterações</Text>
         </Pressable>
-        {mensagemSalvo ? <Text>{mensagemSalvo}</Text> : null}
       </ScrollView>
       <View>
         <Footer />

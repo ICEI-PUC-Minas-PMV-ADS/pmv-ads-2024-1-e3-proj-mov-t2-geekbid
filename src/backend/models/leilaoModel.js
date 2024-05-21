@@ -30,7 +30,19 @@ const Leilao = sequelize.define("leilao", {
             'encerrado',
             'cancelado'),
         defaultValue: 'cadastrado'
-    }
+    },
+    duracaoDias: {
+        type: DataTypes.INTEGER,
+        allowNull: false,
+      },
+      duracaoHoras: {
+        type: DataTypes.INTEGER,
+        allowNull: false,
+      },
+      duracaoMinutos: {
+        type: DataTypes.INTEGER,
+        allowNull: false,
+      },
 },
 {
     freezeTableName: true
