@@ -1,5 +1,5 @@
 import { createContext, useContext, useEffect, useState } from 'react'
-import { AsyncStorage } from 'react-native'
+import AsyncStorage from '@react-native-async-storage/async-storage'
 
 import { api } from './api'
 
@@ -12,19 +12,28 @@ function AuthProvider({ children }) {
       const response = await api.post('/sessao', { email, senha })
       const { usuario, token } = response.data
 
-      // AsyncStorage.setItem('@geekbid:usuario', JSON.stringify(usuario))
-      // AsyncStorage.setItem('@geekbid:token', token)
+      AsyncStorage.setItem('@geekbid:usuario', JSON.stringify(usuario))
+      AsyncStorage.setItem('@geekbid:token', token)
 
-      // api.defaults.headers.common['Authorization'] = `Bearer ${token}`
+      api.defaults.headers.authorization = `Bearer ${token}`
       setData({ usuario, token })
       console.log(response)
+      return true
     } catch (error) {
       if (error.response) {
-        alert(error.response.data.message)
+        alert('Email ou senha incorretos.')
       } else {
         alert('Não foi possível entrar.')
       }
+      return false
     }
+  }
+
+  function signOut() {
+    AsyncStorage.removeItem('@geekbid:usuario')
+    AsyncStorage.removeItem('@geekbid:token')
+
+    setData({})
   }
 
   async function updatePerfil({ usuario }) {
@@ -37,27 +46,32 @@ function AuthProvider({ children }) {
       if (error.response) {
         alert(error.response.data.message)
       } else {
-        alert('Não foi possível entrar.')
+        alert('Não foi possível atualizar.')
       }
     }
   }
 
-  // useEffect(() => {
-  //   const token = AsyncStorage.getItem('@geekbid:token')
-  //   const usuario = AsyncStorage.getItem('@geekbid:usuario')
+  useEffect(() => {
+    async function loadStorageData() {
+      const token = await AsyncStorage.getItem('@geekbid:token')
+      const usuario = await AsyncStorage.getItem('@geekbid:usuario')
 
-  //   if (token && usuario) {
-  //     api.defaults.headers.common['Authorization'] = `Bearer ${token}`
+      if (token && usuario) {
+        api.defaults.headers.authorization = `Bearer ${token}`
 
-  //     setData({
-  //       token,
-  //       usuario: JSON.parse(usuario)
-  //     })
-  //   }
-  // }, [])
+        setData({
+          token,
+          usuario: JSON.parse(usuario)
+        })
+      }
+    }
+
+    loadStorageData()
+  }, [])
+
   return (
     <AuthContext.Provider
-      value={{ signIn, updatePerfil, usuario: data.usuario }}
+      value={{ signIn, updatePerfil, usuario: data.usuario, signOut }}
     >
       {children}
     </AuthContext.Provider>
