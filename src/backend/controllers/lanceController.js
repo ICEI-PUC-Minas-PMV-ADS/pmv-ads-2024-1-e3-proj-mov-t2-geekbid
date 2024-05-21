@@ -1,19 +1,19 @@
-const Lance = require("../models/lanceModel");
-const Leilao = require("../models/leilaoModel");
+const Lance = require('../models/lanceModel');
+const Leilao = require('../models/leilaoModel');
 
 // Função para controlar erros
 const handleErrors = (err) => {
   let errors = {};
 
   // Erros de validação
-  if (err.name === "SequelizeValidationError") {
-    err.errors.forEach((error) => {
+    if (err.name === 'SequelizeValidationError') {
+        err.errors.forEach(error => {
       errors[error.path] = error.message;
     });
   }
 
   return errors;
-};
+}
 
 // Métodos do controller
 const lanceController = {
@@ -26,17 +26,10 @@ const lanceController = {
       // Checar se o usuário dando lance é o mesmo que criou o leilão
       const leilao = await Leilao.findByPk(leilaoId);
       if (leilao.usuarioId === usuarioId) {
-        return res
-          .status(403)
-          .json({ message: "Você não pode dar lances em seus leilões" });
+                return res.status(403).json({ message: 'Você não pode dar lances em seus leilões' });
       }
 
-      const lance = await Lance.create({
-        valorLance,
-        dataLance,
-        usuarioId,
-        leilaoId,
-      });
+            const lance = await Lance.create({ valorLance, dataLance, usuarioId, leilaoId });
       res.status(201).json(lance);
     } catch (err) {
       const errors = handleErrors(err);
@@ -97,7 +90,7 @@ const lanceController = {
       const lance = await Lance.findByPk(id);
 
       if (!lance) {
-        throw new Error("Bid not found");
+                throw new Error('Bid not found');
       }
 
       res.status(200).json(lance);
