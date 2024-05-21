@@ -58,6 +58,26 @@ const lanceController = {
     }
   },
 
+  async buscarLancesPorUsuario(req, res) {
+    try {
+      const { userId } = req.params
+      const lances = await Lance.findAll({
+        //where: { userId }
+        include: [
+          { model: Usuario, as: 'usuario' },
+          {
+            model: Leilao,
+            as: 'leilao',
+            include: [{ model: Produto, as: 'produto' }]
+          }
+        ]
+      })
+      res.status(200).json(lances)
+    } catch (err) {
+      res.status(404).json({ message: err.message })
+    }
+  },
+
   // Retornar os últimos 5 lances de um leilão
   async buscarUltimosLances(req, res) {
     try {

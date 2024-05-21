@@ -39,19 +39,19 @@ const Lance = ({ item }) => {
   const getLeiloes = async () => {
     try {
       const response = await axios.get(
-        'http://localhost:3000/leilao/meusleiloes'
+        'http://localhost:3000/leilao'
       )
 
       console.log(response)
-      setLeiloes(response.data?.meusLeiloes)
+      setLeiloes(response.data?.leiloes)
     } catch (error) {
       console.error(error)
     }
   }
 
-  // useEffect(() => {
-  //   getLeiloes()
-  // }, [])
+   useEffect(() => {
+     getLeiloes()
+   }, [])
 
   console.log('Leilões: ', leiloes)
 

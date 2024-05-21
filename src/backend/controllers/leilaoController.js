@@ -70,7 +70,15 @@ const leilaoController = {
   // Buscar todos os leilões
   async listarLeiloes(req, res) {
     try {
-      const leiloes = await Leilao.findAll()
+      const leiloes = await Leilao.findAll({
+        include: [
+          {model: Usuario, as: 'usuario'},
+          {model: Produto, as: 'produto'}
+        ],
+        order: [
+          ['dataInicio', 'DESC']
+        ]
+      })
       res.status(200).json({ leiloes })
     } catch (error) {
       console.error('Erro ao buscar leilões:', error)
@@ -78,29 +86,29 @@ const leilaoController = {
     }
   },
 
-      // Buscar todos os leilões para a meusLeiloes
-      async listarMeusLeiloes(req, res) {
-        try {
-            const { usuarioId } = req.query;
-            const meusLeiloes = await Leilao.findAll({
-                where: {
-                    usuarioId: usuarioId,
-                },
-                include: [
-                    {model: Usuario, as: 'usuario'},
-                    {model: Produto, as: 'produto'}
-                ],
-                order: [
-                  ['dataInicio', 'DESC']
-                ]
-            })
-            console.log(JSON.stringify(meusLeiloes, null, 2));
-            res.status(200).json({ meusLeiloes });
-        } catch (error) {
-            console.error('Erro ao buscar leilões:', error);
-            res.status(500).json({ error: 'Erro interno do servidor' });
-        }
-    },
+    // Buscar todos os leilões para a meusLeiloes
+    async listarMeusLeiloes(req, res) {
+      try {
+          const { usuarioId } = req.query;
+          const meusLeiloes = await Leilao.findAll({
+              where: {
+                  usuarioId: usuarioId,
+              },
+              include: [
+                  {model: Usuario, as: 'usuario'},
+                  {model: Produto, as: 'produto'}
+              ],
+              order: [
+                ['dataInicio', 'DESC']
+              ]
+          })
+          console.log(JSON.stringify(meusLeiloes, null, 2));
+          res.status(200).json({ meusLeiloes });
+      } catch (error) {
+          console.error('Erro ao buscar leilões:', error);
+          res.status(500).json({ error: 'Erro interno do servidor' });
+      }
+  },
 
 
   // Buscar um leilão por ID
