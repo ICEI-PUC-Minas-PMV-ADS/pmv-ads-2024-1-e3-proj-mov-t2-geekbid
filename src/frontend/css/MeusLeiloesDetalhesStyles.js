@@ -5,6 +5,11 @@ const MeusLeiloesDetalhesStyles = StyleSheet.create({
     flex: 1,
     backgroundColor: "#fff",
     padding: 20,
+    flexGrow: 1,
+  },
+  scrollContent: {
+    flexGrow: 1,
+    backgroundColor: "#fff",
   },
   head: {
     flexDirection: "row",
@@ -30,21 +35,19 @@ const MeusLeiloesDetalhesStyles = StyleSheet.create({
     borderRadius: 5,
     paddingLeft: 10,
     marginBottom: 10,
-    height: 60,
+    padding: 10,
   },
   boxTitle: {
-    marginTop:2,
+    marginTop: 2,
     paddingBottom: 5,
     fontSize: 11,
     color: "#6f6f6f",
   },
   boxContent: {
-    height: 30,
-    marginTop: 5,
     fontSize: 16,
     color: "#000000",
   },
-    publicButton: {
+  publicButton: {
     color: "#fff",
     fontSize: 16,
     fontWeight: "bold",
@@ -68,6 +71,39 @@ const MeusLeiloesDetalhesStyles = StyleSheet.create({
     marginBottom: 20,
     fontSize: 12,
     color: "#808080",
-  },});
+  },
+  lanceRow: {
+    flexDirection: "row",
+    justifyContent: "space-between",
+    paddingVertical: 5,
+  },
+  lanceUser: {
+    fontSize: 16,
+    color: "#000",
+  },
+  lanceValue: {
+    fontSize: 16,
+    color: "#000",
+  },
+  lancesContainer: {
+    marginBottom: 30,  
+  },
+  linkContainer: {
+    alignItems: "center",
+    marginTop: 10,
+  },
+  link: {
+    color: "#666cff",
+    fontSize: 16,
+    textDecorationLine: "underline",
+  },
+  buttonContainer: {
+    marginBottom: 80, 
+  },
+  footerPlaceholder: {
+    height: 100,
+  },
+  
+});
 
 export default MeusLeiloesDetalhesStyles;

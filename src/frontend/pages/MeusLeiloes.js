@@ -92,6 +92,7 @@ const MeusLeiloes = () => {
               </TouchableOpacity>
             </View>
           ))}
+          <View style={MeusLeiloesStyles.footerPlaceholder} />
       </ScrollView>
       <Footer />
     </View>

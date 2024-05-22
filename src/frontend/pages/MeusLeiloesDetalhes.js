@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from "react";
-import { View, Text, Image, Alert } from "react-native";
+import { View, Text, Image, Alert, ScrollView } from "react-native";
 import { Button, Headline, IconButton } from "react-native-paper";
 import { useNavigation, useRoute } from "@react-navigation/native";
 import Footer from "./../navegations/Footer";
@@ -13,6 +13,7 @@ const MeusLeiloesDetalhes = () => {
   const [produto, setProduto] = useState(null);
   const [leilao, setLeilao] = useState(null);
   const [lances, setLances] = useState([]);
+  const [showAllLances, setShowAllLances] = useState(false);
 
   useEffect(() => {
     const fetchProduto = async () => {
@@ -32,9 +33,11 @@ const MeusLeiloesDetalhes = () => {
 
     const fetchLances = async () => {
       try {
-        const response = await fetch(
-          `http://localhost:3000/lance/${id}/ultimos`
-        );
+        let url = `http://localhost:3000/lances/${id}/ultimos`;
+        if (showAllLances) {
+          url = `http://localhost:3000/lances/${id}`;
+        }
+        const response = await fetch(url);
         const data = await response.json();
         setLances(data);
       } catch (error) {
@@ -48,29 +51,33 @@ const MeusLeiloesDetalhes = () => {
 
     fetchProduto();
     fetchLances();
-  }, [id]);
+  }, [id, showAllLances]);
 
   const handleEditarLeilao = (produtoId) => {
     console.log("ID do produto selecionado:", produtoId);
     navigation.navigate("EditarLeilao", { id: produtoId });
   };
 
+  const handleShowAllLances = async () => {
+    setShowAllLances(true);
+  };
+
   const handlePublicarLeilao = async () => {
     console.log("Clicou em publicar");
     // Mudar o status do leilão para "publicado"
-    setLeilao(prevLeilao => ({
+    setLeilao((prevLeilao) => ({
       ...prevLeilao,
-      statusLeilao: "publicado"
+      statusLeilao: "publicado",
     }));
 
     try {
-      // Atualizar o status do leilão no servidor 
+      // Atualizar o status do leilão no servidor
       await fetch(`http://localhost:3000/leilao/${id}`, {
-        method: 'PUT',
+        method: "PUT",
         headers: {
-          'Content-Type': 'application/json'
+          "Content-Type": "application/json",
         },
-        body: JSON.stringify({ statusLeilao: "publicado" })
+        body: JSON.stringify({ statusLeilao: "publicado" }),
       });
       Alert.alert("Sucesso", "Leilão publicado com sucesso!");
     } catch (error) {
@@ -79,25 +86,27 @@ const MeusLeiloesDetalhes = () => {
         "Erro",
         "Erro ao publicar o leilão. Por favor, tente novamente mais tarde."
       );
-    }    
+    }
   };
 
   const handleAtualizarDataFim = () => {
     // Calcular a nova data fim
-    const { DuracaoDias, DuracaoHoras, DuracaoMinutos } = leilao; 
+    const { DuracaoDias, DuracaoHoras, DuracaoMinutos } = leilao;
     const newDataFim = new Date();
     newDataFim.setDate(newDataFim.getDate() + DuracaoDias);
     newDataFim.setHours(newDataFim.getHours() + DuracaoHoras);
     newDataFim.setMinutes(newDataFim.getMinutes() + DuracaoMinutos);
 
     // Atualizar a data fim no estado do leilão
-    setLeilao(prevLeilao => ({
+    setLeilao((prevLeilao) => ({
       ...prevLeilao,
-      dataFim: newDataFim
+      dataFim: newDataFim,
     }));
-  };  
+  };
 
   return (
+    <ScrollView style={MeusLeiloesDetalhesStyles.scrollContent}>
+
     <View style={MeusLeiloesDetalhesStyles.container}>
       <View style={MeusLeiloesDetalhesStyles.head}>
         <Button icon="chevron-left" onPress={() => navigation.goBack()} />
@@ -149,43 +158,71 @@ const MeusLeiloesDetalhes = () => {
       )}
 
       {leilao && leilao.statusLeilao !== "cadastrado" && (
-        <View style={MeusLeiloesDetalhesStyles.box}>
-          <Text style={MeusLeiloesDetalhesStyles.title}>Últimos 5 Lances</Text>
+        <View
+          style={[
+            MeusLeiloesDetalhesStyles.box,
+            MeusLeiloesDetalhesStyles.lancesContainer,
+          ]}
+        >
+          <Text style={MeusLeiloesDetalhesStyles.title}>
+            {showAllLances ? "Todos os Lances" : "Últimos 5 Lances"}
+          </Text>
           {lances.length > 0 ? (
             lances.map((lance, index) => (
-              <Text key={index} style={MeusLeiloesDetalhesStyles.boxContent}>
-                {`Usuário: ${lance.usuarioId}, Valor: ${
-                  lance.valorLance
-                }, Data: ${new Date(lance.createdAt).toLocaleString()}`}
-              </Text>
+              <View key={index} style={MeusLeiloesDetalhesStyles.lanceRow}>
+                <Text style={MeusLeiloesDetalhesStyles.lanceUser}>
+                  {lance.usuarioNome || "Usuário desconhecido"}
+                </Text>
+                <Text style={MeusLeiloesDetalhesStyles.lanceValue}>
+                  {`R$ ${lance.valorLance}`}
+                </Text>
+              </View>
             ))
           ) : (
             <Text style={MeusLeiloesDetalhesStyles.boxContent}>
               Nenhum lance encontrado.
             </Text>
           )}
+          {!showAllLances && (
+            <View style={MeusLeiloesDetalhesStyles.linkContainer}>
+              <Text
+                style={[
+                  MeusLeiloesDetalhesStyles.link,
+                  { color: "blue", textDecorationLine: "underline" },
+                ]}
+                onPress={handleShowAllLances}
+              >
+                Exibir todos os lances
+              </Text>
+            </View>
+          )}
         </View>
       )}
 
-      <Button
-        icon="check"
-        mode="contained"
-        style={
-          leilao && leilao.statusLeilao === "cadastrado"
-            ? MeusLeiloesDetalhesStyles.publicButton
-            : MeusLeiloesDetalhesStyles.inactiveButton
-        }
-        onPress={async () => {
-          await handlePublicarLeilao();
-          handleAtualizarDataFim();
-        }}
-        color="#666cff"
-        disabled={!(leilao && leilao.statusLeilao === "cadastrado")}
-      >
-        Publicar
-      </Button>
-      <Footer />
+      <View style={MeusLeiloesDetalhesStyles.buttonContainer}>
+        <Button
+          icon="check"
+          mode="contained"
+          style={
+            leilao && leilao.statusLeilao === "cadastrado"
+              ? MeusLeiloesDetalhesStyles.publicButton
+              : MeusLeiloesDetalhesStyles.inactiveButton
+          }
+          onPress={async () => {
+            await handlePublicarLeilao();
+            handleAtualizarDataFim();
+          }}
+          color="#666cff"
+          disabled={!(leilao && leilao.statusLeilao === "cadastrado")}
+        >
+          Publicar
+        </Button>
+      </View>
     </View>
+    <View style={MeusLeiloesDetalhesStyles.footerPlaceholder}/>
+    <Footer/>
+   </ScrollView>
+   
   );
 };
 

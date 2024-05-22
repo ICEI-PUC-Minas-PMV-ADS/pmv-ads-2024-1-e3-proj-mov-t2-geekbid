@@ -12,6 +12,7 @@ import {
 import { Button, Headline, IconButton } from 'react-native-paper'
 import { useNavigation, useRoute } from '@react-navigation/native'
 import { Picker } from '@react-native-picker/picker'
+import { addDays, addHours, addMinutes, parseISO, formatISO } from 'date-fns'
 import Footer from './../navegations/Footer'
 import editarLeilaoStyles from './../css/EditarLeilaoStyles'
 import ConfirmarExclusaoLeilao from './ConfirmarExclusaoLeilao'
@@ -91,6 +92,21 @@ const EditarLeilao = () => {
 
     fetchLeilao()
   }, [id])
+
+  useEffect(() => {
+    const calculateDataFim = () => {
+      const dataInicioParsed = parseISO(dataInicio)
+      const dataComDias = addDays(dataInicioParsed, parseInt(duracaoDias) || 0)
+      const dataComHoras = addHours(dataComDias, parseInt(duracaoHoras) || 0)
+      const dataComMinutos = addMinutes(dataComHoras, parseInt(duracaoMinutos) || 0)
+      const dataFimCalculada = formatISO(dataComMinutos)
+      setDataFim(dataFimCalculada)
+    }
+
+    if (dataInicio) {
+      calculateDataFim()
+    }
+  }, [duracaoDias, duracaoHoras, duracaoMinutos, dataInicio])
 
   const handleSalvarAlteracoesPress = async () => {
     try {
