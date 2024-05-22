@@ -33,15 +33,15 @@ const Leilao = sequelize.define("leilao", {
     },
     duracaoDias: {
         type: DataTypes.INTEGER,
-        allowNull: false,
+        allowNull: true,
       },
       duracaoHoras: {
         type: DataTypes.INTEGER,
-        allowNull: false,
+        allowNull: true,
       },
       duracaoMinutos: {
         type: DataTypes.INTEGER,
-        allowNull: false,
+        allowNull: true,
       },
 },
 {

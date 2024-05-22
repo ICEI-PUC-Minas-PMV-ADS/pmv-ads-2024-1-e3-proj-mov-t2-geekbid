@@ -11,6 +11,7 @@ import { Button, Headline } from "react-native-paper";
 import { useNavigation } from "@react-navigation/native";
 import { Picker } from "@react-native-picker/picker";
 import { useAuth } from "../services/auth.services";
+import { add } from "date-fns";
 import Footer from "./../navegations/Footer";
 import novoLeilaoStyles from "./../css/NovoLeilaoStyles";
 
@@ -52,19 +53,28 @@ const NovoLeilao = () => {
 
   const handleSalvarAlteracoesPress = async () => {
     try {
-      const dataInicioFim = new Date();
+      const dataInicio = new Date();
+      const duracaoDiasNum = Number(duracaoDias) || 0;
+      const duracaoHorasNum = Number(duracaoHoras) || 0;
+      const duracaoMinutosNum = Number(duracaoMinutos) || 0;
+
+      const dataFim = add(dataInicio, {
+        days: duracaoDiasNum,
+        hours: duracaoHorasNum,
+        minutes: duracaoMinutosNum,
+      });
 
       const novoLeilao = {
         nomeProduto,
         descricaoProduto,
         categoriaProduto: categoriaSelecionada,
         precoInicial,
-        duracaoDias: Number(duracaoDias) || 0,
-        duracaoHoras: Number(duracaoHoras) || 0,
-        duracaoMinutos: Number(duracaoMinutos) || 0,
+        duracaoDias: duracaoDiasNum,
+        duracaoHoras: duracaoHorasNum,
+        duracaoMinutos: duracaoMinutosNum,
         urlImagemProduto,
-        dataInicio: dataInicioFim,
-        dataFim: dataInicioFim,
+        dataInicio,
+        dataFim,
         precoAtual,
         usuarioId: usuario?.id,
       };
@@ -102,7 +112,6 @@ const NovoLeilao = () => {
     }
   };
 
-  // Função para verificar se uma string é uma URL válida
   const isURLValid = (text) => {
     const urlRegex = /^(ftp|http|https):\/\/[^ "]+$/;
     return urlRegex.test(text);
@@ -175,7 +184,8 @@ const NovoLeilao = () => {
         </View>
         <Text style={novoLeilaoStyles.errorMessage}>{mensagemURLInvalida}</Text>
         <View style={novoLeilaoStyles.inputBox}>
-          <Text style={novoLeilaoStyles.inputTitle}>Nome
+          <Text style={novoLeilaoStyles.inputTitle}>
+            Nome
             <Text style={novoLeilaoStyles.obrigatorio}> *</Text>
           </Text>
           <TextInput
@@ -193,7 +203,8 @@ const NovoLeilao = () => {
           />
         </View>
         <View style={novoLeilaoStyles.inputBox}>
-          <Text style={novoLeilaoStyles.inputTitle}>Categoria
+          <Text style={novoLeilaoStyles.inputTitle}>
+            Categoria
             <Text style={novoLeilaoStyles.obrigatorio}> *</Text>
           </Text>
           {categorias.length > 0 && (
@@ -218,9 +229,10 @@ const NovoLeilao = () => {
           )}
         </View>
         <View style={novoLeilaoStyles.inputBox}>
-          <Text style={novoLeilaoStyles.inputTitle}>Lance mínimo
+          <Text style={novoLeilaoStyles.inputTitle}>
+            Lance mínimo
             <Text style={novoLeilaoStyles.obrigatorio}> *</Text>
-         </Text>
+          </Text>
           <TextInput
             value={precoInicial}
             onChangeText={(text) => {
@@ -233,7 +245,8 @@ const NovoLeilao = () => {
           />
         </View>
         <View style={novoLeilaoStyles.duracaoContainer}>
-          <Text style={novoLeilaoStyles.duracaoLabel}>Duração
+          <Text style={novoLeilaoStyles.duracaoLabel}>
+            Duração
             <Text style={novoLeilaoStyles.obrigatorio}> *</Text>
           </Text>
           <View style={novoLeilaoStyles.duracaoInputContainer}>
