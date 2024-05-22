@@ -1,15 +1,15 @@
+import React from 'react'
 import { NavigationContainer } from '@react-navigation/native'
-import { useAuth } from './services/auth.services'
-import Route from './navegations/Route'
 import { AuthProvider } from './services/auth.services'
+import Route from './navegations/Route'
 
 const App = () => {
   return (
-    <NavigationContainer>
-      <AuthProvider>
+    <AuthProvider>
+      <NavigationContainer>
         <Route />
-      </AuthProvider>
-    </NavigationContainer>
+      </NavigationContainer>
+    </AuthProvider>
   )
 }
 
