@@ -15,7 +15,6 @@ import { Picker } from '@react-native-picker/picker'
 import { addDays, addHours, addMinutes, parseISO, formatISO } from 'date-fns'
 import Footer from './../navegations/Footer'
 import editarLeilaoStyles from './../css/EditarLeilaoStyles'
-import ConfirmarExclusaoLeilao from './ConfirmarExclusaoLeilao'
 
 const EditarLeilao = () => {
   const navigation = useNavigation()
@@ -123,32 +122,33 @@ const EditarLeilao = () => {
         dataFim,
         precoAtual,
         statusLeilao
-      }
-
-      console.log('Dados do leilão atualizado:', leilaoAtualizado)
-
+      };
+  
+      console.log('Dados do leilão atualizado:', leilaoAtualizado);
+  
       const response = await fetch(`http://localhost:3000/leilao/${id}`, {
         method: 'PUT',
         headers: {
           'Content-Type': 'application/json'
         },
         body: JSON.stringify(leilaoAtualizado)
-      })
-
-      console.log('Resposta da requisição:', response)
-
+      });
+  
+      console.log('Resposta da requisição:', response);
+  
       if (response.ok) {
-        setMensagemSalvo('Alterações salvas com sucesso!')
+        setMensagemSalvo('Alterações salvas com sucesso!');
         setTimeout(() => {
-          navigation.goBack()
-        }, 2000)
+          navigation.navigate('MeusLeiloesDetalhes', { id }); // Navegar de volta para a página de detalhes
+        }, 2000);
       } else {
-        throw new Error('Erro ao salvar o leilão')
+        throw new Error('Erro ao salvar o leilão');
       }
     } catch (error) {
-      console.error('Erro ao salvar o leilão:', error)
+      console.error('Erro ao salvar o leilão:', error);
     }
-  }
+  };
+  
 
   const isURLValid = text => {
     const urlRegex = /^(ftp|http|https):\/\/[^ "]+$/
@@ -163,63 +163,6 @@ const EditarLeilao = () => {
       setMensagemURLInvalida('')
     }
   }
-
-  // EXCLUIR VERIFICANDO LANCE VINCULADO
-  // const handleExcluirLeilao = async (idLeilao) => {
-  //   try {
-  //     const leilaoResponse = await fetch(
-  //       `http://localhost:3000/leilao/${idLeilao}`
-  //     );
-  //     const leilaoData = await leilaoResponse.json();
-  //     const produtoId = leilaoData.leilao.produto.id;
-
-  //     const lancesResponse = await fetch(
-  //       `http://localhost:3000/lance/${idLeilao}`
-  //     );
-  //     const lancesData = await lancesResponse.json();
-
-  //     if (lancesData.length > 0) {
-  //       Alert.alert(
-  //         "Erro",
-  //         "Não é possível excluir o leilão. Existem lances vinculados a este leilão."
-  //       );
-  //       return;
-  //     }
-
-  //     const leilaoDeleteResponse = await fetch(
-  //       `http://localhost:3000/leilao/${idLeilao}`,
-  //       {
-  //         method: "DELETE",
-  //       }
-  //     );
-
-  //     if (leilaoDeleteResponse.ok) {
-  //       const produtoDeleteResponse = await fetch(
-  //         `http://localhost:3000/produto/${produtoId}`,
-  //         {
-  //           method: "DELETE",
-  //         }
-  //       );
-
-  //       if (produtoDeleteResponse.ok) {
-  //         console.log("Produto excluído com sucesso!");
-  //         Alert.alert("Sucesso", "Leilão e produto excluídos com sucesso!");
-  //         setModalVisible(false);
-  //         navigation.navigate("MeusLeiloes");
-  //       } else {
-  //         throw new Error("Erro ao excluir o produto");
-  //       }
-  //     } else {
-  //       throw new Error("Erro ao excluir o leilão");
-  //     }
-  //   } catch (error) {
-  //     console.error("Erro ao excluir o leilão e produto:", error.message);
-  //     Alert.alert(
-  //       "Erro",
-  //       "Erro ao excluir o leilão e produto. Por favor, tente novamente."
-  //     );
-  //   }
-  // };
 
   const handleExcluirLeilao = async idLeilao => {
     try {

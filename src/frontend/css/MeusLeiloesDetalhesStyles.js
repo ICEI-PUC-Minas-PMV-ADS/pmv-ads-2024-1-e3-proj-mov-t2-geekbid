@@ -2,26 +2,27 @@ import { StyleSheet } from "react-native";
 
 const MeusLeiloesDetalhesStyles = StyleSheet.create({
   container: {
-    flex: 1,
+    paddingHorizontal: 5,
     backgroundColor: "#fff",
-    padding: 20,
-    flexGrow: 1,
+    paddingHorizontal:20,
   },
   scrollContent: {
-    flexGrow: 1,
     backgroundColor: "#fff",
   },
   head: {
     flexDirection: "row",
+    justifyContent: "space-between",
     alignItems: "center",
-    marginBottom: 20,
+    marginTop: 20,
+    marginBottom: 30,
+    padding: 0,
   },
   textHeader: {
-    fontSize: 20,
-    marginLeft: 20,
+    fontSize: 22,
+    textAlign: "left",
   },
   iconTrash: {
-    marginLeft: "auto",
+    marginLeft: 10,
   },
   image: {
     width: "100%",
@@ -47,15 +48,18 @@ const MeusLeiloesDetalhesStyles = StyleSheet.create({
     fontSize: 16,
     color: "#000000",
   },
-  publicButton: {
-    color: "#fff",
-    fontSize: 16,
-    fontWeight: "bold",
+  button: {
     backgroundColor: "#666cff",
-    padding: 15,
+    paddingVertical: 10,
     borderRadius: 5,
     alignItems: "center",
-    marginBottom: 5,
+  },
+  itemContainer: {
+    widht: "80%",
+    height: "auto",
+    padding: 10,
+    marginHorizontal: 10,
+    marginBottom: 10,
   },
   inactiveButton: {
     color: "#808080",
@@ -99,10 +103,12 @@ const MeusLeiloesDetalhesStyles = StyleSheet.create({
   },
   buttonContainer: {
     marginBottom: 80, 
+    padding: 20,
   },
   footerPlaceholder: {
-    height: 100,
+    height: 160,
   },
+
   
 });
 

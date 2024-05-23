@@ -9,21 +9,24 @@ import {
   Alert,
 } from "react-native";
 import { Button, Headline, IconButton } from "react-native-paper";
-import { useNavigation } from "@react-navigation/native";
+import { useNavigation, useIsFocused } from "@react-navigation/native";
 import Footer from "./../navegations/Footer";
 import MeusLeiloesStyles from "./../css/MeusLeiloesStyles";
-import { useAuth } from '../services/auth.services';
+import { useAuth } from "../services/auth.services";
 
 const MeusLeiloes = () => {
   const navigation = useNavigation();
   const [meusLeiloes, setMeusLeiloes] = useState([]);
   const { usuario } = useAuth();
   const usuarioId = usuario.id;
-  
+  const isFocused = useIsFocused();
+
   useEffect(() => {
     const getLeiloes = async () => {
       try {
-        const response = await fetch(`http://localhost:3000/leilao/meusleiloes?usuarioId=${usuarioId}`);
+        const response = await fetch(
+          `http://localhost:3000/leilao/meusleiloes?usuarioId=${usuarioId}`
+        );
         const data = await response.json();
         console.log("Dados recebidos:", data);
         setMeusLeiloes(data.meusLeiloes);
@@ -31,9 +34,12 @@ const MeusLeiloes = () => {
         console.error(error);
       }
     };
-
-    getLeiloes();
-  }, []);
+  
+    if (isFocused) {
+      getLeiloes();
+    }
+  }, [isFocused]); 
+  
 
   const handleMeusLeiloesDetalhes = (produtoId) => {
     console.log("ID do produto selecionado:", produtoId);
@@ -71,7 +77,8 @@ const MeusLeiloes = () => {
                 />
               )}
               <Text style={MeusLeiloesStyles.title} key={index}>
-                {item.produto && item.produto.nomeProduto} - Cód.: {item.produto && item.produto.id} 
+                {item.produto && item.produto.nomeProduto} - Cód.:{" "}
+                {item.produto && item.produto.id}
               </Text>
               <View style={MeusLeiloesStyles.infoContainer}>
                 <Text style={MeusLeiloesStyles.creator}>
@@ -92,7 +99,7 @@ const MeusLeiloes = () => {
               </TouchableOpacity>
             </View>
           ))}
-          <View style={MeusLeiloesStyles.footerPlaceholder} />
+        <View style={MeusLeiloesStyles.footerPlaceholder} />
       </ScrollView>
       <Footer />
     </View>
