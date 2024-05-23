@@ -2,21 +2,27 @@ import { StyleSheet } from "react-native";
 
 const MeusLeiloesDetalhesStyles = StyleSheet.create({
   container: {
-    flex: 1,
+    paddingHorizontal: 5,
     backgroundColor: "#fff",
-    padding: 20,
+    paddingHorizontal:20,
+  },
+  scrollContent: {
+    backgroundColor: "#fff",
   },
   head: {
     flexDirection: "row",
+    justifyContent: "space-between",
     alignItems: "center",
-    marginBottom: 20,
+    marginTop: 20,
+    marginBottom: 30,
+    padding: 0,
   },
   textHeader: {
-    fontSize: 20,
-    marginLeft: 20,
+    fontSize: 22,
+    textAlign: "left",
   },
   iconTrash: {
-    marginLeft: "auto",
+    marginLeft: 10,
   },
   image: {
     width: "100%",
@@ -30,29 +36,30 @@ const MeusLeiloesDetalhesStyles = StyleSheet.create({
     borderRadius: 5,
     paddingLeft: 10,
     marginBottom: 10,
-    height: 60,
+    padding: 10,
   },
   boxTitle: {
-    marginTop:2,
+    marginTop: 2,
     paddingBottom: 5,
     fontSize: 11,
     color: "#6f6f6f",
   },
   boxContent: {
-    height: 30,
-    marginTop: 5,
     fontSize: 16,
     color: "#000000",
   },
-    publicButton: {
-    color: "#fff",
-    fontSize: 16,
-    fontWeight: "bold",
+  button: {
     backgroundColor: "#666cff",
-    padding: 15,
+    paddingVertical: 10,
     borderRadius: 5,
     alignItems: "center",
-    marginBottom: 5,
+  },
+  itemContainer: {
+    widht: "80%",
+    height: "auto",
+    padding: 10,
+    marginHorizontal: 10,
+    marginBottom: 10,
   },
   inactiveButton: {
     color: "#808080",
@@ -68,6 +75,41 @@ const MeusLeiloesDetalhesStyles = StyleSheet.create({
     marginBottom: 20,
     fontSize: 12,
     color: "#808080",
-  },});
+  },
+  lanceRow: {
+    flexDirection: "row",
+    justifyContent: "space-between",
+    paddingVertical: 5,
+  },
+  lanceUser: {
+    fontSize: 16,
+    color: "#000",
+  },
+  lanceValue: {
+    fontSize: 16,
+    color: "#000",
+  },
+  lancesContainer: {
+    marginBottom: 30,  
+  },
+  linkContainer: {
+    alignItems: "center",
+    marginTop: 10,
+  },
+  link: {
+    color: "#666cff",
+    fontSize: 16,
+    textDecorationLine: "underline",
+  },
+  buttonContainer: {
+    marginBottom: 80, 
+    padding: 20,
+  },
+  footerPlaceholder: {
+    height: 160,
+  },
+
+  
+});
 
 export default MeusLeiloesDetalhesStyles;

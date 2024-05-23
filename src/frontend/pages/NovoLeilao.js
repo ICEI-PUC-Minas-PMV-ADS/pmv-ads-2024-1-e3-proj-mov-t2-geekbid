@@ -315,7 +315,7 @@ const NovoLeilao = () => {
             }
           }}
         >
-          <Text style={novoLeilaoStyles.buttonText}>Salvar Alterações</Text>
+          <Text style={novoLeilaoStyles.buttonText}>Cadastrar leilão</Text>
         </Pressable>
       </ScrollView>
       <View>

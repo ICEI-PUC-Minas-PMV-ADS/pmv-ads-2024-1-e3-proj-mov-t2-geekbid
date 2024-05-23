@@ -1,35 +1,34 @@
-import { StyleSheet } from 'react-native';
+import { StyleSheet } from "react-native";
 
 const styles = StyleSheet.create({
   container: {
     flex: 1,
   },
-  scrollContent: {
-    flexGrow: 1,
-    paddingHorizontal:20,
+  footerPlaceholder: {
+    height: 180,
   },
   row: {
-    flexDirection: 'row',
-    justifyContent: 'space-between',
+    flexDirection: "row",
+    justifyContent: "space-between",
     marginBottom: 20,
   },
   head: {
     flexDirection: "row",
-    justifyContent: 'flex-start',
-    alignItems: 'center',
+    justifyContent: "flex-start",
+    alignItems: "center",
     marginTop: 20,
     marginBottom: 30,
   },
   textHeader: {
     fontSize: 22,
-    textAlign:'left',
+    textAlign: "left",
     paddingLeft: 30,
-    width: '60%',
+    width: "60%",
   },
   itemContainer: {
     flex: 1,
     borderWidth: 1,
-    borderColor: '#ccc',
+    borderColor: "#ccc",
     borderRadius: 10,
     padding: 10,
     marginHorizontal: 5,
@@ -38,19 +37,19 @@ const styles = StyleSheet.create({
     marginBottom: 80, // Ajuste para ficar acima do rodapé
   },
   image: {
-    width: '100%',
+    width: "100%",
     height: 160,
     borderRadius: 10,
     marginBottom: 10,
   },
   title: {
     fontSize: 15,
-    fontWeight: 'bold',
+    fontWeight: "bold",
     marginBottom: 5,
   },
 
   infoContainer: {
-    flexDirection: 'column',
+    flexDirection: "column",
     marginBottom: 10,
   },
   creator: {
@@ -61,16 +60,17 @@ const styles = StyleSheet.create({
   },
   container: {
     paddingHorizontal: 5,
+    backgroundColor: "#fff",
   },
   row: {
-    justifyContent: 'space-between',
+    justifyContent: "space-between",
     marginBottom: 20,
   },
   itemContainer: {
-    widht: '80%',
-    height: 'auto',
+    widht: "80%",
+    height: "auto",
     borderWidth: 1,
-    borderColor: '#ccc',
+    borderColor: "#ccc",
     borderRadius: 10,
     padding: 10,
     marginHorizontal: 5,
@@ -79,18 +79,18 @@ const styles = StyleSheet.create({
     marginBottom: 10,
   },
   image: {
-    width: '100%',
+    width: "100%",
     height: 160,
     borderRadius: 10,
     marginBottom: 10,
   },
   title: {
     fontSize: 15,
-    fontWeight: 'bold',
+    fontWeight: "bold",
     marginBottom: 5,
   },
   infoContainer: {
-    flexDirection: 'column',
+    flexDirection: "column",
     marginBottom: 10,
   },
   creator: {
@@ -100,23 +100,23 @@ const styles = StyleSheet.create({
     marginBottom: 10,
   },
   button: {
-    backgroundColor: '#666cff',
+    backgroundColor: "#666cff",
     paddingVertical: 10,
     borderRadius: 5,
-    alignItems: 'center',
+    alignItems: "center",
   },
   buttonText: {
-    color: '#fff',
+    color: "#fff",
     fontSize: 16,
   },
   linkText: {
-    color: 'blue',
+    color: "blue",
     fontSize: 15,
-    textAlign: 'right',
+    textAlign: "right",
     paddingTop: 15,
     paddingBottom: 15,
-    fontWeight: 'bold'
-  },  
+    fontWeight: "bold",
+  },
 });
 
 export default styles;
