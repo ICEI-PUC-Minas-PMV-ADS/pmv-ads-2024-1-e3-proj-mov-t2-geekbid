@@ -1,129 +1,142 @@
-import React from 'react';
-import { View, Text, StyleSheet, Image } from 'react-native';
+import React, { useState, useEffect } from "react";
+import { View, Text, StyleSheet, Image, ScrollView } from 'react-native';
+import { useNavigation } from "@react-navigation/native";
 import { TextInput, Headline, Button } from 'react-native-paper';
+import { useAuth } from '../services/auth.services';
 
 const NotificacaoItem = ({ titulo, subtitulo, imagem }) => {
-  return (    
-    <View style={styles.notificacaoContainer}>
-      <View style={styles.imageContainer}>
-        <Image source={{ uri: imagem }} style={styles.image} />
-      </View>
-      <View style={styles.textContainer}>
-        <Text style={styles.titulo}>{titulo}</Text>
-        <Text style={styles.subtitulo}>{subtitulo}</Text>
-      </View>
-    </View>
-  );
+    return (
+        <View style={styles.notificacaoContainer}>
+            <View style={styles.imageContainer}>
+                <Image source={{ uri: imagem }} style={styles.image} />
+            </View>
+            <View style={styles.textContainer}>
+                <Text style={styles.titulo}>{titulo}</Text>
+                <Text style={styles.subtitulo}>{subtitulo}</Text>
+            </View>
+        </View>
+    );
 };
 
 const Notificacoes = () => {
-  const notificacoes = [
-    {
-      id: 1,
-      titulo: 'Título da Notificação 1',
-      subtitulo: 'Subtítulo da Notificação 1',
-      imagem: 'https://via.placeholder.com/80',
-    },
-    {
-      id: 2,
-      titulo: 'Título da Notificação 2',
-      subtitulo: 'Subtítulo da Notificação 2',
-      imagem: 'https://via.placeholder.com/80',
-    },
-    {
-      id: 3,
-      titulo: 'Título da Notificação 3',
-      subtitulo: 'Subtítulo da Notificação 3',
-      imagem: 'https://via.placeholder.com/80',
-    },
-    {
-      id: 4,
-      titulo: 'Título da Notificação 4',
-      subtitulo: 'Subtítulo da Notificação 4',
-      imagem: 'https://via.placeholder.com/80',
-    }
-  ];
+    const navigation = useNavigation();
+    const [minhasNotificacoes, SetItensNotificacoes] = useState([]);
+    const { usuario } = useAuth();
+    const usuarioId = usuario.id;
 
-  return (
-    
-    <View style={styles.container}>
-      <View style={styles.head}>
-      <Headline style={styles.textHeader}>Notificações</Headline>
-      </View>
-      <View style={styles.section}>
-        <Text style={styles.sectionTitle}>Hoje</Text>
-        {notificacoes.slice(0, 3).map((notificacao) => (
-          <NotificacaoItem
-            key={notificacao.id}
-            titulo={notificacao.titulo}
-            subtitulo={notificacao.subtitulo}
-            imagem={notificacao.imagem}
-          />
-        ))}
-      </View>
-      <View style={styles.section}>
-        <Text style={styles.sectionTitle}>Ontem</Text>
-        {notificacoes.slice(3, 6).map((notificacao) => (
-          <NotificacaoItem
-            key={notificacao.id}
-            titulo={notificacao.titulo}
-            subtitulo={notificacao.subtitulo}
-            imagem={notificacao.imagem}
-          />
-        ))}
-      </View>
-    </View>
-  );
-};
+    useEffect(() => {
+        const MapearNotificacoes = (data) => {
+            return data.map(infoLeilao => ({
+                id: infoLeilao.id,
+                titulo: infoLeilao.produto.nomeProduto,
+                subtitulo: infoLeilao.produto.descricaoProduto,
+                imagem: infoLeilao.produto.urlImagemProduto,
+                status: infoLeilao.statusLeilao
+            }))
+        };
+   
+
+    const getLeiloes = async () => {
+        try {
+            const response = await fetch(`http://localhost:3000/leilao/meusleiloes?usuarioId=${usuarioId}`);
+            const data = await response.json();
+            console.log("Dados recebidos:", data);         
+            SetItensNotificacoes(MapearNotificacoes(data.meusLeiloes));
+            console.log(data.meusLeiloes);
+        } catch (error) {
+            console.error(error);
+        }
+    };
+
+    getLeiloes();
+    }, []);
+
+const notificacoes = minhasNotificacoes;
+
+
+
+
+
+return (
+
+    <ScrollView style={styles.container}>
+        <View style={styles.head}>
+            <Headline style={styles.textHeader}>Notificações</Headline>
+        </View>
+        <View style={styles.section}>
+            <Text style={styles.sectionTitle}>Meus Leilões</Text>           
+            {notificacoes.slice(0, 3).map((notificacao) => (
+                <NotificacaoItem
+                    key={notificacao.id}
+                    titulo={notificacao.titulo}
+                    subtitulo={notificacao.subtitulo}
+                    imagem={notificacao.imagem}
+                />
+            ))}
+        </View>
+        <View style={styles.section}> 
+            <Text style={styles.sectionTitle}>Meus Lances</Text>
+            {notificacoes.slice(3, 6).map((notificacao) => (
+                <NotificacaoItem
+                    key={notificacao.id}
+                    titulo={notificacao.titulo}
+                    subtitulo={notificacao.subtitulo}
+                    imagem={notificacao.imagem}
+                />
+            ))}
+        </View>
+    </ScrollView>
+);
+}
 
 const styles = StyleSheet.create({
-  container: {
-    flex: 1,
-    backgroundColor: '#fff',
-    padding: 20,
-  },
-  section: {
-    marginBottom: 20,
-  },
-  sectionTitle: {
-    fontSize: 18,
-    fontWeight: 'bold',
-    marginBottom: 10,
-  },
-  notificacaoContainer: {
-    flexDirection: 'row',
-    alignItems: 'center',
-    marginBottom: 10,
-    marginTop:10,
-    borderWidth: 1,
-    borderColor: '#ccc',
-    borderRadius: 5,
-    padding: 10,
-  },
-  imageContainer: {
-    marginRight: 10,
-  },
-  image: {
-    width: 60,
-    height: 60,
-    borderRadius: 30,
-  },
-  textContainer: {
-    flex: 1,
-  },
-  titulo: {
-    fontSize: 16,
-    fontWeight: 'bold',
-  },
-  subtitulo: {
-    fontSize: 14,
-  },
-  textHeader: {
-    textAlign: 'center',
-    fontSize: 25,
-    marginTop: 30,
-    marginBottom: 30
-  },
+    container: {
+        flex: 1,
+        backgroundColor: '#fff',
+        padding: 20,
+    },
+    section: {
+        marginBottom: 20,
+    },
+    sectionTitle: {
+        fontSize: 18,
+        fontWeight: 'bold',
+        marginBottom: 10,
+    },
+    notificacaoContainer: {
+        flexDirection: 'row',
+        alignItems: 'center',
+        marginBottom: 10,
+        marginTop: 10,
+        borderWidth: 1,
+        borderColor: '#ccc',
+        borderRadius: 5,
+        padding: 10,
+    },
+    imageContainer: {
+        marginRight: 10,
+    },
+    image: {
+        width: 60,
+        height: 60,
+        borderRadius: 30,
+    },
+    textContainer: {
+        flex: 1,
+    },
+    titulo: {
+        fontSize: 16,
+        fontWeight: 'bold',
+    },
+    subtitulo: {
+        fontSize: 14,
+    },
+    textHeader: {
+        textAlign: 'center',
+        fontSize: 25,
+        marginTop: 30,
+        marginBottom: 30
+    },
 });
 
 export default Notificacoes;
