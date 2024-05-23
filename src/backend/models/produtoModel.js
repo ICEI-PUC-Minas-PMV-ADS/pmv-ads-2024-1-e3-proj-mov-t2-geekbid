@@ -35,6 +35,21 @@ const Produto = sequelize.define("produto",
                                 'Arte e Decoração', 'Memorabilia'),
             defaultValue: "Colecionáveis"
         },
+        duracaoDias: {
+            type: DataTypes.DOUBLE,
+            allowNull: false,
+            defaultValue: 0
+        },
+        duracaoHoras: {
+            type: DataTypes.DOUBLE,
+            allowNull: false,
+            defaultValue: 0
+        },
+        duracaoMinutos: {
+            type: DataTypes.DOUBLE,
+            allowNull: false,
+            defaultValue: 0
+        },
     },
     {
         freezeTableName: true
