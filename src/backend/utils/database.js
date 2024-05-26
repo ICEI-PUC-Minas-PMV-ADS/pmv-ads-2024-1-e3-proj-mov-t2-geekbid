@@ -3,8 +3,9 @@
 
 const Sequelize = require('sequelize')
 
-const sequelize = new Sequelize('app', 'TEMP', '123', {
+const sequelize = new Sequelize('geekbid', 'postgres', '1234', {
   dialect: 'postgres',
   host: 'localhost'
 })
+
 module.exports = sequelize
