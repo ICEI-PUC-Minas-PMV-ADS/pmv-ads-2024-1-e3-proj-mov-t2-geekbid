@@ -313,6 +313,7 @@ const EnviarLance = ({ route, navigation }) => {
                 onPress={() => {
                   closeLanceEnviadoModal()
                   closeModal()
+                  navigation.navigate('MeusLances')
                   // Adicionar lógica para acompanhar o lance aqui
                 }}
               >
