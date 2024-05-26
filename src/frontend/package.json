@@ -11,10 +11,12 @@
     "@expo/webpack-config": "^19.0.1",
     "@react-native-async-storage/async-storage": "1.18.2",
     "@react-native-community/datetimepicker": "7.2.0",
+    "@react-native-picker/picker": "2.4.10",
     "@react-navigation/native": "*",
     "@react-navigation/native-stack": "*",
     "axios": "^1.6.8",
     "bootstrap": "^3.4.1",
+    "date-fns": "^3.6.0",
     "expo": "^49.0.23",
     "expo-cli": "^4.0.17",
     "expo-constants": "~14.4.2",
@@ -31,8 +33,7 @@
     "react-native-screens": "~3.22.0",
     "react-native-vector-icons": "*",
     "react-native-web": "~0.19.6",
-    "react-navigation": "^5.0.0",
-    "@react-native-picker/picker": "2.4.10"
+    "react-navigation": "^5.0.0"
   },
   "devDependencies": {
     "@babel/core": "^7.20.0",

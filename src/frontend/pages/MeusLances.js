@@ -11,17 +11,37 @@ import {
 import { Ionicons } from '@expo/vector-icons'
 import axios from 'axios'
 import { useAuth } from '../services/auth.services'
+import { useNavigation } from '@react-navigation/native'
 
 const MeuLanceItem = ({
   onPress,
+  id,
+  dataFim,
   descricao,
   foto,
   seuLance,
   ultimoLance,
   responsavel
 }) => {
+  const navigation = useNavigation()
   const formatCurrency = value => {
     return `R$ ${value.toFixed(2)}`
+  }
+
+  const handleLancePress = (
+    leilaoId,
+    leilaoDataFim,
+    nomeProduto,
+    imagemProduto,
+    nomeUsuario
+  ) => {
+    navigation.navigate('EnviarLance', {
+      leilaoId: leilaoId,
+      leilaoDataFim: leilaoDataFim,
+      nomeProduto: nomeProduto,
+      imagemProduto: imagemProduto,
+      nomeUsuario: nomeUsuario
+    })
   }
 
   return (
@@ -44,7 +64,12 @@ const MeuLanceItem = ({
             <Text style={styles.lanceValor}>{formatCurrency(ultimoLance)}</Text>
           </View>
         </View>
-        <TouchableOpacity style={styles.button}>
+        <TouchableOpacity
+          style={styles.button}
+          onPress={() => {
+            handleLancePress(id, dataFim, descricao, foto, responsavel)
+          }}
+        >
           <Text style={styles.buttonText}>Lance</Text>
         </TouchableOpacity>
       </View>
@@ -127,6 +152,8 @@ const MeusLances = ({ navigation }) => {
         {lances.map(lance => (
           <MeuLanceItem
             key={lance.id}
+            id={lance.id}
+            dataFim={lance.dataFim}
             descricao={lance.leilao.produto.descricao}
             foto={lance.leilao.produto.urlImagemProduto}
             seuLance={lance.valorLance}
