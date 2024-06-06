@@ -86,6 +86,7 @@ const styles = StyleSheet.create({
     flex: 1,
     fontSize: 12,
     backgroundColor: 'transparent',
+    borderRadius: 10,
   },
   linkText: {
     color: 'blue',
