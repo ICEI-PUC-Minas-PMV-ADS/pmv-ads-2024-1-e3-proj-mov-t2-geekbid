@@ -30,20 +30,14 @@ const Lance = ({ item }) => {
     })
   }
 
-  const handlePress = () => {
-    console.log('Link pressed!')
-  }
-
   const [leiloes, setLeiloes] = useState([])
 
   const getLeiloes = async () => {
     try {
       const response = await axios.get(
-        'http://localhost:3000/leilao'
+        'http://localhost:3000/leilao/home'
       )
-
-      console.log(response)
-      setLeiloes(response.data?.leiloes)
+      setLeiloes(response.data?.leiloesHome)
     } catch (error) {
       console.error(error)
     }
@@ -57,9 +51,6 @@ const Lance = ({ item }) => {
 
   return (
     <View style={styles.container}>
-      <TouchableOpacity style={styles.link} onPress={handlePress}>
-        <Text style={styles.linkText}>Filtrar</Text>
-      </TouchableOpacity>
       <ScrollView>
         {leiloes?.map((item, index) => {
           const leilaoFinalizado = moment(item.dataFim).isBefore(moment())

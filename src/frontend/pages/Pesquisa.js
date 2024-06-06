@@ -1,11 +1,22 @@
-import React from 'react';
-import { View, Text, TextInput, StyleSheet } from 'react-native';
+import React, { useEffect, useState } from 'react';
+import { View, Text, TextInput, TouchableOpacity, StyleSheet } from 'react-native';
+import { useAuth } from '../services/auth.services'
+import { useNavigation } from '@react-navigation/native'
 import Icon from 'react-native-vector-icons/FontAwesome';
 
+
 const Pesquisa = () => {
+
+  const handleFiltroPress = () => {
+    console.log('Link pressed!')
+  }
+
+  let usuario = useAuth()
+  usuario = usuario.usuario
+
   return (
     <View>
-      <Text style={styles.title}>Olá Fulano</Text>
+      <Text style={styles.title}>Olá {usuario.nome} </Text>
       <Text style={styles.subtitle}>Vamos começar o leilão!</Text>
       <View style={styles.container}>
         <View style={styles.searchContainer}>
@@ -16,6 +27,11 @@ const Pesquisa = () => {
             style={styles.input}
           />
         </View>
+      </View>
+      <View style={styles.filterContainer}>
+          <TouchableOpacity style={styles.link} onPress={handleFiltroPress}>
+            <Text style={styles.linkText}>Filtrar</Text>
+          </TouchableOpacity>
       </View>
     </View>
   );
@@ -58,6 +74,11 @@ const styles = StyleSheet.create({
     paddingVertical: 20,
 
   },
+  filterContainer: {
+    backgroundColor: 'transparent',
+    paddingRight: 10,
+    marginRight: 15
+  },
   icon: {
     marginRight: 10,
   },
@@ -66,6 +87,14 @@ const styles = StyleSheet.create({
     fontSize: 12,
     backgroundColor: 'transparent',
   },
+  linkText: {
+    color: 'blue',
+    fontSize: 15,
+    textAlign: 'right',
+    paddingTop: 15,
+    paddingBottom: 15,
+    fontWeight: 'bold'
+  }
 });
 
 export default Pesquisa;
