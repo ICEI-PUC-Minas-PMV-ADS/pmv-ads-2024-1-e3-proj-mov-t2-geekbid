@@ -1,11 +1,13 @@
 import React, { useState, useEffect } from "react";
-import { View, Text, StyleSheet, Image, ScrollView } from 'react-native';
+import { View, Text, StyleSheet, Image, ScrollView, TouchableOpacity } from 'react-native';
 import { useNavigation } from "@react-navigation/native";
 import { TextInput, Headline, Button } from 'react-native-paper';
 import { useAuth } from '../services/auth.services';
 
-const NotificacaoItem = ({ titulo, subtitulo, imagem }) => {
+const NotificacaoItem = ({ titulo, subtitulo, imagem, item }) => {
     return (
+        <TouchableOpacity
+                onPress={() => handleMeusLeiloesDetalhes(item.id)}>
         <View style={styles.notificacaoContainer}>
             <View style={styles.imageContainer}>
                 <Image source={{ uri: imagem }} style={styles.image} />
@@ -15,6 +17,7 @@ const NotificacaoItem = ({ titulo, subtitulo, imagem }) => {
                 <Text style={styles.subtitulo}>{subtitulo}</Text>
             </View>
         </View>
+        </TouchableOpacity>
     );
 };
 
@@ -24,12 +27,17 @@ const Notificacoes = () => {
     const { usuario } = useAuth();
     const usuarioId = usuario.id;
 
+    titulonotificacao = {
+        "encerrado": "Parabéns",
+        "Status2": "titulo2",
+    }
+    
     useEffect(() => {
         const MapearNotificacoes = (data) => {
             return data.map(infoLeilao => ({
                 id: infoLeilao.id,
-                titulo: infoLeilao.produto.nomeProduto,
-                subtitulo: infoLeilao.produto.descricaoProduto,
+                subtitulo: infoLeilao.produto.nomeProduto,
+                titulo: infoLeilao.produto.descricaoProduto,
                 imagem: infoLeilao.produto.urlImagemProduto,
                 status: infoLeilao.statusLeilao
             }))
@@ -53,7 +61,10 @@ const Notificacoes = () => {
 
 const notificacoes = minhasNotificacoes;
 
-
+const handleMeusLeiloesDetalhes = (produtoId) => {
+    console.log("ID do produto selecionado:", produtoId);
+    navigation.navigate("MeusLeiloesDetalhes", { id: produtoId });
+  };
 
 
 
@@ -65,12 +76,13 @@ return (
         </View>
         <View style={styles.section}>
             <Text style={styles.sectionTitle}>Meus Leilões</Text>           
-            {notificacoes.slice(0, 3).map((notificacao) => (
+            {notificacoes.map((notificacao) => (
                 <NotificacaoItem
                     key={notificacao.id}
                     titulo={notificacao.titulo}
                     subtitulo={notificacao.subtitulo}
                     imagem={notificacao.imagem}
+                    item={notificacao}
                 />
             ))}
         </View>
