@@ -1,13 +1,11 @@
 import React, { useState, useEffect } from "react";
-import { View, Text, StyleSheet, Image, ScrollView, TouchableOpacity } from 'react-native';
+import { View, Text, StyleSheet, Image, ScrollView } from 'react-native';
 import { useNavigation } from "@react-navigation/native";
 import { TextInput, Headline, Button } from 'react-native-paper';
 import { useAuth } from '../services/auth.services';
-
-const NotificacaoItem = ({ titulo, subtitulo, imagem, item }) => {
+ 
+const NotificacaoItem = ({ titulo, subtitulo, imagem }) => {
     return (
-        <TouchableOpacity
-                onPress={() => handleMeusLeiloesDetalhes(item.id)}>
         <View style={styles.notificacaoContainer}>
             <View style={styles.imageContainer}>
                 <Image source={{ uri: imagem }} style={styles.image} />
@@ -17,90 +15,74 @@ const NotificacaoItem = ({ titulo, subtitulo, imagem, item }) => {
                 <Text style={styles.subtitulo}>{subtitulo}</Text>
             </View>
         </View>
-        </TouchableOpacity>
     );
 };
-
+ 
 const Notificacoes = () => {
     const navigation = useNavigation();
-    const [minhasNotificacoes, SetItensNotificacoes] = useState([]);
     const { usuario } = useAuth();
-    const usuarioId = usuario.id;
-
-    titulonotificacao = {
-        "encerrado": "Parabéns",
-        "Status2": "titulo2",
-    }
-    
+    const usuarioId = 3;
+ 
+    const [meusLeiloes, SetMeusLeiloes] = useState([]);
+    const [meusLances, setMeusLances] = useState([])
+ 
     useEffect(() => {
-        const MapearNotificacoes = (data) => {
-            return data.map(infoLeilao => ({
-                id: infoLeilao.id,
-                subtitulo: infoLeilao.produto.nomeProduto,
-                titulo: infoLeilao.produto.descricaoProduto,
-                imagem: infoLeilao.produto.urlImagemProduto,
-                status: infoLeilao.statusLeilao
-            }))
+        const getLeiloes = async () => {
+            try {
+                const leiloesResponse = await fetch(`http://localhost:3000/leilao/meusleiloes?usuarioId=${usuarioId}`);
+                const lancesResponse = await fetch(`http://localhost:3000/lances/user/${usuarioId}`);
+ 
+                const leiloesData = await leiloesResponse.json();
+                const lancesData = await lancesResponse.json()
+ 
+                SetMeusLeiloes(leiloesData.meusLeiloes);
+                setMeusLances(lancesData);
+ 
+                console.log(meusLances);
+            } catch (error) {
+                console.error(error);
+            }
         };
-   
-
-    const getLeiloes = async () => {
-        try {
-            const response = await fetch(`http://localhost:3000/leilao/meusleiloes?usuarioId=${usuarioId}`);
-            const data = await response.json();
-            console.log("Dados recebidos:", data);         
-            SetItensNotificacoes(MapearNotificacoes(data.meusLeiloes));
-            console.log(data.meusLeiloes);
-        } catch (error) {
-            console.error(error);
-        }
-    };
-
-    getLeiloes();
+ 
+        getLeiloes();
     }, []);
-
-const notificacoes = minhasNotificacoes;
-
-const handleMeusLeiloesDetalhes = (produtoId) => {
-    console.log("ID do produto selecionado:", produtoId);
-    navigation.navigate("MeusLeiloesDetalhes", { id: produtoId });
-  };
-
-
-
-return (
-
-    <ScrollView style={styles.container}>
-        <View style={styles.head}>
-            <Headline style={styles.textHeader}>Notificações</Headline>
-        </View>
-        <View style={styles.section}>
-            <Text style={styles.sectionTitle}>Meus Leilões</Text>           
-            {notificacoes.map((notificacao) => (
-                <NotificacaoItem
-                    key={notificacao.id}
-                    titulo={notificacao.titulo}
-                    subtitulo={notificacao.subtitulo}
-                    imagem={notificacao.imagem}
-                    item={notificacao}
-                />
-            ))}
-        </View>
-        <View style={styles.section}> 
-            <Text style={styles.sectionTitle}>Meus Lances</Text>
-            {notificacoes.slice(3, 6).map((notificacao) => (
-                <NotificacaoItem
-                    key={notificacao.id}
-                    titulo={notificacao.titulo}
-                    subtitulo={notificacao.subtitulo}
-                    imagem={notificacao.imagem}
-                />
-            ))}
-        </View>
-    </ScrollView>
-);
+ 
+    return (
+ 
+        <ScrollView style={styles.container}>
+            <View style={styles.head}>
+                <Headline style={styles.textHeader}>Notificações</Headline>
+            </View>
+            <View style={styles.section}>
+                <Text style={styles.sectionTitle}>Meus Leilões</Text>
+                {
+                    meusLeiloes && meusLeiloes.map(leilao =>
+                        <NotificacaoItem
+                            key={leilao.id}
+                            titulo={leilao.produto.nomeProduto}
+                            subtitulo={leilao.usuario.nome}
+                            imagem={leilao.produto.urlImagemProduto}
+                        />
+                    )
+                }
+            </View>
+            <View style={styles.section}>
+                <Text style={styles.sectionTitle}>Meus Lances</Text>
+                {
+                    meusLances && meusLances.map(lance =>
+                        <NotificacaoItem
+                            key={lance.id}
+                            titulo={lance.leilao.produto.nomeProduto}
+                            subtitulo={lance.valorLance == lance.leilao.precoAtual ? "ganhando" : "lance superado"}
+                            imagem={lance.leilao.produto.urlImagemProduto}
+                        />
+                    )
+                }
+            </View>
+        </ScrollView>
+    );
 }
-
+ 
 const styles = StyleSheet.create({
     container: {
         flex: 1,
@@ -150,5 +132,5 @@ const styles = StyleSheet.create({
         marginBottom: 30
     },
 });
-
+ 
 export default Notificacoes;
