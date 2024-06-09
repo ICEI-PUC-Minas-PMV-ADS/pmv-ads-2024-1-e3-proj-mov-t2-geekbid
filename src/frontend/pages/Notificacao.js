@@ -21,7 +21,7 @@ const NotificacaoItem = ({ titulo, subtitulo, imagem }) => {
 const Notificacoes = () => {
     const navigation = useNavigation();
     const { usuario } = useAuth();
-    const usuarioId = 3;
+    const usuarioId = usuario.usuarioId;
  
     const [meusLeiloes, SetMeusLeiloes] = useState([]);
     const [meusLances, setMeusLances] = useState([])
@@ -39,6 +39,7 @@ const Notificacoes = () => {
                 setMeusLances(lancesData);
  
                 console.log(meusLances);
+                console.log(meusLeiloes);
             } catch (error) {
                 console.error(error);
             }
@@ -73,7 +74,7 @@ const Notificacoes = () => {
                         <NotificacaoItem
                             key={lance.id}
                             titulo={lance.leilao.produto.nomeProduto}
-                            subtitulo={lance.valorLance == lance.leilao.precoAtual ? "ganhando" : "lance superado"}
+                            subtitulo={lance.valorLance == lance.leilao.precoAtual ? "Você está ganhando!" : "Lance superado!"}
                             imagem={lance.leilao.produto.urlImagemProduto}
                         />
                     )
