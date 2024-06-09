@@ -12,7 +12,7 @@ router.post('/', lanceController.cadastrarLance)
 router.get('/:leilaoId', lanceController.buscarLances)
 
 // Retornar todos os lances de um usuário
- router.get('/user/:userId', lanceController.buscarLancesPorUsuario)
+ router.get('/user/:usuarioId', lanceController.buscarLancesPorUsuario)
 
 // Retornar os detalhes de um lance específico
 router.get('/:id', lanceController.buscarLance)
