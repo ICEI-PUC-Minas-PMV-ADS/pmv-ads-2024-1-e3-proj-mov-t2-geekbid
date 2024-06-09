@@ -15,6 +15,7 @@ import {
 } from 'react-native'
 import moment from 'moment'
 import { useAuth } from '../services/auth.services'
+import Footer from './../navegations/Footer'
 
 const EnviarLance = ({ route, navigation }) => {
   const { usuario } = useAuth()
@@ -193,219 +194,251 @@ const EnviarLance = ({ route, navigation }) => {
   }
 
   return (
-    <ScrollView contentContainerStyle={styles.scrollContainer}>
-      <View style={styles.container}>
-        <View style={styles.header}>
-          <TouchableOpacity onPress={() => navigation.goBack()}>
-            <Text style={styles.voltarIcone}>{'<'}</Text>
-          </TouchableOpacity>
-          <Text style={styles.titulo}>{nomeProduto}</Text>
-        </View>
-        <Text style={styles.responsavel}>By {nomeUsuario}</Text>
-        <Image source={{ uri: imagemProduto }} style={styles.imagem} />
-        <View style={styles.infoContainer}>
-          {!leilaoAcabou() ? (
-            <Text style={styles.infoValue}>
-              {`${tempoRestanteF().split(' ')[0]} Dias `}
-              {`${tempoRestanteF().split(' ')[2]} Horas `}
-              {`${tempoRestanteF().split(' ')[4]} Minutos`}
-            </Text>
-          ) : (
-            <Text style={styles.infoValue}>Finalizado</Text>
-          )}
-        </View>
-        <View style={styles.infoLancesContainer}>
-          <View style={styles.lanceItemLeft}>
-            <Text style={styles.lanceTitulo}>Seu Lance</Text>
-            <Text style={styles.lanceValor}>{formatCurrency(seuLance)}</Text>
-          </View>
-          <View style={styles.lanceItemRight}>
-            <Text style={styles.lanceTitulo}>Último Lance</Text>
-            <Text style={styles.lanceValor}>{formatCurrency(ultimoLance)}</Text>
-          </View>
-        </View>
-        <Text style={styles.subtituloMenor}>Insira o valor do seu lance</Text>
-        <View style={styles.inputLanceContainer}>
-          <View style={styles.bordaLance}>
-            <TouchableOpacity style={styles.botaoLance} onPress={diminuirLance}>
-              <Text style={styles.botaoTexto}>-</Text>
+    <View style={styles.outerContainer}>
+      <ScrollView contentContainerStyle={styles.scrollContainer}>
+        <View style={styles.container}>
+          <View style={styles.header}>
+            <TouchableOpacity onPress={() => navigation.goBack()}>
+              <Text style={styles.voltarIcone}>{'<'}</Text>
             </TouchableOpacity>
-            <View style={styles.valorInput}>
-              <Text style={styles.valorUltimoLance}>
-                {formatCurrency(novoLance)}
+            <Text style={styles.titulo}>{nomeProduto}</Text>
+          </View>
+          <Text style={styles.responsavel}>By {nomeUsuario}</Text>
+          <Image source={{ uri: imagemProduto }} style={styles.imagem} />
+          <View style={styles.infoContainer}>
+            {!leilaoAcabou() ? (
+              <Text style={styles.infoValue}>
+                {`${tempoRestanteF().split(' ')[0]} Dias `}
+                {`${tempoRestanteF().split(' ')[2]} Horas `}
+                {`${tempoRestanteF().split(' ')[4]} Minutos`}
+              </Text>
+            ) : (
+              <Text style={styles.infoValue}>Finalizado</Text>
+            )}
+          </View>
+          <View style={styles.infoLancesContainer}>
+            <View style={styles.lanceItemLeft}>
+              <Text style={styles.lanceTitulo}>Seu Lance</Text>
+              <Text style={styles.lanceValor}>{formatCurrency(seuLance)}</Text>
+            </View>
+            <View style={styles.lanceItemRight}>
+              <Text style={styles.lanceTitulo}>Último Lance</Text>
+              <Text style={styles.lanceValor}>
+                {formatCurrency(ultimoLance)}
               </Text>
             </View>
-            <TouchableOpacity style={styles.botaoLance} onPress={aumentarLance}>
-              <Text style={styles.botaoTexto}>+</Text>
-            </TouchableOpacity>
           </View>
-        </View>
-        <TouchableOpacity style={styles.button} onPress={enviarLance}>
-          <Text style={styles.buttonText}>Envie seu lance</Text>
-        </TouchableOpacity>
-      </View>
-      <Modal
-        animationType="slide"
-        transparent={true}
-        visible={modalVisible}
-        onRequestClose={() => {
-          Alert.alert('Modal has been closed.')
-          closeModal()
-        }}
-      >
-        <TouchableWithoutFeedback onPress={Keyboard.dismiss} accessible={false}>
-          <View style={styles.modalContainer}>
-            <View style={styles.modalContent}>
-              <Text style={styles.modalTitle}>Confirme seu lance!</Text>
-              <Text style={styles.modalOferta}>
-                Sua oferta: {formatCurrency(novoLance)}
-              </Text>
-              <Text style={styles.modalSubTitle}>{tituloProduto}</Text>
-              <Text style={styles.modalResponsavel}>By {responsavel}</Text>
-              <Text>Código do Leilão</Text>
-              <Text style={styles.modalTotal}>
-                Total: {formatCurrency(novoLance)}
-              </Text>
-              <Text style={styles.modalText}>
-                Ao clicar em enviar, você confirma que comprará esse item e não
-                poderá mais cancelar.
-              </Text>
-              <View style={styles.modalButtonContainer}>
-                <TouchableOpacity
-                  style={[styles.modalButton, styles.sendButton]}
-                  onPress={() => doEnviarLance()}
-                >
-                  <Text style={styles.modalButtonText}>Enviar</Text>
-                </TouchableOpacity>
-                <TouchableOpacity
-                  style={[styles.modalButton, styles.buttonCancelar]}
-                  onPress={closeModal}
-                >
-                  <Text style={styles.buttonCancelarText}>Cancelar</Text>
-                </TouchableOpacity>
-              </View>
-            </View>
-          </View>
-        </TouchableWithoutFeedback>
-      </Modal>
-      <Modal
-        animationType="slide"
-        transparent={true}
-        visible={lanceEnviadoModalVisible}
-        onRequestClose={() => {
-          Alert.alert('Modal has been closed.')
-          closeLanceEnviadoModal()
-        }}
-      >
-        <TouchableWithoutFeedback onPress={Keyboard.dismiss} accessible={false}>
-          <View style={styles.modalContainer}>
-            <View style={styles.modalContent}>
-              <View style={styles.modalEnviado}>
-                {/* Ícone de check */}
-                <Image
-                  source={require('./../assets/verifica.png')}
-                  style={styles.modalIcon}
-                />
-                <Text style={styles.modalLanceEnviado}>Lance enviado!</Text>
-              </View>
+          <Text style={styles.subtituloMenor}>Insira o valor do seu lance</Text>
+          <View style={styles.inputLanceContainer}>
+            <View style={styles.bordaLance}>
               <TouchableOpacity
-                style={[styles.modalButton, styles.sendButton]}
-                onPress={() => {
-                  closeLanceEnviadoModal()
-                  closeModal()
-                  navigation.navigate('MeusLances')
-                  // Adicionar lógica para acompanhar o lance aqui
-                }}
+                style={styles.botaoLance}
+                onPress={diminuirLance}
               >
-                <Text style={styles.modalButtonText}>Acompanhe seu lance</Text>
+                <Text style={styles.botaoTexto}>-</Text>
               </TouchableOpacity>
-            </View>
-          </View>
-        </TouchableWithoutFeedback>
-      </Modal>
-
-      <Modal
-        animationType="slide"
-        transparent={true}
-        visible={leilaoArremetadoModalVisible}
-        onRequestClose={() => {
-          Alert.alert('Modal has been closed.')
-          closeLanceEnviadoModal()
-        }}
-      >
-        <TouchableWithoutFeedback onPress={Keyboard.dismiss} accessible={false}>
-          <View style={styles.modalContainer}>
-            <View style={styles.modalContent}>
-              <View style={styles.modalEnviado}>
-                <Text style={styles.modalLanceEnviado}>Parabéns!</Text>
-              </View>
-              <View style={styles.modalSubtitleContainer}>
-                <Image
-                  source={require('./../assets/hammer.png')}
-                  style={styles.modalHammerIcon}
-                />
-                <Text style={styles.modalSubtitleText}>
-                  Você arrematou este item!
+              <View style={styles.valorInput}>
+                <Text style={styles.valorUltimoLance}>
+                  {formatCurrency(novoLance)}
                 </Text>
               </View>
-              <Image
-                source={{ uri: imagemProduto }}
-                style={styles.modalProductImage}
-              />
-              <Text style={styles.modalProductName}>{nomeProduto}</Text>
-              <Text style={styles.modalCreator}>Criador: Pedro</Text>
-              <Text>
-                Seu lance <Text style={styles.modalBid}>R$ {ultimoLance}</Text>
-              </Text>
+              <TouchableOpacity
+                style={styles.botaoLance}
+                onPress={aumentarLance}
+              >
+                <Text style={styles.botaoTexto}>+</Text>
+              </TouchableOpacity>
+            </View>
+          </View>
+          <TouchableOpacity style={styles.button} onPress={enviarLance}>
+            <Text style={styles.buttonText}>Envie seu lance</Text>
+          </TouchableOpacity>
+        </View>
+        <Modal
+          animationType="slide"
+          transparent={true}
+          visible={modalVisible}
+          onRequestClose={() => {
+            Alert.alert('Modal has been closed.')
+            closeModal()
+          }}
+        >
+          <TouchableWithoutFeedback
+            onPress={Keyboard.dismiss}
+            accessible={false}
+          >
+            <View style={styles.modalContainer}>
+              <View style={styles.modalContent}>
+                <Text style={styles.modalTitle}>Confirme seu lance!</Text>
+                <Text style={styles.modalOferta}>
+                  Sua oferta: {formatCurrency(novoLance)}
+                </Text>
+                <Text style={styles.modalSubTitle}>{tituloProduto}</Text>
+                <Text style={styles.modalResponsavel}>By {responsavel}</Text>
+                <Text>Código do Leilão</Text>
+                <Text style={styles.modalTotal}>
+                  Total: {formatCurrency(novoLance)}
+                </Text>
+                <Text style={styles.modalText}>
+                  Ao clicar em enviar, você confirma que comprará esse item e
+                  não poderá mais cancelar.
+                </Text>
+                <View style={styles.modalButtonContainer}>
+                  <TouchableOpacity
+                    style={[styles.modalButton, styles.sendButton]}
+                    onPress={() => doEnviarLance()}
+                  >
+                    <Text style={styles.modalButtonText}>Enviar</Text>
+                  </TouchableOpacity>
+                  <TouchableOpacity
+                    style={[styles.modalButton, styles.buttonCancelar]}
+                    onPress={closeModal}
+                  >
+                    <Text style={styles.buttonCancelarText}>Cancelar</Text>
+                  </TouchableOpacity>
+                </View>
+              </View>
+            </View>
+          </TouchableWithoutFeedback>
+        </Modal>
+        <Modal
+          animationType="slide"
+          transparent={true}
+          visible={lanceEnviadoModalVisible}
+          onRequestClose={() => {
+            Alert.alert('Modal has been closed.')
+            closeLanceEnviadoModal()
+          }}
+        >
+          <TouchableWithoutFeedback
+            onPress={Keyboard.dismiss}
+            accessible={false}
+          >
+            <View style={styles.modalContainer}>
+              <View style={styles.modalContent}>
+                <View style={styles.modalEnviado}>
+                  {/* Ícone de check */}
+                  <Image
+                    source={require('./../assets/verifica.png')}
+                    style={styles.modalIcon}
+                  />
+                  <Text style={styles.modalLanceEnviado}>Lance enviado!</Text>
+                </View>
+                <TouchableOpacity
+                  style={[styles.modalButton, styles.sendButton]}
+                  onPress={() => {
+                    closeLanceEnviadoModal()
+                    closeModal()
+                    navigation.navigate('MeusLances')
+                    // Adicionar lógica para acompanhar o lance aqui
+                  }}
+                >
+                  <Text style={styles.modalButtonText}>
+                    Acompanhe seu lance
+                  </Text>
+                </TouchableOpacity>
+              </View>
+            </View>
+          </TouchableWithoutFeedback>
+        </Modal>
 
-              <TouchableOpacity
-                style={styles.button}
-                onPress={openAguardeContatoModal} // Abre o modal de "Aguarde Contato" ao clicar no botão "Pagar agora"
-              >
-                <Text style={styles.buttonText}>Pagar agora</Text>
-              </TouchableOpacity>
+        <Modal
+          animationType="slide"
+          transparent={true}
+          visible={leilaoArremetadoModalVisible}
+          onRequestClose={() => {
+            Alert.alert('Modal has been closed.')
+            closeLanceEnviadoModal()
+          }}
+        >
+          <TouchableWithoutFeedback
+            onPress={Keyboard.dismiss}
+            accessible={false}
+          >
+            <View style={styles.modalContainer}>
+              <View style={styles.modalContent}>
+                <View style={styles.modalEnviado}>
+                  <Text style={styles.modalLanceEnviado}>Parabéns!</Text>
+                </View>
+                <View style={styles.modalSubtitleContainer}>
+                  <Image
+                    source={require('./../assets/hammer.png')}
+                    style={styles.modalHammerIcon}
+                  />
+                  <Text style={styles.modalSubtitleText}>
+                    Você arrematou este item!
+                  </Text>
+                </View>
+                <Image
+                  source={{ uri: imagemProduto }}
+                  style={styles.modalProductImage}
+                />
+                <Text style={styles.modalProductName}>{nomeProduto}</Text>
+                <Text style={styles.modalCreator}>Criador: Pedro</Text>
+                <Text>
+                  Seu lance{' '}
+                  <Text style={styles.modalBid}>R$ {ultimoLance}</Text>
+                </Text>
+
+                <TouchableOpacity
+                  style={styles.button}
+                  onPress={openAguardeContatoModal} // Abre o modal de "Aguarde Contato" ao clicar no botão "Pagar agora"
+                >
+                  <Text style={styles.buttonText}>Pagar agora</Text>
+                </TouchableOpacity>
+              </View>
             </View>
-          </View>
-        </TouchableWithoutFeedback>
-      </Modal>
-      <Modal
-        animationType="slide"
-        transparent={true}
-        visible={aguardeContatoModalVisible} // Modal de "Aguarde Contato"
-        onRequestClose={() => {
-          Alert.alert('Modal has been closed.')
-          closeAguardeContatoModal()
-        }}
-      >
-        <TouchableWithoutFeedback onPress={Keyboard.dismiss} accessible={false}>
-          <View style={styles.modalContainer}>
-            <View style={styles.modalContent}>
-              <Image
-                source={require('./../assets/img-modal-contato.png')}
-                style={styles.modalImage}
-              />
-              <Text style={styles.modalMessage}>
-                Aguarde que o vendedor entrará em contato com você em breve para
-                fornecer os detalhes de pagamento.
-              </Text>
-              <TouchableOpacity
-                style={styles.button}
-                onPress={() => {
-                  closeAguardeContatoModal()
-                  navigation.navigate('Home') // Redireciona para a tela inicial ao clicar em "Concluir"
-                }}
-              >
-                <Text style={styles.buttonText}>Concluir</Text>
-              </TouchableOpacity>
+          </TouchableWithoutFeedback>
+        </Modal>
+        <Modal
+          animationType="slide"
+          transparent={true}
+          visible={aguardeContatoModalVisible} // Modal de "Aguarde Contato"
+          onRequestClose={() => {
+            Alert.alert('Modal has been closed.')
+            closeAguardeContatoModal()
+          }}
+        >
+          <TouchableWithoutFeedback
+            onPress={Keyboard.dismiss}
+            accessible={false}
+          >
+            <View style={styles.modalContainer}>
+              <View style={styles.modalContent}>
+                <Image
+                  source={require('./../assets/img-modal-contato.png')}
+                  style={styles.modalImage}
+                />
+                <Text style={styles.modalMessage}>
+                  Aguarde que o vendedor entrará em contato com você em breve
+                  para fornecer os detalhes de pagamento.
+                </Text>
+                <TouchableOpacity
+                  style={styles.button}
+                  onPress={() => {
+                    closeAguardeContatoModal()
+                    navigation.navigate('Home') // Redireciona para a tela inicial ao clicar em "Concluir"
+                  }}
+                >
+                  <Text style={styles.buttonText}>Concluir</Text>
+                </TouchableOpacity>
+              </View>
             </View>
-          </View>
-        </TouchableWithoutFeedback>
-      </Modal>
-    </ScrollView>
+          </TouchableWithoutFeedback>
+        </Modal>
+      </ScrollView>
+
+      <View>
+        <Footer />
+      </View>
+    </View>
   )
 }
 
 const styles = StyleSheet.create({
+  outerContainer: {
+    flex: 1,
+  },
   scrollContainer: {
     flexGrow: 1
   },
@@ -470,7 +503,6 @@ const styles = StyleSheet.create({
     fontSize: 18,
     fontWeight: 600
   },
-
 
   infoBox: {
     flex: 1,
@@ -566,13 +598,12 @@ const styles = StyleSheet.create({
     alignItems: 'center',
     width: '90%',
     marginBottom: 20,
-    marginTop:18
+    marginTop: 18
   },
   buttonText: {
     color: '#fff',
     fontSize: 16,
-    fontWeight: 'bold',
-    
+    fontWeight: 'bold'
   },
   modalContainer: {
     flex: 1,

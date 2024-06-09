@@ -42,8 +42,7 @@ const lanceController = {
       })
       res.status(201).json(lance)
     } catch (err) {
-      const errors = handleErrors(err)
-      res.status(400).json({ errors })
+      res.status(404).json({ message: err.message })
     }
   },
 
@@ -60,9 +59,9 @@ const lanceController = {
 
   async buscarLancesPorUsuario(req, res) {
     try {
-      const { userId } = req.params
+      const { usuarioId } = req.params
       const lances = await Lance.findAll({
-        //where: { userId }
+        where: { usuarioId },
         include: [
           { model: Usuario, as: 'usuario' },
           {

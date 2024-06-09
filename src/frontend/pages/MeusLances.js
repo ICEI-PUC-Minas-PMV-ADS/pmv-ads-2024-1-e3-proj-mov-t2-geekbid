@@ -12,10 +12,12 @@ import { Ionicons } from '@expo/vector-icons'
 import axios from 'axios'
 import { useAuth } from '../services/auth.services'
 import { useNavigation } from '@react-navigation/native'
+import Footer from './../navegations/Footer'
 
 const MeuLanceItem = ({
   onPress,
   id,
+  leilaoId,
   dataFim,
   descricao,
   foto,
@@ -67,7 +69,7 @@ const MeuLanceItem = ({
         <TouchableOpacity
           style={styles.button}
           onPress={() => {
-            handleLancePress(id, dataFim, descricao, foto, responsavel)
+            handleLancePress(leilaoId, dataFim, descricao, foto, responsavel)
           }}
         >
           <Text style={styles.buttonText}>Lance</Text>
@@ -79,16 +81,14 @@ const MeuLanceItem = ({
 
 const MeusLances = ({ navigation }) => {
   const [lances, setLances] = useState([])
+  const [searchQuery, setSearchQuery] = useState('')
   const { usuario } = useAuth()
 
   const getLeiloes = async () => {
-    const userId = usuario.id
+    const usuarioId = usuario.id
     try {
       const response = await axios.get(
-        'http://localhost:3000/lances/user/' + userId,
-        {
-          params: { userId }
-        }
+        'http://localhost:3000/lances/user/' + usuarioId
       )
       console.log(response)
       setLances(response.data)
@@ -100,32 +100,16 @@ const MeusLances = ({ navigation }) => {
   useEffect(() => {
     getLeiloes()
   }, [])
-  /*  const lances = [
-    {
-      id: 1,
-      descricao: 'Descrição do lance 1',
-      foto: 'https://via.placeholder.com/80',
-      seuLance: 200,
-      ultimoLance: 150,
-      responsavel: 'Fulano'
-    },
-    {
-      id: 2,
-      descricao: 'Descrição do lance 2',
-      foto: 'https://via.placeholder.com/80',
-      seuLance: 300,
-      ultimoLance: 250,
-      responsavel: 'Ciclano'
-    },
-    {
-      id: 3,
-      descricao: 'Descrição do lance 3',
-      foto: 'https://via.placeholder.com/80',
-      seuLance: 400,
-      ultimoLance: 350,
-      responsavel: 'Beltrano'
-    }
-  ] */
+  
+  const handleSearch = text => {
+    setSearchQuery(text)
+  }
+
+  const filteredLances = lances.filter(lance =>
+    lance.leilao.produto.descricaoProduto
+      .toLowerCase()
+      .includes(searchQuery.toLowerCase())
+  )
 
   return (
     <View style={styles.container}>
@@ -146,15 +130,18 @@ const MeusLances = ({ navigation }) => {
           placeholder="Search Arts"
           style={styles.searchInput}
           placeholderTextColor="#666"
+          value={searchQuery}
+          onChangeText={handleSearch}
         />
       </View>
       <ScrollView style={styles.scrollView}>
-        {lances.map(lance => (
+        {filteredLances.map(lance => (
           <MeuLanceItem
             key={lance.id}
             id={lance.id}
+            leilaoId={lance.leilaoId}
             dataFim={lance.dataFim}
-            descricao={lance.leilao.produto.descricao}
+            descricao={lance.leilao.produto.descricaoProduto}
             foto={lance.leilao.produto.urlImagemProduto}
             seuLance={lance.valorLance}
             ultimoLance={lance.valorLance}
@@ -163,6 +150,10 @@ const MeusLances = ({ navigation }) => {
           />
         ))}
       </ScrollView>
+
+      <View>
+        <Footer />
+      </View>
     </View>
   )
 }
