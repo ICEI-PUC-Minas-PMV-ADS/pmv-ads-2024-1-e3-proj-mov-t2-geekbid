@@ -1,11 +1,14 @@
 import React, { useState, useEffect } from "react";
-import { View, Text, StyleSheet, Image, ScrollView } from 'react-native';
+import { View, Text, StyleSheet, Image, ScrollView, TouchableOpacity} from 'react-native';
 import { useNavigation } from "@react-navigation/native";
 import { TextInput, Headline, Button } from 'react-native-paper';
 import { useAuth } from '../services/auth.services';
+
  
-const NotificacaoItem = ({ titulo, subtitulo, imagem }) => {
+const NotificacaoItem = ( {id, titulo, subtitulo, imagem, onPress} ) => {
+    console.log(id);
     return (
+    <TouchableOpacity style={styles.lanceItemContainer} onPress={onPress}>
         <View style={styles.notificacaoContainer}>
             <View style={styles.imageContainer}>
                 <Image source={{ uri: imagem }} style={styles.image} />
@@ -15,9 +18,14 @@ const NotificacaoItem = ({ titulo, subtitulo, imagem }) => {
                 <Text style={styles.subtitulo}>{subtitulo}</Text>
             </View>
         </View>
+    </TouchableOpacity>
     );
 };
- 
+const ClicaNotificacao = async (id) => {
+    console.log(id);
+    //navigation.navigate('MeusLeiloesDetalhes', { id });
+
+}
 const Notificacoes = () => {
     const navigation = useNavigation();
     const { usuario } = useAuth();
@@ -29,7 +37,7 @@ const Notificacoes = () => {
     useEffect(() => {
         const getLeiloes = async () => {
             try {
-                const leiloesResponse = await fetch(`http://localhost:3000/leilao/meusleiloes?usuarioId=${usuarioId}`);
+                const leiloesResponse = await fetch(`http://localhost:3000/leilao/meusleiloes?usuarioId=2`);
                 const lancesResponse = await fetch(`http://localhost:3000/lances/user/${usuarioId}`);
  
                 const leiloesData = await leiloesResponse.json();
@@ -39,7 +47,7 @@ const Notificacoes = () => {
                 setMeusLances(lancesData);
  
                 console.log(meusLances);
-                console.log(meusLeiloes);
+                console.log(lancesData)
             } catch (error) {
                 console.error(error);
             }
@@ -57,26 +65,44 @@ const Notificacoes = () => {
             <View style={styles.section}>
                 <Text style={styles.sectionTitle}>Meus Leilões</Text>
                 {
-                    meusLeiloes && meusLeiloes.map(leilao =>
-                        <NotificacaoItem
-                            key={leilao.id}
+                    meusLeiloes && meusLeiloes.map(leilao =>{
+                        console.log(leilao.id);
+                        var id = leilao.id;
+                       return ( 
+                       <NotificacaoItem
+                            id={leilao.id}
                             titulo={leilao.produto.nomeProduto}
-                            subtitulo={leilao.usuario.nome}
+                            subtitulo={leilao.precoAtual}
                             imagem={leilao.produto.urlImagemProduto}
-                        />
+                            onPress={() => navigation.navigate('MeusLeiloesDetalhes', { id })}
+                        />);}
                     )
                 }
             </View>
             <View style={styles.section}>
                 <Text style={styles.sectionTitle}>Meus Lances</Text>
                 {
-                    meusLances && meusLances.map(lance =>
-                        <NotificacaoItem
-                            key={lance.id}
-                            titulo={lance.leilao.produto.nomeProduto}
-                            subtitulo={lance.valorLance == lance.leilao.precoAtual ? "Você está ganhando!" : "Lance superado!"}
-                            imagem={lance.leilao.produto.urlImagemProduto}
-                        />
+                    meusLances && meusLances.map(lance =>{
+                        console.log(lance);
+                            var sub = "Lance superado!";
+                            if (lance.valorLance == lance.leilao.precoAtual){
+                                sub = "Você está ganhando!"
+                            }else if (lance.leilao.statusLeilao == "encerrado" && sub == "Você está ganhando!"){
+                                sub = "Você ganhou!"
+                            }else if (lance.leilao.statusLeilao == "encerrado" && sub == "Lance superado!"){
+                                sub = "Você perdeu!"
+                            }
+                            var id = lance.id;
+                            return (
+                                <NotificacaoItem
+                                    id={lance.id}
+                                    titulo={lance.leilao.produto.nomeProduto}
+                                    subtitulo={sub}
+                                    imagem={lance.leilao.produto.urlImagemProduto}
+                                    onPress={() => navigation.navigate('Lance')}
+                                />
+                            );
+                    }
                     )
                 }
             </View>
