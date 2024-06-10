@@ -159,7 +159,7 @@ const styles = StyleSheet.create({
     justifyContent: 'space-between',
     width: '100%',
   },
-  confirmationText: {
+  confirmationText: { 
     padding: 10,
     fontSize: 12
   },

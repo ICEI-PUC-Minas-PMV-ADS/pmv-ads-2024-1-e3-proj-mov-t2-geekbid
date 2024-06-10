@@ -34,12 +34,11 @@ const MeusLeiloes = () => {
         console.error(error);
       }
     };
-  
+
     if (isFocused) {
       getLeiloes();
     }
-  }, [isFocused]); 
-  
+  }, [isFocused]);
 
   const handleMeusLeiloesDetalhes = (produtoId) => {
     console.log("ID do produto selecionado:", produtoId);
@@ -48,7 +47,7 @@ const MeusLeiloes = () => {
 
   return (
     <View style={MeusLeiloesStyles.container}>
-      <ScrollView style={MeusLeiloesStyles.scrollContent}>
+      <ScrollView>
         <View style={MeusLeiloesStyles.head}>
           <Button icon="chevron-left" onPress={() => navigation.goBack()} />
           <Headline style={MeusLeiloesStyles.textHeader}>Meus Leilões</Headline>
@@ -57,7 +56,6 @@ const MeusLeiloes = () => {
             color="#666cff"
             size={45}
             onPress={() => navigation.navigate("NovoLeilao")}
-            style={MeusLeiloesStyles.iconTrash}
           />
         </View>
 
@@ -101,7 +99,9 @@ const MeusLeiloes = () => {
           ))}
         <View style={MeusLeiloesStyles.footerPlaceholder} />
       </ScrollView>
-      <Footer />
+      <View>
+        <Footer />
+      </View>
     </View>
   );
 };
