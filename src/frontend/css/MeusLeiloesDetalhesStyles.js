@@ -2,6 +2,10 @@ import { StyleSheet } from "react-native";
 
 const MeusLeiloesDetalhesStyles = StyleSheet.create({
   container: {
+    flex:1,
+  },
+  containerBody: {
+    flex:1,
     paddingHorizontal: 5,
     backgroundColor: "#fff",
     paddingHorizontal:20,

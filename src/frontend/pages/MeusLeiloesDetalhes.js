@@ -1,7 +1,11 @@
 import React, { useState, useEffect } from "react";
 import { View, Text, Image, Alert, ScrollView } from "react-native";
 import { Button, Headline, IconButton } from "react-native-paper";
-import { useNavigation, useRoute, useIsFocused } from "@react-navigation/native";
+import {
+  useNavigation,
+  useRoute,
+  useIsFocused,
+} from "@react-navigation/native";
 import Footer from "./../navegations/Footer";
 import MeusLeiloesDetalhesStyles from "./../css/MeusLeiloesDetalhesStyles";
 
@@ -91,109 +95,112 @@ const MeusLeiloesDetalhes = () => {
   };
 
   return (
-    <ScrollView style={MeusLeiloesDetalhesStyles.scrollContent}>
-      <View style={MeusLeiloesDetalhesStyles.container}>
-        <View style={MeusLeiloesDetalhesStyles.head}>
-          <Button icon="chevron-left" onPress={() => navigation.goBack()} />
-          <Headline style={MeusLeiloesDetalhesStyles.textHeader}>
-            Detalhes do Leilão
-          </Headline>
-          {leilao && leilao.statusLeilao === "cadastrado" ? (
-            <IconButton
-              icon="circle-edit-outline"
-              color="#666cff"
-              size={30}
-              onPress={() => handleEditarLeilao(id)}
-              style={MeusLeiloesDetalhesStyles.iconTrash}
-            />
-          ) : (
-            <IconButton
-              icon="circle-edit-outline"
-              color="#808080"
-              size={30}
-              disabled
-              style={MeusLeiloesDetalhesStyles.iconTrash}
-            />
-          )}
-        </View>
-        {produto && (
-          <>
-            <Image
-              style={MeusLeiloesDetalhesStyles.image}
-              source={{ uri: produto.urlImagemProduto }}
-            />
-            <View>
-              <Text style={MeusLeiloesDetalhesStyles.status}>
-                Status: {leilao.statusLeilao}
-              </Text>
-            </View>
-            <View style={MeusLeiloesDetalhesStyles.box}>
-              <Text style={MeusLeiloesDetalhesStyles.title}>Nome</Text>
-              <Text style={MeusLeiloesDetalhesStyles.boxContent}>
-                {produto.nomeProduto}
-              </Text>
-            </View>
-            <View style={MeusLeiloesDetalhesStyles.box}>
-              <Text style={MeusLeiloesDetalhesStyles.title}>Descrição</Text>
-              <Text style={MeusLeiloesDetalhesStyles.boxContent}>
-                {produto.descricaoProduto}
-              </Text>
-            </View>
-          </>
-        )}
-
-        {leilao && leilao.statusLeilao !== "cadastrado" && (
-          <View
-            style={[
-              MeusLeiloesDetalhesStyles.box,
-              MeusLeiloesDetalhesStyles.lancesContainer,
-            ]}
-          >
-            <Text style={MeusLeiloesDetalhesStyles.title}>
-              {showAllLances ? "Todos os Lances" : "Últimos 5 Lances"}
-            </Text>
-            {lances.length > 0 ? (
-              lances.map((lance, index) => (
-                <View key={index} style={MeusLeiloesDetalhesStyles.lanceRow}>
-                  <Text style={MeusLeiloesDetalhesStyles.lanceUser}>
-                    {lance.usuarioNome || "Usuário desconhecido"}
-                  </Text>
-                  <Text style={MeusLeiloesDetalhesStyles.lanceValue}>
-                    {`R$ ${lance.valorLance}`}
-                  </Text>
-                </View>
-              ))
+    <View style={MeusLeiloesDetalhesStyles.container}>
+      <ScrollView style={MeusLeiloesDetalhesStyles.scrollContent}>
+        <View style={MeusLeiloesDetalhesStyles.containerBody}>
+          <View style={MeusLeiloesDetalhesStyles.head}>
+            <Button icon="chevron-left" onPress={() => navigation.goBack()} />
+            <Headline style={MeusLeiloesDetalhesStyles.textHeader}>
+              Detalhes do Leilão
+            </Headline>
+            {leilao && leilao.statusLeilao === "cadastrado" ? (
+              <IconButton
+                icon="circle-edit-outline"
+                color="#666cff"
+                size={30}
+                onPress={() => handleEditarLeilao(id)}
+                style={MeusLeiloesDetalhesStyles.iconTrash}
+              />
             ) : (
-              <Text style={MeusLeiloesDetalhesStyles.boxContent}>
-                Nenhum lance encontrado.
-              </Text>
-            )}
-            {!showAllLances && lances.length > 0 && (
-              <Button
-                mode="contained"
-                onPress={handleShowAllLances}
-                style={MeusLeiloesDetalhesStyles.button}
-              >
-                Ver Todos os Lances
-              </Button>
+              <IconButton
+                icon="circle-edit-outline"
+                color="#808080"
+                size={30}
+                disabled
+                style={MeusLeiloesDetalhesStyles.iconTrash}
+              />
             )}
           </View>
-        )}
+          {produto && (
+            <>
+              <Image
+                style={MeusLeiloesDetalhesStyles.image}
+                source={{ uri: produto.urlImagemProduto }}
+              />
+              <View>
+                <Text style={MeusLeiloesDetalhesStyles.status}>
+                  Status: {leilao.statusLeilao}
+                </Text>
+              </View>
+              <View style={MeusLeiloesDetalhesStyles.box}>
+                <Text style={MeusLeiloesDetalhesStyles.title}>Nome</Text>
+                <Text style={MeusLeiloesDetalhesStyles.boxContent}>
+                  {produto.nomeProduto}
+                </Text>
+              </View>
+              <View style={MeusLeiloesDetalhesStyles.box}>
+                <Text style={MeusLeiloesDetalhesStyles.title}>Descrição</Text>
+                <Text style={MeusLeiloesDetalhesStyles.boxContent}>
+                  {produto.descricaoProduto}
+                </Text>
+              </View>
+            </>
+          )}
+
+          {leilao && leilao.statusLeilao !== "cadastrado" && (
+            <View
+              style={[
+                MeusLeiloesDetalhesStyles.box,
+                MeusLeiloesDetalhesStyles.lancesContainer,
+              ]}
+            >
+              <Text style={MeusLeiloesDetalhesStyles.title}>
+                {showAllLances ? "Todos os Lances" : "Últimos 5 Lances"}
+              </Text>
+              {lances.length > 0 ? (
+                lances.map((lance, index) => (
+                  <View key={index} style={MeusLeiloesDetalhesStyles.lanceRow}>
+                    <Text style={MeusLeiloesDetalhesStyles.lanceUser}>
+                      {lance.usuarioNome || "Usuário desconhecido"}
+                    </Text>
+                    <Text style={MeusLeiloesDetalhesStyles.lanceValue}>
+                      {`R$ ${lance.valorLance}`}
+                    </Text>
+                  </View>
+                ))
+              ) : (
+                <Text style={MeusLeiloesDetalhesStyles.boxContent}>
+                  Nenhum lance encontrado.
+                </Text>
+              )}
+              {!showAllLances && lances.length > 0 && (
+                <Button
+                  mode="contained"
+                  onPress={handleShowAllLances}
+                  style={MeusLeiloesDetalhesStyles.button}
+                >
+                  Ver Todos os Lances
+                </Button>
+              )}
+            </View>
+          )}
+        </View>
+        <View style={MeusLeiloesDetalhesStyles.itemContainer}>
+          {leilao && leilao.statusLeilao === "cadastrado" && (
+            <Button
+              mode="contained"
+              onPress={handlePublicarLeilao}
+              style={MeusLeiloesDetalhesStyles.button}
+            >
+              Publicar Leilão
+            </Button>
+          )}
+        </View>
+      </ScrollView>
+      <View style={{ paddingTop: 60 }}>
+        <Footer />
       </View>
-      <View style={MeusLeiloesDetalhesStyles.itemContainer}> 
-      {leilao && leilao.statusLeilao === "cadastrado" && (
-        <Button
-          mode="contained"
-          onPress={handlePublicarLeilao}
-          style={MeusLeiloesDetalhesStyles.button}
-        >
-          Publicar Leilão
-        </Button>
-      )}
-      </View>
-      <Footer />
-      <View style={MeusLeiloesDetalhesStyles.footerPlaceholder} />
-    </ScrollView>
+    </View>
   );
 };
 
