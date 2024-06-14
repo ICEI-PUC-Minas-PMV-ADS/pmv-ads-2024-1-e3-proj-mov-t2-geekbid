@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from "react";
-import { View, Text, StyleSheet, Image, ScrollView, TouchableOpacity} from 'react-native';
+import { View, Text, StyleSheet, Image, ScrollView, Modal, TouchableOpacity, TouchableWithoutFeedback} from 'react-native';
 import { useNavigation } from "@react-navigation/native";
 import { TextInput, Headline, Button } from 'react-native-paper';
 import { useAuth } from '../services/auth.services';
@@ -30,6 +30,8 @@ const Notificacoes = () => {
     const navigation = useNavigation();
     const { usuario } = useAuth();
     const usuarioId = usuario.usuarioId;
+    const [leilaoArremetadoModalVisible, setLeilaoArrematadoModalVisible] =
+    useState(false)
  
     const [meusLeiloes, SetMeusLeiloes] = useState([]);
     const [meusLances, setMeusLances] = useState([])
@@ -48,6 +50,7 @@ const Notificacoes = () => {
  
                 console.log(meusLances);
                 console.log(lancesData)
+                console.log(id);
             } catch (error) {
                 console.error(error);
             }
@@ -72,7 +75,7 @@ const Notificacoes = () => {
                        <NotificacaoItem
                             id={leilao.id}
                             titulo={leilao.produto.nomeProduto}
-                            subtitulo={leilao.precoAtual}
+                            subtitulo={'R$ '+leilao.precoAtual+',00'}
                             imagem={leilao.produto.urlImagemProduto}
                             onPress={() => navigation.navigate('MeusLeiloesDetalhes', { id })}
                         />);}
@@ -106,6 +109,47 @@ const Notificacoes = () => {
                     )
                 }
             </View>
+            {/* <Modal
+        animationType="slide"
+        transparent={true}
+        visible={leilaoArremetadoModalVisible}
+        onRequestClose={() => {
+          Alert.alert('Modal has been closed.')
+          closeLanceEnviadoModal()
+        }}
+      >
+        <TouchableWithoutFeedback onPress={Keyboard.dismiss} accessible={false}>
+          <View style={styles.modalContainer}>
+            <View style={styles.modalContent}>
+              <View style={styles.modalEnviado}>
+                <Text style={styles.modalLanceEnviado}>Parabéns!</Text>
+              </View>
+              <View style={styles.modalSubtitleContainer}>
+                <Image
+                  source={require('./../assets/hammer.png')}
+                  style={styles.modalHammerIcon}
+                />
+                <Text style={styles.modalSubtitleText}>
+                  Você arrematou este item!
+                </Text>
+              </View>
+              <Image source={{ uri: imagem }} style={styles.image} />
+              <Text style={styles.modalProductName}>{nomeProduto}</Text>
+              <Text style={styles.modalCreator}>Criador: Pedro</Text>
+              <Text>
+                Seu lance <Text style={styles.modalBid}>R$ {ultimoLance}</Text>
+              </Text>
+
+              <TouchableOpacity
+                style={styles.button}
+                onPress={openAguardeContatoModal} // Abre o modal de "Aguarde Contato" ao clicar no botão "Pagar agora"
+              >
+                <Text style={styles.buttonText}>Pagar agora</Text>
+              </TouchableOpacity>
+            </View>
+          </View>
+        </TouchableWithoutFeedback>
+      </Modal> */}
         </ScrollView>
     );
 }
