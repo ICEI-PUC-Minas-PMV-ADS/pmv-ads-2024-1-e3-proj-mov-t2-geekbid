@@ -6,6 +6,7 @@ import Header from '../components/Header'
 import { useNavigation } from '@react-navigation/native'
 import { useAuth } from '../services/auth.services'
 
+
 const Perfil = () => {
   const { signOut, usuario } = useAuth()
   const navigation = useNavigation()

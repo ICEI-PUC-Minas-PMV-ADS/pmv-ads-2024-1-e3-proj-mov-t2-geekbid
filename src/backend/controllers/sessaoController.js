@@ -26,6 +26,19 @@ class sessaoController {
 
     return response.json({ usuario, token })
   }
+  async delete(request, response) {
+    try {
+      const userId = request.usuario.id
+      console.log(userId)
+      await Usuario.destroy({ where: { id: userId } })
+
+      return response.status(200).json({ message: 'Usuario deletado.' })
+    } catch (error) {
+      return response
+        .status(500)
+        .json({ message: 'Unable to delete user', error })
+    }
+  }
 }
 
 module.exports = sessaoController

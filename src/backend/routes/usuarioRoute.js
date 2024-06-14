@@ -10,7 +10,12 @@ router.post('/', usuarioController.cadastrarUsuario)
 router.put('/', garantirAutenticacao, usuarioController.atualizarUsuario)
 
 // Rota para deletar um usuário
-router.delete('/:id', usuarioController.excluirUsuario)
+router.delete(
+  '/',
+
+  garantirAutenticacao,
+  usuarioController.excluirUsuario
+)
 
 // Rota para consultar um usuário
 router.get('/:id', usuarioController.buscarUsuario)

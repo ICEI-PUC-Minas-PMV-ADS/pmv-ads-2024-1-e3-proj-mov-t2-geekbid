@@ -59,9 +59,9 @@ class CadastroController {
 
   async delete(req, res) {
     try {
-      const { id } = req.params
+      const userId = request.user.id
 
-      const deletedRowsCount = await Usuario.destroy({ where: { id } })
+      const deletedRowsCount = await Usuario.destroy({ where: { id: userId } })
 
       if (deletedRowsCount === 0) {
         return res.status(404).json({ error: 'Usuário não encontrado' })
