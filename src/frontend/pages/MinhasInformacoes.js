@@ -94,9 +94,8 @@ function MinhasInformacoes() {
       >
         Excluir cadastro
       </Button>
-      <View style={{ paddingTop: 80 }}>
-        <Footer />
-      </View>
+
+      <Footer />
     </View>
   )
 }
