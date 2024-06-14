@@ -4,22 +4,19 @@ const styles = StyleSheet.create({
   container: {
     flex: 1,
   },
-  footerPlaceholder: {
-    height: 180,
-  },
   row: {
     flexDirection: "row",
     justifyContent: "space-between",
     marginBottom: 20,
   },
-  head: {
+  head: { 
     flexDirection: "row",
     justifyContent: "flex-start",
     alignItems: "center",
     marginTop: 20,
     marginBottom: 30,
   },
-  textHeader: {
+  textHeader: { 
     fontSize: 22,
     textAlign: "left",
     paddingLeft: 30,
@@ -33,8 +30,8 @@ const styles = StyleSheet.create({
     padding: 10,
     marginHorizontal: 5,
   },
-  lastItem: {
-    marginBottom: 80, // Ajuste para ficar acima do rodapé
+  lastItem: { 
+    marginBottom: 80, 
   },
   image: {
     width: "100%",
@@ -58,7 +55,8 @@ const styles = StyleSheet.create({
   price: {
     marginBottom: 10,
   },
-  container: {
+  container: { 
+    flex: 1,
     paddingHorizontal: 5,
     backgroundColor: "#fff",
   },
@@ -66,7 +64,7 @@ const styles = StyleSheet.create({
     justifyContent: "space-between",
     marginBottom: 20,
   },
-  itemContainer: {
+  itemContainer: { 
     widht: "80%",
     height: "auto",
     borderWidth: 1,
@@ -78,13 +76,13 @@ const styles = StyleSheet.create({
     marginRight: 15,
     marginBottom: 10,
   },
-  image: {
+  image: { 
     width: "100%",
     height: 160,
     borderRadius: 10,
     marginBottom: 10,
   },
-  title: {
+  title: { 
     fontSize: 15,
     fontWeight: "bold",
     marginBottom: 5,
