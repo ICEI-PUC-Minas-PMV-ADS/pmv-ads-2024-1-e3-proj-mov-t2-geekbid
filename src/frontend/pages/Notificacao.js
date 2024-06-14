@@ -22,8 +22,7 @@ const NotificacaoItem = ( {id, titulo, subtitulo, imagem, onPress} ) => {
     );
 };
 const ClicaNotificacao = async (id) => {
-    console.log(id);
-    //navigation.navigate('MeusLeiloesDetalhes', { id });
+    console.log(id);   
 
 }
 const Notificacoes = () => {
@@ -42,20 +41,16 @@ const Notificacoes = () => {
             const Id = usuario.id
             try {
                 const leiloesResponse = await fetch(`http://localhost:3000/leilao/meusleiloes?usuarioId=${usuarioId}`);
-                const lancesResponse = await fetch('http://localhost:3000/lances/user/' + Id);
-                //const lancesLeilaoResponse = await fetch(`http://localhost:3000/lances/${leilaoId}`);
+                const lancesResponse = await fetch('http://localhost:3000/lances/user/' + Id);                
  
                 const leiloesData = await leiloesResponse.json();
-                const lancesData = await lancesResponse.json();
-                //const lancesLeilaoData = await lancesLeilaoResponse.json();
+                const lancesData = await lancesResponse.json();                
  
                 SetMeusLeiloes(leiloesData.meusLeiloes);
-                setMeusLances(lancesData);
-                //setLancesLeilao(lancesLeilaoData);
+                setMeusLances(lancesData);               
  
                 console.log(meusLances);
-                console.log(lancesData);
-                //console.log(lancesLeilaoData);
+                console.log(lancesData);               
             } catch (error) {
                 console.error(error);
             }
