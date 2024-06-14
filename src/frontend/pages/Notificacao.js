@@ -29,28 +29,44 @@ const ClicaNotificacao = async (id) => {
 const Notificacoes = () => {
     const navigation = useNavigation();
     const { usuario } = useAuth();
-    const usuarioId = usuario.usuarioId;
+    const usuarioId = usuario.id;
     const [leilaoArremetadoModalVisible, setLeilaoArrematadoModalVisible] =
     useState(false)
  
     const [meusLeiloes, SetMeusLeiloes] = useState([]);
-    const [meusLances, setMeusLances] = useState([])
+    const [meusLances, setMeusLances] = useState([]);
+    const [lancesLeilao, setLancesLeilao] = useState([])
  
     useEffect(() => {
         const getLeiloes = async () => {
+            const Id = usuario.id
             try {
-                const leiloesResponse = await fetch(`http://localhost:3000/leilao/meusleiloes?usuarioId=2`);
-                const lancesResponse = await fetch(`http://localhost:3000/lances/user/${usuarioId}`);
+                const leiloesResponse = await fetch(`http://localhost:3000/leilao/meusleiloes?usuarioId=${usuarioId}`);
+                const lancesResponse = await fetch('http://localhost:3000/lances/user/' + Id);
+                //const lancesLeilaoResponse = await fetch(`http://localhost:3000/lances/${leilaoId}`);
  
                 const leiloesData = await leiloesResponse.json();
-                const lancesData = await lancesResponse.json()
+                const lancesData = await lancesResponse.json();
+                //const lancesLeilaoData = await lancesLeilaoResponse.json();
  
                 SetMeusLeiloes(leiloesData.meusLeiloes);
                 setMeusLances(lancesData);
+                //setLancesLeilao(lancesLeilaoData);
  
                 console.log(meusLances);
-                console.log(lancesData)
-                console.log(id);
+                console.log(lancesData);
+                //console.log(lancesLeilaoData);
+            } catch (error) {
+                console.error(error);
+            }
+        };
+
+        const fetchLancesLeilao = async (leilaoId) => {
+            try {
+                const lancesLeilaoResponse = await fetch(`http://localhost:3000/lances/${leilaoId}`);
+                const lancesLeilaoData = await lancesLeilaoResponse.json();
+                console.log(lancesLeilaoData);
+                setLancesLeilao(lancesLeilaoData);
             } catch (error) {
                 console.error(error);
             }
@@ -87,6 +103,7 @@ const Notificacoes = () => {
                 {
                     meusLances && meusLances.map(lance =>{
                         console.log(lance);
+                        console.log(lance.valorLance);
                             var sub = "Lance superado!";
                             if (lance.valorLance == lance.leilao.precoAtual){
                                 sub = "Você está ganhando!"
