@@ -1,10 +1,11 @@
-import React, { useEffect, useState } from 'react';
-import { View, Text, Image, TouchableOpacity, StyleSheet, ScrollView, TextInput, ActivityIndicator } from 'react-native';
+import React, { useEffect, useState, useRef } from 'react';
+import { View, Text, Image, TouchableOpacity, StyleSheet, ScrollView, ActivityIndicator } from 'react-native';
+import { TextInput } from 'react-native-paper';
 import { useNavigation } from '@react-navigation/native';
 import axios from 'axios';
 import moment from 'moment';
-import Icon from 'react-native-vector-icons/FontAwesome';
 import filter from 'lodash.filter';
+import { Picker } from '@react-native-picker/picker'
 
 
 const Lance = ({ item }) => {
@@ -15,6 +16,8 @@ const Lance = ({ item }) => {
 
   const [isLoading, setIsLoading] = useState(false);
   const [leiloes, setLeiloes] = useState([]);
+  const [filteredLeiloes, setFilteredLeiloes] = useState([]);
+  const [selectedCategory, setSelectedCategory] = useState("Todas")
   const [error, setError] = useState(null);
   const [fullData, setFullData] = useState([]);
   const [searchQuery, setSearchQuery] = useState("");
@@ -44,8 +47,9 @@ const Lance = ({ item }) => {
     try {
       const response = await axios.get(url);
       setLeiloes(response.data?.leiloesHome);
-      setIsLoading(false);
       setFullData(response.data?.leiloesHome);
+      setFilteredLeiloes(response.data?.leiloesHome);
+      setIsLoading(false);
       // console.log(leiloes);
     } catch (error) {
       setError(error);
@@ -53,6 +57,36 @@ const Lance = ({ item }) => {
       console.error(error);
     }
   };
+
+  useEffect(() => {
+    let active = true;
+
+    const fetchLeiloes = async () => {
+      // setLeiloes(fullData);
+      // console.log("leiloes 01: ", leiloes);
+      if (selectedCategory === "Todas") {
+        if (active) {
+          setLeiloes(fullData);
+        }
+      } else {
+        const filtered = fullData.filter(fullData => 
+          fullData.produto.categoriaProduto === selectedCategory);        
+        if (active) {
+          // console.log("selectedCategory: ", selectedCategory);
+          // console.log("filtered: ", filtered);
+          setLeiloes(filtered);
+        }
+        // console.log("Active: ", active);
+      }
+      // console.log("leiloes 02: ", leiloes);
+    };
+    
+    fetchLeiloes();
+    
+    return () => {
+      active = false;
+    };
+  }, [selectedCategory]);
 
   const handleSearch = (query) => {
     setSearchQuery(query);
@@ -65,10 +99,8 @@ const Lance = ({ item }) => {
 
   const contains = ({produto}, query) => {
     const { id, nomeProduto, descricaoProduto } = produto;
-    // console.log(nomeProduto, descricaoProduto);
-    console.log(query);
-    console.log("nomeProduto: ", nomeProduto, nomeProduto.includes(query), " descricaoProduto: ", descricaoProduto, descricaoProduto.includes(query));
-    if ( nomeProduto.toLowerCase().includes(query) || descricaoProduto.toLowerCase().includes(query)) {
+    if ( nomeProduto.toLowerCase().includes(query) || 
+         descricaoProduto.toLowerCase().includes(query)) {
       return true;
     }
     return false;
@@ -90,32 +122,46 @@ const Lance = ({ item }) => {
     )
   }
 
-  const handleFiltro = () => {
-    console.log('Link pressed!');
-  };
-
   return (
     <View style={styles.container}>
       <View>
         <View style={styles.searchContainer}>
-          <Icon name="search" size={20} color="#666" style={styles.icon} />
           <TextInput
             placeholder="Pesquisar"
             clearButtonMode="always"
             autoCapitalize="none"
             autoCorrect={false}
+            left={<TextInput.Icon icon="magnify" />}
             value={searchQuery}
             onChangeText={(query) => handleSearch(query)}
             placeholderTextColor="#666"
             style={styles.input}
-          />
-        </View>
+          />           
       </View>
       <View style={styles.filterContainer}>
-          <TouchableOpacity style={styles.link} onPress={handleFiltro}>
-            <Text style={styles.linkText}>Filtrar</Text>
-          </TouchableOpacity>
+        <Picker
+        selectedValue={selectedCategory}
+        onValueChange={(itemValue) => {
+          setSelectedCategory(itemValue);
+          console.log("itemValue: ", itemValue);
+        }}
+        style={styles.picker}
+        >
+          <Picker.Item label="Todas" value="Todas" />
+          <Picker.Item label="Quadrinhos e Mangás" value="Quadrinhos e Mangás" />
+          <Picker.Item label="Colecionáveis" value="Colecionáveis" />
+          <Picker.Item label="Jogos de Tabuleiro e Card Games" value="Jogos de Tabuleiro e Card Games" />
+          <Picker.Item label="Jogos Eletrônicos" value="Jogos Eletrônicos" />
+          <Picker.Item label="Livros e Literatura Fantástica" value="Livros e Literatura Fantástica" />
+          <Picker.Item label="Filmes e Séries" value="Filmes e Séries" />
+          <Picker.Item label="Tecnologia e Gadgets" value="Tecnologia e Gadgets" />
+          <Picker.Item label="Roupas e Acessórios" value="Roupas e Acessórios" />
+          <Picker.Item label="Arte e Decoração" value="Arte e Decoração" />
+          <Picker.Item label="Memorabilia" value="Memorabilia" />
+        </Picker>
       </View>
+    </View>
+
       <ScrollView>
         {leiloes?.map((item, index) => {
           const leilaoFinalizado = moment(item.dataFim).isBefore(moment())
@@ -175,8 +221,9 @@ const styles = StyleSheet.create({
     marginBottom: 10
   },
   image: {
-    width: '100%',
+    width: "100%",
     height: 160,
+    resizeMode: "contain",
     borderRadius: 10,
     marginBottom: 10
   },
@@ -209,6 +256,7 @@ const styles = StyleSheet.create({
     fontSize: 16
   },
   searchContainer: {
+    flex: 1,
     flexDirection: 'row',
     textAlign: 'left',
     alignItems: 'center',
@@ -217,27 +265,17 @@ const styles = StyleSheet.create({
     paddingVertical: 10,
   },
   filterContainer: {
-    backgroundColor: 'transparent',
-    paddingRight: 10,
-    marginRight: 15
-  },
-  icon: {
-    marginRight: 10,
   },
   input: {
     flex: 1,
-    paddingHorizontal: 20,
-    paddingVertical: 10,
     borderColor:"#ccc",
     borderWidth: 1,
-    borderRadius: 8,
+    borderRadius: 8
   },
-  linkText: {
-    color: 'blue',
-    fontSize: 13,
-    textAlign: 'right',
-    paddingBottom: 10,
-    fontWeight: 'bold'
+  picker: {
+    flex: 1,
+    fontSize: 12,
+    marginBottom: 10
   }
 })
 
