@@ -1,12 +1,24 @@
-import React, { useEffect, useState } from 'react'
-import { View, Text, Image, TouchableOpacity, StyleSheet, ScrollView } from 'react-native'
-import { useNavigation } from '@react-navigation/native'
-import axios from 'axios'
-import moment from 'moment'
+import React, { useEffect, useState } from 'react';
+import { View, Text, Image, TouchableOpacity, StyleSheet, ScrollView, TextInput, ActivityIndicator } from 'react-native';
+import { useNavigation } from '@react-navigation/native';
+import axios from 'axios';
+import moment from 'moment';
+import Icon from 'react-native-vector-icons/FontAwesome';
+import filter from 'lodash.filter';
+
 
 const Lance = ({ item }) => {
-  const navigation = useNavigation()
 
+  const navigation = useNavigation();
+
+  const API = 'http://localhost:3000/leilao/home';
+
+  const [isLoading, setIsLoading] = useState(false);
+  const [leiloes, setLeiloes] = useState([]);
+  const [error, setError] = useState(null);
+  const [fullData, setFullData] = useState([]);
+  const [searchQuery, setSearchQuery] = useState("");
+  
   const handleLancePress = (
     leilaoId,
     leilaoDataFim,
@@ -20,30 +32,90 @@ const Lance = ({ item }) => {
       nomeProduto: nomeProduto,
       imagemProduto: imagemProduto,
       nomeUsuario: nomeUsuario
-    })
+    });
   }
 
-  const [leiloes, setLeiloes] = useState([])
+  useEffect(() => {
+    setIsLoading(true);
+    fetchData(API);
+  }, [])
 
-  const getLeiloes = async () => {
+  const fetchData = async(url) => {
     try {
-      const response = await axios.get(
-        'http://localhost:3000/leilao/home'
-      )
-      setLeiloes(response.data?.leiloesHome)
+      const response = await axios.get(url);
+      setLeiloes(response.data?.leiloesHome);
+      setIsLoading(false);
+      setFullData(response.data?.leiloesHome);
+      // console.log(leiloes);
     } catch (error) {
-      console.error(error)
+      setError(error);
+      setIsLoading(false);
+      console.error(error);
     }
+  };
+
+  const handleSearch = (query) => {
+    setSearchQuery(query);
+    const formattedQuery = query.toLowerCase();
+    const filteredData = filter(fullData, (produto) => {
+      return contains(produto, formattedQuery);
+    });
+    setLeiloes(filteredData);
+  };
+
+  const contains = ({produto}, query) => {
+    const { id, nomeProduto, descricaoProduto } = produto;
+    // console.log(nomeProduto, descricaoProduto);
+    console.log(query);
+    console.log("nomeProduto: ", nomeProduto, nomeProduto.includes(query), " descricaoProduto: ", descricaoProduto, descricaoProduto.includes(query));
+    if ( nomeProduto.toLowerCase().includes(query) || descricaoProduto.toLowerCase().includes(query)) {
+      return true;
+    }
+    return false;
   }
 
-   useEffect(() => {
-     getLeiloes()
-   }, [])
+  if (isLoading) {
+    return (
+      <View style={{flex:1, justifyContent:"center", alignItems:"center"}}>
+        <ActivityIndicator size="large" color="#5500dc" />
+      </View>
+    )
+  };
 
-  // console.log('Leilões: ', leiloes)
+  if (error) {
+    return (
+      <View style={{flex:1, justifyContent:"center", alignItems:"center"}}>
+        <Text>Erro ao buscar dados ... Por favor verifique sua conexão</Text>
+      </View>
+    )
+  }
+
+  const handleFiltro = () => {
+    console.log('Link pressed!');
+  };
 
   return (
     <View style={styles.container}>
+      <View>
+        <View style={styles.searchContainer}>
+          <Icon name="search" size={20} color="#666" style={styles.icon} />
+          <TextInput
+            placeholder="Pesquisar"
+            clearButtonMode="always"
+            autoCapitalize="none"
+            autoCorrect={false}
+            value={searchQuery}
+            onChangeText={(query) => handleSearch(query)}
+            placeholderTextColor="#666"
+            style={styles.input}
+          />
+        </View>
+      </View>
+      <View style={styles.filterContainer}>
+          <TouchableOpacity style={styles.link} onPress={handleFiltro}>
+            <Text style={styles.linkText}>Filtrar</Text>
+          </TouchableOpacity>
+      </View>
       <ScrollView>
         {leiloes?.map((item, index) => {
           const leilaoFinalizado = moment(item.dataFim).isBefore(moment())
@@ -136,12 +208,35 @@ const styles = StyleSheet.create({
     color: '#fff',
     fontSize: 16
   },
+  searchContainer: {
+    flexDirection: 'row',
+    textAlign: 'left',
+    alignItems: 'center',
+    backgroundColor: 'transparent',
+    width:'100%',
+    paddingVertical: 10,
+  },
+  filterContainer: {
+    backgroundColor: 'transparent',
+    paddingRight: 10,
+    marginRight: 15
+  },
+  icon: {
+    marginRight: 10,
+  },
+  input: {
+    flex: 1,
+    paddingHorizontal: 20,
+    paddingVertical: 10,
+    borderColor:"#ccc",
+    borderWidth: 1,
+    borderRadius: 8,
+  },
   linkText: {
     color: 'blue',
-    fontSize: 15,
+    fontSize: 13,
     textAlign: 'right',
-    paddingTop: 15,
-    paddingBottom: 15,
+    paddingBottom: 10,
     fontWeight: 'bold'
   }
 })
