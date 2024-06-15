@@ -53,9 +53,9 @@ Usuario.belongsToMany(Leilao, { through: Lance })
 Mensagem.belongsToMany(Usuario, { through: HistoricoMensagem })
 
 sequelize
-  //  .sync({ force: true }) // PARA CRIAR AS TABELAS E RELAÇÕES -- APAGA OS DADOS
-  .sync({ alter: true }) // PARA ATUALIZAR AS TABELAS E RELAÇÕES -- NÃO APAGA OS DADOS
-  // .sync()  DESABILITAR QUANTO HABILITAR A LLINHA DE CIMA
+  // .sync({ force: true }) // PARA CRIAR AS TABELAS E RELAÇÕES -- APAGA OS DADOS
+  // .sync({ alter: true }) // PARA ATUALIZAR AS TABELAS E RELAÇÕES -- NÃO APAGA OS DADOS
+  .sync() // DESABILITAR QUANTO HABILITAR A LLINHA DE CIMA
   .then(user => {
     app.listen(3000, () => console.log('Server is running at port 3000....'))
   })

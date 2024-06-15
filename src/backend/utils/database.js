@@ -3,9 +3,9 @@
 
 const Sequelize = require('sequelize')
 
-const sequelize = new Sequelize('geekbid', 'postgres', '12345', {
+const sequelize = new Sequelize('postgres', 'geekbid', 'puc-ads-1234', {
   dialect: 'postgres',
-  host: 'localhost'
+  host:  'geekbid.postgres.database.azure.com'
 })
 
 module.exports = sequelize

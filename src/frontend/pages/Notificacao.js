@@ -3,12 +3,13 @@ import { View, Text, StyleSheet, Image, ScrollView, Modal, TouchableOpacity, Tou
 import { useNavigation } from "@react-navigation/native";
 import { TextInput, Headline, Button } from 'react-native-paper';
 import { useAuth } from '../services/auth.services';
+import Footer from "./../navegations/Footer";
 
  
 const NotificacaoItem = ( {id, titulo, subtitulo, imagem, onPress} ) => {
     console.log(id);
     return (
-    <TouchableOpacity style={styles.lanceItemContainer} onPress={onPress}>
+    <TouchableOpacity style={styles.container} onPress={onPress}>
         <View style={styles.notificacaoContainer}>
             <View style={styles.imageContainer}>
                 <Image source={{ uri: imagem }} style={styles.image} />
@@ -17,8 +18,10 @@ const NotificacaoItem = ( {id, titulo, subtitulo, imagem, onPress} ) => {
                 <Text style={styles.titulo}>{titulo}</Text>
                 <Text style={styles.subtitulo}>{subtitulo}</Text>
             </View>
-        </View>
+        </View>        
     </TouchableOpacity>
+    
+    
     );
 };
 const ClicaNotificacao = async (id) => {
@@ -71,8 +74,8 @@ const Notificacoes = () => {
     }, []);
  
     return (
- 
-        <ScrollView style={styles.container}>
+        <View style={styles.container}> 
+        <ScrollView >
             <View style={styles.head}>
                 <Headline style={styles.textHeader}>Notificações</Headline>
             </View>
@@ -163,6 +166,10 @@ const Notificacoes = () => {
         </TouchableWithoutFeedback>
       </Modal> */}
         </ScrollView>
+        {/* <View style={{ paddingTop: 60 }}> */}
+        <Footer />
+      {/* </View> */}
+      </View>
     );
 }
  
@@ -214,6 +221,7 @@ const styles = StyleSheet.create({
         marginTop: 30,
         marginBottom: 30
     },
+    
 });
  
 export default Notificacoes;
