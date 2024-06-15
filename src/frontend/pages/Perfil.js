@@ -5,6 +5,7 @@ import Container from '../components/Container'
 import Header from '../components/Header'
 import { useNavigation } from '@react-navigation/native'
 import { useAuth } from '../services/auth.services'
+import Footer from "./../navegations/Footer";
 
 const Perfil = () => {
   const { signOut, usuario } = useAuth()
@@ -94,6 +95,9 @@ const Perfil = () => {
             <Text style={styles.linkText}>Sair</Text>
           </View>
         </TouchableOpacity>
+      </View>
+      <View style={{ paddingTop: 80 }}>
+        <Footer />
       </View>
     </Container>
   )

@@ -5,7 +5,8 @@ import { useNavigation } from '@react-navigation/native';
 import axios from 'axios';
 import moment from 'moment';
 import filter from 'lodash.filter';
-import { Picker } from '@react-native-picker/picker'
+import { Picker } from '@react-native-picker/picker';
+
 
 
 const Lance = ({ item }) => {
@@ -90,6 +91,7 @@ const Lance = ({ item }) => {
 
   const handleSearch = (query) => {
     setSearchQuery(query);
+    setSelectedCategory("Todas");
     const formattedQuery = query.toLowerCase();
     const filteredData = filter(fullData, (produto) => {
       return contains(produto, formattedQuery);
@@ -143,7 +145,7 @@ const Lance = ({ item }) => {
         selectedValue={selectedCategory}
         onValueChange={(itemValue) => {
           setSelectedCategory(itemValue);
-          console.log("itemValue: ", itemValue);
+          // console.log("itemValue: ", itemValue);
         }}
         style={styles.picker}
         >
