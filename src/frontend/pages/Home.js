@@ -60,17 +60,17 @@ const Home = ({ navigation }) => {
         navigationState={{ index, routes }}
         onIndexChange={setIndex}
         renderScene={renderScene}
-        activeColor="#666cff"
-        inactiveColor="#000000"
-        barStyle={{
-          backgroundColor: 'transparent',
-          elevation: 0,
-          position: 'absolute',
-          bottom: 0,
-          left: 0,
-          right: 0,
-        }}
-        shifting={false}
+        // activeColor="#666cff"
+        // inactiveColor="#000000"
+        // barStyle={{
+          // backgroundColor: 'transparent',
+          // elevation: 0,
+          // position: 'absolute',
+          // bottom: 0,
+          // left: 0,
+          // right: 0,
+        // }}
+        // shifting={false}
       />
       {/* <View style={styles.buttonContainer}>
         {renderIcon(0, 'home-outline', '#000000', 28)}
@@ -79,7 +79,7 @@ const Home = ({ navigation }) => {
         {renderIcon(1, 'bell-outline', '#000000', 28)}
         {renderIcon(2, 'account', '#000000', 28)}
       </View> */}
-      <View style={{ paddingTop: 80 }}>
+      <View style={{  }}>
         <Footer />
       </View>
     </View>
