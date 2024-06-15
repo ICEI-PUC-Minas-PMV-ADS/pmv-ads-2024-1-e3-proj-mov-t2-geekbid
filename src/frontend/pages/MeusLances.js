@@ -97,6 +97,8 @@ const MeusLances = ({ navigation }) => {
     }
   }
 
+  console.log("Lances: ", lances);
+
   useEffect(() => {
     getLeiloes()
   }, [])

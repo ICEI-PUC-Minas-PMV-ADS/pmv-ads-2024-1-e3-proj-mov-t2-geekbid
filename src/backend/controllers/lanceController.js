@@ -86,6 +86,9 @@ const lanceController = {
 
       const lances = await Lance.findAll({
         where: { leilaoId },
+        include: [
+          {model: Usuario, as: 'usuario' },
+        ],
         order: [['createdAt', 'DESC']],
         limit: 5
       })
