@@ -162,6 +162,7 @@ const MeusLeiloesDetalhes = () => {
               {lances.length > 0 ? (
                 lances.map((lance, index) => (
                   <View key={index} style={MeusLeiloesDetalhesStyles.lanceRow}>
+                    
                     <Text style={MeusLeiloesDetalhesStyles.lanceUser}>
                       {lance.usuario?.nome || "Usuário desconhecido"}
                     </Text>
