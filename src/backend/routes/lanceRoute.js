@@ -5,6 +5,9 @@ const lanceController = require('../controllers/lanceController')
 // Retornar ultimos lances de um leilão
 router.get('/:leilaoId/ultimos', lanceController.buscarUltimosLances) // Nova rota
 
+// Retornar todos os lances de um leilão
+router.get('/:leilaoId', lanceController.buscarTodosLances) // Nova rota
+
 // Cadastrar lance em leilão
 router.post('/', lanceController.cadastrarLance)
 
