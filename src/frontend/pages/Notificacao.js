@@ -5,7 +5,6 @@ import { TextInput, Headline, Button } from 'react-native-paper';
 import { useAuth } from '../services/auth.services';
 import Footer from "./../navegations/Footer";
 
-
 const NotificacaoItem = ({ id, titulo, subtitulo, imagem, onPress }) => {
   console.log(id);
   return (
