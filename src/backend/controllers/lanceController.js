@@ -108,10 +108,18 @@ const lanceController = {
 
   async buscarTodosLances(req, res) {
     try {
-      const lances = await Lance.findAll() // Buscar todos os lances sem filtro
-      res.status(200).json(lances)
+      const { leilaoId } = req.params;
+      const lances = await Lance.findAll({
+        where: { leilaoId },
+        include: [
+          { model: Usuario, as: 'usuario' },
+        ],
+        order: [['createdAt', 'DESC']],
+      });
+      console.log('Lances encontrados:', lances)
+      res.status(200).json(lances);
     } catch (err) {
-      res.status(404).json({ message: err.message })
+      res.status(404).json({ message: err.message });
     }
   },
 
