@@ -220,6 +220,55 @@ const leilaoController = {
       res.status(500).json({ error: "Erro interno do servidor" });
     }
   },
+
+    // Pesquisar leilões na Home
+    async pesquisarLeilaoHome(req, res) {
+      const query = `%${req.query}`
+      console.log("query: ", query);
+      try {
+          const leiloesPesquisa = await Leilao.findAll({
+              raw: true,
+              where: {
+                  statusLeilao: ['ativo', 'publicado'],
+              },
+              include: [
+                  {model: Usuario, as: "usuario"},
+                  {model: Produto, as: "produto",
+                      where: {
+                          nomeProduto: { [Op.like] : query },
+                      }
+                  }
+              ]
+          })
+          console.log("leiloesPesquisa: ", JSON.stringify(leiloesPesquisa, null, 2));
+          res.status(200).json({ leiloesPesquisa });
+      } catch (error) {
+          console.error('Erro ao buscar leilões:', error);
+          res.status(500).json({ error: 'Erro interno do servidor' });
+      }
+  },
+
+  // Buscar todos os leilões para a home
+  async listarLeiloesHome(req, res) {
+      try {
+          const leiloesHome = await Leilao.findAll({
+              // raw: true,
+              where: {
+                  statusLeilao: ['ativo', 'publicado']
+              },
+              include: [
+                  {model: Usuario, as: "usuario"},
+                  {model: Produto, as: "produto"}
+              ]
+          })
+          console.log(JSON.stringify(leiloesHome, null, 2));
+          res.status(200).json({ leiloesHome });
+      } catch (error) {
+          console.error('Erro ao buscar leilões:', error);
+          res.status(500).json({ error: 'Erro interno do servidor' });
+      }
+  },
+
 };
 
 module.exports = leilaoController;

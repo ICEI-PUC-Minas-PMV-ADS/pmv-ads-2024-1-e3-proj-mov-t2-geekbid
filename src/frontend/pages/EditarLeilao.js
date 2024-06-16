@@ -139,7 +139,7 @@ const EditarLeilao = () => {
       if (response.ok) {
         setMensagemSalvo('Alterações salvas com sucesso!');
         setTimeout(() => {
-          navigation.navigate('MeusLeiloesDetalhes', { id }); // Navegar de volta para a página de detalhes
+          navigation.navigate('MeusLeiloesDetalhes', { id }); 
         }, 2000);
       } else {
         throw new Error('Erro ao salvar o leilão');
