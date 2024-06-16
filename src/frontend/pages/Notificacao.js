@@ -1,142 +1,168 @@
 import React, { useState, useEffect } from "react";
-import { View, Text, StyleSheet, Image, ScrollView } from 'react-native';
+import { View, Text, StyleSheet, Image, ScrollView, Modal, TouchableOpacity } from 'react-native';
 import { useNavigation } from "@react-navigation/native";
 import { TextInput, Headline, Button } from 'react-native-paper';
 import { useAuth } from '../services/auth.services';
+import Footer from "./../navegations/Footer";
 
-const NotificacaoItem = ({ titulo, subtitulo, imagem }) => {
-    return (
-        <View style={styles.notificacaoContainer}>
-            <View style={styles.imageContainer}>
-                <Image source={{ uri: imagem }} style={styles.image} />
-            </View>
-            <View style={styles.textContainer}>
-                <Text style={styles.titulo}>{titulo}</Text>
-                <Text style={styles.subtitulo}>{subtitulo}</Text>
-            </View>
+const NotificacaoItem = ({ id, titulo, subtitulo, imagem, onPress }) => {
+  console.log(id);
+  return (
+    <TouchableOpacity style={styles.container} onPress={onPress}>
+      <View style={styles.notificacaoContainer}>
+        <View style={styles.imageContainer}>
+          <Image source={{ uri: imagem }} style={styles.image} />
         </View>
-    );
+        <View style={styles.textContainer}>
+          <Text style={styles.titulo}>{titulo}</Text>
+          <Text style={styles.subtitulo}>{subtitulo}</Text>
+        </View>
+      </View>
+    </TouchableOpacity>
+
+  );
 };
+const ClicaNotificacao = async (id) => {
+  console.log(id);
 
+}
 const Notificacoes = () => {
-    const navigation = useNavigation();
-    const [minhasNotificacoes, SetItensNotificacoes] = useState([]);
-    const { usuario } = useAuth();
-    const usuarioId = usuario.id;
+  const navigation = useNavigation();
+  const { usuario } = useAuth();
+  const usuarioId = usuario.id;
 
-    useEffect(() => {
-        const MapearNotificacoes = (data) => {
-            return data.map(infoLeilao => ({
-                id: infoLeilao.id,
-                titulo: infoLeilao.produto.nomeProduto,
-                subtitulo: infoLeilao.produto.descricaoProduto,
-                imagem: infoLeilao.produto.urlImagemProduto,
-                status: infoLeilao.statusLeilao
-            }))
-        };
-   
+  const [meusLeiloes, SetMeusLeiloes] = useState([]);
+  const [meusLances, setMeusLances] = useState([]);
 
+  useEffect(() => {
     const getLeiloes = async () => {
-        try {
-            const response = await fetch(`http://localhost:3000/leilao/meusleiloes?usuarioId=${usuarioId}`);
-            const data = await response.json();
-            console.log("Dados recebidos:", data);         
-            SetItensNotificacoes(MapearNotificacoes(data.meusLeiloes));
-            console.log(data.meusLeiloes);
-        } catch (error) {
-            console.error(error);
-        }
+      const Id = usuario.id
+      try {
+        const leiloesResponse = await fetch(`http://localhost:3000/leilao/meusleiloes?usuarioId=${usuarioId}`);
+        const lancesResponse = await fetch('http://localhost:3000/lances/user/' + Id);
+
+        const leiloesData = await leiloesResponse.json();
+        const lancesData = await lancesResponse.json();
+
+        SetMeusLeiloes(leiloesData.meusLeiloes);
+        setMeusLances(lancesData);
+
+        console.log(meusLances);
+        console.log(lancesData);
+      } catch (error) {
+        console.error(error);
+      }
     };
 
     getLeiloes();
-    }, []);
+  }, []);
 
-const notificacoes = minhasNotificacoes;
-
-
-
-
-
-return (
-
-    <ScrollView style={styles.container}>
+  return (
+    <View style={styles.container}>
+      <ScrollView >
         <View style={styles.head}>
-            <Headline style={styles.textHeader}>Notificações</Headline>
+          <Headline style={styles.textHeader}>Notificações</Headline>
         </View>
         <View style={styles.section}>
-            <Text style={styles.sectionTitle}>Meus Leilões</Text>           
-            {notificacoes.slice(0, 3).map((notificacao) => (
+          <Text style={styles.sectionTitle}>Meus Leilões</Text>
+          {
+            meusLeiloes && meusLeiloes.map(leilao => {
+              console.log(leilao.id);
+              var id = leilao.id;
+              return (
                 <NotificacaoItem
-                    key={notificacao.id}
-                    titulo={notificacao.titulo}
-                    subtitulo={notificacao.subtitulo}
-                    imagem={notificacao.imagem}
-                />
-            ))}
+                  id={leilao.id}
+                  titulo={leilao.produto.nomeProduto}
+                  subtitulo={'R$ ' + leilao.precoAtual + ',00'}
+                  imagem={leilao.produto.urlImagemProduto}
+                  onPress={() => navigation.navigate('MeusLeiloesDetalhes', { id })}
+                />);
+            }
+            )
+          }
         </View>
-        <View style={styles.section}> 
-            <Text style={styles.sectionTitle}>Meus Lances</Text>
-            {notificacoes.slice(3, 6).map((notificacao) => (
+        <View style={styles.section}>
+          <Text style={styles.sectionTitle}>Meus Lances</Text>
+          {
+            meusLances && meusLances.map(lance => {
+              console.log(lance);
+              console.log(lance.valorLance);
+              var sub = "Lance superado!";
+              if (lance.valorLance == lance.leilao.precoAtual) {
+                sub = "Você está ganhando!"
+              } else if (lance.leilao.statusLeilao == "encerrado" && sub == "Você está ganhando!") {
+                sub = "Você ganhou!"
+              } else if (lance.leilao.statusLeilao == "encerrado" && sub == "Lance superado!") {
+                sub = "Você perdeu!"
+              }
+              var id = lance.id;
+              return (
                 <NotificacaoItem
-                    key={notificacao.id}
-                    titulo={notificacao.titulo}
-                    subtitulo={notificacao.subtitulo}
-                    imagem={notificacao.imagem}
+                  id={lance.id}
+                  titulo={lance.leilao.produto.nomeProduto}
+                  subtitulo={sub}
+                  imagem={lance.leilao.produto.urlImagemProduto}
+                  onPress={() => navigation.navigate('Lance')}
                 />
-            ))}
+              );
+            }
+            )
+          }
         </View>
-    </ScrollView>
-);
+      </ScrollView>
+      <Footer />
+    </View>
+  );
 }
 
 const styles = StyleSheet.create({
-    container: {
-        flex: 1,
-        backgroundColor: '#fff',
-        padding: 20,
-    },
-    section: {
-        marginBottom: 20,
-    },
-    sectionTitle: {
-        fontSize: 18,
-        fontWeight: 'bold',
-        marginBottom: 10,
-    },
-    notificacaoContainer: {
-        flexDirection: 'row',
-        alignItems: 'center',
-        marginBottom: 10,
-        marginTop: 10,
-        borderWidth: 1,
-        borderColor: '#ccc',
-        borderRadius: 5,
-        padding: 10,
-    },
-    imageContainer: {
-        marginRight: 10,
-    },
-    image: {
-        width: 60,
-        height: 60,
-        borderRadius: 30,
-    },
-    textContainer: {
-        flex: 1,
-    },
-    titulo: {
-        fontSize: 16,
-        fontWeight: 'bold',
-    },
-    subtitulo: {
-        fontSize: 14,
-    },
-    textHeader: {
-        textAlign: 'center',
-        fontSize: 25,
-        marginTop: 30,
-        marginBottom: 30
-    },
-});
+  container: {
+    flex: 1,
+    backgroundColor: '#fff',
+    padding: 20,
+  },
+  section: {
+    marginBottom: 20,
+  },
+  sectionTitle: {
+    fontSize: 18,
+    fontWeight: 'bold',
+    marginBottom: 10,
+  },
+  notificacaoContainer: {
+    flexDirection: 'row',
+    alignItems: 'center',
+    marginBottom: 10,
+    marginTop: 10,
+    borderWidth: 1,
+    borderColor: '#ccc',
+    borderRadius: 5,
+    padding: 10,
+  },
+  imageContainer: {
+    marginRight: 10,
+  },
+  image: {
+    width: 60,
+    height: 60,
+    borderRadius: 30,
+  },
+  textContainer: {
+    flex: 1,
+  },
+  titulo: {
+    fontSize: 16,
+    fontWeight: 'bold',
+  },
+  subtitulo: {
+    fontSize: 14,
+  },
+  textHeader: {
+    textAlign: 'center',
+    fontSize: 25,
+    marginTop: 30,
+    marginBottom: 30
+  },
 
+});
 export default Notificacoes;
