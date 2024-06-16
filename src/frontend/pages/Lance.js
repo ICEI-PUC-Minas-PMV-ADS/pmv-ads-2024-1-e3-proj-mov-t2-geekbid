@@ -38,9 +38,7 @@ const Lance = ({ item }) => {
 
   const getLeiloes = async () => {
     try {
-      const response = await axios.get(
-        'http://localhost:3000/leilao'
-      )
+      const response = await axios.get('http://localhost:3000/leilao')
 
       console.log(response)
       setLeiloes(response.data?.leiloes)
@@ -49,9 +47,9 @@ const Lance = ({ item }) => {
     }
   }
 
-   useEffect(() => {
-     getLeiloes()
-   }, [])
+  useEffect(() => {
+    getLeiloes()
+  }, [])
 
   console.log('Leilões: ', leiloes)
 
@@ -64,7 +62,7 @@ const Lance = ({ item }) => {
         {leiloes?.map((item, index) => {
           const leilaoFinalizado = moment(item.dataFim).isBefore(moment())
 
-          return (
+          return leilaoFinalizado ? null : (
             <View style={styles.itemContainer} key={index}>
               <Image
                 style={styles.image}
@@ -94,9 +92,7 @@ const Lance = ({ item }) => {
                   )
                 }}
               >
-                <Text style={styles.buttonText}>
-                  {leilaoFinalizado ? 'Leilão Finalizado' : 'Dar Lance'}
-                </Text>
+                <Text style={styles.buttonText}>Dar Lance</Text>
               </TouchableOpacity>
             </View>
           )
