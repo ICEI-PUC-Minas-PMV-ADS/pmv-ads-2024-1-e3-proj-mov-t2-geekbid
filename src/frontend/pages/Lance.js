@@ -168,7 +168,7 @@ const Lance = ({ item }) => {
         {leiloes?.map((item, index) => {
           const leilaoFinalizado = moment(item.dataFim).isBefore(moment())
 
-          return (
+          return leilaoFinalizado ? null : (
             <View style={styles.itemContainer} key={index}>
               <Image
                 style={styles.image}
@@ -198,9 +198,7 @@ const Lance = ({ item }) => {
                   )
                 }}
               >
-                <Text style={styles.buttonText}>
-                  {leilaoFinalizado ? 'Leilão Finalizado' : 'Dar Lance'}
-                </Text>
+                <Text style={styles.buttonText}>Dar Lance</Text>
               </TouchableOpacity>
             </View>
           )
