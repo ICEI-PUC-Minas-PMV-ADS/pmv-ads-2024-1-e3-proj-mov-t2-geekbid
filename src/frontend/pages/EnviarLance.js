@@ -125,16 +125,19 @@ const EnviarLance = ({ route, navigation }) => {
   }
 
   const doEnviarLance = async () => {
-    const resp = await axios.post('http://localhost:3000/lances/', {
-      usuarioId: usuario.id,
-      leilaoId: leilaoId,
-      valorLance: novoLance
-    })
+    try {
+      const resp = await axios.post('http://localhost:3000/lances/', {
+        usuarioId: usuario.id,
+        leilaoId: leilaoId,
+        valorLance: novoLance
+      })
 
-    console.log(resp)
-
-    openLanceEnviadoModal()
-    setSeuLance(novoLance)
+      openLanceEnviadoModal()
+      setSeuLance(novoLance)
+    } catch (e) {
+      console.log(e)
+      alert(e?.response?.data?.message)
+    }
   }
 
   // Função para formatar o valor para moeda brasileira
@@ -174,11 +177,8 @@ const EnviarLance = ({ route, navigation }) => {
   }
 
   function tempoRestanteF() {
-    console.log(leilaoDataFim)
     const dataFim = moment(leilaoDataFim, 'YYYY-MM-DD HH:mm:ss.SSS Z')
     const agora = moment()
-    console.log(dataFim)
-    console.log(agora)
 
     // Calcule a diferença de tempo em dias, horas e minutos
     const diff = moment.duration(dataFim.diff(agora))
@@ -437,7 +437,7 @@ const EnviarLance = ({ route, navigation }) => {
 
 const styles = StyleSheet.create({
   outerContainer: {
-    flex: 1,
+    flex: 1
   },
   scrollContainer: {
     flexGrow: 1

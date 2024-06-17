@@ -6,6 +6,7 @@ import Perfil from './Perfil';
 import Notificacao from './Notificacao';
 import Lance from './Lance';
 import Pesquisa from './Pesquisa';
+import Footer from "./../navegations/Footer";
 
 const Home = ({ navigation }) => {
   const [index, setIndex] = useState(0);
@@ -59,24 +60,27 @@ const Home = ({ navigation }) => {
         navigationState={{ index, routes }}
         onIndexChange={setIndex}
         renderScene={renderScene}
-        activeColor="#666cff"
-        inactiveColor="#000000"
-        barStyle={{
-          backgroundColor: 'transparent',
-          elevation: 0,
-          position: 'absolute',
-          bottom: 0,
-          left: 0,
-          right: 0,
-        }}
-        shifting={false}
+        // activeColor="#666cff"
+        // inactiveColor="#000000"
+        // barStyle={{
+          // backgroundColor: 'transparent',
+          // elevation: 0,
+          // position: 'absolute',
+          // bottom: 0,
+          // left: 0,
+          // right: 0,
+        // }}
+        // shifting={false}
       />
-      <View style={styles.buttonContainer}>
+      {/* <View style={styles.buttonContainer}>
         {renderIcon(0, 'home-outline', '#000000', 28)}
       </View>
       <View style={styles.profileNotificationsContainer}>
         {renderIcon(1, 'bell-outline', '#000000', 28)}
         {renderIcon(2, 'account', '#000000', 28)}
+      </View> */}
+      <View style={{  }}>
+        <Footer />
       </View>
     </View>
   );

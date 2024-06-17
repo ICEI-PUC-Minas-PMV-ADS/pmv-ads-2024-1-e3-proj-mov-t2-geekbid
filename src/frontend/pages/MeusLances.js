@@ -13,6 +13,7 @@ import axios from 'axios'
 import { useAuth } from '../services/auth.services'
 import { useNavigation } from '@react-navigation/native'
 import Footer from './../navegations/Footer'
+import moment from 'moment'
 
 const MeuLanceItem = ({
   onPress,
@@ -29,6 +30,8 @@ const MeuLanceItem = ({
   const formatCurrency = value => {
     return `R$ ${value.toFixed(2)}`
   }
+
+  const leilaoFinalizado = moment(dataFim).isBefore(moment())
 
   const handleLancePress = (
     leilaoId,
@@ -67,7 +70,8 @@ const MeuLanceItem = ({
           </View>
         </View>
         <TouchableOpacity
-          style={styles.button}
+          style={leilaoFinalizado ? styles.disabledButton : styles.button}
+          disabled={leilaoFinalizado}
           onPress={() => {
             handleLancePress(leilaoId, dataFim, descricao, foto, responsavel)
           }}
@@ -97,10 +101,12 @@ const MeusLances = ({ navigation }) => {
     }
   }
 
+  console.log("Lances: ", lances);
+
   useEffect(() => {
     getLeiloes()
   }, [])
-  
+
   const handleSearch = text => {
     setSearchQuery(text)
   }
@@ -140,7 +146,7 @@ const MeusLances = ({ navigation }) => {
             key={lance.id}
             id={lance.id}
             leilaoId={lance.leilaoId}
-            dataFim={lance.dataFim}
+            dataFim={lance.leilao.dataFim}
             descricao={lance.leilao.produto.descricaoProduto}
             foto={lance.leilao.produto.urlImagemProduto}
             seuLance={lance.valorLance}
@@ -259,7 +265,16 @@ const styles = StyleSheet.create({
     paddingHorizontal: 10,
     borderRadius: 5,
     alignItems: 'center',
-    marginTop: 10 // Adjusted margin top
+    marginTop: 10
+  },
+  disabledButton: {
+    paddingVertical: 5,
+    paddingHorizontal: 10,
+    borderRadius: 5,
+    alignItems: 'center',
+    marginTop: 10,
+    backgroundColor: '#757575',
+    opacity: 0.37
   },
   buttonText: {
     color: '#fff',

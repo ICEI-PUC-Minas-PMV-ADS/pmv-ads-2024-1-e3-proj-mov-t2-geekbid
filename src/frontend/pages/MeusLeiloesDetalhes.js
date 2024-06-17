@@ -53,6 +53,8 @@ const MeusLeiloesDetalhes = () => {
     }
   };
 
+  console.log(lances);
+
   useEffect(() => {
     if (isFocused) {
       fetchProduto();
@@ -160,8 +162,9 @@ const MeusLeiloesDetalhes = () => {
               {lances.length > 0 ? (
                 lances.map((lance, index) => (
                   <View key={index} style={MeusLeiloesDetalhesStyles.lanceRow}>
+                    
                     <Text style={MeusLeiloesDetalhesStyles.lanceUser}>
-                      {lance.usuarioNome || "Usuário desconhecido"}
+                      {lance.usuario?.nome || "Usuário desconhecido"}
                     </Text>
                     <Text style={MeusLeiloesDetalhesStyles.lanceValue}>
                       {`R$ ${lance.valorLance}`}
