@@ -16,6 +16,10 @@ function MinhasInformacoes() {
   const [confirmSenha, setConfirmSenha] = useState('')
 
   async function handleSalvarAlteracoesPress() {
+    if (!senha) {
+      return alert('Digite uma senha válida.')
+    }
+
     if (senha !== confirmSenha) {
       return alert('As senhas não coincidem.')
     }
