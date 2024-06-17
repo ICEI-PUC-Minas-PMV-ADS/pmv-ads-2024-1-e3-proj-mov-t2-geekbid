@@ -25,6 +25,10 @@ export function Register() {
       return alert('Preencha todos os campos!')
     }
 
+    if (!email.includes('@')) {
+      return alert('Formato de e-mail inválido!')
+    }
+
     if (senha != confirmSenha) {
       return alert('Senha diferente da digitada.')
     }
@@ -33,6 +37,7 @@ export function Register() {
       .post('/usuario', { nome, email, senha })
       .then(() => {
         alert('Usuário cadastrado com sucesso!')
+        navigation.navigate('Inicial')
       })
       .catch(error => {
         alert('Não foi possivel cadastrar.')

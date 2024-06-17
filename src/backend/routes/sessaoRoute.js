@@ -6,5 +6,6 @@ const SessaoController = new sessaoController()
 
 const sessaoRoute = router
 sessaoRoute.post('/', SessaoController.create)
+sessaoRoute.delete('/usuario', SessaoController.delete)
 
 module.exports = sessaoRoute

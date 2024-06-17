@@ -17,7 +17,7 @@ function AuthProvider({ children }) {
 
       api.defaults.headers.authorization = `Bearer ${token}`
       setData({ usuario, token })
-      console.log(response)
+
       return true
     } catch (error) {
       if (error.response) {
@@ -51,6 +51,23 @@ function AuthProvider({ children }) {
     }
   }
 
+  async function deleteAccount() {
+    try {
+      await api.delete('/usuario')
+      await AsyncStorage.removeItem('@geekbid:usuario')
+      await AsyncStorage.removeItem('@geekbid:token')
+
+      setData({})
+      alert('Conta excluída com sucesso.')
+    } catch (error) {
+      if (error.response) {
+        console.log(data)
+      } else {
+        alert('Não foi possível excluir a conta.')
+      }
+    }
+  }
+
   useEffect(() => {
     async function loadStorageData() {
       const token = await AsyncStorage.getItem('@geekbid:token')
@@ -71,7 +88,13 @@ function AuthProvider({ children }) {
 
   return (
     <AuthContext.Provider
-      value={{ signIn, updatePerfil, usuario: data.usuario, signOut }}
+      value={{
+        signIn,
+        updatePerfil,
+        usuario: data.usuario,
+        signOut,
+        deleteAccount
+      }}
     >
       {children}
     </AuthContext.Provider>

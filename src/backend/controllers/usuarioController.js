@@ -57,18 +57,20 @@ const usuarioController = {
 
   async excluirUsuario(req, res) {
     try {
-      const { id } = req.params
+      const usuarioId = req.usuario.id
+      console.log(usuarioId)
+      const deletedCount = await Usuario.destroy({ where: { id: usuarioId } })
 
-      const deletedRowsCount = await Usuario.destroy({ where: { id } })
-
-      if (deletedRowsCount === 0) {
-        return res.status(404).json({ error: 'Usuário não encontrado' })
+      if (deletedCount === 0) {
+        return res.status(404).json({ error: 'Usuário não encontrado.' })
       }
 
-      res.json({ message: 'Usuário excluído com sucesso' })
+      return res.json({ message: 'Usuário excluído com sucesso.' })
     } catch (error) {
-      console.error('Erro ao excluir cadastro de usuário:', error.message)
-      res.status(500).json({ error: 'Erro do servidor' })
+      console.error('Erro ao excluir usuário:', error)
+      return res
+        .status(500)
+        .json({ error: 'Erro do servidor ao excluir usuário.' })
     }
   },
 

@@ -1,12 +1,14 @@
 import React, { useState } from 'react'
-import { View, StyleSheet } from 'react-native'
+import { View, StyleSheet, Alert } from 'react-native'
 import { TextInput, Headline, Button } from 'react-native-paper'
 import { useNavigation } from '@react-navigation/native'
 import Input from '../components/Input'
 import { useAuth } from '../services/auth.services'
+import Footer from '../navegations/Footer'
 
 function MinhasInformacoes() {
-  const { usuario, updatePerfil } = useAuth()
+  const navigation = useNavigation()
+  const { usuario, updatePerfil, deleteAccount } = useAuth()
   const [nome, setNome] = useState(usuario.nome)
   const [lastNome, setLastNome] = useState('')
   const [email, setEmail] = useState(usuario.email)
@@ -14,13 +16,28 @@ function MinhasInformacoes() {
   const [confirmSenha, setConfirmSenha] = useState('')
 
   async function handleSalvarAlteracoesPress() {
+    if (!senha) {
+      return alert('Digite uma senha válida.')
+    }
+
+    if (senha !== confirmSenha) {
+      return alert('As senhas não coincidem.')
+    }
+
+    if (!email.includes('@')) {
+      return alert('Formato de e-mail inválido!')
+    }
     const usuario = { nome, email, senha }
 
     await updatePerfil({ usuario })
+    navigation.navigate('Perfil')
   }
 
-  const navigation = useNavigation()
-  const handleExcluirCadastroPress = () => {}
+  async function handleDeleteAccount() {
+    await deleteAccount()
+    navigation.navigate('Inicial')
+  }
+
   return (
     <View style={styles.container}>
       <View style={styles.head}>
@@ -38,13 +55,13 @@ function MinhasInformacoes() {
           onChangeText={text => setNome(text)}
           editable={true}
         />
-        <Input
+        {/* <Input
           label="Sobrenome"
           value={lastNome}
           mode="outlined"
           onChangeText={text => setLastNome(text)}
           editable={true}
-        />
+        /> */}
         <Input
           label="E-mail"
           value={email}
@@ -77,10 +94,12 @@ function MinhasInformacoes() {
       <Button
         style={styles.button}
         mode="outlined"
-        onPress={handleExcluirCadastroPress}
+        onPress={handleDeleteAccount}
       >
         Excluir cadastro
       </Button>
+
+      <Footer />
     </View>
   )
 }
