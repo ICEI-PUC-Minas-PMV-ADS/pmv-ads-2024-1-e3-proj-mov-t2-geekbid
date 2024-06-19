@@ -1,0 +1,26 @@
+message: Please cite this software using these metadata.
+title: GeekBid
+authors:
+  - family-names: Pinto Moreira
+    given-names: Bianca
+  - family-names: Henrique Matias Ferreira
+    given-names: Douglas
+  - family-names: Russo Grilo
+    given-names: Gabriel
+  - family-names: Aparecida Couto Ferraz
+    given-names: Irene
+  - family-names: de Pereira Binda
+    given-names: Marco
+  - family-names: Fernandes Silva
+    given-names: Talita
+  - name-suffix: Professor
+    affiliation: PUC Minas
+    family-names: Fritzke Junior
+    given-names: Udo
+keywords:
+  - App
+  - Leilão
+  - Nerd
+repository-code: https://github.com/ICEI-PUC-Minas-PMV-ADS/pmv-ads-2024-1-e3-proj-mov-t2-geekbid
+version: 1.0.0
+date-released: 2024-06-23
