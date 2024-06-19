@@ -26,4 +26,11 @@ router.put('/:id', leilaoController.atualizarLeilao);
 // Rota para excluir um leilão por ID
 router.delete('/:id', leilaoController.excluirLeilao);
 
+// Rota para atualizar status de leilões expirados
+router.put('/atualizar-status-leiloes', (req, res, next) => {
+    console.log("Rota /atualizar-status-leiloes chamada");
+    next();
+  }, leilaoController.atualizarStatusLeiloes);
+  
+
 module.exports = router;
