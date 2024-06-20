@@ -126,7 +126,7 @@ const Lance = ({ item }) => {
 
   return (
     <View style={styles.container}>
-      <View>
+      <View style={styles.searchfilterContainer}>
         <View style={styles.searchContainer}>
           <TextInput
             placeholder="Pesquisar"
@@ -139,30 +139,30 @@ const Lance = ({ item }) => {
             placeholderTextColor="#666"
             style={styles.input}
           />           
+        </View>
+        <View style={styles.filterContainer}>
+          <Picker
+          selectedValue={selectedCategory}
+          onValueChange={(itemValue) => {
+            setSelectedCategory(itemValue);
+            // console.log("itemValue: ", itemValue);
+          }}
+          style={styles.picker}
+          >
+            <Picker.Item label="Todas" value="Todas" />
+            <Picker.Item label="Quadrinhos e Mangás" value="Quadrinhos e Mangás" />
+            <Picker.Item label="Colecionáveis" value="Colecionáveis" />
+            <Picker.Item label="Jogos de Tabuleiro e Card Games" value="Jogos de Tabuleiro e Card Games" />
+            <Picker.Item label="Jogos Eletrônicos" value="Jogos Eletrônicos" />
+            <Picker.Item label="Livros e Literatura Fantástica" value="Livros e Literatura Fantástica" />
+            <Picker.Item label="Filmes e Séries" value="Filmes e Séries" />
+            <Picker.Item label="Tecnologia e Gadgets" value="Tecnologia e Gadgets" />
+            <Picker.Item label="Roupas e Acessórios" value="Roupas e Acessórios" />
+            <Picker.Item label="Arte e Decoração" value="Arte e Decoração" />
+            <Picker.Item label="Memorabilia" value="Memorabilia" />
+          </Picker>
+        </View>
       </View>
-      <View style={styles.filterContainer}>
-        <Picker
-        selectedValue={selectedCategory}
-        onValueChange={(itemValue) => {
-          setSelectedCategory(itemValue);
-          // console.log("itemValue: ", itemValue);
-        }}
-        style={styles.picker}
-        >
-          <Picker.Item label="Todas" value="Todas" />
-          <Picker.Item label="Quadrinhos e Mangás" value="Quadrinhos e Mangás" />
-          <Picker.Item label="Colecionáveis" value="Colecionáveis" />
-          <Picker.Item label="Jogos de Tabuleiro e Card Games" value="Jogos de Tabuleiro e Card Games" />
-          <Picker.Item label="Jogos Eletrônicos" value="Jogos Eletrônicos" />
-          <Picker.Item label="Livros e Literatura Fantástica" value="Livros e Literatura Fantástica" />
-          <Picker.Item label="Filmes e Séries" value="Filmes e Séries" />
-          <Picker.Item label="Tecnologia e Gadgets" value="Tecnologia e Gadgets" />
-          <Picker.Item label="Roupas e Acessórios" value="Roupas e Acessórios" />
-          <Picker.Item label="Arte e Decoração" value="Arte e Decoração" />
-          <Picker.Item label="Memorabilia" value="Memorabilia" />
-        </Picker>
-      </View>
-    </View>
 
       <ScrollView>
         {leiloes?.map((item, index) => {
@@ -211,7 +211,8 @@ const Lance = ({ item }) => {
 const styles = StyleSheet.create({
   container: {
     flex: 1,
-    paddingHorizontal: 10
+    paddingHorizontal: 10,
+    marginVertical: 10,
   },
   itemContainer: {
     borderWidth: 1,
@@ -219,6 +220,33 @@ const styles = StyleSheet.create({
     borderRadius: 10,
     padding: 10,
     marginBottom: 10
+  },
+  infoContainer: {
+    flexDirection: 'column',
+    marginBottom: 10
+  },
+  searchfilterContainer: {
+    marginVertical: 10,
+  },
+  searchContainer: {
+    // flex: 1,
+    flexDirection: 'row',
+    textAlign: 'left',
+    alignItems: 'center',
+    backgroundColor: 'transparent',
+    width:'100%',
+    height: 30,
+    marginVertical: 10,
+  },
+  filterContainer: {
+    // flex: 1,
+    flexDirection: 'row',
+    textAlign: 'left',
+    alignItems: 'center',
+    backgroundColor: 'transparent',
+    width:'100%',
+    height: 30,
+    marginVertical: 15,
   },
   image: {
     width: "100%",
@@ -231,10 +259,6 @@ const styles = StyleSheet.create({
     fontSize: 15,
     fontWeight: 'bold',
     marginBottom: 5
-  },
-  infoContainer: {
-    flexDirection: 'column',
-    marginBottom: 10
   },
   creator: {
     marginBottom: 5
@@ -254,17 +278,6 @@ const styles = StyleSheet.create({
   buttonText: {
     color: '#fff',
     fontSize: 16
-  },
-  searchContainer: {
-    flex: 1,
-    flexDirection: 'row',
-    textAlign: 'left',
-    alignItems: 'center',
-    backgroundColor: 'transparent',
-    width:'100%',
-    paddingVertical: 10,
-  },
-  filterContainer: {
   },
   input: {
     flex: 1,

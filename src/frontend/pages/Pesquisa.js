@@ -8,7 +8,7 @@ const Pesquisa = () => {
   const { usuario } = useAuth()
 
   return (
-    <View>
+    <View style={styles.container}>
       <Text style={styles.title}>Olá {usuario.nome} </Text>
       <Text style={styles.subtitle}>Vamos começar o leilão!</Text>
     </View>
@@ -17,12 +17,13 @@ const Pesquisa = () => {
 
 const styles = StyleSheet.create({
   container: {
-    flexDirection: 'row',
-    alignItems: 'center',
-    borderRadius: 10,
-    paddingHorizontal: 20,
-    marginTop: 15,
-    height: 60,
+    // flexDirection: 'row',
+    // alignItems: 'center',
+    // borderRadius: 10,
+    // paddingHorizontal: 20,
+    // marginTop: 15,
+    // height: 60,
+    marginVertical: 10,
   },
   title: {
     fontSize: 20,
