@@ -22,10 +22,7 @@ const NotificacaoItem = ({ id, titulo, subtitulo, imagem, onPress }) => {
 
   );
 };
-const ClicaNotificacao = async (id) => {
-  console.log(id);
 
-}
 const Notificacoes = () => {
   const navigation = useNavigation();
   const { usuario } = useAuth();
@@ -33,28 +30,42 @@ const Notificacoes = () => {
 
   const [meusLeiloes, SetMeusLeiloes] = useState([]);
   const [meusLances, setMeusLances] = useState([]);
+  const [ultimosLances, setUltLances] = useState([]);
 
   useEffect(() => {
     const getLeiloes = async () => {
-      const Id = usuario.id
+      const Id = usuario.id     
       try {
         const leiloesResponse = await fetch(`http://localhost:3000/leilao/meusleiloes?usuarioId=${usuarioId}`);
-        const lancesResponse = await fetch('http://localhost:3000/lances/user/' + Id);
+        const lancesResponse = await fetch('http://localhost:3000/lances/user/' + Id);       
 
         const leiloesData = await leiloesResponse.json();
-        const lancesData = await lancesResponse.json();
+        const lancesData = await lancesResponse.json();        
 
         SetMeusLeiloes(leiloesData.meusLeiloes);
-        setMeusLances(lancesData);
+        setMeusLances(lancesData);        
+       
+      } catch (error) {
+        console.error(error);
+      }
+    };
 
-        console.log(meusLances);
-        console.log(lancesData);
+    const getLances = async () => {
+      const lId = leilao.id;
+      try {
+        const ultimosLancesResponse = await fetch('http://localhost:3000/leilaoId/ultimos/' + lId);
+
+        const ultimosLancesData = await ultimosLancesResponse.json();
+
+        setUltLances(ultimosLancesData);
+        
       } catch (error) {
         console.error(error);
       }
     };
 
     getLeiloes();
+
   }, []);
 
   return (
@@ -67,7 +78,6 @@ const Notificacoes = () => {
           <Text style={styles.sectionTitle}>Meus Leilões</Text>
           {
             meusLeiloes && meusLeiloes.map(leilao => {
-              console.log(leilao.id);
               var id = leilao.id;
               return (
                 <NotificacaoItem
@@ -85,24 +95,22 @@ const Notificacoes = () => {
           <Text style={styles.sectionTitle}>Meus Lances</Text>
           {
             meusLances && meusLances.map(lance => {
-              console.log(lance);
-              console.log(lance.valorLance);
               var sub = "Lance superado!";
-              if (lance.valorLance == lance.leilao.precoAtual) {
+              if ((lance.valorLance + lance.leilao.produto.precoInicial == lance.leilao.precoAtual)) {
                 sub = "Você está ganhando!"
               } else if (lance.leilao.statusLeilao == "encerrado" && sub == "Você está ganhando!") {
                 sub = "Você ganhou!"
               } else if (lance.leilao.statusLeilao == "encerrado" && sub == "Lance superado!") {
                 sub = "Você perdeu!"
               }
-              var id = lance.id;
+                          
               return (
                 <NotificacaoItem
                   id={lance.id}
                   titulo={lance.leilao.produto.nomeProduto}
                   subtitulo={sub}
                   imagem={lance.leilao.produto.urlImagemProduto}
-                  onPress={() => navigation.navigate('Lance')}
+                  onPress={() => navigation.navigate('MeusLances')}
                 />
               );
             }
