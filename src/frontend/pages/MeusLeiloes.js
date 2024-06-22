@@ -49,7 +49,7 @@ const MeusLeiloes = () => {
     <View style={MeusLeiloesStyles.container}>
       <ScrollView>
         <View style={MeusLeiloesStyles.head}>
-          <Button icon="chevron-left" onPress={() => navigation.goBack()} />
+         
           <Headline style={MeusLeiloesStyles.textHeader}>Meus Leilões</Headline>
           <IconButton
             icon="plus-circle-outline"

@@ -1,7 +1,7 @@
 const Sequelize = require("sequelize");
 const { Op } = Sequelize;
 const sequelize = require("../utils/database");
-
+const cron = require('node-cron');
 const Leilao = require("../models/leilaoModel");
 const Produto = require("../models/produtoModel");
 const Usuario = require("../models/usuarioModel");
@@ -221,54 +221,151 @@ const leilaoController = {
     }
   },
 
-    // Pesquisar leilões na Home
-    async pesquisarLeilaoHome(req, res) {
-      const query = `%${req.query}`
-      console.log("query: ", query);
-      try {
-          const leiloesPesquisa = await Leilao.findAll({
-              raw: true,
-              where: {
-                  statusLeilao: ['ativo', 'publicado'],
-              },
-              include: [
-                  {model: Usuario, as: "usuario"},
-                  {model: Produto, as: "produto",
-                      where: {
-                          nomeProduto: { [Op.like] : query },
-                      }
-                  }
-              ]
-          })
-          console.log("leiloesPesquisa: ", JSON.stringify(leiloesPesquisa, null, 2));
-          res.status(200).json({ leiloesPesquisa });
-      } catch (error) {
-          console.error('Erro ao buscar leilões:', error);
-          res.status(500).json({ error: 'Erro interno do servidor' });
-      }
+  // Pesquisar leilões na Home
+  async pesquisarLeilaoHome(req, res) {
+    const query = `%${req.query}`;
+    console.log("query: ", query);
+    try {
+      const leiloesPesquisa = await Leilao.findAll({
+        raw: true,
+        where: {
+          statusLeilao: ["ativo", "publicado"],
+        },
+        include: [
+          { model: Usuario, as: "usuario" },
+          {
+            model: Produto,
+            as: "produto",
+            where: {
+              nomeProduto: { [Op.like]: query },
+            },
+          },
+        ],
+      });
+      console.log(
+        "leiloesPesquisa: ",
+        JSON.stringify(leiloesPesquisa, null, 2)
+      );
+      res.status(200).json({ leiloesPesquisa });
+    } catch (error) {
+      console.error("Erro ao buscar leilões:", error);
+      res.status(500).json({ error: "Erro interno do servidor" });
+    }
   },
 
   // Buscar todos os leilões para a home
   async listarLeiloesHome(req, res) {
-      try {
-          const leiloesHome = await Leilao.findAll({
-              // raw: true,
-              where: {
-                  statusLeilao: ['ativo', 'publicado']
-              },
-              include: [
-                  {model: Usuario, as: "usuario"},
-                  {model: Produto, as: "produto"}
-              ]
-          })
-          console.log(JSON.stringify(leiloesHome, null, 2));
-          res.status(200).json({ leiloesHome });
-      } catch (error) {
-          console.error('Erro ao buscar leilões:', error);
-          res.status(500).json({ error: 'Erro interno do servidor' });
-      }
+    try {
+      const leiloesHome = await Leilao.findAll({
+        // raw: true,
+        where: {
+          statusLeilao: ["ativo", "publicado"],
+        },
+        include: [
+          { model: Usuario, as: "usuario" },
+          { model: Produto, as: "produto" },
+        ],
+      });
+      console.log(JSON.stringify(leiloesHome, null, 2));
+      res.status(200).json({ leiloesHome });
+    } catch (error) {
+      console.error("Erro ao buscar leilões:", error);
+      res.status(500).json({ error: "Erro interno do servidor" });
+    }
   },
 
+  // Função para atualizar status de leilões expirados no contexto cron
+  async atualizarStatusLeiloesCron() {
+    const t = await sequelize.transaction();
+    try {
+      // Obter a data atual
+      const agora = new Date();
+      console.log("Data atual:", agora);
+
+      // Encontrar todos os leilões que ainda não foram encerrados e cuja dataFim já passou
+      const leiloesExpirados = await Leilao.findAll({
+        where: {
+          dataFim: {
+            [Op.lt]: agora,
+          },
+          statusLeilao: {
+            [Op.ne]: "encerrado",
+          },
+        },
+        transaction: t,
+      });
+
+      console.log("Leilões expirados encontrados:", leiloesExpirados.length);
+
+      // Atualizar o status de todos esses leilões para 'encerrado'
+      for (const leilao of leiloesExpirados) {
+        console.log("Atualizando leilão:", leilao.id);
+        await leilao.update({ statusLeilao: "encerrado" }, { transaction: t });
+        console.log("Atualizando leilão:", leilao.id);
+      }
+
+      // Commit da transação
+      await t.commit();
+
+    } catch (error) {
+      // Rollback da transação em caso de erro
+      await t.rollback();
+      console.error("Erro ao atualizar status dos leilões:", error);
+    }
+  },
+
+  // Função para atualizar status de leilões expirados no contexto HTTP
+  async atualizarStatusLeiloes(req, res) {
+    const t = await sequelize.transaction();
+    try {
+      // Obter a data atual
+      const agora = new Date();
+      console.log("Data atual:", agora);
+
+      // Encontrar todos os leilões que ainda não foram encerrados e cuja dataFim já passou
+      const leiloesExpirados = await Leilao.findAll({
+        where: {
+          dataFim: {
+            [Op.lt]: agora,
+          },
+          statusLeilao: {
+            [Op.ne]: "encerrado",
+          },
+        },
+        transaction: t,
+      });
+
+      console.log("Leilões expirados encontrados:", leiloesExpirados.length);
+
+      // Atualizar o status de todos esses leilões para 'encerrado'
+      for (const leilao of leiloesExpirados) {
+        console.log("Atualizando leilão:", leilao.id);
+        await leilao.update({ statusLeilao: "encerrado" }, { transaction: t });
+        console.log("Atualizando leilão:", leilao.id);
+      }
+
+      // Commit da transação
+      await t.commit();
+
+      // Responder com o número de leilões atualizados
+      res.status(200).json({ message: `${leiloesExpirados.length} leilões atualizados para 'encerrado'.` });
+    } catch (error) {
+      // Rollback da transação em caso de erro
+      await t.rollback();
+      console.error("Erro ao atualizar status dos leilões:", error);
+      res.status(500).json({ error: "Erro interno do servidor" });
+    }
+  }
 };
+
+// Agendar a tarefa para executar a cada minuto
+cron.schedule('* * * * *', async () => {
+  try {
+    await leilaoController.atualizarStatusLeiloesCron();
+    console.log('Tarefa de atualização de status de leilões executada com sucesso.');
+  } catch (error) {
+    console.error('Erro ao executar tarefa de atualização de status de leilões:', error);
+  }
+});
 
 module.exports = leilaoController;
