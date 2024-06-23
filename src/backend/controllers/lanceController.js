@@ -39,7 +39,12 @@ const lanceController = {
         dataLance,
         usuarioId,
         leilaoId
-      })
+      }) 
+       
+      const produto = await Produto.findByPk(leilao.produtoId);
+      leilao.precoAtual = (valorLance + produto.precoInicial)
+      await leilao.save()       
+      
       res.status(201).json(lance)
     } catch (err) {
       res.status(404).json({ message: err.message })
