@@ -234,7 +234,7 @@ const MeusLances = ({ navigation }) => {
           closeResultModal()
         }}
       >
-        <TouchableWithoutFeedback onPress={Keyboard.dismiss} accessible={false}>
+        <TouchableWithoutFeedback accessible={false}>
           <View style={styles.modalContainer}>
             <View style={styles.modalContent}>
             {maiorLance?.usuarioId === usuario.id && <View style={styles.modalEnviado}>
