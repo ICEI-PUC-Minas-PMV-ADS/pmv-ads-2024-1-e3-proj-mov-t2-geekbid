@@ -1,4 +1,6 @@
-# 🔨 Geek Bid
+# 🔨 Geekbid
+
+![Geekbid](img/geekbid.png)
 
 `ANÁLISE E DESENVOLVIMENTO DE SISTEMAS`
 
@@ -6,7 +8,7 @@
 
 `3° SEMESTRE`
 
-Descrever resumidamente, em um ou dois parágrafos, o projeto que está sendo desenvolvido.
+Geekbid - Plataforma de leilões online exclusiva para produtos do segmento nerd.
 
 ## 👥 Integrantes
 
@@ -75,4 +77,10 @@ Diagramas: Lucidchart.
 
 # Apresentação
 
-<li><a href="presentation/README.md"> Apresentação da solução</a></li>
+## Conjunto de Slides (Estrutura)
+
+Ver [Apresentação em pdf](/presentation/GeekBid.pdf) 
+
+## Vídeo
+
+Ver [Vídeo](https://github.com/ICEI-PUC-Minas-PMV-ADS/pmv-ads-2024-1-e3-proj-mov-t2-geekbid/assets/101235591/c31b22de-ebcb-4c4f-8c05-17575125ab93)
