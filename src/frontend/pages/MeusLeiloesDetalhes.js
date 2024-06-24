@@ -6,6 +6,7 @@ import {
   useRoute,
   useIsFocused,
 } from "@react-navigation/native";
+import axios from 'axios';
 import Footer from "./../navegations/Footer";
 import MeusLeiloesDetalhesStyles from "./../css/MeusLeiloesDetalhesStyles";
 
@@ -20,12 +21,20 @@ const MeusLeiloesDetalhes = () => {
   const [lances, setLances] = useState([]);
   const [showAllLances, setShowAllLances] = useState(false);
 
-  const fetchProduto = async () => {
+  const API = `http://localhost:3000/leilao/${id}`;
+
+  const fetchProduto = async (url) => {
     try {
-      const response = await fetch(`http://localhost:3000/leilao/${id}`);
-      const data = await response.json();
-      setProduto(data.leilao.produto);
-      setLeilao(data.leilao);
+      const response = await axios.get(url);
+      // const response = await fetch(`http://192.168.0.78:3000/leilao/${id}`);
+      // const data = await response.json();
+      // console.log("response: ", response);
+      setLeilao(response.data?.leilao);
+      setProduto(response.data?.leilao.produto);
+      // setProduto(data.leilao.produto);
+      // setLeilao(data.leilao);
+      console.log("IN produto: ", produto);
+      console.log("IN leilao: ", leilao);
     } catch (error) {
       console.error("Erro ao buscar detalhes do produto:", error);
       Alert.alert(
@@ -34,6 +43,9 @@ const MeusLeiloesDetalhes = () => {
       );
     }
   };
+
+  // console.log("data leilao: ", data.leilao);
+  console.log("OUT leilao: ", leilao);
 
   const fetchLances = async () => {
     try {
@@ -57,7 +69,7 @@ const MeusLeiloesDetalhes = () => {
 
   useEffect(() => {
     if (isFocused) {
-      fetchProduto();
+      fetchProduto(API);
       fetchLances();
     }
   }, [id, showAllLances, isFocused]);
